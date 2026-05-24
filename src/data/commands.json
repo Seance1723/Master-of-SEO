@@ -1,0 +1,182 @@
+[
+  {
+    "id": "help",
+    "command": "/seo-master help",
+    "title": "Help",
+    "description": "Show all available Master of SEO commands.",
+    "group": "group-01",
+    "status": "active",
+    "requiredInputs": [],
+    "outputType": "command-menu"
+  },
+  {
+    "id": "audit-website",
+    "command": "/seo-master audit-website",
+    "title": "Audit Website",
+    "description": "Run a complete website SEO audit.",
+    "group": "group-15",
+    "status": "planned",
+    "requiredInputs": ["websiteUrl"],
+    "outputType": "audit-report"
+  },
+  {
+    "id": "competitor-analysis",
+    "command": "/seo-master competitor-analysis",
+    "title": "Competitor Analysis",
+    "description": "Analyze SEO competitors and identify gaps.",
+    "group": "group-16",
+    "status": "planned",
+    "requiredInputs": ["websiteUrl", "competitors"],
+    "outputType": "competitor-gap-report"
+  },
+  {
+    "id": "keyword-research",
+    "command": "/seo-master keyword-research",
+    "title": "Keyword Research",
+    "description": "Research keywords and map search intent.",
+    "group": "group-05",
+    "status": "planned",
+    "requiredInputs": ["topicOrWebsite"],
+    "outputType": "keyword-map"
+  },
+  {
+    "id": "seo-plan",
+    "command": "/seo-master seo-plan",
+    "title": "SEO Plan",
+    "description": "Create a prioritized SEO strategy plan.",
+    "group": "group-17",
+    "status": "planned",
+    "requiredInputs": ["websiteUrl", "businessGoal"],
+    "outputType": "seo-roadmap"
+  },
+  {
+    "id": "content-plan",
+    "command": "/seo-master content-plan",
+    "title": "Content Plan",
+    "description": "Create a content strategy and publishing plan.",
+    "group": "group-06",
+    "status": "planned",
+    "requiredInputs": ["topicOrWebsite"],
+    "outputType": "content-plan"
+  },
+  {
+    "id": "technical-audit",
+    "command": "/seo-master technical-audit",
+    "title": "Technical Audit",
+    "description": "Audit technical SEO foundations.",
+    "group": "group-02",
+    "status": "planned",
+    "requiredInputs": ["websiteUrl"],
+    "outputType": "technical-audit"
+  },
+  {
+    "id": "on-page-audit",
+    "command": "/seo-master on-page-audit",
+    "title": "On-Page Audit",
+    "description": "Audit page-level SEO and content alignment.",
+    "group": "group-04",
+    "status": "planned",
+    "requiredInputs": ["pageUrl"],
+    "outputType": "on-page-audit"
+  },
+  {
+    "id": "schema-audit",
+    "command": "/seo-master schema-audit",
+    "title": "Schema Audit",
+    "description": "Audit structured data and entity markup.",
+    "group": "group-08",
+    "status": "planned",
+    "requiredInputs": ["websiteUrl"],
+    "outputType": "schema-audit"
+  },
+  {
+    "id": "performance-audit",
+    "command": "/seo-master performance-audit",
+    "title": "Performance Audit",
+    "description": "Audit Core Web Vitals and performance SEO.",
+    "group": "group-03",
+    "status": "planned",
+    "requiredInputs": ["websiteUrl"],
+    "outputType": "performance-audit"
+  },
+  {
+    "id": "local-seo",
+    "command": "/seo-master local-seo",
+    "title": "Local SEO",
+    "description": "Plan local SEO improvements.",
+    "group": "group-11",
+    "status": "planned",
+    "requiredInputs": ["businessName", "location"],
+    "outputType": "local-seo-plan"
+  },
+  {
+    "id": "ecommerce-seo",
+    "command": "/seo-master ecommerce-seo",
+    "title": "Ecommerce SEO",
+    "description": "Plan ecommerce SEO for categories, products, and feeds.",
+    "group": "group-10",
+    "status": "planned",
+    "requiredInputs": ["storeUrl"],
+    "outputType": "ecommerce-seo-plan"
+  },
+  {
+    "id": "ai-search-readiness",
+    "command": "/seo-master ai-search-readiness",
+    "title": "AI Search Readiness",
+    "description": "Assess readiness for AI search and discovery systems.",
+    "group": "group-12",
+    "status": "planned",
+    "requiredInputs": ["websiteUrl"],
+    "outputType": "ai-search-readiness-report"
+  },
+  {
+    "id": "launch-checklist",
+    "command": "/seo-master launch-checklist",
+    "title": "Launch Checklist",
+    "description": "Create a pre-launch SEO checklist.",
+    "group": "group-02",
+    "status": "planned",
+    "requiredInputs": ["websiteUrl"],
+    "outputType": "launch-checklist"
+  },
+  {
+    "id": "migration-plan",
+    "command": "/seo-master migration-plan",
+    "title": "Migration Plan",
+    "description": "Create an SEO migration plan.",
+    "group": "group-02",
+    "status": "planned",
+    "requiredInputs": ["currentUrl", "newUrl"],
+    "outputType": "migration-plan"
+  },
+  {
+    "id": "report",
+    "command": "/seo-master report",
+    "title": "Report",
+    "description": "Generate an SEO report.",
+    "group": "group-18",
+    "status": "planned",
+    "requiredInputs": ["websiteUrl"],
+    "outputType": "seo-report"
+  },
+  {
+    "id": "memory",
+    "command": "/seo-master memory",
+    "title": "Memory",
+    "description": "Show project memory status.",
+    "group": "group-01",
+    "status": "active",
+    "requiredInputs": [],
+    "outputType": "memory-status"
+  },
+  {
+    "id": "next-group",
+    "command": "/seo-master next-group",
+    "title": "Next Group",
+    "description": "Show the next planned implementation group.",
+    "group": "group-01",
+    "status": "active",
+    "requiredInputs": [],
+    "outputType": "next-group"
+  }
+]

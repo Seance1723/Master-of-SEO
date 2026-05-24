@@ -1,0 +1,169 @@
+#!/usr/bin/env node
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
+import { getCommandMenu } from "../core/command-registry.ts";
+import { runSeoMaster } from "../core/orchestrator.ts";
+import { dataDir, memoryPath } from "../core/paths.ts";
+
+interface JsonRpcRequest {
+  jsonrpc: "2.0";
+  id?: number | string;
+  method: string;
+  params?: Record<string, unknown>;
+}
+
+const protocolVersion = "2024-11-05";
+let buffer = "";
+
+const tools = [
+  {
+    name: "seo_master_run",
+    description: "Run Master of SEO through the same trigger-safe orchestrator used by the CLI.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        input: { type: "string", description: "Raw user input. Must start with /seo-master to activate SEO logic." }
+      },
+      required: ["input"]
+    }
+  },
+  {
+    name: "seo_master_commands",
+    description: "List all available Master of SEO commands.",
+    inputSchema: { type: "object", properties: {} }
+  }
+];
+
+const prompts = [
+  "seo-master-audit",
+  "seo-master-keyword-research",
+  "seo-master-competitor-analysis",
+  "seo-master-seo-plan"
+].map((name) => ({
+  name,
+  description: `${name} prompt. Returns planned-module behavior until its module is implemented.`,
+  arguments: []
+}));
+
+function send(message: Record<string, unknown>): void {
+  process.stdout.write(`${JSON.stringify(message)}\n`);
+}
+
+function resultText(text: string): Record<string, unknown> {
+  return { content: [{ type: "text", text }] };
+}
+
+async function readResource(uri: string): Promise<string> {
+  if (uri === "seo-master://memory") return readFile(memoryPath, "utf8");
+  if (uri === "seo-master://commands") return readFile(join(dataDir, "commands.json"), "utf8");
+  if (uri === "seo-master://groups") return readFile(join(dataDir, "groups.json"), "utf8");
+  throw new Error(`Unknown resource: ${uri}`);
+}
+
+async function handle(request: JsonRpcRequest): Promise<void> {
+  const { id, method, params = {} } = request;
+
+  try {
+    if (method === "initialize") {
+      send({
+        jsonrpc: "2.0",
+        id,
+        result: {
+          protocolVersion,
+          capabilities: { tools: {}, resources: {}, prompts: {} },
+          serverInfo: { name: "master-of-seo", version: "0.1.0" }
+        }
+      });
+      return;
+    }
+
+    if (method === "notifications/initialized") return;
+
+    if (method === "tools/list") {
+      send({ jsonrpc: "2.0", id, result: { tools } });
+      return;
+    }
+
+    if (method === "tools/call") {
+      const name = String(params.name ?? "");
+      const args = (params.arguments ?? {}) as Record<string, unknown>;
+      if (name === "seo_master_run") {
+        const response = await runSeoMaster(String(args.input ?? ""));
+        send({ jsonrpc: "2.0", id, result: resultText(response.message) });
+        return;
+      }
+      if (name === "seo_master_commands") {
+        send({ jsonrpc: "2.0", id, result: resultText(await getCommandMenu()) });
+        return;
+      }
+      throw new Error(`Unknown tool: ${name}`);
+    }
+
+    if (method === "resources/list") {
+      send({
+        jsonrpc: "2.0",
+        id,
+        result: {
+          resources: [
+            { uri: "seo-master://memory", name: "Master of SEO Memory", mimeType: "application/json" },
+            { uri: "seo-master://commands", name: "Master of SEO Commands", mimeType: "application/json" },
+            { uri: "seo-master://groups", name: "Master of SEO Groups", mimeType: "application/json" }
+          ]
+        }
+      });
+      return;
+    }
+
+    if (method === "resources/read") {
+      const uri = String(params.uri ?? "");
+      send({ jsonrpc: "2.0", id, result: { contents: [{ uri, mimeType: "application/json", text: await readResource(uri) }] } });
+      return;
+    }
+
+    if (method === "prompts/list") {
+      send({ jsonrpc: "2.0", id, result: { prompts } });
+      return;
+    }
+
+    if (method === "prompts/get") {
+      const promptName = String(params.name ?? "");
+      const commandByPrompt: Record<string, string> = {
+        "seo-master-audit": "/seo-master audit-website",
+        "seo-master-keyword-research": "/seo-master keyword-research",
+        "seo-master-competitor-analysis": "/seo-master competitor-analysis",
+        "seo-master-seo-plan": "/seo-master seo-plan"
+      };
+      send({
+        jsonrpc: "2.0",
+        id,
+        result: {
+          description: `${promptName} planned-module prompt`,
+          messages: [
+            {
+              role: "user",
+              content: {
+                type: "text",
+                text: commandByPrompt[promptName] ?? "/seo-master help"
+              }
+            }
+          ]
+        }
+      });
+      return;
+    }
+
+    send({ jsonrpc: "2.0", id, error: { code: -32601, message: `Method not found: ${method}` } });
+  } catch (error: unknown) {
+    send({ jsonrpc: "2.0", id, error: { code: -32000, message: error instanceof Error ? error.message : String(error) } });
+  }
+}
+
+process.stdin.setEncoding("utf8");
+process.stdin.on("data", (chunk: string) => {
+  buffer += chunk;
+  const lines = buffer.split(/\r?\n/u);
+  buffer = lines.pop() ?? "";
+  for (const line of lines) {
+    if (line.trim()) void handle(JSON.parse(line) as JsonRpcRequest);
+  }
+});

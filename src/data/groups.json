@@ -1,0 +1,20 @@
+[
+  { "id": "group-01", "name": "Core SEO Orchestration", "status": "completed" },
+  { "id": "group-02", "name": "Technical SEO", "status": "next" },
+  { "id": "group-03", "name": "Performance SEO", "status": "planned" },
+  { "id": "group-04", "name": "On-Page SEO", "status": "planned" },
+  { "id": "group-05", "name": "Keyword Research & Intent", "status": "planned" },
+  { "id": "group-06", "name": "Content Strategy & Planning", "status": "planned" },
+  { "id": "group-07", "name": "Site Architecture & Internal Linking", "status": "planned" },
+  { "id": "group-08", "name": "Schema & Entity SEO", "status": "planned" },
+  { "id": "group-09", "name": "Media SEO", "status": "planned" },
+  { "id": "group-10", "name": "Ecommerce SEO", "status": "planned" },
+  { "id": "group-11", "name": "Local & International SEO", "status": "planned" },
+  { "id": "group-12", "name": "AI Search & Discover SEO", "status": "planned" },
+  { "id": "group-13", "name": "Trust, Security & Accessibility", "status": "planned" },
+  { "id": "group-14", "name": "CMS & Framework SEO", "status": "planned" },
+  { "id": "group-15", "name": "Website Audit", "status": "planned" },
+  { "id": "group-16", "name": "Competitor Analysis", "status": "planned" },
+  { "id": "group-17", "name": "SEO Strategy & Campaign Planning", "status": "planned" },
+  { "id": "group-18", "name": "Measurement, Reporting & Governance", "status": "planned" }
+]
