@@ -1,0 +1,4 @@
+interface:
+  display_name: "Master of SEO"
+  short_description: "Run gated SEO workflows from /seo-master."
+  default_prompt: "/seo-master"

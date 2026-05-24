@@ -1,0 +1,34 @@
+{
+  "name": "master-of-seo",
+  "version": "0.1.0",
+  "description": "A gated /seo-master skill package with modular SEO workflows, project memory, README syncing, and MCP server support.",
+  "type": "module",
+  "bin": {
+    "master-of-seo": "./src/cli.js",
+    "master-of-seo-mcp": "./src/mcp-server.js"
+  },
+  "files": [
+    "README.md",
+    "src",
+    "skills"
+  ],
+  "scripts": {
+    "test": "node ./src/validate.js",
+    "mcp": "node ./src/mcp-server.js",
+    "actions": "node ./src/cli.js actions"
+  },
+  "keywords": [
+    "seo",
+    "mcp",
+    "ai-skill",
+    "openai",
+    "claude",
+    "cursor",
+    "windsurf",
+    "continue"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}
