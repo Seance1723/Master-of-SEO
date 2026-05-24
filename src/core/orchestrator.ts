@@ -1,4 +1,5 @@
 import type { OrchestratorResponse } from "../types/index.ts";
+import { parseTechnicalAuditInputFromText, runTechnicalAudit } from "../technical/technical-audit.ts";
 import { getCommandFromInput, getCommandMenu } from "./command-registry.ts";
 import { getNextGroupFromMemory, readMemory } from "./memory.ts";
 import { checkTrigger } from "./trigger.ts";
@@ -38,6 +39,17 @@ export async function runSeoMaster(input: string): Promise<OrchestratorResponse>
       type: "planned",
       command,
       message: `${command.command} is planned for ${command.group}. This module is not implemented yet.`
+    };
+  }
+
+  if (command.id === "technical-audit") {
+    const report = runTechnicalAudit(parseTechnicalAuditInputFromText(input));
+    return {
+      active: true,
+      type: "technical-audit",
+      command,
+      data: report,
+      message: JSON.stringify(report, null, 2)
     };
   }
 

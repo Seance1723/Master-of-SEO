@@ -65,9 +65,9 @@
     "title": "Technical Audit",
     "description": "Audit technical SEO foundations.",
     "group": "group-02",
-    "status": "planned",
-    "requiredInputs": ["websiteUrl"],
-    "outputType": "technical-audit"
+    "status": "active",
+    "requiredInputs": ["url optional", "html optional", "robotsTxt optional", "sitemapXml optional", "statusCode optional"],
+    "outputType": "technical_audit_report"
   },
   {
     "id": "on-page-audit",

@@ -18,19 +18,27 @@ seo-master /
 seo-master "/seo-master help"
 seo-master "/seo-master memory"
 seo-master "/seo-master next-group"
+seo-master "/seo-master technical-audit"
+seo-master "/seo-master technical-audit --url https://example.com"
+seo-master "/seo-master technical-audit --html '<html>...</html>'"
 ```
 
-## Slash Commands
+## Active Commands
+
+- `/seo-master help`
+- `/seo-master memory`
+- `/seo-master next-group`
+- `/seo-master technical-audit`
 
 Typing `/` shows all available Master of SEO commands. SEO logic only runs when input starts with `/seo-master`.
 
-- `/seo-master help`
+## Planned Commands
+
 - `/seo-master audit-website`
 - `/seo-master competitor-analysis`
 - `/seo-master keyword-research`
 - `/seo-master seo-plan`
 - `/seo-master content-plan`
-- `/seo-master technical-audit`
 - `/seo-master on-page-audit`
 - `/seo-master schema-audit`
 - `/seo-master performance-audit`
@@ -40,10 +48,12 @@ Typing `/` shows all available Master of SEO commands. SEO logic only runs when 
 - `/seo-master launch-checklist`
 - `/seo-master migration-plan`
 - `/seo-master report`
-- `/seo-master memory`
-- `/seo-master next-group`
 
-Group 1 active commands: `help`, `memory`, `next-group`. Other commands are planned placeholders.
+## Technical SEO Scope
+
+Group 2 implements Search Essentials, spam policy compliance, crawlability, indexability, robots.txt, meta robots, X-Robots-Tag, XML sitemap, URL structure, canonicalization, redirects, and HTTP status code checks.
+
+Group 2 does not perform full live crawling unless crawler support is added later. It audits provided inputs safely.
 
 ## MCP Usage
 
@@ -70,16 +80,18 @@ The MCP server exposes:
 
 - Tool: `seo_master_run`
 - Tool: `seo_master_commands`
+- Tool: `seo_master_technical_audit`
 - Resource: `seo-master://memory`
 - Resource: `seo-master://commands`
 - Resource: `seo-master://groups`
-- Prompts: `seo-master-audit`, `seo-master-keyword-research`, `seo-master-competitor-analysis`, `seo-master-seo-plan`
+- Resource: `seo-master://technical-rules`
+- Prompts: `seo-master-technical-audit`, `seo-master-audit`, `seo-master-keyword-research`, `seo-master-competitor-analysis`, `seo-master-seo-plan`
 
 ## Group Roadmap
 
 - Group 1: Core SEO Orchestration - completed
-- Group 2: Technical SEO - next
-- Group 3: Performance SEO
+- Group 2: Technical SEO - completed
+- Group 3: Performance SEO - next
 - Group 4: On-Page SEO
 - Group 5: Keyword Research & Intent
 - Group 6: Content Strategy & Planning
@@ -106,5 +118,5 @@ Master of SEO is designed for OpenAI agents, Claude, Antigravity, Windsurf, Curs
 
 ## Current Status
 
-- Current status: Group 1 completed
-- Next group: Group 2 Technical SEO
+- Current status: Group 2 completed
+- Next group: Group 3 Performance SEO

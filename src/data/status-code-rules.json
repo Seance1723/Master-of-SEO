@@ -1,0 +1,13 @@
+[
+  {
+    "id": "status-codes-core",
+    "category": "http status codes",
+    "title": "HTTP status code correctness",
+    "description": "Pages should return status codes that match their real availability.",
+    "do": ["Return 200 for live pages.", "Return 404 for missing pages.", "Return 410 for permanently removed pages.", "Return 503 for temporary maintenance."],
+    "dont": ["Return 200 for error pages.", "Create soft 404s.", "Leave important pages with 5xx errors."],
+    "priority": "P0",
+    "appliesTo": ["website", "page", "technical", "audit"],
+    "status": "active"
+  }
+]

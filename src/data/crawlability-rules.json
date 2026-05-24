@@ -1,0 +1,13 @@
+[
+  {
+    "id": "crawlability-links",
+    "category": "crawlability",
+    "title": "Crawlable internal links",
+    "description": "Important pages should be discoverable through real anchor links.",
+    "do": ["Use real <a href=\"\"> links.", "Make important pages internally linked.", "Avoid orphan pages.", "Keep key pages within reasonable click depth."],
+    "dont": ["Rely only on JavaScript click handlers.", "Block important CSS/JS/images.", "Create infinite crawl traps.", "Allow internal search pages to flood crawl paths."],
+    "priority": "P1",
+    "appliesTo": ["website", "page", "technical", "audit"],
+    "status": "active"
+  }
+]

@@ -4,6 +4,9 @@ import { join } from "node:path";
 import { getCommandMenu } from "../core/command-registry.ts";
 import { runSeoMaster } from "../core/orchestrator.ts";
 import { dataDir, memoryPath } from "../core/paths.ts";
+import { runTechnicalAudit } from "../technical/technical-audit.ts";
+import { getTechnicalRules } from "../technical/technical-rules.ts";
+import type { TechnicalAuditInput } from "../types/technical.ts";
 
 interface JsonRpcRequest {
   jsonrpc: "2.0";
@@ -31,10 +34,28 @@ const tools = [
     name: "seo_master_commands",
     description: "List all available Master of SEO commands.",
     inputSchema: { type: "object", properties: {} }
+  },
+  {
+    name: "seo_master_technical_audit",
+    description: "Run Technical SEO audit logic with explicit provided inputs only. No live crawling is performed.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        url: { type: "string" },
+        html: { type: "string" },
+        robotsTxt: { type: "string" },
+        sitemapXml: { type: "string" },
+        headers: { type: "object" },
+        statusCode: { type: "number" },
+        canonicalUrl: { type: "string" },
+        mode: { type: "string", enum: ["website", "page", "code", "planning"] }
+      }
+    }
   }
 ];
 
 const prompts = [
+  "seo-master-technical-audit",
   "seo-master-audit",
   "seo-master-keyword-research",
   "seo-master-competitor-analysis",
@@ -57,6 +78,7 @@ async function readResource(uri: string): Promise<string> {
   if (uri === "seo-master://memory") return readFile(memoryPath, "utf8");
   if (uri === "seo-master://commands") return readFile(join(dataDir, "commands.json"), "utf8");
   if (uri === "seo-master://groups") return readFile(join(dataDir, "groups.json"), "utf8");
+  if (uri === "seo-master://technical-rules") return JSON.stringify(await getTechnicalRules(), null, 2);
   throw new Error(`Unknown resource: ${uri}`);
 }
 
@@ -96,6 +118,11 @@ async function handle(request: JsonRpcRequest): Promise<void> {
         send({ jsonrpc: "2.0", id, result: resultText(await getCommandMenu()) });
         return;
       }
+      if (name === "seo_master_technical_audit") {
+        const report = runTechnicalAudit({ mode: "planning", ...(args as Partial<TechnicalAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
       throw new Error(`Unknown tool: ${name}`);
     }
 
@@ -107,7 +134,8 @@ async function handle(request: JsonRpcRequest): Promise<void> {
           resources: [
             { uri: "seo-master://memory", name: "Master of SEO Memory", mimeType: "application/json" },
             { uri: "seo-master://commands", name: "Master of SEO Commands", mimeType: "application/json" },
-            { uri: "seo-master://groups", name: "Master of SEO Groups", mimeType: "application/json" }
+            { uri: "seo-master://groups", name: "Master of SEO Groups", mimeType: "application/json" },
+            { uri: "seo-master://technical-rules", name: "Master of SEO Technical Rules", mimeType: "application/json" }
           ]
         }
       });
@@ -128,6 +156,7 @@ async function handle(request: JsonRpcRequest): Promise<void> {
     if (method === "prompts/get") {
       const promptName = String(params.name ?? "");
       const commandByPrompt: Record<string, string> = {
+        "seo-master-technical-audit": "/seo-master technical-audit",
         "seo-master-audit": "/seo-master audit-website",
         "seo-master-keyword-research": "/seo-master keyword-research",
         "seo-master-competitor-analysis": "/seo-master competitor-analysis",

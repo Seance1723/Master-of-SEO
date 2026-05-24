@@ -22,5 +22,5 @@ export async function getCommandFromInput(commandName = "help"): Promise<SeoComm
 
 export async function getCommandMenu(): Promise<string> {
   const commands = await getCommands();
-  return commands.map((command) => `${command.command} - ${command.title}: ${command.description}`).join("\n");
+  return commands.map((command) => `${command.command} [${command.status}] - ${command.title}: ${command.description}`).join("\n");
 }

@@ -1,0 +1,35 @@
+[
+  {
+    "id": "robots-txt-core",
+    "category": "robots.txt",
+    "title": "Robots.txt crawl control",
+    "description": "Robots.txt should control crawl access without hiding private content or blocking critical resources.",
+    "do": ["Use robots.txt for crawl control.", "Include sitemap location.", "Test robots rules."],
+    "dont": ["Use robots.txt to hide private content.", "Block pages that need Google to see noindex.", "Accidentally block the full site.", "Block important resources needed for rendering."],
+    "priority": "P0",
+    "appliesTo": ["website", "technical", "audit"],
+    "status": "active"
+  },
+  {
+    "id": "meta-robots-core",
+    "category": "meta robots",
+    "title": "Meta robots directives",
+    "description": "Meta robots should be intentional and visibility-safe.",
+    "do": ["Use noindex intentionally.", "Keep desktop/mobile directives consistent.", "Use max-image-preview:large where image visibility matters."],
+    "dont": ["Apply noindex globally by mistake.", "Overuse nofollow internally.", "Use nosnippet if visibility matters."],
+    "priority": "P1",
+    "appliesTo": ["page", "technical", "audit"],
+    "status": "active"
+  },
+  {
+    "id": "x-robots-tag-core",
+    "category": "x-robots-tag",
+    "title": "X-Robots-Tag directives",
+    "description": "Use X-Robots-Tag for file-level and non-HTML indexing control.",
+    "do": ["Support PDF/file-level indexing control.", "Use X-Robots-Tag for non-HTML assets."],
+    "dont": ["Conflict with page-level directives.", "Noindex important downloadable assets unless intentional."],
+    "priority": "P2",
+    "appliesTo": ["website", "page", "technical", "audit"],
+    "status": "active"
+  }
+]
