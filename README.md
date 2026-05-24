@@ -20,8 +20,9 @@ seo-master "/seo-master memory"
 seo-master "/seo-master next-group"
 seo-master "/seo-master technical-audit"
 seo-master "/seo-master performance-audit"
-seo-master "/seo-master performance-audit --metrics '{\"lcp\":3.2,\"inp\":240,\"cls\":0.15}'"
-seo-master "/seo-master performance-audit --html '<html>...</html>'"
+seo-master "/seo-master on-page-audit"
+seo-master "/seo-master on-page-audit --title 'Technical SEO Services' --metaDescription 'Fix technical SEO issues that block growth.'"
+seo-master "/seo-master on-page-audit --html '<html>...</html>'"
 ```
 
 ## Active Commands
@@ -31,6 +32,7 @@ seo-master "/seo-master performance-audit --html '<html>...</html>'"
 - `/seo-master next-group`
 - `/seo-master technical-audit`
 - `/seo-master performance-audit`
+- `/seo-master on-page-audit`
 
 Typing `/` shows all available Master of SEO commands. SEO logic only runs when input starts with `/seo-master`.
 
@@ -41,7 +43,6 @@ Typing `/` shows all available Master of SEO commands. SEO logic only runs when 
 - `/seo-master keyword-research`
 - `/seo-master seo-plan`
 - `/seo-master content-plan`
-- `/seo-master on-page-audit`
 - `/seo-master schema-audit`
 - `/seo-master local-seo`
 - `/seo-master ecommerce-seo`
@@ -54,13 +55,15 @@ Typing `/` shows all available Master of SEO commands. SEO logic only runs when 
 
 Group 2 implements Search Essentials, spam policy compliance, crawlability, indexability, robots.txt, meta robots, X-Robots-Tag, XML sitemap, URL structure, canonicalization, redirects, and HTTP status code checks.
 
-Group 2 does not perform full live crawling unless crawler support is added later. It audits provided inputs safely.
-
 ## Performance SEO Scope
 
 Group 3 implements Core Web Vitals, LCP, INP, CLS, TTFB, asset optimization, image performance, font performance, JavaScript performance, CSS performance, third-party script checks, and performance recommendations.
 
-Group 3 does not perform full live Lighthouse crawling unless crawler/performance collection support is added later. It audits provided metrics, HTML, headers, and asset data safely.
+## On-Page SEO Scope
+
+Group 4 implements title tags, meta descriptions, heading structure, H1-H6 hierarchy, content structure, above-the-fold SEO, CTA/conversion checks, internal on-page links, image alt text, and on-page recommendations.
+
+Group 4 does not perform full live crawling unless crawler support is added later. It audits provided HTML and on-page inputs safely.
 
 ## MCP Usage
 
@@ -70,39 +73,15 @@ Run the MCP server:
 npm run mcp
 ```
 
-Client config example:
-
-```json
-{
-  "mcpServers": {
-    "master-of-seo": {
-      "command": "seo-master",
-      "args": ["mcp"]
-    }
-  }
-}
-```
-
-The MCP server exposes:
-
-- Tool: `seo_master_run`
-- Tool: `seo_master_commands`
-- Tool: `seo_master_technical_audit`
-- Tool: `seo_master_performance_audit`
-- Resource: `seo-master://memory`
-- Resource: `seo-master://commands`
-- Resource: `seo-master://groups`
-- Resource: `seo-master://technical-rules`
-- Resource: `seo-master://performance-rules`
-- Prompts: `seo-master-performance-audit`, `seo-master-technical-audit`, `seo-master-audit`, `seo-master-keyword-research`, `seo-master-competitor-analysis`, `seo-master-seo-plan`
+The MCP server exposes `seo_master_run`, `seo_master_commands`, `seo_master_technical_audit`, `seo_master_performance_audit`, `seo_master_on_page_audit`, and rule resources for technical, performance, and on-page packs.
 
 ## Group Roadmap
 
 - Group 1: Core SEO Orchestration - completed
 - Group 2: Technical SEO - completed
 - Group 3: Performance SEO - completed
-- Group 4: On-Page SEO - next
-- Group 5: Keyword Research & Intent
+- Group 4: On-Page SEO - completed
+- Group 5: Keyword Research & Intent - next
 - Group 6: Content Strategy & Planning
 - Group 7: Site Architecture & Internal Linking
 - Group 8: Schema & Entity SEO
@@ -127,5 +106,5 @@ Master of SEO is designed for OpenAI agents, Claude, Antigravity, Windsurf, Curs
 
 ## Current Status
 
-- Current status: Group 3 completed
-- Next group: Group 4 On-Page SEO
+- Current status: Group 4 completed
+- Next group: Group 5 Keyword Research & Intent

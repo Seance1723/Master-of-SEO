@@ -1,0 +1,13 @@
+[
+  {
+    "id": "title-tag-core",
+    "category": "title-tag",
+    "title": "Title tag quality",
+    "description": "Title tags should be unique, clear, intent-aligned, and naturally include the primary topic.",
+    "do": ["Create a unique title per page.", "Keep the title aligned with search intent.", "Include the primary topic naturally.", "Make it click-worthy but honest.", "Keep important words near the beginning."],
+    "dont": ["Duplicate title tags across pages.", "Keyword-stuff titles.", "Make titles misleading.", "Make titles too vague.", "Use the same title as the H1 automatically unless it fits."],
+    "priority": "P1",
+    "appliesTo": ["website", "page", "content", "on_page", "audit"],
+    "status": "active"
+  }
+]

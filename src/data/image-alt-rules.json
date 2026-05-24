@@ -1,0 +1,13 @@
+[
+  {
+    "id": "image-alt-core",
+    "category": "image-alt",
+    "title": "Image alt text",
+    "description": "Important images should have meaningful, natural alt text.",
+    "do": ["Add meaningful alt text.", "Keep alt text natural.", "Describe the image purpose.", "Leave decorative images empty where appropriate."],
+    "dont": ["Keyword-stuff alt text.", "Use the same alt text for all images.", "Leave important images without alt text.", "Put important page copy only inside images."],
+    "priority": "P2",
+    "appliesTo": ["website", "page", "content", "on_page", "audit"],
+    "status": "active"
+  }
+]

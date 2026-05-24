@@ -1,4 +1,5 @@
 import type { OrchestratorResponse } from "../types/index.ts";
+import { parseOnPageAuditInputFromText, runOnPageAudit } from "../on-page/on-page-audit.ts";
 import { parsePerformanceAuditInputFromText, runPerformanceAudit } from "../performance/performance-audit.ts";
 import { parseTechnicalAuditInputFromText, runTechnicalAudit } from "../technical/technical-audit.ts";
 import { getCommandFromInput, getCommandMenu } from "./command-registry.ts";
@@ -59,6 +60,17 @@ export async function runSeoMaster(input: string): Promise<OrchestratorResponse>
     return {
       active: true,
       type: "performance-audit",
+      command,
+      data: report,
+      message: JSON.stringify(report, null, 2)
+    };
+  }
+
+  if (command.id === "on-page-audit") {
+    const report = runOnPageAudit(parseOnPageAuditInputFromText(input));
+    return {
+      active: true,
+      type: "on-page-audit",
       command,
       data: report,
       message: JSON.stringify(report, null, 2)

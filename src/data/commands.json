@@ -75,9 +75,9 @@
     "title": "On-Page Audit",
     "description": "Audit page-level SEO and content alignment.",
     "group": "group-04",
-    "status": "planned",
-    "requiredInputs": ["pageUrl"],
-    "outputType": "on-page-audit"
+    "status": "active",
+    "requiredInputs": ["url optional", "html optional", "title optional", "metaDescription optional", "headings optional", "bodyText optional", "images optional", "links optional", "ctas optional", "primaryKeyword optional"],
+    "outputType": "on_page_audit_report"
   },
   {
     "id": "schema-audit",

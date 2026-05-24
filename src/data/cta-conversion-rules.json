@@ -1,0 +1,13 @@
+[
+  {
+    "id": "cta-conversion-core",
+    "category": "cta-conversion",
+    "title": "CTA and conversion clarity",
+    "description": "Commercial pages should provide clear, intent-matched next actions.",
+    "do": ["Use clear CTAs.", "Match CTA to page intent.", "Include primary and secondary CTAs where useful.", "Reduce friction.", "Make mobile CTAs accessible."],
+    "dont": ["Make users search for the CTA.", "Use too many competing CTAs.", "Use unclear CTA text like Submit when better copy is possible.", "Drive SEO traffic to a dead-end page."],
+    "priority": "P2",
+    "appliesTo": ["website", "page", "content", "on_page", "audit"],
+    "status": "active"
+  }
+]

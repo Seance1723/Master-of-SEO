@@ -1,0 +1,13 @@
+[
+  {
+    "id": "heading-structure-core",
+    "category": "headings",
+    "title": "Heading structure",
+    "description": "Headings should organize the page with one clear H1 and descriptive subtopics.",
+    "do": ["Use one clear H1.", "Use H2/H3 to structure the page.", "Make headings descriptive.", "Use headings to support scanability.", "Include subtopics users expect."],
+    "dont": ["Skip heading hierarchy carelessly.", "Use headings only for styling.", "Repeat the same keyword in every heading.", "Use multiple unrelated H1s.", "Hide important sections without headings."],
+    "priority": "P1",
+    "appliesTo": ["website", "page", "content", "on_page", "audit"],
+    "status": "active"
+  }
+]
