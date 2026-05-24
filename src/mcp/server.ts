@@ -4,8 +4,11 @@ import { join } from "node:path";
 import { getCommandMenu } from "../core/command-registry.ts";
 import { runSeoMaster } from "../core/orchestrator.ts";
 import { dataDir, memoryPath } from "../core/paths.ts";
+import { runPerformanceAudit } from "../performance/performance-audit.ts";
+import { getPerformanceRules } from "../performance/performance-rules.ts";
 import { runTechnicalAudit } from "../technical/technical-audit.ts";
 import { getTechnicalRules } from "../technical/technical-rules.ts";
+import type { PerformanceAuditInput } from "../types/performance.ts";
 import type { TechnicalAuditInput } from "../types/technical.ts";
 
 interface JsonRpcRequest {
@@ -51,10 +54,26 @@ const tools = [
         mode: { type: "string", enum: ["website", "page", "code", "planning"] }
       }
     }
+  },
+  {
+    name: "seo_master_performance_audit",
+    description: "Run Performance SEO audit logic with explicit provided inputs only. No live Lighthouse crawl is performed.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        url: { type: "string" },
+        html: { type: "string" },
+        headers: { type: "object" },
+        assets: { type: "array" },
+        metrics: { type: "object" },
+        mode: { type: "string", enum: ["website", "page", "code", "planning"] }
+      }
+    }
   }
 ];
 
 const prompts = [
+  "seo-master-performance-audit",
   "seo-master-technical-audit",
   "seo-master-audit",
   "seo-master-keyword-research",
@@ -79,6 +98,7 @@ async function readResource(uri: string): Promise<string> {
   if (uri === "seo-master://commands") return readFile(join(dataDir, "commands.json"), "utf8");
   if (uri === "seo-master://groups") return readFile(join(dataDir, "groups.json"), "utf8");
   if (uri === "seo-master://technical-rules") return JSON.stringify(await getTechnicalRules(), null, 2);
+  if (uri === "seo-master://performance-rules") return JSON.stringify(await getPerformanceRules(), null, 2);
   throw new Error(`Unknown resource: ${uri}`);
 }
 
@@ -123,6 +143,11 @@ async function handle(request: JsonRpcRequest): Promise<void> {
         send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
         return;
       }
+      if (name === "seo_master_performance_audit") {
+        const report = runPerformanceAudit({ mode: "planning", ...(args as Partial<PerformanceAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
       throw new Error(`Unknown tool: ${name}`);
     }
 
@@ -135,7 +160,8 @@ async function handle(request: JsonRpcRequest): Promise<void> {
             { uri: "seo-master://memory", name: "Master of SEO Memory", mimeType: "application/json" },
             { uri: "seo-master://commands", name: "Master of SEO Commands", mimeType: "application/json" },
             { uri: "seo-master://groups", name: "Master of SEO Groups", mimeType: "application/json" },
-            { uri: "seo-master://technical-rules", name: "Master of SEO Technical Rules", mimeType: "application/json" }
+            { uri: "seo-master://technical-rules", name: "Master of SEO Technical Rules", mimeType: "application/json" },
+            { uri: "seo-master://performance-rules", name: "Master of SEO Performance Rules", mimeType: "application/json" }
           ]
         }
       });
@@ -156,6 +182,7 @@ async function handle(request: JsonRpcRequest): Promise<void> {
     if (method === "prompts/get") {
       const promptName = String(params.name ?? "");
       const commandByPrompt: Record<string, string> = {
+        "seo-master-performance-audit": "/seo-master performance-audit",
         "seo-master-technical-audit": "/seo-master technical-audit",
         "seo-master-audit": "/seo-master audit-website",
         "seo-master-keyword-research": "/seo-master keyword-research",

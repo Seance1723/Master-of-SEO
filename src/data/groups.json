@@ -1,8 +1,8 @@
 [
   { "id": "group-01", "name": "Core SEO Orchestration", "status": "completed" },
   { "id": "group-02", "name": "Technical SEO", "status": "completed" },
-  { "id": "group-03", "name": "Performance SEO", "status": "next" },
-  { "id": "group-04", "name": "On-Page SEO", "status": "planned" },
+  { "id": "group-03", "name": "Performance SEO", "status": "completed" },
+  { "id": "group-04", "name": "On-Page SEO", "status": "next" },
   { "id": "group-05", "name": "Keyword Research & Intent", "status": "planned" },
   { "id": "group-06", "name": "Content Strategy & Planning", "status": "planned" },
   { "id": "group-07", "name": "Site Architecture & Internal Linking", "status": "planned" },

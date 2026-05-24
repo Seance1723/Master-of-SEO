@@ -19,8 +19,9 @@ seo-master "/seo-master help"
 seo-master "/seo-master memory"
 seo-master "/seo-master next-group"
 seo-master "/seo-master technical-audit"
-seo-master "/seo-master technical-audit --url https://example.com"
-seo-master "/seo-master technical-audit --html '<html>...</html>'"
+seo-master "/seo-master performance-audit"
+seo-master "/seo-master performance-audit --metrics '{\"lcp\":3.2,\"inp\":240,\"cls\":0.15}'"
+seo-master "/seo-master performance-audit --html '<html>...</html>'"
 ```
 
 ## Active Commands
@@ -29,6 +30,7 @@ seo-master "/seo-master technical-audit --html '<html>...</html>'"
 - `/seo-master memory`
 - `/seo-master next-group`
 - `/seo-master technical-audit`
+- `/seo-master performance-audit`
 
 Typing `/` shows all available Master of SEO commands. SEO logic only runs when input starts with `/seo-master`.
 
@@ -41,7 +43,6 @@ Typing `/` shows all available Master of SEO commands. SEO logic only runs when 
 - `/seo-master content-plan`
 - `/seo-master on-page-audit`
 - `/seo-master schema-audit`
-- `/seo-master performance-audit`
 - `/seo-master local-seo`
 - `/seo-master ecommerce-seo`
 - `/seo-master ai-search-readiness`
@@ -54,6 +55,12 @@ Typing `/` shows all available Master of SEO commands. SEO logic only runs when 
 Group 2 implements Search Essentials, spam policy compliance, crawlability, indexability, robots.txt, meta robots, X-Robots-Tag, XML sitemap, URL structure, canonicalization, redirects, and HTTP status code checks.
 
 Group 2 does not perform full live crawling unless crawler support is added later. It audits provided inputs safely.
+
+## Performance SEO Scope
+
+Group 3 implements Core Web Vitals, LCP, INP, CLS, TTFB, asset optimization, image performance, font performance, JavaScript performance, CSS performance, third-party script checks, and performance recommendations.
+
+Group 3 does not perform full live Lighthouse crawling unless crawler/performance collection support is added later. It audits provided metrics, HTML, headers, and asset data safely.
 
 ## MCP Usage
 
@@ -81,18 +88,20 @@ The MCP server exposes:
 - Tool: `seo_master_run`
 - Tool: `seo_master_commands`
 - Tool: `seo_master_technical_audit`
+- Tool: `seo_master_performance_audit`
 - Resource: `seo-master://memory`
 - Resource: `seo-master://commands`
 - Resource: `seo-master://groups`
 - Resource: `seo-master://technical-rules`
-- Prompts: `seo-master-technical-audit`, `seo-master-audit`, `seo-master-keyword-research`, `seo-master-competitor-analysis`, `seo-master-seo-plan`
+- Resource: `seo-master://performance-rules`
+- Prompts: `seo-master-performance-audit`, `seo-master-technical-audit`, `seo-master-audit`, `seo-master-keyword-research`, `seo-master-competitor-analysis`, `seo-master-seo-plan`
 
 ## Group Roadmap
 
 - Group 1: Core SEO Orchestration - completed
 - Group 2: Technical SEO - completed
-- Group 3: Performance SEO - next
-- Group 4: On-Page SEO
+- Group 3: Performance SEO - completed
+- Group 4: On-Page SEO - next
 - Group 5: Keyword Research & Intent
 - Group 6: Content Strategy & Planning
 - Group 7: Site Architecture & Internal Linking
@@ -118,5 +127,5 @@ Master of SEO is designed for OpenAI agents, Claude, Antigravity, Windsurf, Curs
 
 ## Current Status
 
-- Current status: Group 2 completed
-- Next group: Group 3 Performance SEO
+- Current status: Group 3 completed
+- Next group: Group 4 On-Page SEO

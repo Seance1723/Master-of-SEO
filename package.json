@@ -14,7 +14,8 @@
     "./mcp": "./dist/src/mcp/server.js",
     "./command-registry": "./dist/src/core/command-registry.js",
     "./memory": "./dist/src/core/memory.js",
-    "./technical-audit": "./dist/src/technical/technical-audit.js"
+    "./technical-audit": "./dist/src/technical/technical-audit.js",
+    "./performance-audit": "./dist/src/performance/performance-audit.js"
   },
   "files": [
     "README.md",
@@ -28,7 +29,7 @@
     "build": "tsc -p tsconfig.json",
     "dev": "node ./src/cli/index.ts",
     "start": "node ./dist/src/cli/index.js",
-    "test": "node ./tests/group-01.test.ts && node ./tests/group-02-technical-seo.test.ts",
+    "test": "node ./tests/group-01.test.ts && node ./tests/group-02-technical-seo.test.ts && node ./tests/group-03-performance-seo.test.ts",
     "mcp": "node ./src/mcp/server.ts",
     "prepublishOnly": "npm run build && npm test"
   },

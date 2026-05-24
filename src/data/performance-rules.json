@@ -1,0 +1,13 @@
+[
+  {
+    "id": "performance-safe-inputs",
+    "category": "performance-orchestration",
+    "title": "Audit only supplied performance inputs",
+    "description": "Performance SEO checks must use only provided metrics, HTML, headers, and asset data until collection support is implemented.",
+    "do": ["Use evidence only from supplied input.", "Return missingInputs when data is unavailable.", "Keep recommendations safe when inputs are limited."],
+    "dont": ["Hallucinate Lighthouse results.", "Fetch live pages by default.", "Infer Core Web Vitals without evidence."],
+    "priority": "P0",
+    "appliesTo": ["website", "page", "performance", "audit"],
+    "status": "active"
+  }
+]

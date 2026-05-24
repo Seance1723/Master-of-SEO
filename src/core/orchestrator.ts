@@ -1,4 +1,5 @@
 import type { OrchestratorResponse } from "../types/index.ts";
+import { parsePerformanceAuditInputFromText, runPerformanceAudit } from "../performance/performance-audit.ts";
 import { parseTechnicalAuditInputFromText, runTechnicalAudit } from "../technical/technical-audit.ts";
 import { getCommandFromInput, getCommandMenu } from "./command-registry.ts";
 import { getNextGroupFromMemory, readMemory } from "./memory.ts";
@@ -47,6 +48,17 @@ export async function runSeoMaster(input: string): Promise<OrchestratorResponse>
     return {
       active: true,
       type: "technical-audit",
+      command,
+      data: report,
+      message: JSON.stringify(report, null, 2)
+    };
+  }
+
+  if (command.id === "performance-audit") {
+    const report = runPerformanceAudit(parsePerformanceAuditInputFromText(input));
+    return {
+      active: true,
+      type: "performance-audit",
       command,
       data: report,
       message: JSON.stringify(report, null, 2)

@@ -1,0 +1,13 @@
+[
+  {
+    "id": "font-performance-core",
+    "category": "font-performance",
+    "title": "Font performance",
+    "description": "Fonts should be limited, preloaded carefully, and configured to avoid rendering delays and layout shifts.",
+    "do": ["Preload critical fonts.", "Use font-display strategy.", "Limit font families and weights.", "Use system fonts when suitable."],
+    "dont": ["Load unnecessary font weights.", "Block rendering with too many font files.", "Cause CLS through late font swaps."],
+    "priority": "P2",
+    "appliesTo": ["website", "page", "performance", "audit"],
+    "status": "active"
+  }
+]

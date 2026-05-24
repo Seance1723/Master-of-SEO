@@ -95,9 +95,9 @@
     "title": "Performance Audit",
     "description": "Audit Core Web Vitals and performance SEO.",
     "group": "group-03",
-    "status": "planned",
-    "requiredInputs": ["websiteUrl"],
-    "outputType": "performance-audit"
+    "status": "active",
+    "requiredInputs": ["url optional", "html optional", "assets optional", "metrics optional", "headers optional"],
+    "outputType": "performance_audit_report"
   },
   {
     "id": "local-seo",
