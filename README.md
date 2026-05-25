@@ -16,13 +16,9 @@ npm install -g master-of-seo
 seo-master
 seo-master /
 seo-master "/seo-master help"
-seo-master "/seo-master memory"
-seo-master "/seo-master next-group"
-seo-master "/seo-master technical-audit"
-seo-master "/seo-master performance-audit"
-seo-master "/seo-master on-page-audit"
-seo-master "/seo-master on-page-audit --title 'Technical SEO Services' --metaDescription 'Fix technical SEO issues that block growth.'"
-seo-master "/seo-master on-page-audit --html '<html>...</html>'"
+seo-master "/seo-master keyword-research"
+seo-master "/seo-master keyword-research technical seo, seo audit, ecommerce seo"
+seo-master "/seo-master keyword-research --seedKeywords '[\"resume screening software\",\"resume screening pricing\"]'"
 ```
 
 ## Active Commands
@@ -33,6 +29,7 @@ seo-master "/seo-master on-page-audit --html '<html>...</html>'"
 - `/seo-master technical-audit`
 - `/seo-master performance-audit`
 - `/seo-master on-page-audit`
+- `/seo-master keyword-research`
 
 Typing `/` shows all available Master of SEO commands. SEO logic only runs when input starts with `/seo-master`.
 
@@ -40,7 +37,6 @@ Typing `/` shows all available Master of SEO commands. SEO logic only runs when 
 
 - `/seo-master audit-website`
 - `/seo-master competitor-analysis`
-- `/seo-master keyword-research`
 - `/seo-master seo-plan`
 - `/seo-master content-plan`
 - `/seo-master schema-audit`
@@ -51,19 +47,11 @@ Typing `/` shows all available Master of SEO commands. SEO logic only runs when 
 - `/seo-master migration-plan`
 - `/seo-master report`
 
-## Technical SEO Scope
+## Keyword Research Scope
 
-Group 2 implements Search Essentials, spam policy compliance, crawlability, indexability, robots.txt, meta robots, X-Robots-Tag, XML sitemap, URL structure, canonicalization, redirects, and HTTP status code checks.
+Group 5 implements keyword research, clustering, search intent detection, difficulty mapping, funnel-stage mapping, keyword-to-page mapping, cannibalization risk detection, opportunity prioritization, and recommendation logic.
 
-## Performance SEO Scope
-
-Group 3 implements Core Web Vitals, LCP, INP, CLS, TTFB, asset optimization, image performance, font performance, JavaScript performance, CSS performance, third-party script checks, and performance recommendations.
-
-## On-Page SEO Scope
-
-Group 4 implements title tags, meta descriptions, heading structure, H1-H6 hierarchy, content structure, above-the-fold SEO, CTA/conversion checks, internal on-page links, image alt text, and on-page recommendations.
-
-Group 4 does not perform full live crawling unless crawler support is added later. It audits provided HTML and on-page inputs safely.
+Group 5 does not fetch live keyword volume, CPC, SERP, or difficulty data unless an external keyword provider is added later. It safely analyzes provided keyword inputs.
 
 ## MCP Usage
 
@@ -73,7 +61,7 @@ Run the MCP server:
 npm run mcp
 ```
 
-The MCP server exposes `seo_master_run`, `seo_master_commands`, `seo_master_technical_audit`, `seo_master_performance_audit`, `seo_master_on_page_audit`, and rule resources for technical, performance, and on-page packs.
+The MCP server exposes `seo_master_run`, `seo_master_commands`, audit tools for active packs, `seo_master_keyword_research`, and rule resources.
 
 ## Group Roadmap
 
@@ -81,8 +69,8 @@ The MCP server exposes `seo_master_run`, `seo_master_commands`, `seo_master_tech
 - Group 2: Technical SEO - completed
 - Group 3: Performance SEO - completed
 - Group 4: On-Page SEO - completed
-- Group 5: Keyword Research & Intent - next
-- Group 6: Content Strategy & Planning
+- Group 5: Keyword Research & Intent - completed
+- Group 6: Content Strategy & Planning - next
 - Group 7: Site Architecture & Internal Linking
 - Group 8: Schema & Entity SEO
 - Group 9: Media SEO
@@ -106,5 +94,5 @@ Master of SEO is designed for OpenAI agents, Claude, Antigravity, Windsurf, Curs
 
 ## Current Status
 
-- Current status: Group 4 completed
-- Next group: Group 5 Keyword Research & Intent
+- Current status: Group 5 completed
+- Next group: Group 6 Content Strategy & Planning

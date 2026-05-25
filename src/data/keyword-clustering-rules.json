@@ -1,0 +1,13 @@
+[
+  {
+    "id": "keyword-clustering-core",
+    "category": "keyword-clustering",
+    "title": "Keyword clustering",
+    "description": "Keywords should be grouped by topic, intent, and page fit.",
+    "do": ["Group keywords by topic.", "Group keywords by search intent.", "Choose one primary keyword per cluster.", "Keep secondary keywords semantically related.", "Separate different page intents."],
+    "dont": ["Mix unrelated keywords in one cluster.", "Create multiple clusters for the same intent.", "Force every keyword into a cluster.", "Create duplicate page plans."],
+    "priority": "P1",
+    "appliesTo": ["keyword", "content", "planning", "audit"],
+    "status": "active"
+  }
+]

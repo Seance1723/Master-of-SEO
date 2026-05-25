@@ -4,12 +4,15 @@ import { join } from "node:path";
 import { getCommandMenu } from "../core/command-registry.ts";
 import { runSeoMaster } from "../core/orchestrator.ts";
 import { dataDir, memoryPath } from "../core/paths.ts";
+import { runKeywordResearch } from "../keywords/keyword-research.ts";
+import { getKeywordRules } from "../keywords/keyword-rules.ts";
 import { runOnPageAudit } from "../on-page/on-page-audit.ts";
 import { getOnPageRules } from "../on-page/on-page-rules.ts";
 import { runPerformanceAudit } from "../performance/performance-audit.ts";
 import { getPerformanceRules } from "../performance/performance-rules.ts";
 import { runTechnicalAudit } from "../technical/technical-audit.ts";
 import { getTechnicalRules } from "../technical/technical-rules.ts";
+import type { KeywordResearchInput } from "../types/keywords.ts";
 import type { OnPageAuditInput } from "../types/on-page.ts";
 import type { PerformanceAuditInput } from "../types/performance.ts";
 import type { TechnicalAuditInput } from "../types/technical.ts";
@@ -95,15 +98,30 @@ const tools = [
         mode: { type: "string", enum: ["website", "page", "code", "planning"] }
       }
     }
+  },
+  {
+    name: "seo_master_keyword_research",
+    description: "Run Keyword Research & Intent logic with explicit provided inputs only. No live keyword API fetching is performed.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        seedKeywords: { type: "array" },
+        competitorKeywords: { type: "array" },
+        existingPages: { type: "array" },
+        business: { type: "object" },
+        keywordMetrics: { type: "array" },
+        mode: { type: "string", enum: ["research", "clustering", "mapping", "planning", "audit"] }
+      }
+    }
   }
 ];
 
 const prompts = [
+  "seo-master-keyword-research",
   "seo-master-on-page-audit",
   "seo-master-performance-audit",
   "seo-master-technical-audit",
   "seo-master-audit",
-  "seo-master-keyword-research",
   "seo-master-competitor-analysis",
   "seo-master-seo-plan"
 ].map((name) => ({
@@ -127,6 +145,7 @@ async function readResource(uri: string): Promise<string> {
   if (uri === "seo-master://technical-rules") return JSON.stringify(await getTechnicalRules(), null, 2);
   if (uri === "seo-master://performance-rules") return JSON.stringify(await getPerformanceRules(), null, 2);
   if (uri === "seo-master://on-page-rules") return JSON.stringify(await getOnPageRules(), null, 2);
+  if (uri === "seo-master://keyword-rules") return JSON.stringify(await getKeywordRules(), null, 2);
   throw new Error(`Unknown resource: ${uri}`);
 }
 
@@ -181,6 +200,11 @@ async function handle(request: JsonRpcRequest): Promise<void> {
         send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
         return;
       }
+      if (name === "seo_master_keyword_research") {
+        const report = runKeywordResearch({ mode: "research", ...(args as Partial<KeywordResearchInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
       throw new Error(`Unknown tool: ${name}`);
     }
 
@@ -195,7 +219,8 @@ async function handle(request: JsonRpcRequest): Promise<void> {
             { uri: "seo-master://groups", name: "Master of SEO Groups", mimeType: "application/json" },
             { uri: "seo-master://technical-rules", name: "Master of SEO Technical Rules", mimeType: "application/json" },
             { uri: "seo-master://performance-rules", name: "Master of SEO Performance Rules", mimeType: "application/json" },
-            { uri: "seo-master://on-page-rules", name: "Master of SEO On-Page Rules", mimeType: "application/json" }
+            { uri: "seo-master://on-page-rules", name: "Master of SEO On-Page Rules", mimeType: "application/json" },
+            { uri: "seo-master://keyword-rules", name: "Master of SEO Keyword Rules", mimeType: "application/json" }
           ]
         }
       });
@@ -216,11 +241,11 @@ async function handle(request: JsonRpcRequest): Promise<void> {
     if (method === "prompts/get") {
       const promptName = String(params.name ?? "");
       const commandByPrompt: Record<string, string> = {
+        "seo-master-keyword-research": "/seo-master keyword-research",
         "seo-master-on-page-audit": "/seo-master on-page-audit",
         "seo-master-performance-audit": "/seo-master performance-audit",
         "seo-master-technical-audit": "/seo-master technical-audit",
         "seo-master-audit": "/seo-master audit-website",
-        "seo-master-keyword-research": "/seo-master keyword-research",
         "seo-master-competitor-analysis": "/seo-master competitor-analysis",
         "seo-master-seo-plan": "/seo-master seo-plan"
       };

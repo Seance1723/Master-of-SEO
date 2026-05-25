@@ -35,9 +35,9 @@
     "title": "Keyword Research",
     "description": "Research keywords and map search intent.",
     "group": "group-05",
-    "status": "planned",
-    "requiredInputs": ["topicOrWebsite"],
-    "outputType": "keyword-map"
+    "status": "active",
+    "requiredInputs": ["seedKeywords optional", "competitorKeywords optional", "existingPages optional", "business optional", "keywordMetrics optional"],
+    "outputType": "keyword_research_report"
   },
   {
     "id": "seo-plan",
