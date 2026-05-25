@@ -16,10 +16,10 @@ npm install -g master-of-seo
 seo-master
 seo-master /
 seo-master "/seo-master help"
-seo-master "/seo-master trust-audit"
-seo-master "/seo-master eeat-audit --page '{\"isYMYL\":true}'"
-seo-master "/seo-master security-audit --page '{\"usesHttps\":false}'"
-seo-master "/seo-master accessibility-audit --html '<html><body><img src=\"hero.jpg\"></body></html>'"
+seo-master "/seo-master framework-seo-audit"
+seo-master "/seo-master wordpress-seo-audit --cms '{\"name\":\"wordpress\",\"settings\":{\"discourageSearchEngines\":true}}'"
+seo-master "/seo-master nextjs-seo-audit --build '{\"status\":\"failed\",\"errors\":[\"metadata generation failed\"]}'"
+seo-master "/seo-master build-seo-check --build '{\"status\":\"passed\",\"generatedSitemap\":false}'"
 ```
 
 ## Active Commands
@@ -57,6 +57,12 @@ seo-master "/seo-master accessibility-audit --html '<html><body><img src=\"hero.
 - `/seo-master eeat-audit`
 - `/seo-master security-audit`
 - `/seo-master accessibility-audit`
+- `/seo-master framework-seo-audit`
+- `/seo-master wordpress-seo-audit`
+- `/seo-master react-seo-audit`
+- `/seo-master nextjs-seo-audit`
+- `/seo-master static-seo-audit`
+- `/seo-master build-seo-check`
 
 Typing `/` shows all available Master of SEO commands. SEO logic only runs when input starts with `/seo-master`.
 
@@ -69,11 +75,11 @@ Typing `/` shows all available Master of SEO commands. SEO logic only runs when 
 - `/seo-master migration-plan`
 - `/seo-master report`
 
-## Trust, Security & Accessibility Scope
+## CMS & Framework SEO Scope
 
-Group 13 implements trust audits, E-E-A-T audits, author/reviewer trust, organization trust, contact transparency, trust pages, testimonial/review authenticity guardrails, legal policy readiness, security audits, HTTPS/mixed content guardrails, malware/hacked content signals, form trust/safety, accessibility audits, semantic HTML, heading accessibility, image alt accessibility, form accessibility, keyboard navigation, contrast/readability checks, and recommendations.
+Group 14 implements CMS/framework audits, WordPress SEO, permalink checks, archive/attachment indexing checks, SEO plugin conflict guardrails, WordPress theme performance review, React SEO, Next.js SEO, static website SEO, SPA risk guardrails, SSR/SSG readiness, dynamic metadata, route-level SEO, sitemap/robots/canonical generation guards, Open Graph/social metadata, JSON-LD rendering guardrails, build validation, and recommendations.
 
-Group 13 does not perform live security scanning, malware scanning, accessibility crawling, or external validation unless provider support is added later. It safely audits provided trust, security, and accessibility inputs only.
+Group 14 does not run live builds, CMS scans, plugin scans, or crawling unless provider/runtime support is added later. It safely audits provided CMS, framework, route, config, build, and HTML inputs only.
 
 ## MCP Usage
 
@@ -100,8 +106,8 @@ The MCP server exposes `seo_master_run`, `seo_master_commands`, active audit/pla
 - Group 11: Local & International SEO - completed
 - Group 12: AI Search & Discover SEO - completed
 - Group 13: Trust, Security & Accessibility - completed
-- Group 14: CMS & Framework SEO - next
-- Group 15: Website Audit
+- Group 14: CMS & Framework SEO - completed
+- Group 15: Website Audit - next
 - Group 16: Competitor Analysis
 - Group 17: SEO Strategy & Campaign Planning
 - Group 18: Measurement, Reporting & Governance
@@ -116,5 +122,5 @@ Master of SEO is designed for OpenAI agents, Claude, Antigravity, Windsurf, Curs
 
 ## Current Status
 
-- Current status: Group 13 completed
-- Next group: Group 14 CMS & Framework SEO
+- Current status: Group 14 completed
+- Next group: Group 15 Website Audit

@@ -30,7 +30,8 @@
     "./discover-seo-audit": "./dist/src/ai-discover/discover-seo-audit.js",
     "./trust-audit": "./dist/src/trust-security-accessibility/trust-audit.js",
     "./security-audit": "./dist/src/trust-security-accessibility/security-audit.js",
-    "./accessibility-audit": "./dist/src/trust-security-accessibility/accessibility-audit.js"
+    "./accessibility-audit": "./dist/src/trust-security-accessibility/accessibility-audit.js",
+    "./framework-seo-audit": "./dist/src/cms-framework/framework-seo-audit.js"
   },
   "files": [
     "README.md",
@@ -44,7 +45,7 @@
     "build": "tsc -p tsconfig.json",
     "dev": "node ./src/cli/index.ts",
     "start": "node ./dist/src/cli/index.js",
-    "test": "node ./tests/group-01.test.ts && node ./tests/group-02-technical-seo.test.ts && node ./tests/group-03-performance-seo.test.ts && node ./tests/group-04-on-page-seo.test.ts && node ./tests/group-05-keyword-research-intent.test.ts && node ./tests/group-06-content-strategy-planning.test.ts && node ./tests/group-07-site-architecture-internal-linking.test.ts && node ./tests/group-08-schema-entity-seo.test.ts && node ./tests/group-09-media-seo.test.ts && node ./tests/group-10-ecommerce-seo.test.ts && node ./tests/group-11-local-international-seo.test.ts && node ./tests/group-12-ai-search-discover-seo.test.ts && node ./tests/group-13-trust-security-accessibility.test.ts",
+    "test": "node ./tests/group-01.test.ts && node ./tests/group-02-technical-seo.test.ts && node ./tests/group-03-performance-seo.test.ts && node ./tests/group-04-on-page-seo.test.ts && node ./tests/group-05-keyword-research-intent.test.ts && node ./tests/group-06-content-strategy-planning.test.ts && node ./tests/group-07-site-architecture-internal-linking.test.ts && node ./tests/group-08-schema-entity-seo.test.ts && node ./tests/group-09-media-seo.test.ts && node ./tests/group-10-ecommerce-seo.test.ts && node ./tests/group-11-local-international-seo.test.ts && node ./tests/group-12-ai-search-discover-seo.test.ts && node ./tests/group-13-trust-security-accessibility.test.ts && node ./tests/group-14-cms-framework-seo.test.ts",
     "mcp": "node ./src/mcp/server.ts",
     "prepublishOnly": "npm run build && npm test"
   },

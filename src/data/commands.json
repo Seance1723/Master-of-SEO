@@ -340,6 +340,66 @@
     "outputType": "trust_security_accessibility_report"
   },
   {
+    "id": "framework-seo-audit",
+    "command": "/seo-master framework-seo-audit",
+    "title": "Framework SEO Audit",
+    "description": "Audit CMS/framework SEO, routes, rendering, metadata, sitemap, robots, canonicals, schema, and build signals.",
+    "group": "group-14",
+    "status": "active",
+    "requiredInputs": ["html optional", "framework optional", "cms optional", "packageJson optional", "frameworkConfig optional", "routes optional", "build optional", "seoFiles optional"],
+    "outputType": "cms_framework_seo_report"
+  },
+  {
+    "id": "wordpress-seo-audit",
+    "command": "/seo-master wordpress-seo-audit",
+    "title": "WordPress SEO Audit",
+    "description": "Audit WordPress permalinks, archive indexing, attachment pages, plugins, sitemap, and theme/plugin risks.",
+    "group": "group-14",
+    "status": "active",
+    "requiredInputs": ["html optional", "framework optional", "cms optional", "packageJson optional", "frameworkConfig optional", "routes optional", "build optional", "seoFiles optional"],
+    "outputType": "cms_framework_seo_report"
+  },
+  {
+    "id": "react-seo-audit",
+    "command": "/seo-master react-seo-audit",
+    "title": "React SEO Audit",
+    "description": "Audit React SPA SEO risk, CSR routes, metadata, root HTML, hash routes, and crawlable navigation.",
+    "group": "group-14",
+    "status": "active",
+    "requiredInputs": ["html optional", "framework optional", "cms optional", "packageJson optional", "frameworkConfig optional", "routes optional", "build optional", "seoFiles optional"],
+    "outputType": "cms_framework_seo_report"
+  },
+  {
+    "id": "nextjs-seo-audit",
+    "command": "/seo-master nextjs-seo-audit",
+    "title": "Next.js SEO Audit",
+    "description": "Audit Next.js metadata, dynamic routes, rendering modes, sitemap, robots, canonicals, and build warnings.",
+    "group": "group-14",
+    "status": "active",
+    "requiredInputs": ["html optional", "framework optional", "cms optional", "packageJson optional", "frameworkConfig optional", "routes optional", "build optional", "seoFiles optional"],
+    "outputType": "cms_framework_seo_report"
+  },
+  {
+    "id": "static-seo-audit",
+    "command": "/seo-master static-seo-audit",
+    "title": "Static SEO Audit",
+    "description": "Audit static site metadata, canonical, sitemap, robots, schema, links, and JS-required content risks.",
+    "group": "group-14",
+    "status": "active",
+    "requiredInputs": ["html optional", "framework optional", "cms optional", "packageJson optional", "frameworkConfig optional", "routes optional", "build optional", "seoFiles optional"],
+    "outputType": "cms_framework_seo_report"
+  },
+  {
+    "id": "build-seo-check",
+    "command": "/seo-master build-seo-check",
+    "title": "Build SEO Check",
+    "description": "Check framework build status, SEO-related warnings, output directory, generated sitemap, robots, and static routes.",
+    "group": "group-14",
+    "status": "active",
+    "requiredInputs": ["html optional", "framework optional", "cms optional", "packageJson optional", "frameworkConfig optional", "routes optional", "build optional", "seoFiles optional"],
+    "outputType": "cms_framework_seo_report"
+  },
+  {
     "id": "launch-checklist",
     "command": "/seo-master launch-checklist",
     "title": "Launch Checklist",

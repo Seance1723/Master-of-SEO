@@ -1,0 +1,14 @@
+[
+  {
+    "id": "sitemap-generation-core",
+    "group": "group-14",
+    "category": "sitemap-generation",
+    "title": "Sitemap Generation",
+    "description": "Generate sitemap only from canonical indexable routes and exclude private/noindex/error routes.",
+    "do": ["Generate sitemap from canonical indexable routes.", "Exclude noindex/private routes."],
+    "dont": ["Include redirected/404/noindex routes in sitemap.", "Rely on sitemap as replacement for internal links."],
+    "priority": "P2",
+    "appliesTo": ["technical", "audit", "planning"],
+    "status": "active"
+  }
+]

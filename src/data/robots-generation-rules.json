@@ -1,0 +1,14 @@
+[
+  {
+    "id": "robots-generation-core",
+    "group": "group-14",
+    "category": "robots-generation",
+    "title": "Robots Generation",
+    "description": "Generate robots.txt intentionally and include sitemap URL without blocking important routes.",
+    "do": ["Generate robots.txt intentionally.", "Include sitemap URL in robots.txt."],
+    "dont": ["Block important routes in robots.txt.", "Skip robots.txt generation for production sites."],
+    "priority": "P2",
+    "appliesTo": ["technical", "audit", "planning"],
+    "status": "active"
+  }
+]

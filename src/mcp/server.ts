@@ -8,6 +8,13 @@ import { runAnswerBlockAudit } from "../ai-discover/answer-block.ts";
 import { runDiscoverSEOAudit } from "../ai-discover/discover-seo-audit.ts";
 import { runArchitectureAudit } from "../architecture/architecture-audit.ts";
 import { getArchitectureRules } from "../architecture/architecture-rules.ts";
+import { runBuildSEOCheck } from "../cms-framework/build-seo-check.ts";
+import { getCMSFrameworkRules } from "../cms-framework/cms-framework-rules.ts";
+import { runFrameworkSEOAudit } from "../cms-framework/framework-seo-audit.ts";
+import { runNextJSSEOAudit } from "../cms-framework/nextjs-seo-audit.ts";
+import { runReactSEOAudit } from "../cms-framework/react-seo-audit.ts";
+import { runStaticSEOAudit } from "../cms-framework/static-seo-audit.ts";
+import { runWordPressSEOAudit } from "../cms-framework/wordpress-seo-audit.ts";
 import { runContentPlan } from "../content/content-plan.ts";
 import { getContentRules } from "../content/content-rules.ts";
 import { getCommandMenu } from "../core/command-registry.ts";
@@ -52,6 +59,7 @@ import type { SchemaAuditInput } from "../types/schema.ts";
 import type { TechnicalAuditInput } from "../types/technical.ts";
 import type { AISearchAuditInput, DiscoverSEOAuditInput } from "../types/ai-discover.ts";
 import type { AccessibilityAuditInput, SecurityAuditInput, TrustAuditInput } from "../types/trust-security-accessibility.ts";
+import type { CMSFrameworkAuditInput } from "../types/cms-framework.ts";
 
 interface JsonRpcRequest {
   jsonrpc: "2.0";
@@ -327,10 +335,46 @@ const tools = [
     name: "seo_master_accessibility_audit",
     description: "Run Accessibility SEO audit logic with explicit provided inputs only. No live accessibility crawling or external validation.",
     inputSchema: { type: "object", properties: { url: { type: "string" }, html: { type: "string" }, page: { type: "object" }, headings: { type: "array" }, images: { type: "array" }, forms: { type: "array" }, links: { type: "array" }, buttons: { type: "array" }, accessibilitySignals: { type: "object" }, mode: { type: "string", enum: ["accessibility", "semantic", "forms", "audit"] } } }
+  },
+  {
+    name: "seo_master_framework_seo_audit",
+    description: "Run CMS/framework SEO audit logic with explicit inputs only. No live CMS login, build execution, plugin scan, or crawling.",
+    inputSchema: { type: "object", properties: { url: { type: "string" }, html: { type: "string" }, framework: { type: "string" }, cms: { type: "object" }, packageJson: { type: "object" }, frameworkConfig: { type: "object" }, routes: { type: "array" }, build: { type: "object" }, seoFiles: { type: "object" }, mode: { type: "string", enum: ["framework", "wordpress", "react", "nextjs", "static", "build", "audit"] } } }
+  },
+  {
+    name: "seo_master_wordpress_seo_audit",
+    description: "Run WordPress SEO audit logic with explicit CMS inputs only.",
+    inputSchema: { type: "object", properties: { html: { type: "string" }, cms: { type: "object" }, routes: { type: "array" }, build: { type: "object" }, seoFiles: { type: "object" }, mode: { type: "string", enum: ["framework", "wordpress", "react", "nextjs", "static", "build", "audit"] } } }
+  },
+  {
+    name: "seo_master_react_seo_audit",
+    description: "Run React SEO audit logic with explicit inputs only.",
+    inputSchema: { type: "object", properties: { html: { type: "string" }, packageJson: { type: "object" }, routes: { type: "array" }, build: { type: "object" }, seoFiles: { type: "object" }, mode: { type: "string", enum: ["framework", "wordpress", "react", "nextjs", "static", "build", "audit"] } } }
+  },
+  {
+    name: "seo_master_nextjs_seo_audit",
+    description: "Run Next.js SEO audit logic with explicit inputs only.",
+    inputSchema: { type: "object", properties: { html: { type: "string" }, packageJson: { type: "object" }, frameworkConfig: { type: "object" }, routes: { type: "array" }, build: { type: "object" }, seoFiles: { type: "object" }, mode: { type: "string", enum: ["framework", "wordpress", "react", "nextjs", "static", "build", "audit"] } } }
+  },
+  {
+    name: "seo_master_static_seo_audit",
+    description: "Run Static Website SEO audit logic with explicit inputs only.",
+    inputSchema: { type: "object", properties: { html: { type: "string" }, routes: { type: "array" }, build: { type: "object" }, seoFiles: { type: "object" }, mode: { type: "string", enum: ["framework", "wordpress", "react", "nextjs", "static", "build", "audit"] } } }
+  },
+  {
+    name: "seo_master_build_seo_check",
+    description: "Run framework build SEO check logic with explicit build data only. No build is executed.",
+    inputSchema: { type: "object", properties: { framework: { type: "string" }, routes: { type: "array" }, build: { type: "object" }, seoFiles: { type: "object" }, mode: { type: "string", enum: ["framework", "wordpress", "react", "nextjs", "static", "build", "audit"] } } }
   }
 ];
 
 const prompts = [
+  "seo-master-build-seo-check",
+  "seo-master-static-seo-audit",
+  "seo-master-nextjs-seo-audit",
+  "seo-master-react-seo-audit",
+  "seo-master-wordpress-seo-audit",
+  "seo-master-framework-seo-audit",
   "seo-master-accessibility-audit",
   "seo-master-security-audit",
   "seo-master-eeat-audit",
@@ -405,6 +449,11 @@ async function readResource(uri: string): Promise<string> {
   if (uri === "seo-master://eeat-rules") return readFile(join(dataDir, "eeat-rules.json"), "utf8");
   if (uri === "seo-master://security-rules") return readFile(join(dataDir, "security-seo-rules.json"), "utf8");
   if (uri === "seo-master://accessibility-rules") return readFile(join(dataDir, "accessibility-rules.json"), "utf8");
+  if (uri === "seo-master://cms-framework-rules") return JSON.stringify(await getCMSFrameworkRules(), null, 2);
+  if (uri === "seo-master://wordpress-seo-rules") return readFile(join(dataDir, "wordpress-seo-rules.json"), "utf8");
+  if (uri === "seo-master://react-seo-rules") return readFile(join(dataDir, "react-seo-rules.json"), "utf8");
+  if (uri === "seo-master://nextjs-seo-rules") return readFile(join(dataDir, "nextjs-seo-rules.json"), "utf8");
+  if (uri === "seo-master://build-seo-rules") return readFile(join(dataDir, "build-seo-rules.json"), "utf8");
   throw new Error(`Unknown resource: ${uri}`);
 }
 
@@ -569,6 +618,36 @@ async function handle(request: JsonRpcRequest): Promise<void> {
         send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
         return;
       }
+      if (name === "seo_master_framework_seo_audit") {
+        const report = runFrameworkSEOAudit({ mode: "framework", ...(args as Partial<CMSFrameworkAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_wordpress_seo_audit") {
+        const report = runWordPressSEOAudit({ mode: "wordpress", ...(args as Partial<CMSFrameworkAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_react_seo_audit") {
+        const report = runReactSEOAudit({ mode: "react", ...(args as Partial<CMSFrameworkAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_nextjs_seo_audit") {
+        const report = runNextJSSEOAudit({ mode: "nextjs", ...(args as Partial<CMSFrameworkAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_static_seo_audit") {
+        const report = runStaticSEOAudit({ mode: "static", ...(args as Partial<CMSFrameworkAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_build_seo_check") {
+        const report = runBuildSEOCheck({ mode: "build", ...(args as Partial<CMSFrameworkAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
       throw new Error(`Unknown tool: ${name}`);
     }
 
@@ -607,7 +686,12 @@ async function handle(request: JsonRpcRequest): Promise<void> {
             { uri: "seo-master://trust-rules", name: "Master of SEO Trust Rules", mimeType: "application/json" },
             { uri: "seo-master://eeat-rules", name: "Master of SEO E-E-A-T Rules", mimeType: "application/json" },
             { uri: "seo-master://security-rules", name: "Master of SEO Security Rules", mimeType: "application/json" },
-            { uri: "seo-master://accessibility-rules", name: "Master of SEO Accessibility Rules", mimeType: "application/json" }
+            { uri: "seo-master://accessibility-rules", name: "Master of SEO Accessibility Rules", mimeType: "application/json" },
+            { uri: "seo-master://cms-framework-rules", name: "Master of SEO CMS Framework Rules", mimeType: "application/json" },
+            { uri: "seo-master://wordpress-seo-rules", name: "Master of SEO WordPress SEO Rules", mimeType: "application/json" },
+            { uri: "seo-master://react-seo-rules", name: "Master of SEO React SEO Rules", mimeType: "application/json" },
+            { uri: "seo-master://nextjs-seo-rules", name: "Master of SEO Next.js SEO Rules", mimeType: "application/json" },
+            { uri: "seo-master://build-seo-rules", name: "Master of SEO Build SEO Rules", mimeType: "application/json" }
           ]
         }
       });
@@ -628,6 +712,12 @@ async function handle(request: JsonRpcRequest): Promise<void> {
     if (method === "prompts/get") {
       const promptName = String(params.name ?? "");
       const commandByPrompt: Record<string, string> = {
+        "seo-master-build-seo-check": "/seo-master build-seo-check",
+        "seo-master-static-seo-audit": "/seo-master static-seo-audit",
+        "seo-master-nextjs-seo-audit": "/seo-master nextjs-seo-audit",
+        "seo-master-react-seo-audit": "/seo-master react-seo-audit",
+        "seo-master-wordpress-seo-audit": "/seo-master wordpress-seo-audit",
+        "seo-master-framework-seo-audit": "/seo-master framework-seo-audit",
         "seo-master-accessibility-audit": "/seo-master accessibility-audit",
         "seo-master-security-audit": "/seo-master security-audit",
         "seo-master-eeat-audit": "/seo-master eeat-audit",

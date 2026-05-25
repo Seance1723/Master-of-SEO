@@ -1,0 +1,14 @@
+[
+  {
+    "id": "wordpress-seo-core",
+    "group": "group-14",
+    "category": "wordpress-seo",
+    "title": "WordPress SEO",
+    "description": "Use clean WordPress SEO configuration, one metadata source, useful archives, XML sitemap, and optimized theme/plugin setup.",
+    "do": ["Use SEO-friendly permalinks.", "Generate XML sitemap.", "Manage indexability of archives, tags, authors, dates, and attachments.", "Use one primary SEO plugin setup cleanly.", "Optimize theme and plugin performance.", "Add breadcrumbs where useful."],
+    "dont": ["Index attachment pages by default.", "Index thin tag/date/author archives unless useful.", "Use multiple SEO plugins that output conflicting metadata.", "Let page builders create bloated templates.", "Leave unused plugins active."],
+    "priority": "P2",
+    "appliesTo": ["technical", "audit", "planning"],
+    "status": "active"
+  }
+]

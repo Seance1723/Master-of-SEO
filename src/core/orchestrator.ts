@@ -5,6 +5,12 @@ import { runAnswerBlockAudit } from "../ai-discover/answer-block.ts";
 import { parseDiscoverInputFromText, runDiscoverSEOAudit } from "../ai-discover/discover-seo-audit.ts";
 import { parseArchitectureAuditInputFromText, runArchitectureAudit } from "../architecture/architecture-audit.ts";
 import { parseContentPlanInputFromText, runContentPlan } from "../content/content-plan.ts";
+import { runBuildSEOCheck } from "../cms-framework/build-seo-check.ts";
+import { parseCMSFrameworkInputFromText, runFrameworkSEOAudit } from "../cms-framework/framework-seo-audit.ts";
+import { runNextJSSEOAudit } from "../cms-framework/nextjs-seo-audit.ts";
+import { runReactSEOAudit } from "../cms-framework/react-seo-audit.ts";
+import { runStaticSEOAudit } from "../cms-framework/static-seo-audit.ts";
+import { runWordPressSEOAudit } from "../cms-framework/wordpress-seo-audit.ts";
 import { runCategorySeoAudit } from "../ecommerce/category-seo.ts";
 import { parseEcommerceAuditInputFromText, runEcommerceAudit } from "../ecommerce/ecommerce-audit.ts";
 import { runProductSeoAudit } from "../ecommerce/product-seo.ts";
@@ -251,6 +257,18 @@ export async function runSeoMaster(input: string): Promise<OrchestratorResponse>
     return {
       active: true,
       type: "trust-security-accessibility-audit",
+      command,
+      data: report,
+      message: JSON.stringify(report, null, 2)
+    };
+  }
+
+  if (command.id === "framework-seo-audit" || command.id === "wordpress-seo-audit" || command.id === "react-seo-audit" || command.id === "nextjs-seo-audit" || command.id === "static-seo-audit" || command.id === "build-seo-check") {
+    const parsed = parseCMSFrameworkInputFromText(input);
+    const report = command.id === "wordpress-seo-audit" ? runWordPressSEOAudit(parsed) : command.id === "react-seo-audit" ? runReactSEOAudit(parsed) : command.id === "nextjs-seo-audit" ? runNextJSSEOAudit(parsed) : command.id === "static-seo-audit" ? runStaticSEOAudit(parsed) : command.id === "build-seo-check" ? runBuildSEOCheck(parsed) : runFrameworkSEOAudit(parsed);
+    return {
+      active: true,
+      type: "cms-framework-audit",
       command,
       data: report,
       message: JSON.stringify(report, null, 2)

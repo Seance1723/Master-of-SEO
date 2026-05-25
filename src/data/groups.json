@@ -12,8 +12,8 @@
   { "id": "group-11", "name": "Local & International SEO", "status": "completed" },
   { "id": "group-12", "name": "AI Search & Discover SEO", "status": "completed" },
   { "id": "group-13", "name": "Trust, Security & Accessibility", "status": "completed" },
-  { "id": "group-14", "name": "CMS & Framework SEO", "status": "next" },
-  { "id": "group-15", "name": "Website Audit", "status": "planned" },
+  { "id": "group-14", "name": "CMS & Framework SEO", "status": "completed" },
+  { "id": "group-15", "name": "Website Audit", "status": "next" },
   { "id": "group-16", "name": "Competitor Analysis", "status": "planned" },
   { "id": "group-17", "name": "SEO Strategy & Campaign Planning", "status": "planned" },
   { "id": "group-18", "name": "Measurement, Reporting & Governance", "status": "planned" }

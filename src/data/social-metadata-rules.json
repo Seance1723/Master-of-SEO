@@ -1,0 +1,14 @@
+[
+  {
+    "id": "social-metadata-core",
+    "group": "group-14",
+    "category": "social-metadata",
+    "title": "Open Graph / Social Metadata",
+    "description": "Generate route-specific Open Graph and social metadata for shareable pages.",
+    "do": ["Include Open Graph for shareable pages.", "Include og:image for important landing/article/product pages."],
+    "dont": ["Use same OG data for every dynamic page.", "Omit social metadata on shareable pages."],
+    "priority": "P3",
+    "appliesTo": ["technical", "audit", "planning"],
+    "status": "active"
+  }
+]

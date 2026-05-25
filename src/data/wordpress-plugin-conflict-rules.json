@@ -1,0 +1,14 @@
+[
+  {
+    "id": "wordpress-plugin-conflict-core",
+    "group": "group-14",
+    "category": "wordpress-plugin-conflict",
+    "title": "WordPress SEO Plugin Conflict Guard",
+    "description": "Avoid duplicate metadata/schema/canonical output from overlapping SEO plugins.",
+    "do": ["Detect multiple SEO plugins.", "Detect duplicate schema/meta output risk.", "Keep one canonical source for metadata."],
+    "dont": ["Run multiple SEO plugins with overlapping features.", "Output duplicate canonical/schema/title tags.", "Assume plugin activation means SEO is configured correctly."],
+    "priority": "P2",
+    "appliesTo": ["technical", "audit", "planning"],
+    "status": "active"
+  }
+]

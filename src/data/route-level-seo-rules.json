@@ -1,0 +1,14 @@
+[
+  {
+    "id": "route-level-seo-core",
+    "group": "group-14",
+    "category": "route-level-seo",
+    "title": "Route-Level SEO",
+    "description": "Check each public route and keep private/app routes noindexed.",
+    "do": ["Check each public route.", "Mark private/dashboard routes noindex.", "Ensure public routes are indexable.", "Map route to page type and intent."],
+    "dont": ["Index login, dashboard, cart, checkout, account, or admin routes.", "Forget canonical on dynamic routes.", "Leave placeholder pages indexable."],
+    "priority": "P1",
+    "appliesTo": ["technical", "audit", "planning"],
+    "status": "active"
+  }
+]

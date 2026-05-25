@@ -1,0 +1,14 @@
+[
+  {
+    "id": "metadata-core",
+    "group": "group-14",
+    "category": "dynamic-metadata",
+    "title": "Dynamic Metadata",
+    "description": "Generate unique title, meta description, canonical, and social metadata per route.",
+    "do": ["Generate unique title/meta/canonical per route.", "Include Open Graph and Twitter metadata.", "Keep metadata aligned with page intent."],
+    "dont": ["Duplicate metadata across dynamic pages.", "Generate metadata from untrusted empty values.", "Omit metadata on dynamic routes."],
+    "priority": "P2",
+    "appliesTo": ["technical", "audit", "planning"],
+    "status": "active"
+  }
+]

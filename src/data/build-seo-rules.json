@@ -1,0 +1,14 @@
+[
+  {
+    "id": "build-seo-core",
+    "group": "group-14",
+    "category": "build-seo",
+    "title": "Framework Build Validation",
+    "description": "Check build status, generated output, sitemap/robots output, static routes, and SEO-related warnings.",
+    "do": ["Check build status.", "Check generated output directory.", "Ensure sitemap/robots are included in build.", "Detect failed builds before deploy.", "Detect warnings affecting SEO routes."],
+    "dont": ["Deploy broken builds.", "Assume dev server behavior equals production build.", "Forget to test generated static routes."],
+    "priority": "P1",
+    "appliesTo": ["technical", "audit", "planning"],
+    "status": "active"
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "react-seo-core",
+    "group": "group-14",
+    "category": "react-seo",
+    "title": "React SEO",
+    "description": "Use SSR/SSG/pre-rendering, reliable metadata, crawlable links, and lightweight public pages for React sites.",
+    "do": ["Use SSR/SSG or pre-rendering for public SEO pages where possible.", "Render title, meta, canonical, Open Graph, and JSON-LD reliably.", "Use real anchor links.", "Avoid hash routing for public SEO pages.", "Keep marketing pages lightweight."],
+    "dont": ["Make public SEO pages client-only without reason.", "Delay SEO metadata until after hydration.", "Hide content behind API calls without fallback.", "Use button-only navigation for crawlable routes."],
+    "priority": "P2",
+    "appliesTo": ["technical", "audit", "planning"],
+    "status": "active"
+  }
+]

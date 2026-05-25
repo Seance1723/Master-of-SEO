@@ -1,0 +1,14 @@
+[
+  {
+    "id": "wordpress-archive-core",
+    "group": "group-14",
+    "category": "wordpress-archives-attachments",
+    "title": "WordPress Archives / Attachments",
+    "description": "Noindex or optimize low-value WordPress archives and attachment pages.",
+    "do": ["Noindex low-value archives.", "Keep useful category archives optimized.", "Disable or redirect attachment pages where needed."],
+    "dont": ["Let media attachment pages index accidentally.", "Index empty tag archives.", "Duplicate category and tag structures."],
+    "priority": "P2",
+    "appliesTo": ["technical", "audit", "planning"],
+    "status": "active"
+  }
+]
