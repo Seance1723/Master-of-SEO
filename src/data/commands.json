@@ -55,9 +55,9 @@
     "title": "Content Plan",
     "description": "Create a content strategy and publishing plan.",
     "group": "group-06",
-    "status": "planned",
-    "requiredInputs": ["topicOrWebsite"],
-    "outputType": "content-plan"
+    "status": "active",
+    "requiredInputs": ["business optional", "keywordClusters optional", "existingPages optional", "competitorPages optional", "constraints optional"],
+    "outputType": "content_strategy_plan"
   },
   {
     "id": "technical-audit",

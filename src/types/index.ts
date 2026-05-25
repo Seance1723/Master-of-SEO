@@ -23,7 +23,7 @@ export interface TriggerResult {
 
 export interface OrchestratorResponse {
   active: boolean;
-  type: "inactive" | "menu" | "help" | "memory" | "next-group" | "technical-audit" | "performance-audit" | "on-page-audit" | "keyword-research" | "planned" | "error";
+  type: "inactive" | "menu" | "help" | "memory" | "next-group" | "technical-audit" | "performance-audit" | "on-page-audit" | "keyword-research" | "content-plan" | "planned" | "error";
   command?: SeoCommand;
   message: string;
   data?: unknown;

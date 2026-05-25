@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { runContentPlan } from "../content/content-plan.ts";
+import { getContentRules } from "../content/content-rules.ts";
 import { getCommandMenu } from "../core/command-registry.ts";
 import { runSeoMaster } from "../core/orchestrator.ts";
 import { dataDir, memoryPath } from "../core/paths.ts";
@@ -12,6 +14,7 @@ import { runPerformanceAudit } from "../performance/performance-audit.ts";
 import { getPerformanceRules } from "../performance/performance-rules.ts";
 import { runTechnicalAudit } from "../technical/technical-audit.ts";
 import { getTechnicalRules } from "../technical/technical-rules.ts";
+import type { ContentPlanInput } from "../types/content.ts";
 import type { KeywordResearchInput } from "../types/keywords.ts";
 import type { OnPageAuditInput } from "../types/on-page.ts";
 import type { PerformanceAuditInput } from "../types/performance.ts";
@@ -113,10 +116,26 @@ const tools = [
         mode: { type: "string", enum: ["research", "clustering", "mapping", "planning", "audit"] }
       }
     }
+  },
+  {
+    name: "seo_master_content_plan",
+    description: "Run Content Strategy & Planning logic with explicit provided inputs only. No live SERP, traffic, competitor, or keyword metric fetching is performed.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        business: { type: "object" },
+        keywordClusters: { type: "array" },
+        existingPages: { type: "array" },
+        competitorPages: { type: "array" },
+        constraints: { type: "object" },
+        mode: { type: "string", enum: ["planning", "brief", "refresh", "pruning", "calendar", "audit"] }
+      }
+    }
   }
 ];
 
 const prompts = [
+  "seo-master-content-plan",
   "seo-master-keyword-research",
   "seo-master-on-page-audit",
   "seo-master-performance-audit",
@@ -146,6 +165,7 @@ async function readResource(uri: string): Promise<string> {
   if (uri === "seo-master://performance-rules") return JSON.stringify(await getPerformanceRules(), null, 2);
   if (uri === "seo-master://on-page-rules") return JSON.stringify(await getOnPageRules(), null, 2);
   if (uri === "seo-master://keyword-rules") return JSON.stringify(await getKeywordRules(), null, 2);
+  if (uri === "seo-master://content-rules") return JSON.stringify(await getContentRules(), null, 2);
   throw new Error(`Unknown resource: ${uri}`);
 }
 
@@ -205,6 +225,11 @@ async function handle(request: JsonRpcRequest): Promise<void> {
         send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
         return;
       }
+      if (name === "seo_master_content_plan") {
+        const report = runContentPlan({ mode: "planning", ...(args as Partial<ContentPlanInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
       throw new Error(`Unknown tool: ${name}`);
     }
 
@@ -220,7 +245,8 @@ async function handle(request: JsonRpcRequest): Promise<void> {
             { uri: "seo-master://technical-rules", name: "Master of SEO Technical Rules", mimeType: "application/json" },
             { uri: "seo-master://performance-rules", name: "Master of SEO Performance Rules", mimeType: "application/json" },
             { uri: "seo-master://on-page-rules", name: "Master of SEO On-Page Rules", mimeType: "application/json" },
-            { uri: "seo-master://keyword-rules", name: "Master of SEO Keyword Rules", mimeType: "application/json" }
+            { uri: "seo-master://keyword-rules", name: "Master of SEO Keyword Rules", mimeType: "application/json" },
+            { uri: "seo-master://content-rules", name: "Master of SEO Content Rules", mimeType: "application/json" }
           ]
         }
       });
@@ -241,6 +267,7 @@ async function handle(request: JsonRpcRequest): Promise<void> {
     if (method === "prompts/get") {
       const promptName = String(params.name ?? "");
       const commandByPrompt: Record<string, string> = {
+        "seo-master-content-plan": "/seo-master content-plan",
         "seo-master-keyword-research": "/seo-master keyword-research",
         "seo-master-on-page-audit": "/seo-master on-page-audit",
         "seo-master-performance-audit": "/seo-master performance-audit",

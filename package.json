@@ -17,7 +17,8 @@
     "./technical-audit": "./dist/src/technical/technical-audit.js",
     "./performance-audit": "./dist/src/performance/performance-audit.js",
     "./on-page-audit": "./dist/src/on-page/on-page-audit.js",
-    "./keyword-research": "./dist/src/keywords/keyword-research.js"
+    "./keyword-research": "./dist/src/keywords/keyword-research.js",
+    "./content-plan": "./dist/src/content/content-plan.js"
   },
   "files": [
     "README.md",
@@ -31,7 +32,7 @@
     "build": "tsc -p tsconfig.json",
     "dev": "node ./src/cli/index.ts",
     "start": "node ./dist/src/cli/index.js",
-    "test": "node ./tests/group-01.test.ts && node ./tests/group-02-technical-seo.test.ts && node ./tests/group-03-performance-seo.test.ts && node ./tests/group-04-on-page-seo.test.ts && node ./tests/group-05-keyword-research-intent.test.ts",
+    "test": "node ./tests/group-01.test.ts && node ./tests/group-02-technical-seo.test.ts && node ./tests/group-03-performance-seo.test.ts && node ./tests/group-04-on-page-seo.test.ts && node ./tests/group-05-keyword-research-intent.test.ts && node ./tests/group-06-content-strategy-planning.test.ts",
     "mcp": "node ./src/mcp/server.ts",
     "prepublishOnly": "npm run build && npm test"
   },

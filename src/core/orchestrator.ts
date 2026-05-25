@@ -1,4 +1,5 @@
 import type { OrchestratorResponse } from "../types/index.ts";
+import { parseContentPlanInputFromText, runContentPlan } from "../content/content-plan.ts";
 import { parseKeywordResearchInputFromText, runKeywordResearch } from "../keywords/keyword-research.ts";
 import { parseOnPageAuditInputFromText, runOnPageAudit } from "../on-page/on-page-audit.ts";
 import { parsePerformanceAuditInputFromText, runPerformanceAudit } from "../performance/performance-audit.ts";
@@ -83,6 +84,17 @@ export async function runSeoMaster(input: string): Promise<OrchestratorResponse>
     return {
       active: true,
       type: "keyword-research",
+      command,
+      data: report,
+      message: JSON.stringify(report, null, 2)
+    };
+  }
+
+  if (command.id === "content-plan") {
+    const report = runContentPlan(parseContentPlanInputFromText(input));
+    return {
+      active: true,
+      type: "content-plan",
       command,
       data: report,
       message: JSON.stringify(report, null, 2)

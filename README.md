@@ -16,9 +16,9 @@ npm install -g master-of-seo
 seo-master
 seo-master /
 seo-master "/seo-master help"
-seo-master "/seo-master keyword-research"
-seo-master "/seo-master keyword-research technical seo, seo audit, ecommerce seo"
-seo-master "/seo-master keyword-research --seedKeywords '[\"resume screening software\",\"resume screening pricing\"]'"
+seo-master "/seo-master content-plan"
+seo-master "/seo-master content-plan technical seo, seo audit, ecommerce seo"
+seo-master "/seo-master content-plan --keywordClusters '[{\"clusterName\":\"Technical SEO\",\"primaryKeyword\":\"technical seo\",\"intent\":\"commercial\"}]'"
 ```
 
 ## Active Commands
@@ -30,6 +30,7 @@ seo-master "/seo-master keyword-research --seedKeywords '[\"resume screening sof
 - `/seo-master performance-audit`
 - `/seo-master on-page-audit`
 - `/seo-master keyword-research`
+- `/seo-master content-plan`
 
 Typing `/` shows all available Master of SEO commands. SEO logic only runs when input starts with `/seo-master`.
 
@@ -38,7 +39,6 @@ Typing `/` shows all available Master of SEO commands. SEO logic only runs when 
 - `/seo-master audit-website`
 - `/seo-master competitor-analysis`
 - `/seo-master seo-plan`
-- `/seo-master content-plan`
 - `/seo-master schema-audit`
 - `/seo-master local-seo`
 - `/seo-master ecommerce-seo`
@@ -47,11 +47,11 @@ Typing `/` shows all available Master of SEO commands. SEO logic only runs when 
 - `/seo-master migration-plan`
 - `/seo-master report`
 
-## Keyword Research Scope
+## Content Strategy Scope
 
-Group 5 implements keyword research, clustering, search intent detection, difficulty mapping, funnel-stage mapping, keyword-to-page mapping, cannibalization risk detection, opportunity prioritization, and recommendation logic.
+Group 6 implements content planning, topic clusters, pillar page planning, supporting content planning, content briefs, gap detection, refresh planning, pruning logic, content calendars, quality guardrails, and recommendations.
 
-Group 5 does not fetch live keyword volume, CPC, SERP, or difficulty data unless an external keyword provider is added later. It safely analyzes provided keyword inputs.
+Group 6 does not fetch live SERP, traffic, or competitor data unless provider support is added later. It safely plans content from provided business, keyword, competitor, and page inputs.
 
 ## MCP Usage
 
@@ -61,7 +61,7 @@ Run the MCP server:
 npm run mcp
 ```
 
-The MCP server exposes `seo_master_run`, `seo_master_commands`, audit tools for active packs, `seo_master_keyword_research`, and rule resources.
+The MCP server exposes `seo_master_run`, `seo_master_commands`, active audit/planning tools, and rule resources.
 
 ## Group Roadmap
 
@@ -70,8 +70,8 @@ The MCP server exposes `seo_master_run`, `seo_master_commands`, audit tools for 
 - Group 3: Performance SEO - completed
 - Group 4: On-Page SEO - completed
 - Group 5: Keyword Research & Intent - completed
-- Group 6: Content Strategy & Planning - next
-- Group 7: Site Architecture & Internal Linking
+- Group 6: Content Strategy & Planning - completed
+- Group 7: Site Architecture & Internal Linking - next
 - Group 8: Schema & Entity SEO
 - Group 9: Media SEO
 - Group 10: Ecommerce SEO
@@ -94,5 +94,5 @@ Master of SEO is designed for OpenAI agents, Claude, Antigravity, Windsurf, Curs
 
 ## Current Status
 
-- Current status: Group 5 completed
-- Next group: Group 6 Content Strategy & Planning
+- Current status: Group 6 completed
+- Next group: Group 7 Site Architecture & Internal Linking
