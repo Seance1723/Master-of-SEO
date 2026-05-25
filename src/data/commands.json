@@ -53,11 +53,61 @@
     "id": "competitor-analysis",
     "command": "/seo-master competitor-analysis",
     "title": "Competitor Analysis",
-    "description": "Analyze SEO competitors and identify gaps.",
+    "description": "Analyze provided competitors, SERP data, keyword gaps, content gaps, backlinks, metadata, schema, and conversion signals.",
     "group": "group-16",
-    "status": "planned",
-    "requiredInputs": ["websiteUrl", "competitors"],
-    "outputType": "competitor-gap-report"
+    "status": "active",
+    "requiredInputs": ["business optional", "ownSite optional", "competitors optional", "serpData optional"],
+    "outputType": "competitor_analysis_report"
+  },
+  {
+    "id": "competitor-audit",
+    "command": "/seo-master competitor-audit",
+    "title": "Competitor Audit",
+    "description": "Audit provided competitor pages, keywords, backlinks, SERP features, page structure, metadata, schema, and UX signals.",
+    "group": "group-16",
+    "status": "active",
+    "requiredInputs": ["business optional", "ownSite optional", "competitors optional", "serpData optional"],
+    "outputType": "competitor_analysis_report"
+  },
+  {
+    "id": "competitor-keyword-gap",
+    "command": "/seo-master competitor-keyword-gap",
+    "title": "Competitor Keyword Gap",
+    "description": "Find provided competitor keywords missing from own-site keyword inputs.",
+    "group": "group-16",
+    "status": "active",
+    "requiredInputs": ["business optional", "ownSite optional", "competitors optional", "serpData optional"],
+    "outputType": "competitor_analysis_report"
+  },
+  {
+    "id": "competitor-content-gap",
+    "command": "/seo-master competitor-content-gap",
+    "title": "Competitor Content Gap",
+    "description": "Find content gaps from provided competitor pages, target keywords, sections, and page types.",
+    "group": "group-16",
+    "status": "active",
+    "requiredInputs": ["business optional", "ownSite optional", "competitors optional", "serpData optional"],
+    "outputType": "competitor_analysis_report"
+  },
+  {
+    "id": "competitor-backlink-gap",
+    "command": "/seo-master competitor-backlink-gap",
+    "title": "Competitor Backlink Gap",
+    "description": "Find safe backlink opportunities from provided competitor backlink inputs only.",
+    "group": "group-16",
+    "status": "active",
+    "requiredInputs": ["business optional", "ownSite optional", "competitors optional", "serpData optional"],
+    "outputType": "competitor_analysis_report"
+  },
+  {
+    "id": "serp-analysis",
+    "command": "/seo-master serp-analysis",
+    "title": "SERP Analysis",
+    "description": "Analyze provided SERP result types and SERP features without live scraping.",
+    "group": "group-16",
+    "status": "active",
+    "requiredInputs": ["business optional", "ownSite optional", "competitors optional", "serpData optional"],
+    "outputType": "competitor_analysis_report"
   },
   {
     "id": "keyword-research",

@@ -15,6 +15,12 @@ import { runNextJSSEOAudit } from "../cms-framework/nextjs-seo-audit.ts";
 import { runReactSEOAudit } from "../cms-framework/react-seo-audit.ts";
 import { runStaticSEOAudit } from "../cms-framework/static-seo-audit.ts";
 import { runWordPressSEOAudit } from "../cms-framework/wordpress-seo-audit.ts";
+import { runCompetitorBacklinkGap } from "../competitors/competitor-backlink-gap.ts";
+import { runCompetitorContentGap } from "../competitors/competitor-content-gap.ts";
+import { runCompetitorAnalysis } from "../competitors/competitor-analysis.ts";
+import { runCompetitorKeywordGap } from "../competitors/competitor-keyword-gap.ts";
+import { getCompetitorRules } from "../competitors/competitor-rules.ts";
+import { runCompetitorSerpAnalysis } from "../competitors/competitor-serp-analysis.ts";
 import { runContentPlan } from "../content/content-plan.ts";
 import { getContentRules } from "../content/content-rules.ts";
 import { getCommandMenu } from "../core/command-registry.ts";
@@ -65,6 +71,7 @@ import type { AISearchAuditInput, DiscoverSEOAuditInput } from "../types/ai-disc
 import type { AccessibilityAuditInput, SecurityAuditInput, TrustAuditInput } from "../types/trust-security-accessibility.ts";
 import type { CMSFrameworkAuditInput } from "../types/cms-framework.ts";
 import type { WebsiteAuditInput } from "../types/website-audit.ts";
+import type { CompetitorAnalysisInput } from "../types/competitors.ts";
 
 interface JsonRpcRequest {
   jsonrpc: "2.0";
@@ -385,10 +392,40 @@ const tools = [
     name: "seo_master_template_audit",
     description: "Run template-level Website Audit grouping logic with explicit provided page inputs only.",
     inputSchema: { type: "object", properties: { pages: { type: "array" }, mode: { type: "string", enum: ["website", "page", "template", "full", "partial"] } } }
+  },
+  {
+    name: "seo_master_competitor_analysis",
+    description: "Run competitor analysis with explicit provided inputs only. No live crawling, SERP scraping, backlink fetching, keyword APIs, or traffic estimation.",
+    inputSchema: { type: "object", properties: { business: { type: "object" }, ownSite: { type: "object" }, competitors: { type: "array" }, serpData: { type: "array" }, mode: { type: "string", enum: ["analysis", "keyword_gap", "content_gap", "backlink_gap", "serp", "planning"] } } }
+  },
+  {
+    name: "seo_master_competitor_keyword_gap",
+    description: "Run competitor keyword gap logic with explicit provided inputs only.",
+    inputSchema: { type: "object", properties: { business: { type: "object" }, ownSite: { type: "object" }, competitors: { type: "array" }, serpData: { type: "array" }, mode: { type: "string", enum: ["analysis", "keyword_gap", "content_gap", "backlink_gap", "serp", "planning"] } } }
+  },
+  {
+    name: "seo_master_competitor_content_gap",
+    description: "Run competitor content gap logic with explicit provided inputs only.",
+    inputSchema: { type: "object", properties: { business: { type: "object" }, ownSite: { type: "object" }, competitors: { type: "array" }, serpData: { type: "array" }, mode: { type: "string", enum: ["analysis", "keyword_gap", "content_gap", "backlink_gap", "serp", "planning"] } } }
+  },
+  {
+    name: "seo_master_competitor_backlink_gap",
+    description: "Run competitor backlink gap logic with explicit provided inputs only. Spam links are not recommended.",
+    inputSchema: { type: "object", properties: { business: { type: "object" }, ownSite: { type: "object" }, competitors: { type: "array" }, serpData: { type: "array" }, mode: { type: "string", enum: ["analysis", "keyword_gap", "content_gap", "backlink_gap", "serp", "planning"] } } }
+  },
+  {
+    name: "seo_master_serp_analysis",
+    description: "Run SERP analysis from provided SERP data only. No live SERP scraping.",
+    inputSchema: { type: "object", properties: { business: { type: "object" }, ownSite: { type: "object" }, competitors: { type: "array" }, serpData: { type: "array" }, mode: { type: "string", enum: ["analysis", "keyword_gap", "content_gap", "backlink_gap", "serp", "planning"] } } }
   }
 ];
 
 const prompts = [
+  "seo-master-serp-analysis",
+  "seo-master-competitor-backlink-gap",
+  "seo-master-competitor-content-gap",
+  "seo-master-competitor-keyword-gap",
+  "seo-master-competitor-analysis",
   "seo-master-full-audit",
   "seo-master-page-audit",
   "seo-master-website-audit",
@@ -480,6 +517,11 @@ async function readResource(uri: string): Promise<string> {
   if (uri === "seo-master://website-audit-rules") return JSON.stringify(await getWebsiteAuditRules(), null, 2);
   if (uri === "seo-master://audit-category-weights") return readFile(join(dataDir, "audit-category-weights.json"), "utf8");
   if (uri === "seo-master://audit-roadmap-rules") return readFile(join(dataDir, "audit-roadmap-rules.json"), "utf8");
+  if (uri === "seo-master://competitor-rules") return JSON.stringify(await getCompetitorRules(), null, 2);
+  if (uri === "seo-master://competitor-keyword-gap-rules") return readFile(join(dataDir, "competitor-keyword-gap-rules.json"), "utf8");
+  if (uri === "seo-master://competitor-content-gap-rules") return readFile(join(dataDir, "competitor-content-gap-rules.json"), "utf8");
+  if (uri === "seo-master://competitor-backlink-gap-rules") return readFile(join(dataDir, "competitor-backlink-gap-rules.json"), "utf8");
+  if (uri === "seo-master://competitor-serp-rules") return readFile(join(dataDir, "competitor-serp-rules.json"), "utf8");
   throw new Error(`Unknown resource: ${uri}`);
 }
 
@@ -689,6 +731,31 @@ async function handle(request: JsonRpcRequest): Promise<void> {
         send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
         return;
       }
+      if (name === "seo_master_competitor_analysis") {
+        const report = runCompetitorAnalysis({ mode: "analysis", ...(args as Partial<CompetitorAnalysisInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_competitor_keyword_gap") {
+        const report = runCompetitorKeywordGap({ mode: "keyword_gap", ...(args as Partial<CompetitorAnalysisInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_competitor_content_gap") {
+        const report = runCompetitorContentGap({ mode: "content_gap", ...(args as Partial<CompetitorAnalysisInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_competitor_backlink_gap") {
+        const report = runCompetitorBacklinkGap({ mode: "backlink_gap", ...(args as Partial<CompetitorAnalysisInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_serp_analysis") {
+        const report = runCompetitorSerpAnalysis({ mode: "serp", ...(args as Partial<CompetitorAnalysisInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
       throw new Error(`Unknown tool: ${name}`);
     }
 
@@ -735,7 +802,12 @@ async function handle(request: JsonRpcRequest): Promise<void> {
             { uri: "seo-master://build-seo-rules", name: "Master of SEO Build SEO Rules", mimeType: "application/json" },
             { uri: "seo-master://website-audit-rules", name: "Master of SEO Website Audit Rules", mimeType: "application/json" },
             { uri: "seo-master://audit-category-weights", name: "Master of SEO Audit Category Weights", mimeType: "application/json" },
-            { uri: "seo-master://audit-roadmap-rules", name: "Master of SEO Audit Roadmap Rules", mimeType: "application/json" }
+            { uri: "seo-master://audit-roadmap-rules", name: "Master of SEO Audit Roadmap Rules", mimeType: "application/json" },
+            { uri: "seo-master://competitor-rules", name: "Master of SEO Competitor Rules", mimeType: "application/json" },
+            { uri: "seo-master://competitor-keyword-gap-rules", name: "Master of SEO Competitor Keyword Gap Rules", mimeType: "application/json" },
+            { uri: "seo-master://competitor-content-gap-rules", name: "Master of SEO Competitor Content Gap Rules", mimeType: "application/json" },
+            { uri: "seo-master://competitor-backlink-gap-rules", name: "Master of SEO Competitor Backlink Gap Rules", mimeType: "application/json" },
+            { uri: "seo-master://competitor-serp-rules", name: "Master of SEO Competitor SERP Rules", mimeType: "application/json" }
           ]
         }
       });
@@ -756,6 +828,11 @@ async function handle(request: JsonRpcRequest): Promise<void> {
     if (method === "prompts/get") {
       const promptName = String(params.name ?? "");
       const commandByPrompt: Record<string, string> = {
+        "seo-master-serp-analysis": "/seo-master serp-analysis",
+        "seo-master-competitor-backlink-gap": "/seo-master competitor-backlink-gap",
+        "seo-master-competitor-content-gap": "/seo-master competitor-content-gap",
+        "seo-master-competitor-keyword-gap": "/seo-master competitor-keyword-gap",
+        "seo-master-competitor-analysis": "/seo-master competitor-analysis",
         "seo-master-full-audit": "/seo-master full-audit",
         "seo-master-page-audit": "/seo-master page-audit",
         "seo-master-website-audit": "/seo-master website-audit",
@@ -792,7 +869,6 @@ async function handle(request: JsonRpcRequest): Promise<void> {
         "seo-master-performance-audit": "/seo-master performance-audit",
         "seo-master-technical-audit": "/seo-master technical-audit",
         "seo-master-audit": "/seo-master audit-website",
-        "seo-master-competitor-analysis": "/seo-master competitor-analysis",
         "seo-master-seo-plan": "/seo-master seo-plan"
       };
       send({

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "competitor-serp-analysis",
+    "group": "group-16",
+    "category": "SERP Analysis",
+    "title": "Analyze provided SERP patterns only",
+    "description": "Detect dominant page type and SERP features from provided SERP data.",
+    "do": ["Count provided top result page types", "Recommend page type only from provided SERP pattern"],
+    "dont": ["Do not scrape SERPs", "Do not claim SERP features exist unless provided"],
+    "priority": "P2",
+    "appliesTo": ["website", "audit", "planning"],
+    "status": "active"
+  }
+]

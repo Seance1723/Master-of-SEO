@@ -1,0 +1,14 @@
+[
+  {
+    "id": "competitor-analysis",
+    "group": "group-16",
+    "category": "Competitor Analysis",
+    "title": "Use competitor data for gaps, not copying",
+    "description": "Compare provided page type, intent, content, metadata, schema, backlinks, and conversion evidence without inventing metrics.",
+    "do": ["Separate direct competitors from search competitors", "Prioritize opportunities by business value and feasibility", "Use competitor data to find gaps"],
+    "dont": ["Do not copy competitor content", "Do not invent traffic, rankings, backlinks, or authority", "Do not recommend spammy tactics"],
+    "priority": "P1",
+    "appliesTo": ["website", "content", "audit", "planning"],
+    "status": "active"
+  }
+]

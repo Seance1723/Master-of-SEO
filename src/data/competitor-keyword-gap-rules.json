@@ -1,0 +1,14 @@
+[
+  {
+    "id": "competitor-keyword-gap",
+    "group": "group-16",
+    "category": "Keyword Gap",
+    "title": "Compare competitor keywords with own-site keywords",
+    "description": "Identify provided competitor keywords missing from own-site target and ranking keyword inputs.",
+    "do": ["Prioritize BOFU and commercial gaps", "Use rank, volume, and difficulty only when provided"],
+    "dont": ["Do not invent keyword volume, rank, or difficulty", "Do not chase only high-volume keywords"],
+    "priority": "P1",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

@@ -11,6 +11,11 @@ import { runNextJSSEOAudit } from "../cms-framework/nextjs-seo-audit.ts";
 import { runReactSEOAudit } from "../cms-framework/react-seo-audit.ts";
 import { runStaticSEOAudit } from "../cms-framework/static-seo-audit.ts";
 import { runWordPressSEOAudit } from "../cms-framework/wordpress-seo-audit.ts";
+import { runCompetitorBacklinkGap } from "../competitors/competitor-backlink-gap.ts";
+import { runCompetitorContentGap } from "../competitors/competitor-content-gap.ts";
+import { parseCompetitorAnalysisInputFromText, runCompetitorAnalysis } from "../competitors/competitor-analysis.ts";
+import { runCompetitorKeywordGap } from "../competitors/competitor-keyword-gap.ts";
+import { runCompetitorSerpAnalysis } from "../competitors/competitor-serp-analysis.ts";
 import { runCategorySeoAudit } from "../ecommerce/category-seo.ts";
 import { parseEcommerceAuditInputFromText, runEcommerceAudit } from "../ecommerce/ecommerce-audit.ts";
 import { runProductSeoAudit } from "../ecommerce/product-seo.ts";
@@ -283,6 +288,18 @@ export async function runSeoMaster(input: string): Promise<OrchestratorResponse>
     return {
       active: true,
       type: "website-audit",
+      command,
+      data: report,
+      message: JSON.stringify(report, null, 2)
+    };
+  }
+
+  if (command.id === "competitor-analysis" || command.id === "competitor-audit" || command.id === "competitor-keyword-gap" || command.id === "competitor-content-gap" || command.id === "competitor-backlink-gap" || command.id === "serp-analysis") {
+    const parsed = parseCompetitorAnalysisInputFromText(input);
+    const report = command.id === "competitor-keyword-gap" ? runCompetitorKeywordGap(parsed) : command.id === "competitor-content-gap" ? runCompetitorContentGap(parsed) : command.id === "competitor-backlink-gap" ? runCompetitorBacklinkGap(parsed) : command.id === "serp-analysis" ? runCompetitorSerpAnalysis(parsed) : runCompetitorAnalysis(parsed);
+    return {
+      active: true,
+      type: "competitor-analysis",
       command,
       data: report,
       message: JSON.stringify(report, null, 2)

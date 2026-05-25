@@ -16,9 +16,9 @@ npm install -g master-of-seo
 seo-master
 seo-master /
 seo-master "/seo-master help"
-seo-master "/seo-master audit-website"
-seo-master "/seo-master website-audit --website '{\"websiteType\":\"saas\",\"businessGoal\":\"demo_booking\"}'"
-seo-master "/seo-master page-audit --pages '[{\"url\":\"/services/seo\",\"pageType\":\"service\",\"title\":\"SEO Services\"}]'"
+seo-master "/seo-master competitor-analysis"
+seo-master "/seo-master competitor-keyword-gap --ownSite '{\"pages\":[{\"url\":\"/seo-services\",\"rankingKeywords\":[\"seo services\"]}]}'"
+seo-master "/seo-master serp-analysis --serpData '[{\"keyword\":\"technical seo\",\"features\":[\"people_also_ask\"]}]'"
 ```
 
 ## Active Commands
@@ -66,22 +66,27 @@ seo-master "/seo-master page-audit --pages '[{\"url\":\"/services/seo\",\"pageTy
 - `/seo-master website-audit`
 - `/seo-master full-audit`
 - `/seo-master page-audit`
+- `/seo-master competitor-analysis`
+- `/seo-master competitor-audit`
+- `/seo-master competitor-keyword-gap`
+- `/seo-master competitor-content-gap`
+- `/seo-master competitor-backlink-gap`
+- `/seo-master serp-analysis`
 
 Typing `/` shows all available Master of SEO commands. SEO logic only runs when input starts with `/seo-master`.
 
 ## Planned Commands
 
-- `/seo-master competitor-analysis`
 - `/seo-master seo-plan`
 - `/seo-master launch-checklist`
 - `/seo-master migration-plan`
 - `/seo-master report`
 
-## Website Audit Scope
+## Competitor Analysis Scope
 
-Group 15 implements full website audits, page-level audits, template-level audits, technical/performance/on-page/content/architecture/schema/media/ecommerce/local-international/AI-discover/trust-security-accessibility/CMS-framework aggregators, issue deduplication, priority normalization, website SEO scoring, audit roadmap generation, and recommendations.
+Group 16 implements competitor type detection, SERP analysis, keyword gaps, content gaps, backlink gaps, page structure comparison, metadata comparison, schema comparison, internal linking signals, UX/conversion signals, SERP feature opportunities, positioning analysis, opportunity prioritization, and competitor report generation.
 
-Group 15 does not perform live crawling, Search Console reads, Lighthouse runs, ranking checks, or external validation unless provider support is added later. It safely generates a full website audit from provided inputs only.
+Group 16 does not fetch live competitor, SERP, keyword, traffic, backlink, or ranking data unless provider support is added later. It safely analyzes provided competitor inputs only.
 
 ## MCP Usage
 
@@ -110,8 +115,8 @@ The MCP server exposes `seo_master_run`, `seo_master_commands`, active audit/pla
 - Group 13: Trust, Security & Accessibility - completed
 - Group 14: CMS & Framework SEO - completed
 - Group 15: Website Audit - completed
-- Group 16: Competitor Analysis - next
-- Group 17: SEO Strategy & Campaign Planning
+- Group 16: Competitor Analysis - completed
+- Group 17: SEO Strategy & Campaign Planning - next
 - Group 18: Measurement, Reporting & Governance
 
 ## Memory System
@@ -124,5 +129,5 @@ Master of SEO is designed for OpenAI agents, Claude, Antigravity, Windsurf, Curs
 
 ## Current Status
 
-- Current status: Group 15 completed
-- Next group: Group 16 Competitor Analysis
+- Current status: Group 16 completed
+- Next group: Group 17 SEO Strategy & Campaign Planning

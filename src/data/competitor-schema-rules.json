@@ -1,0 +1,14 @@
+[
+  {
+    "id": "competitor-schema",
+    "group": "group-16",
+    "category": "Schema",
+    "title": "Recommend schema only when valid",
+    "description": "Compare schema types and recommend only schema that matches own visible content.",
+    "do": ["Use own page type and visible content as guardrails"],
+    "dont": ["Do not add schema just because competitors have it", "Do not add fake reviews or ratings"],
+    "priority": "P3",
+    "appliesTo": ["page", "audit", "planning"],
+    "status": "active"
+  }
+]

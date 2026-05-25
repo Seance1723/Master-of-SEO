@@ -1,0 +1,14 @@
+[
+  {
+    "id": "competitor-type-detection",
+    "group": "group-16",
+    "category": "Competitor Type Detection",
+    "title": "Classify competitor roles from evidence",
+    "description": "Classify competitors as direct, search, content, local, product, marketplace, or unknown based on provided data.",
+    "do": ["Use provided type when present", "Use SERP, page type, product, local, and industry overlap evidence"],
+    "dont": ["Do not treat every ranking domain as a direct business competitor", "Do not ignore marketplace/listing patterns"],
+    "priority": "P2",
+    "appliesTo": ["website", "audit", "planning"],
+    "status": "active"
+  }
+]

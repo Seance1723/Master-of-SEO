@@ -14,7 +14,7 @@
   { "id": "group-13", "name": "Trust, Security & Accessibility", "status": "completed" },
   { "id": "group-14", "name": "CMS & Framework SEO", "status": "completed" },
   { "id": "group-15", "name": "Website Audit", "status": "completed" },
-  { "id": "group-16", "name": "Competitor Analysis", "status": "next" },
-  { "id": "group-17", "name": "SEO Strategy & Campaign Planning", "status": "planned" },
+  { "id": "group-16", "name": "Competitor Analysis", "status": "completed" },
+  { "id": "group-17", "name": "SEO Strategy & Campaign Planning", "status": "next" },
   { "id": "group-18", "name": "Measurement, Reporting & Governance", "status": "planned" }
 ]

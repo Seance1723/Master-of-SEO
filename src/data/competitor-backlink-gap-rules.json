@@ -1,0 +1,14 @@
+[
+  {
+    "id": "competitor-backlink-gap",
+    "group": "group-16",
+    "category": "Backlink Gap",
+    "title": "Use only provided backlink evidence",
+    "description": "Identify relevant non-spam competitor backlink source opportunities.",
+    "do": ["Prioritize editorial, partner, resource, and PR links", "Ignore spam links"],
+    "dont": ["Do not recommend buying followed links", "Do not invent domain authority or link quality"],
+    "priority": "P2",
+    "appliesTo": ["website", "audit", "planning"],
+    "status": "active"
+  }
+]
