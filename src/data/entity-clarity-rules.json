@@ -1,0 +1,14 @@
+[
+  {
+    "id": "entity-clarity-core",
+    "group": "group-12",
+    "category": "entity-clarity",
+    "title": "Entity Clarity",
+    "description": "Clearly define real brand, product, service, author, organization, location, and topic entities.",
+    "do": ["Clearly define brand, product, service, author, organization, location, and topic entities.", "Use consistent entity names.", "Connect entities using schema and sameAs where valid.", "Explain what the entity is and why it matters."],
+    "dont": ["Create fake entities.", "Use inconsistent names.", "Confuse product, brand, and company names."],
+    "priority": "P2",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

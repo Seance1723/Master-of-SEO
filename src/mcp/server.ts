@@ -1,6 +1,11 @@
 #!/usr/bin/env node
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { runAIContentQualityAudit } from "../ai-discover/ai-generated-content-quality-guard.ts";
+import { getAIDiscoverRules } from "../ai-discover/ai-discover-rules.ts";
+import { runAISearchAudit } from "../ai-discover/ai-search-audit.ts";
+import { runAnswerBlockAudit } from "../ai-discover/answer-block.ts";
+import { runDiscoverSEOAudit } from "../ai-discover/discover-seo-audit.ts";
 import { runArchitectureAudit } from "../architecture/architecture-audit.ts";
 import { getArchitectureRules } from "../architecture/architecture-rules.ts";
 import { runContentPlan } from "../content/content-plan.ts";
@@ -40,6 +45,7 @@ import type { OnPageAuditInput } from "../types/on-page.ts";
 import type { PerformanceAuditInput } from "../types/performance.ts";
 import type { SchemaAuditInput } from "../types/schema.ts";
 import type { TechnicalAuditInput } from "../types/technical.ts";
+import type { AISearchAuditInput, DiscoverSEOAuditInput } from "../types/ai-discover.ts";
 
 interface JsonRpcRequest {
   jsonrpc: "2.0";
@@ -275,10 +281,34 @@ const tools = [
     name: "seo_master_hreflang_audit",
     description: "Run Hreflang audit logic with explicit provided inputs only.",
     inputSchema: { type: "object", properties: { site: { type: "object" }, pages: { type: "array" }, hreflangSets: { type: "array" }, localizedContent: { type: "array" }, mode: { type: "string", enum: ["audit", "hreflang", "localization", "planning"] } } }
+  },
+  {
+    name: "seo_master_ai_search_audit",
+    description: "Run AI Search readiness audit logic with explicit provided inputs only. No live AI Overview, SERP, or ranking checks are performed.",
+    inputSchema: { type: "object", properties: { url: { type: "string" }, html: { type: "string" }, page: { type: "object" }, content: { type: "object" }, entities: { type: "array" }, queries: { type: "array" }, schema: { type: "object" }, mode: { type: "string", enum: ["audit", "readiness", "answer_block", "content_quality", "planning"] } } }
+  },
+  {
+    name: "seo_master_answer_block_audit",
+    description: "Run answer block audit logic with explicit provided inputs only.",
+    inputSchema: { type: "object", properties: { html: { type: "string" }, page: { type: "object" }, content: { type: "object" }, queries: { type: "array" }, mode: { type: "string", enum: ["audit", "readiness", "answer_block", "content_quality", "planning"] } } }
+  },
+  {
+    name: "seo_master_discover_seo_audit",
+    description: "Run Discover SEO readiness audit logic with explicit provided inputs only. No live Discover, news, or ranking checks are performed.",
+    inputSchema: { type: "object", properties: { url: { type: "string" }, html: { type: "string" }, page: { type: "object" }, publisher: { type: "object" }, images: { type: "array" }, openGraph: { type: "object" }, contentSignals: { type: "object" }, mode: { type: "string", enum: ["audit", "discover", "news", "planning"] } } }
+  },
+  {
+    name: "seo_master_ai_content_quality_audit",
+    description: "Run AI content quality audit logic with explicit provided inputs only.",
+    inputSchema: { type: "object", properties: { html: { type: "string" }, page: { type: "object" }, content: { type: "object" }, entities: { type: "array" }, queries: { type: "array" }, schema: { type: "object" }, mode: { type: "string", enum: ["audit", "readiness", "answer_block", "content_quality", "planning"] } } }
   }
 ];
 
 const prompts = [
+  "seo-master-ai-content-quality-audit",
+  "seo-master-discover-seo-audit",
+  "seo-master-answer-block-audit",
+  "seo-master-ai-search-audit",
   "seo-master-hreflang-audit",
   "seo-master-international-seo-audit",
   "seo-master-local-seo-audit",
@@ -337,6 +367,10 @@ async function readResource(uri: string): Promise<string> {
   if (uri === "seo-master://local-seo-rules") return JSON.stringify(await getLocalInternationalRules(), null, 2);
   if (uri === "seo-master://international-seo-rules") return readFile(join(dataDir, "international-seo-rules.json"), "utf8");
   if (uri === "seo-master://hreflang-rules") return readFile(join(dataDir, "hreflang-rules.json"), "utf8");
+  if (uri === "seo-master://ai-search-rules") return JSON.stringify(await getAIDiscoverRules(), null, 2);
+  if (uri === "seo-master://discover-seo-rules") return readFile(join(dataDir, "discover-seo-rules.json"), "utf8");
+  if (uri === "seo-master://answer-block-rules") return readFile(join(dataDir, "answer-block-rules.json"), "utf8");
+  if (uri === "seo-master://ai-content-quality-rules") return readFile(join(dataDir, "ai-content-quality-rules.json"), "utf8");
   throw new Error(`Unknown resource: ${uri}`);
 }
 
@@ -461,6 +495,26 @@ async function handle(request: JsonRpcRequest): Promise<void> {
         send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
         return;
       }
+      if (name === "seo_master_ai_search_audit") {
+        const report = runAISearchAudit({ mode: "audit", ...(args as Partial<AISearchAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_answer_block_audit") {
+        const report = runAnswerBlockAudit({ mode: "answer_block", ...(args as Partial<AISearchAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_discover_seo_audit") {
+        const report = runDiscoverSEOAudit({ mode: "discover", ...(args as Partial<DiscoverSEOAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_ai_content_quality_audit") {
+        const report = runAIContentQualityAudit({ mode: "content_quality", ...(args as Partial<AISearchAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
       throw new Error(`Unknown tool: ${name}`);
     }
 
@@ -491,7 +545,11 @@ async function handle(request: JsonRpcRequest): Promise<void> {
             { uri: "seo-master://faceted-navigation-rules", name: "Master of SEO Faceted Navigation Rules", mimeType: "application/json" },
             { uri: "seo-master://local-seo-rules", name: "Master of SEO Local SEO Rules", mimeType: "application/json" },
             { uri: "seo-master://international-seo-rules", name: "Master of SEO International SEO Rules", mimeType: "application/json" },
-            { uri: "seo-master://hreflang-rules", name: "Master of SEO Hreflang Rules", mimeType: "application/json" }
+            { uri: "seo-master://hreflang-rules", name: "Master of SEO Hreflang Rules", mimeType: "application/json" },
+            { uri: "seo-master://ai-search-rules", name: "Master of SEO AI Search Rules", mimeType: "application/json" },
+            { uri: "seo-master://discover-seo-rules", name: "Master of SEO Discover SEO Rules", mimeType: "application/json" },
+            { uri: "seo-master://answer-block-rules", name: "Master of SEO Answer Block Rules", mimeType: "application/json" },
+            { uri: "seo-master://ai-content-quality-rules", name: "Master of SEO AI Content Quality Rules", mimeType: "application/json" }
           ]
         }
       });
@@ -512,6 +570,10 @@ async function handle(request: JsonRpcRequest): Promise<void> {
     if (method === "prompts/get") {
       const promptName = String(params.name ?? "");
       const commandByPrompt: Record<string, string> = {
+        "seo-master-ai-content-quality-audit": "/seo-master ai-content-quality-audit",
+        "seo-master-discover-seo-audit": "/seo-master discover-seo-audit",
+        "seo-master-answer-block-audit": "/seo-master answer-block-audit",
+        "seo-master-ai-search-audit": "/seo-master ai-search-audit",
         "seo-master-hreflang-audit": "/seo-master hreflang-audit",
         "seo-master-international-seo-audit": "/seo-master international-seo-audit",
         "seo-master-local-seo-audit": "/seo-master local-seo-audit",

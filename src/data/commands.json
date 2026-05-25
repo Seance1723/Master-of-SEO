@@ -253,11 +253,51 @@
     "id": "ai-search-readiness",
     "command": "/seo-master ai-search-readiness",
     "title": "AI Search Readiness",
-    "description": "Assess readiness for AI search and discovery systems.",
+    "description": "Audit AI Search readiness, answer extractability, entity clarity, information gain, and content quality.",
     "group": "group-12",
-    "status": "planned",
-    "requiredInputs": ["websiteUrl"],
-    "outputType": "ai-search-readiness-report"
+    "status": "active",
+    "requiredInputs": ["html optional", "page optional", "content optional", "entities optional", "queries optional", "schema optional", "publisher optional", "images optional", "openGraph optional", "contentSignals optional"],
+    "outputType": "ai_search_discover_report"
+  },
+  {
+    "id": "ai-search-audit",
+    "command": "/seo-master ai-search-audit",
+    "title": "AI Search Audit",
+    "description": "Audit AI Search readiness from provided page, content, entity, query, schema, and source inputs.",
+    "group": "group-12",
+    "status": "active",
+    "requiredInputs": ["html optional", "page optional", "content optional", "entities optional", "queries optional", "schema optional"],
+    "outputType": "ai_search_discover_report"
+  },
+  {
+    "id": "answer-block-audit",
+    "command": "/seo-master answer-block-audit",
+    "title": "Answer Block Audit",
+    "description": "Audit concise answer blocks, extractability, and query alignment.",
+    "group": "group-12",
+    "status": "active",
+    "requiredInputs": ["content optional", "queries optional", "page optional", "html optional"],
+    "outputType": "ai_search_discover_report"
+  },
+  {
+    "id": "discover-seo-audit",
+    "command": "/seo-master discover-seo-audit",
+    "title": "Discover SEO Audit",
+    "description": "Audit Google Discover readiness from provided page, publisher, image, Open Graph, and content-signal inputs.",
+    "group": "group-12",
+    "status": "active",
+    "requiredInputs": ["html optional", "page optional", "publisher optional", "images optional", "openGraph optional", "contentSignals optional"],
+    "outputType": "ai_search_discover_report"
+  },
+  {
+    "id": "ai-content-quality-audit",
+    "command": "/seo-master ai-content-quality-audit",
+    "title": "AI Content Quality Audit",
+    "description": "Audit generic AI-content risk, source quality, information gain, and human-value signals.",
+    "group": "group-12",
+    "status": "active",
+    "requiredInputs": ["content optional", "page optional", "entities optional", "queries optional", "schema optional"],
+    "outputType": "ai_search_discover_report"
   },
   {
     "id": "launch-checklist",

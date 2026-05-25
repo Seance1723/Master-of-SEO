@@ -16,9 +16,9 @@ npm install -g master-of-seo
 seo-master
 seo-master /
 seo-master "/seo-master help"
-seo-master "/seo-master local-seo"
-seo-master "/seo-master local-seo-audit --business '{\"name\":\"ABC Dental\",\"phone\":\"9999999999\",\"address\":{\"city\":\"Bangalore\",\"country\":\"IN\"}}'"
-seo-master "/seo-master hreflang-audit --hreflangSets '[{\"sourceUrl\":\"https://example.com/en-in/\",\"alternates\":[{\"lang\":\"en-IN\",\"url\":\"https://example.com/en-in/\"}]}]'"
+seo-master "/seo-master ai-search-readiness"
+seo-master "/seo-master ai-search-audit --queries '[{\"query\":\"what is technical seo\",\"intent\":\"informational\"}]'"
+seo-master "/seo-master discover-seo-audit --page '{\"pageType\":\"article\",\"title\":\"SEO Trends\",\"isIndexable\":true,\"maxImagePreview\":\"standard\"}'"
 ```
 
 ## Active Commands
@@ -47,6 +47,11 @@ seo-master "/seo-master hreflang-audit --hreflangSets '[{\"sourceUrl\":\"https:/
 - `/seo-master international-seo`
 - `/seo-master international-seo-audit`
 - `/seo-master hreflang-audit`
+- `/seo-master ai-search-readiness`
+- `/seo-master ai-search-audit`
+- `/seo-master answer-block-audit`
+- `/seo-master discover-seo-audit`
+- `/seo-master ai-content-quality-audit`
 
 Typing `/` shows all available Master of SEO commands. SEO logic only runs when input starts with `/seo-master`.
 
@@ -55,16 +60,15 @@ Typing `/` shows all available Master of SEO commands. SEO logic only runs when 
 - `/seo-master audit-website`
 - `/seo-master competitor-analysis`
 - `/seo-master seo-plan`
-- `/seo-master ai-search-readiness`
 - `/seo-master launch-checklist`
 - `/seo-master migration-plan`
 - `/seo-master report`
 
-## Local & International SEO Scope
+## AI Search & Discover SEO Scope
 
-Group 11 implements local SEO audits, Google Business Profile readiness, NAP consistency, local landing page checks, LocalBusiness schema guardrails, review authenticity guardrails, citation readiness, service-area SEO, multi-location SEO, international SEO audits, hreflang checks, language/country targeting, x-default checks, localized content quality, international URL structure checks, and recommendations.
+Group 12 implements AI Search readiness, generative search content checks, answer blocks, conversational query coverage, snippet eligibility guardrails, entity clarity, information gain, source/citation quality, content extractability, AI-generated content quality checks, Google Discover readiness, news/publisher readiness, large image preview guardrails, title/thumbnail checks, and recommendations.
 
-Group 11 does not fetch live Google Business Profile, citation, map, language, or hreflang data unless provider support is added later. It safely audits provided local and international SEO inputs only.
+Group 12 does not check live AI Overview, Discover, SERP, or ranking visibility unless provider support is added later. It safely audits AI Search and Discover readiness from provided content, page, entity, query, image, and publisher inputs.
 
 ## MCP Usage
 
@@ -89,8 +93,8 @@ The MCP server exposes `seo_master_run`, `seo_master_commands`, active audit/pla
 - Group 9: Media SEO - completed
 - Group 10: Ecommerce SEO - completed
 - Group 11: Local & International SEO - completed
-- Group 12: AI Search & Discover SEO - next
-- Group 13: Trust, Security & Accessibility
+- Group 12: AI Search & Discover SEO - completed
+- Group 13: Trust, Security & Accessibility - next
 - Group 14: CMS & Framework SEO
 - Group 15: Website Audit
 - Group 16: Competitor Analysis
@@ -107,5 +111,5 @@ Master of SEO is designed for OpenAI agents, Claude, Antigravity, Windsurf, Curs
 
 ## Current Status
 
-- Current status: Group 11 completed
-- Next group: Group 12 AI Search & Discover SEO
+- Current status: Group 12 completed
+- Next group: Group 13 Trust, Security & Accessibility

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "large-image-preview-core",
+    "group": "group-12",
+    "category": "large-image-preview",
+    "title": "Large Image Preview",
+    "description": "Use max-image-preview:large and high-quality relevant hero images where visual discovery matters.",
+    "do": ["Use max-image-preview:large where visual discovery matters.", "Use high-quality hero images.", "Include relevant alt text."],
+    "dont": ["Use low-quality images.", "Block image previews unnecessarily.", "Use unrelated images."],
+    "priority": "P3",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

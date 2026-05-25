@@ -1,0 +1,14 @@
+[
+  {
+    "id": "discover-seo-core",
+    "group": "group-12",
+    "category": "discover-seo",
+    "title": "Google Discover Readiness",
+    "description": "Use useful content, honest titles, large high-quality images, author/publisher trust, and fresh timely signals where relevant.",
+    "do": ["Create useful, engaging, high-quality content.", "Use strong but honest titles.", "Use large, high-quality images.", "Allow large image previews where appropriate.", "Show author/publisher trust.", "Keep timely content fresh."],
+    "dont": ["Use clickbait titles.", "Use misleading thumbnails.", "Use shocking or exaggerated imagery only to get clicks.", "Promise Discover traffic.", "Rely on Discover as the only traffic channel."],
+    "priority": "P2",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "generative-search-content-core",
+    "group": "group-12",
+    "category": "generative-search-content",
+    "title": "Generative Search Content",
+    "description": "Answer the main query clearly with definitions, steps, comparisons, examples, and credible support where useful.",
+    "do": ["Answer the main query clearly.", "Include definitions, steps, comparisons, examples, and decision help where relevant.", "Support claims with credible sources when needed.", "Make content easy to extract and summarize."],
+    "dont": ["Write filler intros.", "Bury the answer.", "Create unsupported claims.", "Write content only for bots."],
+    "priority": "P2",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

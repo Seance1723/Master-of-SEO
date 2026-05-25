@@ -1,0 +1,14 @@
+[
+  {
+    "id": "answer-block-core",
+    "group": "group-12",
+    "category": "answer-block",
+    "title": "Answer Blocks",
+    "description": "Use concise, accurate answer blocks near relevant headings for important user questions.",
+    "do": ["Add concise answer blocks for important questions.", "Place key answers near relevant headings.", "Keep answers accurate and complete.", "Use short paragraphs, lists, or tables where useful."],
+    "dont": ["Over-optimize every section into artificial answer snippets.", "Make answer blocks misleading.", "Repeat the same answer everywhere."],
+    "priority": "P2",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

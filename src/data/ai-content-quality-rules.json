@@ -1,0 +1,14 @@
+[
+  {
+    "id": "ai-content-quality-core",
+    "group": "group-12",
+    "category": "ai-content-quality",
+    "title": "AI-Generated Content Quality",
+    "description": "Require human review, fact checking, real expertise, examples, and proof for AI-assisted content.",
+    "do": ["Require human review.", "Require factual checking.", "Remove generic AI filler.", "Add real expertise, examples, and proof."],
+    "dont": ["Mass-publish low-value AI pages.", "Create duplicate AI content.", "Present AI-generated claims as verified facts without review."],
+    "priority": "P2",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

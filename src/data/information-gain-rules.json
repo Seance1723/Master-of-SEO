@@ -1,0 +1,14 @@
+[
+  {
+    "id": "information-gain-core",
+    "group": "group-12",
+    "category": "information-gain",
+    "title": "Information Gain",
+    "description": "Add original examples, data, screenshots, case studies, templates, or expert insight.",
+    "do": ["Add original examples, data, screenshots, case studies, templates, or expert insight.", "Provide value beyond competitor summaries.", "Explain unique perspective or experience."],
+    "dont": ["Rewrite competitor content.", "Publish generic AI output.", "Create content with no new value."],
+    "priority": "P2",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

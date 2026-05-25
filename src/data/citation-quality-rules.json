@@ -1,0 +1,14 @@
+[
+  {
+    "id": "citation-quality-core",
+    "group": "group-12",
+    "category": "source-citation-quality",
+    "title": "Source & Citation Quality",
+    "description": "Use credible source-backed claims for technical, medical, legal, financial, current, or factual content.",
+    "do": ["Cite official, primary, or credible sources when making factual claims.", "Use source-backed claims for technical, medical, legal, financial, or current information.", "Avoid low-trust sources for important claims."],
+    "dont": ["Cite irrelevant sources.", "Invent citations.", "Use outdated claims without review."],
+    "priority": "P2",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

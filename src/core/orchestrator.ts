@@ -1,4 +1,8 @@
 import type { OrchestratorResponse } from "../types/index.ts";
+import { runAIContentQualityAudit } from "../ai-discover/ai-generated-content-quality-guard.ts";
+import { parseAISearchInputFromText, runAISearchAudit } from "../ai-discover/ai-search-audit.ts";
+import { runAnswerBlockAudit } from "../ai-discover/answer-block.ts";
+import { parseDiscoverInputFromText, runDiscoverSEOAudit } from "../ai-discover/discover-seo-audit.ts";
 import { parseArchitectureAuditInputFromText, runArchitectureAudit } from "../architecture/architecture-audit.ts";
 import { parseContentPlanInputFromText, runContentPlan } from "../content/content-plan.ts";
 import { runCategorySeoAudit } from "../ecommerce/category-seo.ts";
@@ -186,6 +190,29 @@ export async function runSeoMaster(input: string): Promise<OrchestratorResponse>
     return {
       active: true,
       type: "local-international-audit",
+      command,
+      data: report,
+      message: JSON.stringify(report, null, 2)
+    };
+  }
+
+  if (command.id === "ai-search-readiness" || command.id === "ai-search-audit" || command.id === "answer-block-audit" || command.id === "ai-content-quality-audit") {
+    const parsed = parseAISearchInputFromText(input);
+    const report = command.id === "answer-block-audit" ? runAnswerBlockAudit(parsed) : command.id === "ai-content-quality-audit" ? runAIContentQualityAudit(parsed) : runAISearchAudit(parsed);
+    return {
+      active: true,
+      type: "ai-discover-audit",
+      command,
+      data: report,
+      message: JSON.stringify(report, null, 2)
+    };
+  }
+
+  if (command.id === "discover-seo-audit") {
+    const report = runDiscoverSEOAudit(parseDiscoverInputFromText(input));
+    return {
+      active: true,
+      type: "ai-discover-audit",
       command,
       data: report,
       message: JSON.stringify(report, null, 2)
