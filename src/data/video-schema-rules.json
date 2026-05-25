@@ -1,0 +1,13 @@
+[
+  {
+    "id": "video-visible-required",
+    "category": "video-schema",
+    "title": "VideoObject must match visible video",
+    "description": "VideoObject schema needs real visible video metadata.",
+    "do": ["Include name, description, thumbnailUrl, uploadDate, duration, contentUrl or embedUrl where available"],
+    "dont": ["Add video schema if video is not visible", "Use misleading thumbnails", "Invent upload dates"],
+    "priority": "P2",
+    "appliesTo": ["schema", "rich_results", "audit", "planning"],
+    "status": "active"
+  }
+]

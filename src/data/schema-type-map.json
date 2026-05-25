@@ -1,0 +1,10 @@
+{
+  "homepage": ["Organization", "WebSite"],
+  "service": ["Service", "Organization", "BreadcrumbList"],
+  "product": ["Product", "BreadcrumbList"],
+  "blog": ["BlogPosting", "BreadcrumbList"],
+  "article": ["Article", "BreadcrumbList"],
+  "local": ["LocalBusiness", "BreadcrumbList"],
+  "video": ["VideoObject"],
+  "job": ["JobPosting"]
+}

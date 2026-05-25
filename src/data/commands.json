@@ -105,9 +105,19 @@
     "title": "Schema Audit",
     "description": "Audit structured data and entity markup.",
     "group": "group-08",
-    "status": "planned",
-    "requiredInputs": ["websiteUrl"],
-    "outputType": "schema-audit"
+    "status": "active",
+    "requiredInputs": ["html optional", "jsonLd optional", "page optional", "organization optional", "author optional", "product optional", "service optional", "softwareApplication optional", "localBusiness optional", "video optional", "jobPosting optional"],
+    "outputType": "schema_entity_report"
+  },
+  {
+    "id": "schema-generate",
+    "command": "/seo-master schema-generate",
+    "title": "Schema Generate",
+    "description": "Generate safe JSON-LD from provided schema and entity inputs only.",
+    "group": "group-08",
+    "status": "active",
+    "requiredInputs": ["html optional", "jsonLd optional", "page optional", "organization optional", "author optional", "product optional", "service optional", "softwareApplication optional", "localBusiness optional", "video optional", "jobPosting optional"],
+    "outputType": "schema_entity_report"
   },
   {
     "id": "performance-audit",

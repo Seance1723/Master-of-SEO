@@ -1,0 +1,13 @@
+[
+  {
+    "id": "website-real-searchaction",
+    "category": "website-schema",
+    "title": "Use WebSite schema accurately",
+    "description": "Include site name and URL; add SearchAction only when real site search exists.",
+    "do": ["Include website name and URL", "Connect WebSite to Organization"],
+    "dont": ["Add SearchAction if search is not available", "Use wrong canonical site URL"],
+    "priority": "P2",
+    "appliesTo": ["schema", "entity", "audit", "planning"],
+    "status": "active"
+  }
+]

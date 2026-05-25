@@ -1,0 +1,13 @@
+[
+  {
+    "id": "schema-selection-visible-content",
+    "category": "schema-selection",
+    "title": "Select schema that matches visible content",
+    "description": "Choose JSON-LD schema based on actual page type and visible content.",
+    "do": ["Choose schema based on actual page type", "Use JSON-LD as preferred format", "Add only schema that matches visible page content", "Use Organization and WebSite where relevant"],
+    "dont": ["Add schema types that do not match the page", "Mark up hidden content", "Expect schema alone to improve rankings"],
+    "priority": "P1",
+    "appliesTo": ["schema", "entity", "rich_results", "audit", "planning"],
+    "status": "active"
+  }
+]

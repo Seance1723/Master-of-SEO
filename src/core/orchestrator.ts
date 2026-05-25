@@ -4,6 +4,8 @@ import { parseContentPlanInputFromText, runContentPlan } from "../content/conten
 import { parseKeywordResearchInputFromText, runKeywordResearch } from "../keywords/keyword-research.ts";
 import { parseOnPageAuditInputFromText, runOnPageAudit } from "../on-page/on-page-audit.ts";
 import { parsePerformanceAuditInputFromText, runPerformanceAudit } from "../performance/performance-audit.ts";
+import { parseSchemaInputFromText, runSchemaAudit } from "../schema/schema-audit.ts";
+import { runSchemaGenerate } from "../schema/schema-generate.ts";
 import { parseTechnicalAuditInputFromText, runTechnicalAudit } from "../technical/technical-audit.ts";
 import { getCommandFromInput, getCommandMenu } from "./command-registry.ts";
 import { getNextGroupFromMemory, readMemory } from "./memory.ts";
@@ -107,6 +109,28 @@ export async function runSeoMaster(input: string): Promise<OrchestratorResponse>
     return {
       active: true,
       type: "architecture-audit",
+      command,
+      data: report,
+      message: JSON.stringify(report, null, 2)
+    };
+  }
+
+  if (command.id === "schema-audit") {
+    const report = runSchemaAudit(parseSchemaInputFromText(input));
+    return {
+      active: true,
+      type: "schema-audit",
+      command,
+      data: report,
+      message: JSON.stringify(report, null, 2)
+    };
+  }
+
+  if (command.id === "schema-generate") {
+    const report = runSchemaGenerate(parseSchemaInputFromText(input));
+    return {
+      active: true,
+      type: "schema-generate",
       command,
       data: report,
       message: JSON.stringify(report, null, 2)

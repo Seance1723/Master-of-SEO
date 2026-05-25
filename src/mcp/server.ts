@@ -14,6 +14,9 @@ import { runOnPageAudit } from "../on-page/on-page-audit.ts";
 import { getOnPageRules } from "../on-page/on-page-rules.ts";
 import { runPerformanceAudit } from "../performance/performance-audit.ts";
 import { getPerformanceRules } from "../performance/performance-rules.ts";
+import { runSchemaAudit } from "../schema/schema-audit.ts";
+import { runSchemaGenerate } from "../schema/schema-generate.ts";
+import { getSchemaRules } from "../schema/schema-rules.ts";
 import { runTechnicalAudit } from "../technical/technical-audit.ts";
 import { getTechnicalRules } from "../technical/technical-rules.ts";
 import type { ContentPlanInput } from "../types/content.ts";
@@ -21,6 +24,7 @@ import type { ArchitectureAuditInput } from "../types/architecture.ts";
 import type { KeywordResearchInput } from "../types/keywords.ts";
 import type { OnPageAuditInput } from "../types/on-page.ts";
 import type { PerformanceAuditInput } from "../types/performance.ts";
+import type { SchemaAuditInput } from "../types/schema.ts";
 import type { TechnicalAuditInput } from "../types/technical.ts";
 
 interface JsonRpcRequest {
@@ -168,10 +172,56 @@ const tools = [
         mode: { type: "string", enum: ["audit", "planning", "linking", "architecture"] }
       }
     }
+  },
+  {
+    name: "seo_master_schema_audit",
+    description: "Run Schema & Entity SEO audit logic with explicit provided inputs only. No live validation is performed.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        url: { type: "string" },
+        html: { type: "string" },
+        jsonLd: { type: "array" },
+        page: { type: "object" },
+        organization: { type: "object" },
+        author: { type: "object" },
+        product: { type: "object" },
+        service: { type: "object" },
+        softwareApplication: { type: "object" },
+        localBusiness: { type: "object" },
+        video: { type: "object" },
+        jobPosting: { type: "object" },
+        mode: { type: "string", enum: ["audit", "generate", "validate", "planning"] }
+      }
+    }
+  },
+  {
+    name: "seo_master_schema_generate",
+    description: "Generate safe JSON-LD from explicit provided inputs only. No fake reviews, ratings, authors, or hidden-content markup.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        url: { type: "string" },
+        html: { type: "string" },
+        jsonLd: { type: "array" },
+        page: { type: "object" },
+        organization: { type: "object" },
+        author: { type: "object" },
+        product: { type: "object" },
+        service: { type: "object" },
+        softwareApplication: { type: "object" },
+        localBusiness: { type: "object" },
+        video: { type: "object" },
+        jobPosting: { type: "object" },
+        mode: { type: "string", enum: ["audit", "generate", "validate", "planning"] }
+      }
+    }
   }
 ];
 
 const prompts = [
+  "seo-master-schema-generate",
+  "seo-master-schema-audit",
   "seo-master-internal-linking-audit",
   "seo-master-architecture-audit",
   "seo-master-content-plan",
@@ -207,6 +257,8 @@ async function readResource(uri: string): Promise<string> {
   if (uri === "seo-master://content-rules") return JSON.stringify(await getContentRules(), null, 2);
   if (uri === "seo-master://architecture-rules") return JSON.stringify(await getArchitectureRules(), null, 2);
   if (uri === "seo-master://internal-linking-rules") return readFile(join(dataDir, "internal-linking-rules.json"), "utf8");
+  if (uri === "seo-master://schema-rules") return JSON.stringify(await getSchemaRules(), null, 2);
+  if (uri === "seo-master://entity-seo-rules") return readFile(join(dataDir, "entity-seo-rules.json"), "utf8");
   throw new Error(`Unknown resource: ${uri}`);
 }
 
@@ -276,6 +328,16 @@ async function handle(request: JsonRpcRequest): Promise<void> {
         send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
         return;
       }
+      if (name === "seo_master_schema_audit") {
+        const report = runSchemaAudit({ mode: "audit", ...(args as Partial<SchemaAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_schema_generate") {
+        const report = runSchemaGenerate({ mode: "generate", ...(args as Partial<SchemaAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
       throw new Error(`Unknown tool: ${name}`);
     }
 
@@ -294,7 +356,9 @@ async function handle(request: JsonRpcRequest): Promise<void> {
             { uri: "seo-master://keyword-rules", name: "Master of SEO Keyword Rules", mimeType: "application/json" },
             { uri: "seo-master://content-rules", name: "Master of SEO Content Rules", mimeType: "application/json" },
             { uri: "seo-master://architecture-rules", name: "Master of SEO Architecture Rules", mimeType: "application/json" },
-            { uri: "seo-master://internal-linking-rules", name: "Master of SEO Internal Linking Rules", mimeType: "application/json" }
+            { uri: "seo-master://internal-linking-rules", name: "Master of SEO Internal Linking Rules", mimeType: "application/json" },
+            { uri: "seo-master://schema-rules", name: "Master of SEO Schema Rules", mimeType: "application/json" },
+            { uri: "seo-master://entity-seo-rules", name: "Master of SEO Entity SEO Rules", mimeType: "application/json" }
           ]
         }
       });
@@ -315,6 +379,8 @@ async function handle(request: JsonRpcRequest): Promise<void> {
     if (method === "prompts/get") {
       const promptName = String(params.name ?? "");
       const commandByPrompt: Record<string, string> = {
+        "seo-master-schema-generate": "/seo-master schema-generate",
+        "seo-master-schema-audit": "/seo-master schema-audit",
         "seo-master-internal-linking-audit": "/seo-master internal-linking-audit",
         "seo-master-architecture-audit": "/seo-master architecture-audit",
         "seo-master-content-plan": "/seo-master content-plan",
