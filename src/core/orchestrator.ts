@@ -1,4 +1,5 @@
 import type { OrchestratorResponse } from "../types/index.ts";
+import { parseArchitectureAuditInputFromText, runArchitectureAudit } from "../architecture/architecture-audit.ts";
 import { parseContentPlanInputFromText, runContentPlan } from "../content/content-plan.ts";
 import { parseKeywordResearchInputFromText, runKeywordResearch } from "../keywords/keyword-research.ts";
 import { parseOnPageAuditInputFromText, runOnPageAudit } from "../on-page/on-page-audit.ts";
@@ -95,6 +96,17 @@ export async function runSeoMaster(input: string): Promise<OrchestratorResponse>
     return {
       active: true,
       type: "content-plan",
+      command,
+      data: report,
+      message: JSON.stringify(report, null, 2)
+    };
+  }
+
+  if (command.id === "architecture-audit" || command.id === "internal-linking-audit") {
+    const report = runArchitectureAudit(parseArchitectureAuditInputFromText(input));
+    return {
+      active: true,
+      type: "architecture-audit",
       command,
       data: report,
       message: JSON.stringify(report, null, 2)

@@ -60,6 +60,26 @@
     "outputType": "content_strategy_plan"
   },
   {
+    "id": "architecture-audit",
+    "command": "/seo-master architecture-audit",
+    "title": "Architecture Audit",
+    "description": "Audit site architecture, URL hierarchy, crawl depth, orphan pages, and internal linking.",
+    "group": "group-07",
+    "status": "active",
+    "requiredInputs": ["pages optional", "links optional", "navigation optional", "breadcrumbs optional", "sitemapUrls optional", "topicClusters optional"],
+    "outputType": "architecture_internal_linking_report"
+  },
+  {
+    "id": "internal-linking-audit",
+    "command": "/seo-master internal-linking-audit",
+    "title": "Internal Linking Audit",
+    "description": "Audit internal links, anchor text, breadcrumbs, topic cluster links, and link equity signals.",
+    "group": "group-07",
+    "status": "active",
+    "requiredInputs": ["pages optional", "links optional", "navigation optional", "breadcrumbs optional", "sitemapUrls optional", "topicClusters optional"],
+    "outputType": "architecture_internal_linking_report"
+  },
+  {
     "id": "technical-audit",
     "command": "/seo-master technical-audit",
     "title": "Technical Audit",

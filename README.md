@@ -16,9 +16,9 @@ npm install -g master-of-seo
 seo-master
 seo-master /
 seo-master "/seo-master help"
-seo-master "/seo-master content-plan"
-seo-master "/seo-master content-plan technical seo, seo audit, ecommerce seo"
-seo-master "/seo-master content-plan --keywordClusters '[{\"clusterName\":\"Technical SEO\",\"primaryKeyword\":\"technical seo\",\"intent\":\"commercial\"}]'"
+seo-master "/seo-master architecture-audit"
+seo-master "/seo-master internal-linking-audit"
+seo-master "/seo-master architecture-audit --pages '[{\"url\":\"/\",\"pageType\":\"homepage\"}]' --links '[]'"
 ```
 
 ## Active Commands
@@ -31,6 +31,8 @@ seo-master "/seo-master content-plan --keywordClusters '[{\"clusterName\":\"Tech
 - `/seo-master on-page-audit`
 - `/seo-master keyword-research`
 - `/seo-master content-plan`
+- `/seo-master architecture-audit`
+- `/seo-master internal-linking-audit`
 
 Typing `/` shows all available Master of SEO commands. SEO logic only runs when input starts with `/seo-master`.
 
@@ -47,11 +49,11 @@ Typing `/` shows all available Master of SEO commands. SEO logic only runs when 
 - `/seo-master migration-plan`
 - `/seo-master report`
 
-## Content Strategy Scope
+## Site Architecture & Internal Linking Scope
 
-Group 6 implements content planning, topic clusters, pillar page planning, supporting content planning, content briefs, gap detection, refresh planning, pruning logic, content calendars, quality guardrails, and recommendations.
+Group 7 implements site architecture, URL hierarchy, navigation structure, crawl depth approximation, orphan page detection, internal linking, anchor text checks, breadcrumb checks, topic cluster linking, link equity recommendations, and audit reporting.
 
-Group 6 does not fetch live SERP, traffic, or competitor data unless provider support is added later. It safely plans content from provided business, keyword, competitor, and page inputs.
+Group 7 does not perform full live crawling unless crawler support is added later. It safely analyzes provided page, link, navigation, breadcrumb, sitemap, and topic cluster inputs.
 
 ## MCP Usage
 
@@ -71,8 +73,8 @@ The MCP server exposes `seo_master_run`, `seo_master_commands`, active audit/pla
 - Group 4: On-Page SEO - completed
 - Group 5: Keyword Research & Intent - completed
 - Group 6: Content Strategy & Planning - completed
-- Group 7: Site Architecture & Internal Linking - next
-- Group 8: Schema & Entity SEO
+- Group 7: Site Architecture & Internal Linking - completed
+- Group 8: Schema & Entity SEO - next
 - Group 9: Media SEO
 - Group 10: Ecommerce SEO
 - Group 11: Local & International SEO
@@ -94,5 +96,5 @@ Master of SEO is designed for OpenAI agents, Claude, Antigravity, Windsurf, Curs
 
 ## Current Status
 
-- Current status: Group 6 completed
-- Next group: Group 7 Site Architecture & Internal Linking
+- Current status: Group 7 completed
+- Next group: Group 8 Schema & Entity SEO

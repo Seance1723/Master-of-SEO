@@ -1,0 +1,13 @@
+[
+  {
+    "id": "navigation-core",
+    "category": "navigation",
+    "title": "Navigation structure",
+    "description": "Navigation should expose important crawlable pages with clear labels.",
+    "do": ["Include important pages in main navigation where appropriate.", "Use clear navigation labels.", "Keep navigation crawlable.", "Support users and search engines."],
+    "dont": ["Hide key pages behind scripts only.", "Overload navigation with every page.", "Use vague labels.", "Link to redirected or broken URLs."],
+    "priority": "P2",
+    "appliesTo": ["architecture", "internal_linking", "crawlability", "audit"],
+    "status": "active"
+  }
+]

@@ -1,0 +1,13 @@
+[
+  {
+    "id": "site-architecture-core",
+    "category": "site-architecture",
+    "title": "Site architecture clarity",
+    "description": "Sites should have clear hierarchy, grouped content, and accessible commercial pages.",
+    "do": ["Create a clear hierarchy.", "Keep important pages close to the homepage.", "Group related content logically.", "Create topic hubs and pillar pages.", "Make commercial pages easy to reach.", "Connect informational pages to money pages."],
+    "dont": ["Create disconnected pages.", "Bury important pages too deep.", "Create too many thin categories.", "Rely only on footer links for important pages.", "Make navigation confusing."],
+    "priority": "P1",
+    "appliesTo": ["architecture", "internal_linking", "crawlability", "planning", "audit"],
+    "status": "active"
+  }
+]

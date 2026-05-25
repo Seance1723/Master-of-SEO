@@ -1,0 +1,13 @@
+[
+  {
+    "id": "anchor-text-core",
+    "category": "anchor-text",
+    "title": "Anchor text quality",
+    "description": "Anchor text should be descriptive, natural, and destination-clear.",
+    "do": ["Make anchor text descriptive.", "Keep anchor text natural.", "Vary anchor text where appropriate.", "Make the destination clear."],
+    "dont": ["Stuff keywords.", "Use the same exact anchor excessively.", "Use vague anchors repeatedly.", "Mislead users about destination page."],
+    "priority": "P2",
+    "appliesTo": ["internal_linking", "planning", "audit"],
+    "status": "active"
+  }
+]

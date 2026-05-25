@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { runArchitectureAudit } from "../architecture/architecture-audit.ts";
+import { getArchitectureRules } from "../architecture/architecture-rules.ts";
 import { runContentPlan } from "../content/content-plan.ts";
 import { getContentRules } from "../content/content-rules.ts";
 import { getCommandMenu } from "../core/command-registry.ts";
@@ -15,6 +17,7 @@ import { getPerformanceRules } from "../performance/performance-rules.ts";
 import { runTechnicalAudit } from "../technical/technical-audit.ts";
 import { getTechnicalRules } from "../technical/technical-rules.ts";
 import type { ContentPlanInput } from "../types/content.ts";
+import type { ArchitectureAuditInput } from "../types/architecture.ts";
 import type { KeywordResearchInput } from "../types/keywords.ts";
 import type { OnPageAuditInput } from "../types/on-page.ts";
 import type { PerformanceAuditInput } from "../types/performance.ts";
@@ -131,10 +134,46 @@ const tools = [
         mode: { type: "string", enum: ["planning", "brief", "refresh", "pruning", "calendar", "audit"] }
       }
     }
+  },
+  {
+    name: "seo_master_architecture_audit",
+    description: "Run Site Architecture & Internal Linking audit logic with explicit provided inputs only. No live crawling is performed.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        url: { type: "string" },
+        pages: { type: "array" },
+        links: { type: "array" },
+        navigation: { type: "array" },
+        breadcrumbs: { type: "array" },
+        sitemapUrls: { type: "array" },
+        topicClusters: { type: "array" },
+        mode: { type: "string", enum: ["audit", "planning", "linking", "architecture"] }
+      }
+    }
+  },
+  {
+    name: "seo_master_internal_linking_audit",
+    description: "Run Internal Linking audit logic with explicit provided inputs only. No live crawling is performed.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        url: { type: "string" },
+        pages: { type: "array" },
+        links: { type: "array" },
+        navigation: { type: "array" },
+        breadcrumbs: { type: "array" },
+        sitemapUrls: { type: "array" },
+        topicClusters: { type: "array" },
+        mode: { type: "string", enum: ["audit", "planning", "linking", "architecture"] }
+      }
+    }
   }
 ];
 
 const prompts = [
+  "seo-master-internal-linking-audit",
+  "seo-master-architecture-audit",
   "seo-master-content-plan",
   "seo-master-keyword-research",
   "seo-master-on-page-audit",
@@ -166,6 +205,8 @@ async function readResource(uri: string): Promise<string> {
   if (uri === "seo-master://on-page-rules") return JSON.stringify(await getOnPageRules(), null, 2);
   if (uri === "seo-master://keyword-rules") return JSON.stringify(await getKeywordRules(), null, 2);
   if (uri === "seo-master://content-rules") return JSON.stringify(await getContentRules(), null, 2);
+  if (uri === "seo-master://architecture-rules") return JSON.stringify(await getArchitectureRules(), null, 2);
+  if (uri === "seo-master://internal-linking-rules") return readFile(join(dataDir, "internal-linking-rules.json"), "utf8");
   throw new Error(`Unknown resource: ${uri}`);
 }
 
@@ -230,6 +271,11 @@ async function handle(request: JsonRpcRequest): Promise<void> {
         send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
         return;
       }
+      if (name === "seo_master_architecture_audit" || name === "seo_master_internal_linking_audit") {
+        const report = runArchitectureAudit({ mode: "audit", ...(args as Partial<ArchitectureAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
       throw new Error(`Unknown tool: ${name}`);
     }
 
@@ -246,7 +292,9 @@ async function handle(request: JsonRpcRequest): Promise<void> {
             { uri: "seo-master://performance-rules", name: "Master of SEO Performance Rules", mimeType: "application/json" },
             { uri: "seo-master://on-page-rules", name: "Master of SEO On-Page Rules", mimeType: "application/json" },
             { uri: "seo-master://keyword-rules", name: "Master of SEO Keyword Rules", mimeType: "application/json" },
-            { uri: "seo-master://content-rules", name: "Master of SEO Content Rules", mimeType: "application/json" }
+            { uri: "seo-master://content-rules", name: "Master of SEO Content Rules", mimeType: "application/json" },
+            { uri: "seo-master://architecture-rules", name: "Master of SEO Architecture Rules", mimeType: "application/json" },
+            { uri: "seo-master://internal-linking-rules", name: "Master of SEO Internal Linking Rules", mimeType: "application/json" }
           ]
         }
       });
@@ -267,6 +315,8 @@ async function handle(request: JsonRpcRequest): Promise<void> {
     if (method === "prompts/get") {
       const promptName = String(params.name ?? "");
       const commandByPrompt: Record<string, string> = {
+        "seo-master-internal-linking-audit": "/seo-master internal-linking-audit",
+        "seo-master-architecture-audit": "/seo-master architecture-audit",
         "seo-master-content-plan": "/seo-master content-plan",
         "seo-master-keyword-research": "/seo-master keyword-research",
         "seo-master-on-page-audit": "/seo-master on-page-audit",
