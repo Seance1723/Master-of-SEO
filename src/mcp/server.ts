@@ -10,6 +10,10 @@ import { runSeoMaster } from "../core/orchestrator.ts";
 import { dataDir, memoryPath } from "../core/paths.ts";
 import { runKeywordResearch } from "../keywords/keyword-research.ts";
 import { getKeywordRules } from "../keywords/keyword-rules.ts";
+import { runImageSeoAudit } from "../media/image-seo.ts";
+import { runMediaAudit } from "../media/media-audit.ts";
+import { getMediaRules } from "../media/media-rules.ts";
+import { runVideoSeoAudit } from "../media/video-seo.ts";
 import { runOnPageAudit } from "../on-page/on-page-audit.ts";
 import { getOnPageRules } from "../on-page/on-page-rules.ts";
 import { runPerformanceAudit } from "../performance/performance-audit.ts";
@@ -22,6 +26,7 @@ import { getTechnicalRules } from "../technical/technical-rules.ts";
 import type { ContentPlanInput } from "../types/content.ts";
 import type { ArchitectureAuditInput } from "../types/architecture.ts";
 import type { KeywordResearchInput } from "../types/keywords.ts";
+import type { MediaAuditInput } from "../types/media.ts";
 import type { OnPageAuditInput } from "../types/on-page.ts";
 import type { PerformanceAuditInput } from "../types/performance.ts";
 import type { SchemaAuditInput } from "../types/schema.ts";
@@ -216,10 +221,28 @@ const tools = [
         mode: { type: "string", enum: ["audit", "generate", "validate", "planning"] }
       }
     }
+  },
+  {
+    name: "seo_master_media_audit",
+    description: "Run Media SEO audit logic with explicit provided inputs only. No live crawling, fetching, OCR, or external validation is performed.",
+    inputSchema: { type: "object", properties: { url: { type: "string" }, html: { type: "string" }, page: { type: "object" }, images: { type: "array" }, videos: { type: "array" }, openGraph: { type: "object" }, schema: { type: "object" }, assets: { type: "array" }, mode: { type: "string", enum: ["audit", "image", "video", "planning"] } } }
+  },
+  {
+    name: "seo_master_image_seo_audit",
+    description: "Run Image SEO audit logic with explicit provided inputs only. No image fetching or OCR is performed.",
+    inputSchema: { type: "object", properties: { url: { type: "string" }, html: { type: "string" }, page: { type: "object" }, images: { type: "array" }, openGraph: { type: "object" }, schema: { type: "object" }, assets: { type: "array" }, mode: { type: "string", enum: ["audit", "image", "video", "planning"] } } }
+  },
+  {
+    name: "seo_master_video_seo_audit",
+    description: "Run Video SEO audit logic with explicit provided inputs only. No video fetching or external validation is performed.",
+    inputSchema: { type: "object", properties: { url: { type: "string" }, html: { type: "string" }, page: { type: "object" }, videos: { type: "array" }, schema: { type: "object" }, assets: { type: "array" }, mode: { type: "string", enum: ["audit", "image", "video", "planning"] } } }
   }
 ];
 
 const prompts = [
+  "seo-master-video-seo-audit",
+  "seo-master-image-seo-audit",
+  "seo-master-media-audit",
   "seo-master-schema-generate",
   "seo-master-schema-audit",
   "seo-master-internal-linking-audit",
@@ -259,6 +282,9 @@ async function readResource(uri: string): Promise<string> {
   if (uri === "seo-master://internal-linking-rules") return readFile(join(dataDir, "internal-linking-rules.json"), "utf8");
   if (uri === "seo-master://schema-rules") return JSON.stringify(await getSchemaRules(), null, 2);
   if (uri === "seo-master://entity-seo-rules") return readFile(join(dataDir, "entity-seo-rules.json"), "utf8");
+  if (uri === "seo-master://media-rules") return JSON.stringify(await getMediaRules(), null, 2);
+  if (uri === "seo-master://image-seo-rules") return readFile(join(dataDir, "image-seo-rules.json"), "utf8");
+  if (uri === "seo-master://video-seo-rules") return readFile(join(dataDir, "video-seo-rules.json"), "utf8");
   throw new Error(`Unknown resource: ${uri}`);
 }
 
@@ -338,6 +364,21 @@ async function handle(request: JsonRpcRequest): Promise<void> {
         send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
         return;
       }
+      if (name === "seo_master_media_audit") {
+        const report = runMediaAudit({ mode: "audit", ...(args as Partial<MediaAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_image_seo_audit") {
+        const report = runImageSeoAudit({ mode: "image", ...(args as Partial<MediaAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_video_seo_audit") {
+        const report = runVideoSeoAudit({ mode: "video", ...(args as Partial<MediaAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
       throw new Error(`Unknown tool: ${name}`);
     }
 
@@ -358,7 +399,10 @@ async function handle(request: JsonRpcRequest): Promise<void> {
             { uri: "seo-master://architecture-rules", name: "Master of SEO Architecture Rules", mimeType: "application/json" },
             { uri: "seo-master://internal-linking-rules", name: "Master of SEO Internal Linking Rules", mimeType: "application/json" },
             { uri: "seo-master://schema-rules", name: "Master of SEO Schema Rules", mimeType: "application/json" },
-            { uri: "seo-master://entity-seo-rules", name: "Master of SEO Entity SEO Rules", mimeType: "application/json" }
+            { uri: "seo-master://entity-seo-rules", name: "Master of SEO Entity SEO Rules", mimeType: "application/json" },
+            { uri: "seo-master://media-rules", name: "Master of SEO Media Rules", mimeType: "application/json" },
+            { uri: "seo-master://image-seo-rules", name: "Master of SEO Image SEO Rules", mimeType: "application/json" },
+            { uri: "seo-master://video-seo-rules", name: "Master of SEO Video SEO Rules", mimeType: "application/json" }
           ]
         }
       });
@@ -379,6 +423,9 @@ async function handle(request: JsonRpcRequest): Promise<void> {
     if (method === "prompts/get") {
       const promptName = String(params.name ?? "");
       const commandByPrompt: Record<string, string> = {
+        "seo-master-video-seo-audit": "/seo-master video-seo-audit",
+        "seo-master-image-seo-audit": "/seo-master image-seo-audit",
+        "seo-master-media-audit": "/seo-master media-audit",
         "seo-master-schema-generate": "/seo-master schema-generate",
         "seo-master-schema-audit": "/seo-master schema-audit",
         "seo-master-internal-linking-audit": "/seo-master internal-linking-audit",

@@ -1,0 +1,13 @@
+[
+  {
+    "id": "media-accessibility",
+    "category": "media-accessibility",
+    "title": "Media must remain accessible",
+    "description": "Media should include alt text, captions, transcripts, accessible controls, and safe autoplay behavior.",
+    "do": ["Use alt text, captions, transcripts, and accessible controls", "Avoid autoplay with sound", "Ensure media does not block keyboard users"],
+    "dont": ["Hide controls", "Rely only on visual information", "Ignore contrast/readability in images with text"],
+    "priority": "P2",
+    "appliesTo": ["media", "image", "video", "accessibility", "audit"],
+    "status": "active"
+  }
+]

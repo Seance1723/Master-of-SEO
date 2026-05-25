@@ -120,6 +120,36 @@
     "outputType": "schema_entity_report"
   },
   {
+    "id": "media-audit",
+    "command": "/seo-master media-audit",
+    "title": "Media Audit",
+    "description": "Audit image, video, Open Graph, schema, accessibility, and media performance inputs.",
+    "group": "group-09",
+    "status": "active",
+    "requiredInputs": ["html optional", "images optional", "videos optional", "openGraph optional", "schema optional", "assets optional"],
+    "outputType": "media_seo_report"
+  },
+  {
+    "id": "image-seo-audit",
+    "command": "/seo-master image-seo-audit",
+    "title": "Image SEO Audit",
+    "description": "Audit image SEO, alt text, filenames, formats, responsive attributes, OG images, and performance.",
+    "group": "group-09",
+    "status": "active",
+    "requiredInputs": ["html optional", "images optional", "openGraph optional", "schema optional", "assets optional"],
+    "outputType": "media_seo_report"
+  },
+  {
+    "id": "video-seo-audit",
+    "command": "/seo-master video-seo-audit",
+    "title": "Video SEO Audit",
+    "description": "Audit video SEO, transcripts, captions, thumbnails, VideoObject schema, accessibility, and performance.",
+    "group": "group-09",
+    "status": "active",
+    "requiredInputs": ["html optional", "videos optional", "schema optional", "assets optional"],
+    "outputType": "media_seo_report"
+  },
+  {
     "id": "performance-audit",
     "command": "/seo-master performance-audit",
     "title": "Performance Audit",

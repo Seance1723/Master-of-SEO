@@ -1,0 +1,13 @@
+[
+  {
+    "id": "open-graph-images",
+    "category": "open-graph-image",
+    "title": "Use optimized social preview images",
+    "description": "Shareable pages should include clear Open Graph and Twitter images.",
+    "do": ["Include og:image on shareable pages", "Include twitter:image where relevant", "Include image alt where available"],
+    "dont": ["Use low-quality social images", "Use misleading images", "Leave important landing pages without OG image"],
+    "priority": "P3",
+    "appliesTo": ["media", "image", "accessibility", "audit"],
+    "status": "active"
+  }
+]

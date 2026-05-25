@@ -1,0 +1,13 @@
+[
+  {
+    "id": "image-seo-foundation",
+    "category": "image-seo",
+    "title": "Use accessible optimized images",
+    "description": "Images should support the page, use useful alt text, be compressed, responsive, and properly sized.",
+    "do": ["Use meaningful images", "Write useful alt text", "Compress images", "Use WebP/AVIF where possible", "Use responsive images", "Define width and height"],
+    "dont": ["Keyword-stuff image alt text", "Upload huge raw images", "Lazy-load hero/LCP images", "Put important SEO text only inside images"],
+    "priority": "P2",
+    "appliesTo": ["media", "image", "accessibility", "performance", "audit"],
+    "status": "active"
+  }
+]

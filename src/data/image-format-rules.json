@@ -1,0 +1,13 @@
+[
+  {
+    "id": "image-format-compression",
+    "category": "image-format-compression",
+    "title": "Compress and modernize images",
+    "description": "Use modern formats and compression where appropriate.",
+    "do": ["Prefer WebP/AVIF", "Keep SVGs optimized", "Compress PNG/JPG assets", "Flag images above 300KB"],
+    "dont": ["Serve oversized images", "Use GIFs for heavy animation when video is better", "Use PNG for large photographic images unless necessary"],
+    "priority": "P2",
+    "appliesTo": ["media", "image", "performance", "audit"],
+    "status": "active"
+  }
+]

@@ -21,7 +21,8 @@
     "./content-plan": "./dist/src/content/content-plan.js",
     "./architecture-audit": "./dist/src/architecture/architecture-audit.js",
     "./schema-audit": "./dist/src/schema/schema-audit.js",
-    "./schema-generate": "./dist/src/schema/schema-generate.js"
+    "./schema-generate": "./dist/src/schema/schema-generate.js",
+    "./media-audit": "./dist/src/media/media-audit.js"
   },
   "files": [
     "README.md",
@@ -35,7 +36,7 @@
     "build": "tsc -p tsconfig.json",
     "dev": "node ./src/cli/index.ts",
     "start": "node ./dist/src/cli/index.js",
-    "test": "node ./tests/group-01.test.ts && node ./tests/group-02-technical-seo.test.ts && node ./tests/group-03-performance-seo.test.ts && node ./tests/group-04-on-page-seo.test.ts && node ./tests/group-05-keyword-research-intent.test.ts && node ./tests/group-06-content-strategy-planning.test.ts && node ./tests/group-07-site-architecture-internal-linking.test.ts && node ./tests/group-08-schema-entity-seo.test.ts",
+    "test": "node ./tests/group-01.test.ts && node ./tests/group-02-technical-seo.test.ts && node ./tests/group-03-performance-seo.test.ts && node ./tests/group-04-on-page-seo.test.ts && node ./tests/group-05-keyword-research-intent.test.ts && node ./tests/group-06-content-strategy-planning.test.ts && node ./tests/group-07-site-architecture-internal-linking.test.ts && node ./tests/group-08-schema-entity-seo.test.ts && node ./tests/group-09-media-seo.test.ts",
     "mcp": "node ./src/mcp/server.ts",
     "prepublishOnly": "npm run build && npm test"
   },

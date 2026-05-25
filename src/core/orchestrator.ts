@@ -2,6 +2,9 @@ import type { OrchestratorResponse } from "../types/index.ts";
 import { parseArchitectureAuditInputFromText, runArchitectureAudit } from "../architecture/architecture-audit.ts";
 import { parseContentPlanInputFromText, runContentPlan } from "../content/content-plan.ts";
 import { parseKeywordResearchInputFromText, runKeywordResearch } from "../keywords/keyword-research.ts";
+import { runImageSeoAudit } from "../media/image-seo.ts";
+import { parseMediaAuditInputFromText, runMediaAudit } from "../media/media-audit.ts";
+import { runVideoSeoAudit } from "../media/video-seo.ts";
 import { parseOnPageAuditInputFromText, runOnPageAudit } from "../on-page/on-page-audit.ts";
 import { parsePerformanceAuditInputFromText, runPerformanceAudit } from "../performance/performance-audit.ts";
 import { parseSchemaInputFromText, runSchemaAudit } from "../schema/schema-audit.ts";
@@ -131,6 +134,18 @@ export async function runSeoMaster(input: string): Promise<OrchestratorResponse>
     return {
       active: true,
       type: "schema-generate",
+      command,
+      data: report,
+      message: JSON.stringify(report, null, 2)
+    };
+  }
+
+  if (command.id === "media-audit" || command.id === "image-seo-audit" || command.id === "video-seo-audit") {
+    const parsed = parseMediaAuditInputFromText(input);
+    const report = command.id === "image-seo-audit" ? runImageSeoAudit(parsed) : command.id === "video-seo-audit" ? runVideoSeoAudit(parsed) : runMediaAudit(parsed);
+    return {
+      active: true,
+      type: "media-audit",
       command,
       data: report,
       message: JSON.stringify(report, null, 2)

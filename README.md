@@ -16,9 +16,9 @@ npm install -g master-of-seo
 seo-master
 seo-master /
 seo-master "/seo-master help"
-seo-master "/seo-master schema-audit"
-seo-master "/seo-master schema-audit --jsonLd '[{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"name\":\"Example\"}]'"
-seo-master "/seo-master schema-generate --organization '{\"name\":\"Example\",\"url\":\"https://example.com\"}' --page '{\"pageType\":\"homepage\",\"url\":\"https://example.com\"}'"
+seo-master "/seo-master media-audit"
+seo-master "/seo-master image-seo-audit --images '[{\"src\":\"/hero.jpg\",\"alt\":\"\",\"sizeKb\":1200,\"isHero\":true,\"loading\":\"lazy\"}]'"
+seo-master "/seo-master video-seo-audit --videos '[{\"title\":\"Demo\",\"hasTranscript\":false,\"hasCaptions\":false}]'"
 ```
 
 ## Active Commands
@@ -35,6 +35,9 @@ seo-master "/seo-master schema-generate --organization '{\"name\":\"Example\",\"
 - `/seo-master internal-linking-audit`
 - `/seo-master schema-audit`
 - `/seo-master schema-generate`
+- `/seo-master media-audit`
+- `/seo-master image-seo-audit`
+- `/seo-master video-seo-audit`
 
 Typing `/` shows all available Master of SEO commands. SEO logic only runs when input starts with `/seo-master`.
 
@@ -51,11 +54,11 @@ Typing `/` shows all available Master of SEO commands. SEO logic only runs when 
 - `/seo-master migration-plan`
 - `/seo-master report`
 
-## Schema & Entity SEO Scope
+## Media SEO Scope
 
-Group 8 implements schema selection, validation, rich result eligibility guardrails, entity SEO, Organization, WebSite, BreadcrumbList, Article, Product, Service, SoftwareApplication, LocalBusiness, FAQPage guard, VideoObject, JobPosting, sameAs/entity relationships, recommendations, and safe JSON-LD generation.
+Group 9 implements media audits, image SEO, alt text checks, filename checks, image format/compression checks, responsive image checks, Open Graph image checks, image sitemap recommendations, video SEO, transcripts/captions, thumbnails, VideoObject schema support, video sitemap recommendations, media accessibility, media performance guard, and recommendations.
 
-Group 8 does not perform live Google Rich Results validation unless validator support is added later. It safely audits and generates schema from provided inputs only.
+Group 9 does not fetch, crawl, OCR, or inspect live media files unless provider support is added later. It safely audits provided HTML, image, video, Open Graph, schema, and asset inputs.
 
 ## MCP Usage
 
@@ -77,8 +80,8 @@ The MCP server exposes `seo_master_run`, `seo_master_commands`, active audit/pla
 - Group 6: Content Strategy & Planning - completed
 - Group 7: Site Architecture & Internal Linking - completed
 - Group 8: Schema & Entity SEO - completed
-- Group 9: Media SEO - next
-- Group 10: Ecommerce SEO
+- Group 9: Media SEO - completed
+- Group 10: Ecommerce SEO - next
 - Group 11: Local & International SEO
 - Group 12: AI Search & Discover SEO
 - Group 13: Trust, Security & Accessibility
@@ -98,5 +101,5 @@ Master of SEO is designed for OpenAI agents, Claude, Antigravity, Windsurf, Curs
 
 ## Current Status
 
-- Current status: Group 8 completed
-- Next group: Group 9 Media SEO
+- Current status: Group 9 completed
+- Next group: Group 10 Ecommerce SEO
