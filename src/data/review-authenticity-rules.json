@@ -1,0 +1,14 @@
+[
+  {
+    "id": "review-authenticity-core",
+    "group": "group-13",
+    "category": "testimonial-review-guard",
+    "title": "Testimonials / Reviews",
+    "description": "Use only genuine reviews, testimonials, and ratings.",
+    "do": ["Use genuine testimonials.", "Show source or verification where possible.", "Avoid fake ratings.", "Keep review schema consistent with visible reviews."],
+    "dont": ["Invent reviews.", "Create fake ratings.", "Mark normal testimonials as product reviews unless valid."],
+    "priority": "P1",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

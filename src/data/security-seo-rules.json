@@ -1,0 +1,14 @@
+[
+  {
+    "id": "security-seo-core",
+    "group": "group-13",
+    "category": "security-seo",
+    "title": "Security SEO",
+    "description": "Treat HTTPS, mixed content, malware, hacked content, and sensitive forms as high-priority SEO trust risks.",
+    "do": ["Use HTTPS.", "Fix mixed content.", "Monitor malware and hacked content.", "Secure forms.", "Keep CMS/plugins updated.", "Monitor manual action/security signals where available."],
+    "dont": ["Leave hacked pages indexed.", "Expose sensitive data.", "Submit forms over HTTP.", "Ignore malware warnings.", "Treat security issues as low priority."],
+    "priority": "P1",
+    "appliesTo": ["technical", "audit", "planning"],
+    "status": "active"
+  }
+]

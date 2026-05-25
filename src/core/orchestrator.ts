@@ -19,6 +19,10 @@ import { parsePerformanceAuditInputFromText, runPerformanceAudit } from "../perf
 import { parseSchemaInputFromText, runSchemaAudit } from "../schema/schema-audit.ts";
 import { runSchemaGenerate } from "../schema/schema-generate.ts";
 import { parseTechnicalAuditInputFromText, runTechnicalAudit } from "../technical/technical-audit.ts";
+import { parseAccessibilityInputFromText, runAccessibilityAudit } from "../trust-security-accessibility/accessibility-audit.ts";
+import { runEEATAudit } from "../trust-security-accessibility/eeat-audit.ts";
+import { parseSecurityInputFromText, runSecurityAudit } from "../trust-security-accessibility/security-audit.ts";
+import { parseTrustInputFromText, runTrustAudit } from "../trust-security-accessibility/trust-audit.ts";
 import { getCommandFromInput, getCommandMenu } from "./command-registry.ts";
 import { getNextGroupFromMemory, readMemory } from "./memory.ts";
 import { checkTrigger } from "./trigger.ts";
@@ -213,6 +217,40 @@ export async function runSeoMaster(input: string): Promise<OrchestratorResponse>
     return {
       active: true,
       type: "ai-discover-audit",
+      command,
+      data: report,
+      message: JSON.stringify(report, null, 2)
+    };
+  }
+
+  if (command.id === "trust-audit" || command.id === "eeat-audit") {
+    const parsed = parseTrustInputFromText(input);
+    const report = command.id === "eeat-audit" ? runEEATAudit(parsed) : runTrustAudit(parsed);
+    return {
+      active: true,
+      type: "trust-security-accessibility-audit",
+      command,
+      data: report,
+      message: JSON.stringify(report, null, 2)
+    };
+  }
+
+  if (command.id === "security-audit") {
+    const report = runSecurityAudit(parseSecurityInputFromText(input));
+    return {
+      active: true,
+      type: "trust-security-accessibility-audit",
+      command,
+      data: report,
+      message: JSON.stringify(report, null, 2)
+    };
+  }
+
+  if (command.id === "accessibility-audit") {
+    const report = runAccessibilityAudit(parseAccessibilityInputFromText(input));
+    return {
+      active: true,
+      type: "trust-security-accessibility-audit",
       command,
       data: report,
       message: JSON.stringify(report, null, 2)

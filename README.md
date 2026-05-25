@@ -16,9 +16,10 @@ npm install -g master-of-seo
 seo-master
 seo-master /
 seo-master "/seo-master help"
-seo-master "/seo-master ai-search-readiness"
-seo-master "/seo-master ai-search-audit --queries '[{\"query\":\"what is technical seo\",\"intent\":\"informational\"}]'"
-seo-master "/seo-master discover-seo-audit --page '{\"pageType\":\"article\",\"title\":\"SEO Trends\",\"isIndexable\":true,\"maxImagePreview\":\"standard\"}'"
+seo-master "/seo-master trust-audit"
+seo-master "/seo-master eeat-audit --page '{\"isYMYL\":true}'"
+seo-master "/seo-master security-audit --page '{\"usesHttps\":false}'"
+seo-master "/seo-master accessibility-audit --html '<html><body><img src=\"hero.jpg\"></body></html>'"
 ```
 
 ## Active Commands
@@ -52,6 +53,10 @@ seo-master "/seo-master discover-seo-audit --page '{\"pageType\":\"article\",\"t
 - `/seo-master answer-block-audit`
 - `/seo-master discover-seo-audit`
 - `/seo-master ai-content-quality-audit`
+- `/seo-master trust-audit`
+- `/seo-master eeat-audit`
+- `/seo-master security-audit`
+- `/seo-master accessibility-audit`
 
 Typing `/` shows all available Master of SEO commands. SEO logic only runs when input starts with `/seo-master`.
 
@@ -64,11 +69,11 @@ Typing `/` shows all available Master of SEO commands. SEO logic only runs when 
 - `/seo-master migration-plan`
 - `/seo-master report`
 
-## AI Search & Discover SEO Scope
+## Trust, Security & Accessibility Scope
 
-Group 12 implements AI Search readiness, generative search content checks, answer blocks, conversational query coverage, snippet eligibility guardrails, entity clarity, information gain, source/citation quality, content extractability, AI-generated content quality checks, Google Discover readiness, news/publisher readiness, large image preview guardrails, title/thumbnail checks, and recommendations.
+Group 13 implements trust audits, E-E-A-T audits, author/reviewer trust, organization trust, contact transparency, trust pages, testimonial/review authenticity guardrails, legal policy readiness, security audits, HTTPS/mixed content guardrails, malware/hacked content signals, form trust/safety, accessibility audits, semantic HTML, heading accessibility, image alt accessibility, form accessibility, keyboard navigation, contrast/readability checks, and recommendations.
 
-Group 12 does not check live AI Overview, Discover, SERP, or ranking visibility unless provider support is added later. It safely audits AI Search and Discover readiness from provided content, page, entity, query, image, and publisher inputs.
+Group 13 does not perform live security scanning, malware scanning, accessibility crawling, or external validation unless provider support is added later. It safely audits provided trust, security, and accessibility inputs only.
 
 ## MCP Usage
 
@@ -94,8 +99,8 @@ The MCP server exposes `seo_master_run`, `seo_master_commands`, active audit/pla
 - Group 10: Ecommerce SEO - completed
 - Group 11: Local & International SEO - completed
 - Group 12: AI Search & Discover SEO - completed
-- Group 13: Trust, Security & Accessibility - next
-- Group 14: CMS & Framework SEO
+- Group 13: Trust, Security & Accessibility - completed
+- Group 14: CMS & Framework SEO - next
 - Group 15: Website Audit
 - Group 16: Competitor Analysis
 - Group 17: SEO Strategy & Campaign Planning
@@ -111,5 +116,5 @@ Master of SEO is designed for OpenAI agents, Claude, Antigravity, Windsurf, Curs
 
 ## Current Status
 
-- Current status: Group 12 completed
-- Next group: Group 13 Trust, Security & Accessibility
+- Current status: Group 13 completed
+- Next group: Group 14 CMS & Framework SEO

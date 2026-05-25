@@ -1,0 +1,14 @@
+[
+  {
+    "id": "form-safety-core",
+    "group": "group-13",
+    "category": "form-trust-safety",
+    "title": "Form Trust & Safety",
+    "description": "Use labels, HTTPS, POST for sensitive forms, CSRF protection where relevant, and privacy reassurance.",
+    "do": ["Label fields clearly.", "Use HTTPS.", "Use POST for sensitive forms.", "Include CSRF protection where relevant.", "Show privacy reassurance near sensitive forms."],
+    "dont": ["Submit passwords or sensitive data over GET.", "Collect unnecessary sensitive data.", "Use forms without visible labels."],
+    "priority": "P1",
+    "appliesTo": ["technical", "audit", "planning"],
+    "status": "active"
+  }
+]

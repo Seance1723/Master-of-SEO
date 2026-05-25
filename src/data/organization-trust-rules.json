@@ -1,0 +1,14 @@
+[
+  {
+    "id": "organization-trust-core",
+    "group": "group-13",
+    "category": "organization-trust",
+    "title": "Organization Trust",
+    "description": "Keep organization identity, contact, and sameAs details real and consistent.",
+    "do": ["Include organization name, description, contact, and sameAs where available.", "Keep organization details consistent.", "Show team/company details where relevant."],
+    "dont": ["Use inconsistent company names.", "Hide company details on commercial sites.", "Invent founding date, address, or social profiles."],
+    "priority": "P2",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

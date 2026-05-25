@@ -1,0 +1,14 @@
+[
+  {
+    "id": "accessibility-core",
+    "group": "group-13",
+    "category": "accessibility",
+    "title": "Accessibility SEO",
+    "description": "Use semantic, readable, keyboard-accessible, assistive-technology-friendly content.",
+    "do": ["Use semantic HTML.", "Use proper heading hierarchy.", "Add meaningful alt text.", "Label form fields.", "Support keyboard navigation.", "Avoid autoplay media with sound.", "Keep content readable."],
+    "dont": ["Use divs/buttons/links incorrectly.", "Skip headings carelessly.", "Hide important content from assistive technology.", "Rely only on color or images to communicate meaning."],
+    "priority": "P2",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

@@ -300,6 +300,46 @@
     "outputType": "ai_search_discover_report"
   },
   {
+    "id": "trust-audit",
+    "command": "/seo-master trust-audit",
+    "title": "Trust Audit",
+    "description": "Audit trust, transparency, authorship, policies, testimonials, and proof signals from provided inputs.",
+    "group": "group-13",
+    "status": "active",
+    "requiredInputs": ["html optional", "page optional", "organization optional", "authors optional", "reviewers optional", "trustPages optional", "testimonials optional", "caseStudies optional", "headers optional", "resources optional", "forms optional", "headings optional", "images optional", "links optional", "buttons optional"],
+    "outputType": "trust_security_accessibility_report"
+  },
+  {
+    "id": "eeat-audit",
+    "command": "/seo-master eeat-audit",
+    "title": "E-E-A-T Audit",
+    "description": "Audit E-E-A-T, author/reviewer trust, YMYL support, and proof from provided inputs.",
+    "group": "group-13",
+    "status": "active",
+    "requiredInputs": ["html optional", "page optional", "organization optional", "authors optional", "reviewers optional", "trustPages optional", "testimonials optional", "caseStudies optional"],
+    "outputType": "trust_security_accessibility_report"
+  },
+  {
+    "id": "security-audit",
+    "command": "/seo-master security-audit",
+    "title": "Security Audit",
+    "description": "Audit HTTPS, mixed content, forms, security headers, malware/hacked flags, and safety signals from provided inputs.",
+    "group": "group-13",
+    "status": "active",
+    "requiredInputs": ["html optional", "page optional", "headers optional", "resources optional", "forms optional"],
+    "outputType": "trust_security_accessibility_report"
+  },
+  {
+    "id": "accessibility-audit",
+    "command": "/seo-master accessibility-audit",
+    "title": "Accessibility Audit",
+    "description": "Audit semantic HTML, headings, image alt text, forms, links, buttons, keyboard, contrast, and readability inputs.",
+    "group": "group-13",
+    "status": "active",
+    "requiredInputs": ["html optional", "page optional", "headings optional", "images optional", "forms optional", "links optional", "buttons optional"],
+    "outputType": "trust_security_accessibility_report"
+  },
+  {
     "id": "launch-checklist",
     "command": "/seo-master launch-checklist",
     "title": "Launch Checklist",

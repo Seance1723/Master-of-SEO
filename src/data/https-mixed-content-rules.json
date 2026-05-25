@@ -1,0 +1,14 @@
+[
+  {
+    "id": "https-mixed-content-core",
+    "group": "group-13",
+    "category": "https-mixed-content",
+    "title": "HTTPS / Mixed Content",
+    "description": "Use HTTPS for pages, resources, and form actions.",
+    "do": ["Use HTTPS for all pages and resources.", "Use secure form actions.", "Update HTTP scripts/images/iframes to HTTPS."],
+    "dont": ["Load active mixed content.", "Use insecure third-party scripts.", "Collect sensitive data on non-HTTPS pages."],
+    "priority": "P1",
+    "appliesTo": ["technical", "audit", "planning"],
+    "status": "active"
+  }
+]

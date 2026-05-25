@@ -1,0 +1,14 @@
+[
+  {
+    "id": "form-accessibility-core",
+    "group": "group-13",
+    "category": "form-accessibility",
+    "title": "Form Accessibility",
+    "description": "Give form fields accessible names, labels, required-state indicators, and helpful errors where known.",
+    "do": ["Provide labels.", "Provide accessible names.", "Mark required fields accessibly.", "Provide helpful error messaging where known."],
+    "dont": ["Rely only on placeholder text.", "Leave inputs unlabeled.", "Use vague submit buttons."],
+    "priority": "P2",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

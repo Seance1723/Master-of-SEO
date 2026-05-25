@@ -1,0 +1,14 @@
+[
+  {
+    "id": "trust-page-core",
+    "group": "group-13",
+    "category": "trust-pages",
+    "title": "Trust Pages",
+    "description": "Provide policies and trust pages relevant to the website type.",
+    "do": ["Include privacy policy.", "Include terms and conditions.", "Include refund/return/shipping policies where relevant.", "Include contact page.", "Include security page for SaaS/product sites where relevant."],
+    "dont": ["Publish ecommerce/SaaS sites without legal/trust pages.", "Hide important policy details.", "Use copied policy text without review."],
+    "priority": "P2",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

@@ -34,6 +34,11 @@ import { runSchemaAudit } from "../schema/schema-audit.ts";
 import { runSchemaGenerate } from "../schema/schema-generate.ts";
 import { getSchemaRules } from "../schema/schema-rules.ts";
 import { runTechnicalAudit } from "../technical/technical-audit.ts";
+import { runAccessibilityAudit } from "../trust-security-accessibility/accessibility-audit.ts";
+import { runEEATAudit } from "../trust-security-accessibility/eeat-audit.ts";
+import { runSecurityAudit } from "../trust-security-accessibility/security-audit.ts";
+import { runTrustAudit } from "../trust-security-accessibility/trust-audit.ts";
+import { getTrustSecurityAccessibilityRules } from "../trust-security-accessibility/trust-security-accessibility-rules.ts";
 import { getTechnicalRules } from "../technical/technical-rules.ts";
 import type { ContentPlanInput } from "../types/content.ts";
 import type { ArchitectureAuditInput } from "../types/architecture.ts";
@@ -46,6 +51,7 @@ import type { PerformanceAuditInput } from "../types/performance.ts";
 import type { SchemaAuditInput } from "../types/schema.ts";
 import type { TechnicalAuditInput } from "../types/technical.ts";
 import type { AISearchAuditInput, DiscoverSEOAuditInput } from "../types/ai-discover.ts";
+import type { AccessibilityAuditInput, SecurityAuditInput, TrustAuditInput } from "../types/trust-security-accessibility.ts";
 
 interface JsonRpcRequest {
   jsonrpc: "2.0";
@@ -301,10 +307,34 @@ const tools = [
     name: "seo_master_ai_content_quality_audit",
     description: "Run AI content quality audit logic with explicit provided inputs only.",
     inputSchema: { type: "object", properties: { html: { type: "string" }, page: { type: "object" }, content: { type: "object" }, entities: { type: "array" }, queries: { type: "array" }, schema: { type: "object" }, mode: { type: "string", enum: ["audit", "readiness", "answer_block", "content_quality", "planning"] } } }
+  },
+  {
+    name: "seo_master_trust_audit",
+    description: "Run Trust SEO audit logic with explicit provided inputs only. No hallucinated trust findings.",
+    inputSchema: { type: "object", properties: { url: { type: "string" }, html: { type: "string" }, page: { type: "object" }, organization: { type: "object" }, authors: { type: "array" }, reviewers: { type: "array" }, trustPages: { type: "object" }, testimonials: { type: "array" }, caseStudies: { type: "array" }, mode: { type: "string", enum: ["trust", "eeat", "policy", "audit"] } } }
+  },
+  {
+    name: "seo_master_eeat_audit",
+    description: "Run E-E-A-T audit logic with explicit provided inputs only. No fake authors, reviewers, credentials, or proof.",
+    inputSchema: { type: "object", properties: { url: { type: "string" }, html: { type: "string" }, page: { type: "object" }, organization: { type: "object" }, authors: { type: "array" }, reviewers: { type: "array" }, trustPages: { type: "object" }, testimonials: { type: "array" }, caseStudies: { type: "array" }, mode: { type: "string", enum: ["trust", "eeat", "policy", "audit"] } } }
+  },
+  {
+    name: "seo_master_security_audit",
+    description: "Run Security SEO audit logic with explicit provided inputs only. No live security, malware, SSL, or external scans.",
+    inputSchema: { type: "object", properties: { url: { type: "string" }, html: { type: "string" }, headers: { type: "object" }, page: { type: "object" }, resources: { type: "array" }, forms: { type: "array" }, securitySignals: { type: "object" }, mode: { type: "string", enum: ["security", "forms", "headers", "audit"] } } }
+  },
+  {
+    name: "seo_master_accessibility_audit",
+    description: "Run Accessibility SEO audit logic with explicit provided inputs only. No live accessibility crawling or external validation.",
+    inputSchema: { type: "object", properties: { url: { type: "string" }, html: { type: "string" }, page: { type: "object" }, headings: { type: "array" }, images: { type: "array" }, forms: { type: "array" }, links: { type: "array" }, buttons: { type: "array" }, accessibilitySignals: { type: "object" }, mode: { type: "string", enum: ["accessibility", "semantic", "forms", "audit"] } } }
   }
 ];
 
 const prompts = [
+  "seo-master-accessibility-audit",
+  "seo-master-security-audit",
+  "seo-master-eeat-audit",
+  "seo-master-trust-audit",
   "seo-master-ai-content-quality-audit",
   "seo-master-discover-seo-audit",
   "seo-master-answer-block-audit",
@@ -371,6 +401,10 @@ async function readResource(uri: string): Promise<string> {
   if (uri === "seo-master://discover-seo-rules") return readFile(join(dataDir, "discover-seo-rules.json"), "utf8");
   if (uri === "seo-master://answer-block-rules") return readFile(join(dataDir, "answer-block-rules.json"), "utf8");
   if (uri === "seo-master://ai-content-quality-rules") return readFile(join(dataDir, "ai-content-quality-rules.json"), "utf8");
+  if (uri === "seo-master://trust-rules") return JSON.stringify(await getTrustSecurityAccessibilityRules(), null, 2);
+  if (uri === "seo-master://eeat-rules") return readFile(join(dataDir, "eeat-rules.json"), "utf8");
+  if (uri === "seo-master://security-rules") return readFile(join(dataDir, "security-seo-rules.json"), "utf8");
+  if (uri === "seo-master://accessibility-rules") return readFile(join(dataDir, "accessibility-rules.json"), "utf8");
   throw new Error(`Unknown resource: ${uri}`);
 }
 
@@ -515,6 +549,26 @@ async function handle(request: JsonRpcRequest): Promise<void> {
         send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
         return;
       }
+      if (name === "seo_master_trust_audit") {
+        const report = runTrustAudit({ mode: "trust", ...(args as Partial<TrustAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_eeat_audit") {
+        const report = runEEATAudit({ mode: "eeat", ...(args as Partial<TrustAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_security_audit") {
+        const report = runSecurityAudit({ mode: "security", ...(args as Partial<SecurityAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_accessibility_audit") {
+        const report = runAccessibilityAudit({ mode: "accessibility", ...(args as Partial<AccessibilityAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
       throw new Error(`Unknown tool: ${name}`);
     }
 
@@ -549,7 +603,11 @@ async function handle(request: JsonRpcRequest): Promise<void> {
             { uri: "seo-master://ai-search-rules", name: "Master of SEO AI Search Rules", mimeType: "application/json" },
             { uri: "seo-master://discover-seo-rules", name: "Master of SEO Discover SEO Rules", mimeType: "application/json" },
             { uri: "seo-master://answer-block-rules", name: "Master of SEO Answer Block Rules", mimeType: "application/json" },
-            { uri: "seo-master://ai-content-quality-rules", name: "Master of SEO AI Content Quality Rules", mimeType: "application/json" }
+            { uri: "seo-master://ai-content-quality-rules", name: "Master of SEO AI Content Quality Rules", mimeType: "application/json" },
+            { uri: "seo-master://trust-rules", name: "Master of SEO Trust Rules", mimeType: "application/json" },
+            { uri: "seo-master://eeat-rules", name: "Master of SEO E-E-A-T Rules", mimeType: "application/json" },
+            { uri: "seo-master://security-rules", name: "Master of SEO Security Rules", mimeType: "application/json" },
+            { uri: "seo-master://accessibility-rules", name: "Master of SEO Accessibility Rules", mimeType: "application/json" }
           ]
         }
       });
@@ -570,6 +628,10 @@ async function handle(request: JsonRpcRequest): Promise<void> {
     if (method === "prompts/get") {
       const promptName = String(params.name ?? "");
       const commandByPrompt: Record<string, string> = {
+        "seo-master-accessibility-audit": "/seo-master accessibility-audit",
+        "seo-master-security-audit": "/seo-master security-audit",
+        "seo-master-eeat-audit": "/seo-master eeat-audit",
+        "seo-master-trust-audit": "/seo-master trust-audit",
         "seo-master-ai-content-quality-audit": "/seo-master ai-content-quality-audit",
         "seo-master-discover-seo-audit": "/seo-master discover-seo-audit",
         "seo-master-answer-block-audit": "/seo-master answer-block-audit",
