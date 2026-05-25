@@ -175,9 +175,39 @@
     "title": "Ecommerce SEO",
     "description": "Plan ecommerce SEO for categories, products, and feeds.",
     "group": "group-10",
-    "status": "planned",
-    "requiredInputs": ["storeUrl"],
-    "outputType": "ecommerce-seo-plan"
+    "status": "active",
+    "requiredInputs": ["html optional", "page optional", "categories optional", "products optional", "filters optional", "pagination optional", "policies optional", "merchantFeed optional", "internalLinks optional"],
+    "outputType": "ecommerce_seo_report"
+  },
+  {
+    "id": "ecommerce-audit",
+    "command": "/seo-master ecommerce-audit",
+    "title": "Ecommerce Audit",
+    "description": "Audit ecommerce category, product, filter, pagination, trust, feed, and internal link inputs.",
+    "group": "group-10",
+    "status": "active",
+    "requiredInputs": ["html optional", "page optional", "categories optional", "products optional", "filters optional", "pagination optional", "policies optional", "merchantFeed optional", "internalLinks optional"],
+    "outputType": "ecommerce_seo_report"
+  },
+  {
+    "id": "product-seo-audit",
+    "command": "/seo-master product-seo-audit",
+    "title": "Product SEO Audit",
+    "description": "Audit ecommerce product pages, variants, reviews, ratings, schema, stock, and internal links.",
+    "group": "group-10",
+    "status": "active",
+    "requiredInputs": ["products optional", "page optional", "policies optional", "merchantFeed optional", "internalLinks optional"],
+    "outputType": "ecommerce_seo_report"
+  },
+  {
+    "id": "category-seo-audit",
+    "command": "/seo-master category-seo-audit",
+    "title": "Category SEO Audit",
+    "description": "Audit ecommerce category pages, filters, pagination, content quality, and internal links.",
+    "group": "group-10",
+    "status": "active",
+    "requiredInputs": ["categories optional", "filters optional", "pagination optional", "internalLinks optional"],
+    "outputType": "ecommerce_seo_report"
   },
   {
     "id": "ai-search-readiness",

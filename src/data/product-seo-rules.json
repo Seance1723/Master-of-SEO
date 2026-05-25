@@ -1,0 +1,13 @@
+[
+  {
+    "id": "product-visible-data",
+    "category": "product-seo",
+    "title": "Product pages need accurate visible product data",
+    "description": "Product pages should include real name, description, SKU, brand, images, price, availability, reviews, and trust data where provided.",
+    "do": ["Write unique product descriptions", "Include product name, brand, SKU, images, price, and availability when available", "Include genuine reviews only", "Show shipping, return, and trust information"],
+    "dont": ["Copy manufacturer descriptions only", "Fake reviews or ratings", "Invent prices or stock status", "Delete discontinued product pages without SEO handling"],
+    "priority": "P1",
+    "appliesTo": ["ecommerce", "product", "audit"],
+    "status": "active"
+  }
+]

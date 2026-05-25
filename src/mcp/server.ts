@@ -8,6 +8,10 @@ import { getContentRules } from "../content/content-rules.ts";
 import { getCommandMenu } from "../core/command-registry.ts";
 import { runSeoMaster } from "../core/orchestrator.ts";
 import { dataDir, memoryPath } from "../core/paths.ts";
+import { runCategorySeoAudit } from "../ecommerce/category-seo.ts";
+import { runEcommerceAudit } from "../ecommerce/ecommerce-audit.ts";
+import { getEcommerceRules } from "../ecommerce/ecommerce-rules.ts";
+import { runProductSeoAudit } from "../ecommerce/product-seo.ts";
 import { runKeywordResearch } from "../keywords/keyword-research.ts";
 import { getKeywordRules } from "../keywords/keyword-rules.ts";
 import { runImageSeoAudit } from "../media/image-seo.ts";
@@ -25,6 +29,7 @@ import { runTechnicalAudit } from "../technical/technical-audit.ts";
 import { getTechnicalRules } from "../technical/technical-rules.ts";
 import type { ContentPlanInput } from "../types/content.ts";
 import type { ArchitectureAuditInput } from "../types/architecture.ts";
+import type { EcommerceAuditInput } from "../types/ecommerce.ts";
 import type { KeywordResearchInput } from "../types/keywords.ts";
 import type { MediaAuditInput } from "../types/media.ts";
 import type { OnPageAuditInput } from "../types/on-page.ts";
@@ -236,10 +241,28 @@ const tools = [
     name: "seo_master_video_seo_audit",
     description: "Run Video SEO audit logic with explicit provided inputs only. No video fetching or external validation is performed.",
     inputSchema: { type: "object", properties: { url: { type: "string" }, html: { type: "string" }, page: { type: "object" }, videos: { type: "array" }, schema: { type: "object" }, assets: { type: "array" }, mode: { type: "string", enum: ["audit", "image", "video", "planning"] } } }
+  },
+  {
+    name: "seo_master_ecommerce_audit",
+    description: "Run Ecommerce SEO audit logic with explicit provided inputs only. No live product, stock, price, review, feed, or Merchant Center fetching is performed.",
+    inputSchema: { type: "object", properties: { url: { type: "string" }, html: { type: "string" }, page: { type: "object" }, categories: { type: "array" }, products: { type: "array" }, filters: { type: "array" }, pagination: { type: "array" }, policies: { type: "object" }, merchantFeed: { type: "object" }, internalLinks: { type: "array" }, mode: { type: "string", enum: ["audit", "category", "product", "variants", "faceted", "planning"] } } }
+  },
+  {
+    name: "seo_master_product_seo_audit",
+    description: "Run Product SEO audit logic with explicit provided inputs only. No hallucinated product, price, review, rating, or stock data.",
+    inputSchema: { type: "object", properties: { products: { type: "array" }, page: { type: "object" }, policies: { type: "object" }, merchantFeed: { type: "object" }, internalLinks: { type: "array" }, mode: { type: "string", enum: ["audit", "category", "product", "variants", "faceted", "planning"] } } }
+  },
+  {
+    name: "seo_master_category_seo_audit",
+    description: "Run Category SEO audit logic with explicit provided inputs only. No live crawling or product fetching.",
+    inputSchema: { type: "object", properties: { categories: { type: "array" }, filters: { type: "array" }, pagination: { type: "array" }, internalLinks: { type: "array" }, mode: { type: "string", enum: ["audit", "category", "product", "variants", "faceted", "planning"] } } }
   }
 ];
 
 const prompts = [
+  "seo-master-category-seo-audit",
+  "seo-master-product-seo-audit",
+  "seo-master-ecommerce-audit",
   "seo-master-video-seo-audit",
   "seo-master-image-seo-audit",
   "seo-master-media-audit",
@@ -285,6 +308,10 @@ async function readResource(uri: string): Promise<string> {
   if (uri === "seo-master://media-rules") return JSON.stringify(await getMediaRules(), null, 2);
   if (uri === "seo-master://image-seo-rules") return readFile(join(dataDir, "image-seo-rules.json"), "utf8");
   if (uri === "seo-master://video-seo-rules") return readFile(join(dataDir, "video-seo-rules.json"), "utf8");
+  if (uri === "seo-master://ecommerce-rules") return JSON.stringify(await getEcommerceRules(), null, 2);
+  if (uri === "seo-master://product-seo-rules") return readFile(join(dataDir, "product-seo-rules.json"), "utf8");
+  if (uri === "seo-master://category-seo-rules") return readFile(join(dataDir, "ecommerce-category-rules.json"), "utf8");
+  if (uri === "seo-master://faceted-navigation-rules") return readFile(join(dataDir, "faceted-navigation-rules.json"), "utf8");
   throw new Error(`Unknown resource: ${uri}`);
 }
 
@@ -379,6 +406,21 @@ async function handle(request: JsonRpcRequest): Promise<void> {
         send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
         return;
       }
+      if (name === "seo_master_ecommerce_audit") {
+        const report = runEcommerceAudit({ mode: "audit", ...(args as Partial<EcommerceAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_product_seo_audit") {
+        const report = runProductSeoAudit({ mode: "product", ...(args as Partial<EcommerceAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_category_seo_audit") {
+        const report = runCategorySeoAudit({ mode: "category", ...(args as Partial<EcommerceAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
       throw new Error(`Unknown tool: ${name}`);
     }
 
@@ -402,7 +444,11 @@ async function handle(request: JsonRpcRequest): Promise<void> {
             { uri: "seo-master://entity-seo-rules", name: "Master of SEO Entity SEO Rules", mimeType: "application/json" },
             { uri: "seo-master://media-rules", name: "Master of SEO Media Rules", mimeType: "application/json" },
             { uri: "seo-master://image-seo-rules", name: "Master of SEO Image SEO Rules", mimeType: "application/json" },
-            { uri: "seo-master://video-seo-rules", name: "Master of SEO Video SEO Rules", mimeType: "application/json" }
+            { uri: "seo-master://video-seo-rules", name: "Master of SEO Video SEO Rules", mimeType: "application/json" },
+            { uri: "seo-master://ecommerce-rules", name: "Master of SEO Ecommerce Rules", mimeType: "application/json" },
+            { uri: "seo-master://product-seo-rules", name: "Master of SEO Product SEO Rules", mimeType: "application/json" },
+            { uri: "seo-master://category-seo-rules", name: "Master of SEO Category SEO Rules", mimeType: "application/json" },
+            { uri: "seo-master://faceted-navigation-rules", name: "Master of SEO Faceted Navigation Rules", mimeType: "application/json" }
           ]
         }
       });
@@ -423,6 +469,9 @@ async function handle(request: JsonRpcRequest): Promise<void> {
     if (method === "prompts/get") {
       const promptName = String(params.name ?? "");
       const commandByPrompt: Record<string, string> = {
+        "seo-master-category-seo-audit": "/seo-master category-seo-audit",
+        "seo-master-product-seo-audit": "/seo-master product-seo-audit",
+        "seo-master-ecommerce-audit": "/seo-master ecommerce-audit",
         "seo-master-video-seo-audit": "/seo-master video-seo-audit",
         "seo-master-image-seo-audit": "/seo-master image-seo-audit",
         "seo-master-media-audit": "/seo-master media-audit",

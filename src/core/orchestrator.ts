@@ -1,6 +1,9 @@
 import type { OrchestratorResponse } from "../types/index.ts";
 import { parseArchitectureAuditInputFromText, runArchitectureAudit } from "../architecture/architecture-audit.ts";
 import { parseContentPlanInputFromText, runContentPlan } from "../content/content-plan.ts";
+import { runCategorySeoAudit } from "../ecommerce/category-seo.ts";
+import { parseEcommerceAuditInputFromText, runEcommerceAudit } from "../ecommerce/ecommerce-audit.ts";
+import { runProductSeoAudit } from "../ecommerce/product-seo.ts";
 import { parseKeywordResearchInputFromText, runKeywordResearch } from "../keywords/keyword-research.ts";
 import { runImageSeoAudit } from "../media/image-seo.ts";
 import { parseMediaAuditInputFromText, runMediaAudit } from "../media/media-audit.ts";
@@ -146,6 +149,18 @@ export async function runSeoMaster(input: string): Promise<OrchestratorResponse>
     return {
       active: true,
       type: "media-audit",
+      command,
+      data: report,
+      message: JSON.stringify(report, null, 2)
+    };
+  }
+
+  if (command.id === "ecommerce-seo" || command.id === "ecommerce-audit" || command.id === "product-seo-audit" || command.id === "category-seo-audit") {
+    const parsed = parseEcommerceAuditInputFromText(input);
+    const report = command.id === "product-seo-audit" ? runProductSeoAudit(parsed) : command.id === "category-seo-audit" ? runCategorySeoAudit(parsed) : runEcommerceAudit(parsed);
+    return {
+      active: true,
+      type: "ecommerce-audit",
       command,
       data: report,
       message: JSON.stringify(report, null, 2)

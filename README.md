@@ -16,9 +16,9 @@ npm install -g master-of-seo
 seo-master
 seo-master /
 seo-master "/seo-master help"
-seo-master "/seo-master media-audit"
-seo-master "/seo-master image-seo-audit --images '[{\"src\":\"/hero.jpg\",\"alt\":\"\",\"sizeKb\":1200,\"isHero\":true,\"loading\":\"lazy\"}]'"
-seo-master "/seo-master video-seo-audit --videos '[{\"title\":\"Demo\",\"hasTranscript\":false,\"hasCaptions\":false}]'"
+seo-master "/seo-master ecommerce-seo"
+seo-master "/seo-master product-seo-audit --products '[{\"url\":\"/p/shoe\",\"name\":\"Running Shoe\",\"availability\":\"out_of_stock\",\"images\":[]}]'"
+seo-master "/seo-master category-seo-audit --categories '[{\"url\":\"/shoes\",\"name\":\"Shoes\",\"productCount\":0,\"isIndexable\":true}]'"
 ```
 
 ## Active Commands
@@ -38,6 +38,10 @@ seo-master "/seo-master video-seo-audit --videos '[{\"title\":\"Demo\",\"hasTran
 - `/seo-master media-audit`
 - `/seo-master image-seo-audit`
 - `/seo-master video-seo-audit`
+- `/seo-master ecommerce-seo`
+- `/seo-master ecommerce-audit`
+- `/seo-master product-seo-audit`
+- `/seo-master category-seo-audit`
 
 Typing `/` shows all available Master of SEO commands. SEO logic only runs when input starts with `/seo-master`.
 
@@ -46,19 +50,17 @@ Typing `/` shows all available Master of SEO commands. SEO logic only runs when 
 - `/seo-master audit-website`
 - `/seo-master competitor-analysis`
 - `/seo-master seo-plan`
-- `/seo-master schema-audit`
 - `/seo-master local-seo`
-- `/seo-master ecommerce-seo`
 - `/seo-master ai-search-readiness`
 - `/seo-master launch-checklist`
 - `/seo-master migration-plan`
 - `/seo-master report`
 
-## Media SEO Scope
+## Ecommerce SEO Scope
 
-Group 9 implements media audits, image SEO, alt text checks, filename checks, image format/compression checks, responsive image checks, Open Graph image checks, image sitemap recommendations, video SEO, transcripts/captions, thumbnails, VideoObject schema support, video sitemap recommendations, media accessibility, media performance guard, and recommendations.
+Group 10 implements ecommerce audits, category SEO, product SEO, product variant handling, review/rating guardrails, Product schema guardrails, category content quality, faceted navigation, filter/parameter SEO, pagination SEO, out-of-stock/discontinued handling, ecommerce internal linking, trust policy checks, Merchant feed readiness, and recommendations.
 
-Group 9 does not fetch, crawl, OCR, or inspect live media files unless provider support is added later. It safely audits provided HTML, image, video, Open Graph, schema, and asset inputs.
+Group 10 does not fetch live product, Merchant Center, pricing, stock, or review data unless provider support is added later. It safely audits provided ecommerce inputs only.
 
 ## MCP Usage
 
@@ -81,8 +83,8 @@ The MCP server exposes `seo_master_run`, `seo_master_commands`, active audit/pla
 - Group 7: Site Architecture & Internal Linking - completed
 - Group 8: Schema & Entity SEO - completed
 - Group 9: Media SEO - completed
-- Group 10: Ecommerce SEO - next
-- Group 11: Local & International SEO
+- Group 10: Ecommerce SEO - completed
+- Group 11: Local & International SEO - next
 - Group 12: AI Search & Discover SEO
 - Group 13: Trust, Security & Accessibility
 - Group 14: CMS & Framework SEO
@@ -101,5 +103,5 @@ Master of SEO is designed for OpenAI agents, Claude, Antigravity, Windsurf, Curs
 
 ## Current Status
 
-- Current status: Group 9 completed
-- Next group: Group 10 Ecommerce SEO
+- Current status: Group 10 completed
+- Next group: Group 11 Local & International SEO

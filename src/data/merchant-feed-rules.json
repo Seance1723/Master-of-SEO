@@ -1,0 +1,13 @@
+[
+  {
+    "id": "merchant-feed-readiness",
+    "category": "merchant-feed-readiness",
+    "title": "Merchant feed data must align with website data",
+    "description": "Feed readiness depends on accurate product name, image, price, currency, availability, and identifiers.",
+    "do": ["Keep product name, image, price, currency, availability, and identifiers consistent", "Include GTIN/MPN/brand where applicable"],
+    "dont": ["Submit products with missing price/availability/image", "Mismatch feed price and page price", "Use poor product images in feed"],
+    "priority": "P1",
+    "appliesTo": ["ecommerce", "product", "audit"],
+    "status": "active"
+  }
+]

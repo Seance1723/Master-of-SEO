@@ -1,0 +1,13 @@
+[
+  {
+    "id": "variant-strategy",
+    "category": "product-variants",
+    "title": "Product variants need a canonical/indexing strategy",
+    "description": "Index variants only when unique and valuable; canonical near-duplicates to the main product.",
+    "do": ["Define a variant strategy", "Canonical duplicate variants where appropriate", "Index variants only with unique demand/content"],
+    "dont": ["Index every color/size variant automatically", "Create duplicate variant pages", "Canonical to unrelated products"],
+    "priority": "P2",
+    "appliesTo": ["ecommerce", "product", "audit"],
+    "status": "active"
+  }
+]

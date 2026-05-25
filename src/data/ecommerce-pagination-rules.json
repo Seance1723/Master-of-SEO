@@ -1,0 +1,13 @@
+[
+  {
+    "id": "pagination-crawlable",
+    "category": "pagination-seo",
+    "title": "Pagination must preserve product discovery",
+    "description": "Paginated category states need crawlable links and stable URL behavior.",
+    "do": ["Use crawlable pagination links", "Use stable URLs", "Keep products discoverable beyond page 1", "Use self-canonical where appropriate"],
+    "dont": ["Rely only on infinite scroll", "Hide products behind Load More without fallback", "Canonical every paginated URL to page 1 blindly"],
+    "priority": "P2",
+    "appliesTo": ["ecommerce", "category", "pagination", "audit"],
+    "status": "active"
+  }
+]

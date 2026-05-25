@@ -1,0 +1,13 @@
+[
+  {
+    "id": "category-content-indexability",
+    "category": "category-seo",
+    "title": "Category pages need products and useful copy",
+    "description": "Index useful category pages with product links and unique content.",
+    "do": ["Write unique category copy", "Include crawlable product links", "Link to subcategories and related categories", "Keep category pages indexable when they have search demand"],
+    "dont": ["Create empty category pages", "Index categories with no products", "Duplicate the same copy across categories", "Canonical all paginated category pages to page 1 blindly"],
+    "priority": "P2",
+    "appliesTo": ["ecommerce", "category", "pagination", "audit"],
+    "status": "active"
+  }
+]

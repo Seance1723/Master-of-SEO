@@ -1,0 +1,13 @@
+[
+  {
+    "id": "stock-discontinued-safe-handling",
+    "category": "stock-discontinued",
+    "title": "Handle out-of-stock and discontinued products safely",
+    "description": "Keep temporary out-of-stock products useful and handle discontinued products with redirects, noindex, or 410 where appropriate.",
+    "do": ["Keep temporarily out-of-stock pages live if they will return", "Show alternatives", "Use accurate availability", "Redirect permanently discontinued products to closest relevant alternatives where appropriate"],
+    "dont": ["Delete product pages immediately", "Mark out-of-stock products as in-stock", "Redirect discontinued products to irrelevant categories"],
+    "priority": "P2",
+    "appliesTo": ["ecommerce", "product", "audit"],
+    "status": "active"
+  }
+]
