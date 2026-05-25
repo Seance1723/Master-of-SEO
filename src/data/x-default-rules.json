@@ -1,0 +1,13 @@
+[
+  {
+    "id": "x-default-fallback",
+    "category": "x-default",
+    "title": "Use x-default for fallback pages",
+    "description": "x-default can identify global selector or fallback pages where useful.",
+    "do": ["Use x-default for global/language selector pages", "Use it for fallback pages"],
+    "dont": ["Use x-default as replacement for proper alternates", "Point x-default to irrelevant pages"],
+    "priority": "P3",
+    "appliesTo": ["international_seo", "hreflang", "audit"],
+    "status": "active"
+  }
+]

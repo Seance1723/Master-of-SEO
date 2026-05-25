@@ -5,6 +5,8 @@ import { runCategorySeoAudit } from "../ecommerce/category-seo.ts";
 import { parseEcommerceAuditInputFromText, runEcommerceAudit } from "../ecommerce/ecommerce-audit.ts";
 import { runProductSeoAudit } from "../ecommerce/product-seo.ts";
 import { parseKeywordResearchInputFromText, runKeywordResearch } from "../keywords/keyword-research.ts";
+import { parseInternationalSEOInputFromText, runHreflangAudit, runInternationalSEOAudit } from "../local-international/international-seo-audit.ts";
+import { parseLocalSEOInputFromText, runLocalSEOAudit } from "../local-international/local-seo-audit.ts";
 import { runImageSeoAudit } from "../media/image-seo.ts";
 import { parseMediaAuditInputFromText, runMediaAudit } from "../media/media-audit.ts";
 import { runVideoSeoAudit } from "../media/video-seo.ts";
@@ -161,6 +163,29 @@ export async function runSeoMaster(input: string): Promise<OrchestratorResponse>
     return {
       active: true,
       type: "ecommerce-audit",
+      command,
+      data: report,
+      message: JSON.stringify(report, null, 2)
+    };
+  }
+
+  if (command.id === "local-seo" || command.id === "local-seo-audit") {
+    const report = runLocalSEOAudit(parseLocalSEOInputFromText(input));
+    return {
+      active: true,
+      type: "local-international-audit",
+      command,
+      data: report,
+      message: JSON.stringify(report, null, 2)
+    };
+  }
+
+  if (command.id === "international-seo" || command.id === "international-seo-audit" || command.id === "hreflang-audit") {
+    const parsed = parseInternationalSEOInputFromText(input);
+    const report = command.id === "hreflang-audit" ? runHreflangAudit(parsed) : runInternationalSEOAudit(parsed);
+    return {
+      active: true,
+      type: "local-international-audit",
       command,
       data: report,
       message: JSON.stringify(report, null, 2)

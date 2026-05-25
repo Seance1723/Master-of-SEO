@@ -1,0 +1,13 @@
+[
+  {
+    "id": "local-reviews-genuine",
+    "category": "review-authenticity",
+    "title": "Local reviews must be genuine",
+    "description": "Use only real visible reviews and valid rating data.",
+    "do": ["Show genuine reviews", "Respond to reviews where relevant", "Keep review schema honest and visible"],
+    "dont": ["Fake reviews", "Use copied reviews", "Hide negative reviews in a misleading way"],
+    "priority": "P2",
+    "appliesTo": ["local_seo", "local_pages", "audit"],
+    "status": "active"
+  }
+]

@@ -1,0 +1,13 @@
+[
+  {
+    "id": "local-landing-pages",
+    "category": "local-landing-pages",
+    "title": "Local landing pages must be unique and useful",
+    "description": "Local pages should serve real locations/service areas with unique local proof and useful content.",
+    "do": ["Create unique pages for real locations or service areas", "Include local proof, services, reviews, map/contact info, and local FAQs"],
+    "dont": ["Create thin city pages", "Swap only city names", "Create local pages for areas not served", "Duplicate copy across locations"],
+    "priority": "P2",
+    "appliesTo": ["local_seo", "local_pages", "audit"],
+    "status": "active"
+  }
+]

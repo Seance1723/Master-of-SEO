@@ -1,0 +1,13 @@
+[
+  {
+    "id": "language-country-targeting",
+    "category": "language-country-targeting",
+    "title": "Language and country targeting should match content",
+    "description": "Use language or language-country targeting when regional differences exist.",
+    "do": ["Target language-specific content", "Use language-country when regional differences exist", "Localize currency, units, spelling, and examples"],
+    "dont": ["Create country pages without meaningful localization", "Duplicate pages across countries with no regional value"],
+    "priority": "P2",
+    "appliesTo": ["international_seo", "audit"],
+    "status": "active"
+  }
+]

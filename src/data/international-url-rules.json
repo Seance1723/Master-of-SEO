@@ -1,0 +1,13 @@
+[
+  {
+    "id": "international-url-structure",
+    "category": "international-url-structure",
+    "title": "International URL strategy should be consistent",
+    "description": "Use predictable international URL patterns and avoid random strategy mixing.",
+    "do": ["Use subdirectories, subdomains, or ccTLDs consistently", "Keep URL patterns predictable"],
+    "dont": ["Mix strategies randomly", "Use flags alone for language selection", "Create duplicate URL versions without canonical/hreflang control"],
+    "priority": "P2",
+    "appliesTo": ["international_seo", "audit"],
+    "status": "active"
+  }
+]

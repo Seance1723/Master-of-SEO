@@ -14,6 +14,9 @@ import { getEcommerceRules } from "../ecommerce/ecommerce-rules.ts";
 import { runProductSeoAudit } from "../ecommerce/product-seo.ts";
 import { runKeywordResearch } from "../keywords/keyword-research.ts";
 import { getKeywordRules } from "../keywords/keyword-rules.ts";
+import { runHreflangAudit, runInternationalSEOAudit } from "../local-international/international-seo-audit.ts";
+import { getLocalInternationalRules } from "../local-international/local-international-rules.ts";
+import { runLocalSEOAudit } from "../local-international/local-seo-audit.ts";
 import { runImageSeoAudit } from "../media/image-seo.ts";
 import { runMediaAudit } from "../media/media-audit.ts";
 import { getMediaRules } from "../media/media-rules.ts";
@@ -31,6 +34,7 @@ import type { ContentPlanInput } from "../types/content.ts";
 import type { ArchitectureAuditInput } from "../types/architecture.ts";
 import type { EcommerceAuditInput } from "../types/ecommerce.ts";
 import type { KeywordResearchInput } from "../types/keywords.ts";
+import type { InternationalSEOAuditInput, LocalSEOAuditInput } from "../types/local-international.ts";
 import type { MediaAuditInput } from "../types/media.ts";
 import type { OnPageAuditInput } from "../types/on-page.ts";
 import type { PerformanceAuditInput } from "../types/performance.ts";
@@ -256,10 +260,28 @@ const tools = [
     name: "seo_master_category_seo_audit",
     description: "Run Category SEO audit logic with explicit provided inputs only. No live crawling or product fetching.",
     inputSchema: { type: "object", properties: { categories: { type: "array" }, filters: { type: "array" }, pagination: { type: "array" }, internalLinks: { type: "array" }, mode: { type: "string", enum: ["audit", "category", "product", "variants", "faceted", "planning"] } } }
+  },
+  {
+    name: "seo_master_local_seo_audit",
+    description: "Run Local SEO audit logic with explicit provided inputs only. No live GBP, maps, citation, or review fetching.",
+    inputSchema: { type: "object", properties: { business: { type: "object" }, locations: { type: "array" }, pages: { type: "array" }, googleBusinessProfile: { type: "object" }, citations: { type: "array" }, reviews: { type: "array" }, mode: { type: "string", enum: ["audit", "planning", "local_pages", "citations", "reviews"] } } }
+  },
+  {
+    name: "seo_master_international_seo_audit",
+    description: "Run International SEO audit logic with explicit provided inputs only. No live hreflang, country, or language fetching.",
+    inputSchema: { type: "object", properties: { site: { type: "object" }, pages: { type: "array" }, hreflangSets: { type: "array" }, localizedContent: { type: "array" }, mode: { type: "string", enum: ["audit", "hreflang", "localization", "planning"] } } }
+  },
+  {
+    name: "seo_master_hreflang_audit",
+    description: "Run Hreflang audit logic with explicit provided inputs only.",
+    inputSchema: { type: "object", properties: { site: { type: "object" }, pages: { type: "array" }, hreflangSets: { type: "array" }, localizedContent: { type: "array" }, mode: { type: "string", enum: ["audit", "hreflang", "localization", "planning"] } } }
   }
 ];
 
 const prompts = [
+  "seo-master-hreflang-audit",
+  "seo-master-international-seo-audit",
+  "seo-master-local-seo-audit",
   "seo-master-category-seo-audit",
   "seo-master-product-seo-audit",
   "seo-master-ecommerce-audit",
@@ -312,6 +334,9 @@ async function readResource(uri: string): Promise<string> {
   if (uri === "seo-master://product-seo-rules") return readFile(join(dataDir, "product-seo-rules.json"), "utf8");
   if (uri === "seo-master://category-seo-rules") return readFile(join(dataDir, "ecommerce-category-rules.json"), "utf8");
   if (uri === "seo-master://faceted-navigation-rules") return readFile(join(dataDir, "faceted-navigation-rules.json"), "utf8");
+  if (uri === "seo-master://local-seo-rules") return JSON.stringify(await getLocalInternationalRules(), null, 2);
+  if (uri === "seo-master://international-seo-rules") return readFile(join(dataDir, "international-seo-rules.json"), "utf8");
+  if (uri === "seo-master://hreflang-rules") return readFile(join(dataDir, "hreflang-rules.json"), "utf8");
   throw new Error(`Unknown resource: ${uri}`);
 }
 
@@ -421,6 +446,21 @@ async function handle(request: JsonRpcRequest): Promise<void> {
         send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
         return;
       }
+      if (name === "seo_master_local_seo_audit") {
+        const report = runLocalSEOAudit({ mode: "audit", ...(args as Partial<LocalSEOAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_international_seo_audit") {
+        const report = runInternationalSEOAudit({ mode: "audit", ...(args as Partial<InternationalSEOAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_hreflang_audit") {
+        const report = runHreflangAudit({ mode: "hreflang", ...(args as Partial<InternationalSEOAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
       throw new Error(`Unknown tool: ${name}`);
     }
 
@@ -448,7 +488,10 @@ async function handle(request: JsonRpcRequest): Promise<void> {
             { uri: "seo-master://ecommerce-rules", name: "Master of SEO Ecommerce Rules", mimeType: "application/json" },
             { uri: "seo-master://product-seo-rules", name: "Master of SEO Product SEO Rules", mimeType: "application/json" },
             { uri: "seo-master://category-seo-rules", name: "Master of SEO Category SEO Rules", mimeType: "application/json" },
-            { uri: "seo-master://faceted-navigation-rules", name: "Master of SEO Faceted Navigation Rules", mimeType: "application/json" }
+            { uri: "seo-master://faceted-navigation-rules", name: "Master of SEO Faceted Navigation Rules", mimeType: "application/json" },
+            { uri: "seo-master://local-seo-rules", name: "Master of SEO Local SEO Rules", mimeType: "application/json" },
+            { uri: "seo-master://international-seo-rules", name: "Master of SEO International SEO Rules", mimeType: "application/json" },
+            { uri: "seo-master://hreflang-rules", name: "Master of SEO Hreflang Rules", mimeType: "application/json" }
           ]
         }
       });
@@ -469,6 +512,9 @@ async function handle(request: JsonRpcRequest): Promise<void> {
     if (method === "prompts/get") {
       const promptName = String(params.name ?? "");
       const commandByPrompt: Record<string, string> = {
+        "seo-master-hreflang-audit": "/seo-master hreflang-audit",
+        "seo-master-international-seo-audit": "/seo-master international-seo-audit",
+        "seo-master-local-seo-audit": "/seo-master local-seo-audit",
         "seo-master-category-seo-audit": "/seo-master category-seo-audit",
         "seo-master-product-seo-audit": "/seo-master product-seo-audit",
         "seo-master-ecommerce-audit": "/seo-master ecommerce-audit",

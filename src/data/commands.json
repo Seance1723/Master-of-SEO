@@ -165,9 +165,49 @@
     "title": "Local SEO",
     "description": "Plan local SEO improvements.",
     "group": "group-11",
-    "status": "planned",
-    "requiredInputs": ["businessName", "location"],
-    "outputType": "local-seo-plan"
+    "status": "active",
+    "requiredInputs": ["business optional", "locations optional", "pages optional", "googleBusinessProfile optional", "citations optional", "reviews optional", "site optional", "hreflangSets optional", "localizedContent optional"],
+    "outputType": "local_international_seo_report"
+  },
+  {
+    "id": "local-seo-audit",
+    "command": "/seo-master local-seo-audit",
+    "title": "Local SEO Audit",
+    "description": "Audit local SEO, GBP readiness, NAP consistency, local pages, citations, reviews, and LocalBusiness schema.",
+    "group": "group-11",
+    "status": "active",
+    "requiredInputs": ["business optional", "locations optional", "pages optional", "googleBusinessProfile optional", "citations optional", "reviews optional"],
+    "outputType": "local_international_seo_report"
+  },
+  {
+    "id": "international-seo",
+    "command": "/seo-master international-seo",
+    "title": "International SEO",
+    "description": "Audit international SEO, hreflang, language/country targeting, x-default, and localized content.",
+    "group": "group-11",
+    "status": "active",
+    "requiredInputs": ["site optional", "pages optional", "hreflangSets optional", "localizedContent optional"],
+    "outputType": "local_international_seo_report"
+  },
+  {
+    "id": "international-seo-audit",
+    "command": "/seo-master international-seo-audit",
+    "title": "International SEO Audit",
+    "description": "Audit international URL structure, hreflang, canonicals, and localization quality.",
+    "group": "group-11",
+    "status": "active",
+    "requiredInputs": ["site optional", "pages optional", "hreflangSets optional", "localizedContent optional"],
+    "outputType": "local_international_seo_report"
+  },
+  {
+    "id": "hreflang-audit",
+    "command": "/seo-master hreflang-audit",
+    "title": "Hreflang Audit",
+    "description": "Audit hreflang self-references, return tags, language/country codes, canonicals, and x-default.",
+    "group": "group-11",
+    "status": "active",
+    "requiredInputs": ["site optional", "pages optional", "hreflangSets optional", "localizedContent optional"],
+    "outputType": "local_international_seo_report"
   },
   {
     "id": "ecommerce-seo",

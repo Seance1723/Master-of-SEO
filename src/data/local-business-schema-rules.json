@@ -1,13 +1,13 @@
 [
   {
-    "id": "local-business-real-location",
+    "id": "localbusiness-schema-real",
     "category": "local-business-schema",
-    "title": "LocalBusiness schema requires real local presence",
-    "description": "Use LocalBusiness only for genuine local business locations.",
-    "do": ["Include name, address, telephone, opening hours, geo, and sameAs where available", "Keep NAP consistent"],
-    "dont": ["Create fake locations", "Use LocalBusiness without real local presence", "Add fake opening hours"],
+    "title": "LocalBusiness schema must match visible NAP",
+    "description": "LocalBusiness schema should use real visible details only.",
+    "do": ["Include name, address, telephone, opening hours, geo, and sameAs where available", "Keep schema consistent with visible page content"],
+    "dont": ["Invent local schema fields", "Add fake locations", "Mark up non-local businesses as LocalBusiness"],
     "priority": "P2",
-    "appliesTo": ["schema", "entity", "audit", "planning"],
+    "appliesTo": ["local_seo", "local_pages", "audit"],
     "status": "active"
   }
 ]
