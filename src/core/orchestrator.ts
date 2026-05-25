@@ -29,6 +29,8 @@ import { parseAccessibilityInputFromText, runAccessibilityAudit } from "../trust
 import { runEEATAudit } from "../trust-security-accessibility/eeat-audit.ts";
 import { parseSecurityInputFromText, runSecurityAudit } from "../trust-security-accessibility/security-audit.ts";
 import { parseTrustInputFromText, runTrustAudit } from "../trust-security-accessibility/trust-audit.ts";
+import { runPageAudit } from "../website-audit/page-audit.ts";
+import { parseWebsiteAuditInputFromText, runWebsiteAudit } from "../website-audit/website-audit.ts";
 import { getCommandFromInput, getCommandMenu } from "./command-registry.ts";
 import { getNextGroupFromMemory, readMemory } from "./memory.ts";
 import { checkTrigger } from "./trigger.ts";
@@ -269,6 +271,18 @@ export async function runSeoMaster(input: string): Promise<OrchestratorResponse>
     return {
       active: true,
       type: "cms-framework-audit",
+      command,
+      data: report,
+      message: JSON.stringify(report, null, 2)
+    };
+  }
+
+  if (command.id === "audit-website" || command.id === "website-audit" || command.id === "full-audit" || command.id === "page-audit") {
+    const parsed = parseWebsiteAuditInputFromText(input);
+    const report = command.id === "page-audit" ? runPageAudit(parsed) : runWebsiteAudit(parsed);
+    return {
+      active: true,
+      type: "website-audit",
       command,
       data: report,
       message: JSON.stringify(report, null, 2)

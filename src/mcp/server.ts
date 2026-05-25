@@ -47,6 +47,10 @@ import { runSecurityAudit } from "../trust-security-accessibility/security-audit
 import { runTrustAudit } from "../trust-security-accessibility/trust-audit.ts";
 import { getTrustSecurityAccessibilityRules } from "../trust-security-accessibility/trust-security-accessibility-rules.ts";
 import { getTechnicalRules } from "../technical/technical-rules.ts";
+import { runPageAudit } from "../website-audit/page-audit.ts";
+import { runTemplateAudit } from "../website-audit/template-audit.ts";
+import { runWebsiteAudit } from "../website-audit/website-audit.ts";
+import { getWebsiteAuditRules } from "../website-audit/website-audit-rules.ts";
 import type { ContentPlanInput } from "../types/content.ts";
 import type { ArchitectureAuditInput } from "../types/architecture.ts";
 import type { EcommerceAuditInput } from "../types/ecommerce.ts";
@@ -60,6 +64,7 @@ import type { TechnicalAuditInput } from "../types/technical.ts";
 import type { AISearchAuditInput, DiscoverSEOAuditInput } from "../types/ai-discover.ts";
 import type { AccessibilityAuditInput, SecurityAuditInput, TrustAuditInput } from "../types/trust-security-accessibility.ts";
 import type { CMSFrameworkAuditInput } from "../types/cms-framework.ts";
+import type { WebsiteAuditInput } from "../types/website-audit.ts";
 
 interface JsonRpcRequest {
   jsonrpc: "2.0";
@@ -365,10 +370,28 @@ const tools = [
     name: "seo_master_build_seo_check",
     description: "Run framework build SEO check logic with explicit build data only. No build is executed.",
     inputSchema: { type: "object", properties: { framework: { type: "string" }, routes: { type: "array" }, build: { type: "object" }, seoFiles: { type: "object" }, mode: { type: "string", enum: ["framework", "wordpress", "react", "nextjs", "static", "build", "audit"] } } }
+  },
+  {
+    name: "seo_master_website_audit",
+    description: "Run Website Audit aggregation logic with explicit provided inputs only. No live crawling, Lighthouse, Search Console, GA4, rankings, or external validation.",
+    inputSchema: { type: "object", properties: { url: { type: "string" }, website: { type: "object" }, pages: { type: "array" }, technical: { type: "object" }, performance: { type: "object" }, onPage: { type: "object" }, keywords: { type: "object" }, content: { type: "object" }, architecture: { type: "object" }, schema: { type: "object" }, media: { type: "object" }, ecommerce: { type: "object" }, localInternational: { type: "object" }, aiDiscover: { type: "object" }, trustSecurityAccessibility: { type: "object" }, cmsFramework: { type: "object" }, mode: { type: "string", enum: ["website", "page", "template", "full", "partial"] } } }
+  },
+  {
+    name: "seo_master_page_audit",
+    description: "Run page-level Website Audit logic with explicit provided inputs only.",
+    inputSchema: { type: "object", properties: { url: { type: "string" }, website: { type: "object" }, pages: { type: "array" }, technical: { type: "object" }, performance: { type: "object" }, onPage: { type: "object" }, schema: { type: "object" }, media: { type: "object" }, trustSecurityAccessibility: { type: "object" }, cmsFramework: { type: "object" }, mode: { type: "string", enum: ["website", "page", "template", "full", "partial"] } } }
+  },
+  {
+    name: "seo_master_template_audit",
+    description: "Run template-level Website Audit grouping logic with explicit provided page inputs only.",
+    inputSchema: { type: "object", properties: { pages: { type: "array" }, mode: { type: "string", enum: ["website", "page", "template", "full", "partial"] } } }
   }
 ];
 
 const prompts = [
+  "seo-master-full-audit",
+  "seo-master-page-audit",
+  "seo-master-website-audit",
   "seo-master-build-seo-check",
   "seo-master-static-seo-audit",
   "seo-master-nextjs-seo-audit",
@@ -454,6 +477,9 @@ async function readResource(uri: string): Promise<string> {
   if (uri === "seo-master://react-seo-rules") return readFile(join(dataDir, "react-seo-rules.json"), "utf8");
   if (uri === "seo-master://nextjs-seo-rules") return readFile(join(dataDir, "nextjs-seo-rules.json"), "utf8");
   if (uri === "seo-master://build-seo-rules") return readFile(join(dataDir, "build-seo-rules.json"), "utf8");
+  if (uri === "seo-master://website-audit-rules") return JSON.stringify(await getWebsiteAuditRules(), null, 2);
+  if (uri === "seo-master://audit-category-weights") return readFile(join(dataDir, "audit-category-weights.json"), "utf8");
+  if (uri === "seo-master://audit-roadmap-rules") return readFile(join(dataDir, "audit-roadmap-rules.json"), "utf8");
   throw new Error(`Unknown resource: ${uri}`);
 }
 
@@ -648,6 +674,21 @@ async function handle(request: JsonRpcRequest): Promise<void> {
         send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
         return;
       }
+      if (name === "seo_master_website_audit") {
+        const report = runWebsiteAudit({ mode: "website", ...(args as Partial<WebsiteAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_page_audit") {
+        const report = runPageAudit({ mode: "page", ...(args as Partial<WebsiteAuditInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_template_audit") {
+        const report = runTemplateAudit(((args as Partial<WebsiteAuditInput>).pages ?? []) as WebsiteAuditInput["pages"]);
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
       throw new Error(`Unknown tool: ${name}`);
     }
 
@@ -691,7 +732,10 @@ async function handle(request: JsonRpcRequest): Promise<void> {
             { uri: "seo-master://wordpress-seo-rules", name: "Master of SEO WordPress SEO Rules", mimeType: "application/json" },
             { uri: "seo-master://react-seo-rules", name: "Master of SEO React SEO Rules", mimeType: "application/json" },
             { uri: "seo-master://nextjs-seo-rules", name: "Master of SEO Next.js SEO Rules", mimeType: "application/json" },
-            { uri: "seo-master://build-seo-rules", name: "Master of SEO Build SEO Rules", mimeType: "application/json" }
+            { uri: "seo-master://build-seo-rules", name: "Master of SEO Build SEO Rules", mimeType: "application/json" },
+            { uri: "seo-master://website-audit-rules", name: "Master of SEO Website Audit Rules", mimeType: "application/json" },
+            { uri: "seo-master://audit-category-weights", name: "Master of SEO Audit Category Weights", mimeType: "application/json" },
+            { uri: "seo-master://audit-roadmap-rules", name: "Master of SEO Audit Roadmap Rules", mimeType: "application/json" }
           ]
         }
       });
@@ -712,6 +756,9 @@ async function handle(request: JsonRpcRequest): Promise<void> {
     if (method === "prompts/get") {
       const promptName = String(params.name ?? "");
       const commandByPrompt: Record<string, string> = {
+        "seo-master-full-audit": "/seo-master full-audit",
+        "seo-master-page-audit": "/seo-master page-audit",
+        "seo-master-website-audit": "/seo-master website-audit",
         "seo-master-build-seo-check": "/seo-master build-seo-check",
         "seo-master-static-seo-audit": "/seo-master static-seo-audit",
         "seo-master-nextjs-seo-audit": "/seo-master nextjs-seo-audit",

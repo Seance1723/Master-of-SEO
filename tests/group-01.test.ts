@@ -27,17 +27,17 @@ test("input /seo-master help returns help", async () => {
 test("input /seo-master memory reads memory", async () => {
   const result = await runSeoMaster("/seo-master memory");
   assert.equal(result.type, "memory");
-  assert.match(result.message, /Current group: Website Audit/u);
+  assert.match(result.message, /Current group: Competitor Analysis/u);
 });
 
-test("input /seo-master next-group returns Group 15", async () => {
+test("input /seo-master next-group returns Group 16", async () => {
   const result = await runSeoMaster("/seo-master next-group");
   assert.equal(result.type, "next-group");
-  assert.match(result.message, /Website Audit \(group-15\)/u);
+  assert.match(result.message, /Competitor Analysis \(group-16\)/u);
 });
 
 test("planned command returns planned-module response", async () => {
-  const result = await runSeoMaster("/seo-master audit-website https://example.com");
+  const result = await runSeoMaster("/seo-master competitor-analysis https://example.com");
   assert.equal(result.type, "planned");
   assert.match(result.message, /not implemented yet/u);
 });

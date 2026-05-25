@@ -13,11 +13,41 @@
     "id": "audit-website",
     "command": "/seo-master audit-website",
     "title": "Audit Website",
-    "description": "Run a complete website SEO audit.",
+    "description": "Run a complete website SEO audit from provided inputs only.",
     "group": "group-15",
-    "status": "planned",
-    "requiredInputs": ["websiteUrl"],
-    "outputType": "audit-report"
+    "status": "active",
+    "requiredInputs": ["website optional", "pages optional", "technical optional", "performance optional", "onPage optional", "keywords optional", "content optional", "architecture optional", "schema optional", "media optional", "ecommerce optional", "localInternational optional", "aiDiscover optional", "trustSecurityAccessibility optional", "cmsFramework optional"],
+    "outputType": "website_audit_report"
+  },
+  {
+    "id": "website-audit",
+    "command": "/seo-master website-audit",
+    "title": "Website Audit",
+    "description": "Run the Website Audit orchestration skill from provided audit inputs only.",
+    "group": "group-15",
+    "status": "active",
+    "requiredInputs": ["website optional", "pages optional", "technical optional", "performance optional", "onPage optional", "keywords optional", "content optional", "architecture optional", "schema optional", "media optional", "ecommerce optional", "localInternational optional", "aiDiscover optional", "trustSecurityAccessibility optional", "cmsFramework optional"],
+    "outputType": "website_audit_report"
+  },
+  {
+    "id": "full-audit",
+    "command": "/seo-master full-audit",
+    "title": "Full Audit",
+    "description": "Run a full SEO audit report from provided website, page, and module inputs only.",
+    "group": "group-15",
+    "status": "active",
+    "requiredInputs": ["website optional", "pages optional", "technical optional", "performance optional", "onPage optional", "keywords optional", "content optional", "architecture optional", "schema optional", "media optional", "ecommerce optional", "localInternational optional", "aiDiscover optional", "trustSecurityAccessibility optional", "cmsFramework optional"],
+    "outputType": "website_audit_report"
+  },
+  {
+    "id": "page-audit",
+    "command": "/seo-master page-audit",
+    "title": "Page Audit",
+    "description": "Run a page-level SEO audit from provided page and contextual inputs only.",
+    "group": "group-15",
+    "status": "active",
+    "requiredInputs": ["pages optional", "technical optional", "performance optional", "onPage optional", "schema optional", "media optional", "trustSecurityAccessibility optional", "cmsFramework optional"],
+    "outputType": "website_audit_report"
   },
   {
     "id": "competitor-analysis",

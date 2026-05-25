@@ -1,0 +1,16 @@
+[
+  {
+    "id": "template-level-audit",
+    "category": "Template-Level Audit",
+    "title": "Group repeated issues by template",
+    "do": [
+      "Group pages by page type.",
+      "Detect repeated metadata, canonical, schema, heading, and thin content issues.",
+      "Recommend fixing template issues once at source."
+    ],
+    "dont": [
+      "Do not list the same issue hundreds of times.",
+      "Do not ignore repeated template-level SEO problems."
+    ]
+  }
+]
