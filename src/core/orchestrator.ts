@@ -27,6 +27,12 @@ import { parseMediaAuditInputFromText, runMediaAudit } from "../media/media-audi
 import { runVideoSeoAudit } from "../media/video-seo.ts";
 import { parseOnPageAuditInputFromText, runOnPageAudit } from "../on-page/on-page-audit.ts";
 import { parsePerformanceAuditInputFromText, runPerformanceAudit } from "../performance/performance-audit.ts";
+import { parseReportingGovernanceInputFromText, runSEOMeasurement } from "../reporting-governance/seo-measurement.ts";
+import { runSEOReport } from "../reporting-governance/seo-report-generator.ts";
+import { runSEOGovernance } from "../reporting-governance/seo-governance.ts";
+import { runSEOQAChecklist } from "../reporting-governance/seo-qa-checklist.ts";
+import { runReleaseSEOGuard } from "../reporting-governance/release-seo-guard.ts";
+import { runFinalMasterReport } from "../reporting-governance/final-master-report.ts";
 import { parseSchemaInputFromText, runSchemaAudit } from "../schema/schema-audit.ts";
 import { runSchemaGenerate } from "../schema/schema-generate.ts";
 import { runCampaignPlan } from "../strategy/campaign-plan.ts";
@@ -318,6 +324,18 @@ export async function runSeoMaster(input: string): Promise<OrchestratorResponse>
     return {
       active: true,
       type: "seo-strategy",
+      command,
+      data: report,
+      message: JSON.stringify(report, null, 2)
+    };
+  }
+
+  if (command.id === "report" || command.id === "seo-report" || command.id === "measurement-report" || command.id === "governance-check" || command.id === "seo-qa" || command.id === "release-seo-check" || command.id === "final-status") {
+    const parsed = parseReportingGovernanceInputFromText(input);
+    const report = command.id === "measurement-report" ? runSEOMeasurement(parsed) : command.id === "governance-check" ? runSEOGovernance(parsed) : command.id === "seo-qa" ? runSEOQAChecklist(parsed) : command.id === "release-seo-check" ? runReleaseSEOGuard(parsed) : command.id === "final-status" ? runFinalMasterReport(parsed) : runSEOReport(parsed);
+    return {
+      active: true,
+      type: "reporting-governance",
       command,
       data: report,
       message: JSON.stringify(report, null, 2)

@@ -43,6 +43,13 @@ import { runOnPageAudit } from "../on-page/on-page-audit.ts";
 import { getOnPageRules } from "../on-page/on-page-rules.ts";
 import { runPerformanceAudit } from "../performance/performance-audit.ts";
 import { getPerformanceRules } from "../performance/performance-rules.ts";
+import { runFinalMasterReport } from "../reporting-governance/final-master-report.ts";
+import { getReportingGovernanceRules } from "../reporting-governance/reporting-governance-rules.ts";
+import { runReleaseSEOGuard } from "../reporting-governance/release-seo-guard.ts";
+import { runSEOGovernance } from "../reporting-governance/seo-governance.ts";
+import { runSEOMeasurement } from "../reporting-governance/seo-measurement.ts";
+import { runSEOQAChecklist } from "../reporting-governance/seo-qa-checklist.ts";
+import { runSEOReport } from "../reporting-governance/seo-report-generator.ts";
 import { runSchemaAudit } from "../schema/schema-audit.ts";
 import { runSchemaGenerate } from "../schema/schema-generate.ts";
 import { getSchemaRules } from "../schema/schema-rules.ts";
@@ -80,6 +87,7 @@ import type { CMSFrameworkAuditInput } from "../types/cms-framework.ts";
 import type { WebsiteAuditInput } from "../types/website-audit.ts";
 import type { CompetitorAnalysisInput } from "../types/competitors.ts";
 import type { SEOStrategyInput } from "../types/strategy.ts";
+import type { ReportingGovernanceInput } from "../types/reporting-governance.ts";
 
 interface JsonRpcRequest {
   jsonrpc: "2.0";
@@ -455,10 +463,46 @@ const tools = [
     name: "seo_master_migration_plan",
     description: "Run migration planning from explicit migration inputs only.",
     inputSchema: { type: "object", properties: { business: { type: "object" }, websiteAudit: { type: "object" }, resources: { type: "object" }, constraints: { type: "object" }, migration: { type: "object" }, mode: { type: "string", enum: ["strategy", "seo_plan", "campaign", "opportunity", "launch", "migration", "roadmap"] } } }
+  },
+  {
+    name: "seo_master_report",
+    description: "Generate an SEO report from explicit provided audit, strategy, measurement, and governance inputs only. No live provider data is fetched.",
+    inputSchema: { type: "object", properties: { business: { type: "object" }, websiteAudit: { type: "object" }, seoStrategy: { type: "object" }, searchConsole: { type: "object" }, ga4: { type: "object" }, rankTracking: { type: "array" }, coreWebVitals: { type: "object" }, backlinks: { type: "object" }, contentPerformance: { type: "array" }, governance: { type: "object" }, mode: { type: "string", enum: ["report", "measurement", "governance", "qa", "release", "final"] } } }
+  },
+  {
+    name: "seo_master_measurement_report",
+    description: "Run SEO measurement logic from explicit provided metrics only. No Search Console, GA4, rank, backlink, or revenue reads are performed.",
+    inputSchema: { type: "object", properties: { business: { type: "object" }, searchConsole: { type: "object" }, ga4: { type: "object" }, rankTracking: { type: "array" }, coreWebVitals: { type: "object" }, backlinks: { type: "object" }, contentPerformance: { type: "array" }, governance: { type: "object" }, mode: { type: "string", enum: ["report", "measurement", "governance", "qa", "release", "final"] } } }
+  },
+  {
+    name: "seo_master_governance_check",
+    description: "Run SEO governance checks from explicit provided governance inputs only.",
+    inputSchema: { type: "object", properties: { governance: { type: "object" }, websiteAudit: { type: "object" }, seoStrategy: { type: "object" }, mode: { type: "string", enum: ["report", "measurement", "governance", "qa", "release", "final"] } } }
+  },
+  {
+    name: "seo_master_seo_qa",
+    description: "Generate an SEO QA checklist. This tool may return a generic checklist without input.",
+    inputSchema: { type: "object", properties: { governance: { type: "object" }, websiteAudit: { type: "object" }, mode: { type: "string", enum: ["report", "measurement", "governance", "qa", "release", "final"] } } }
+  },
+  {
+    name: "seo_master_release_seo_check",
+    description: "Assess provided pending release changes for SEO risk. No external validation is performed.",
+    inputSchema: { type: "object", properties: { governance: { type: "object" }, mode: { type: "string", enum: ["report", "measurement", "governance", "qa", "release", "final"] } } }
+  },
+  {
+    name: "seo_master_final_status",
+    description: "Generate the final Master of SEO report from explicit audit, strategy, measurement, and governance inputs only.",
+    inputSchema: { type: "object", properties: { business: { type: "object" }, websiteAudit: { type: "object" }, seoStrategy: { type: "object" }, searchConsole: { type: "object" }, ga4: { type: "object" }, rankTracking: { type: "array" }, coreWebVitals: { type: "object" }, backlinks: { type: "object" }, contentPerformance: { type: "array" }, governance: { type: "object" }, mode: { type: "string", enum: ["report", "measurement", "governance", "qa", "release", "final"] } } }
   }
 ];
 
 const prompts = [
+  "seo-master-final-status",
+  "seo-master-release-seo-check",
+  "seo-master-seo-qa",
+  "seo-master-governance-check",
+  "seo-master-measurement-report",
+  "seo-master-report",
   "seo-master-migration-plan",
   "seo-master-launch-checklist",
   "seo-master-campaign-plan",
@@ -570,6 +614,11 @@ async function readResource(uri: string): Promise<string> {
   if (uri === "seo-master://campaign-planning-rules") return readFile(join(dataDir, "campaign-planning-rules.json"), "utf8");
   if (uri === "seo-master://launch-checklist-rules") return readFile(join(dataDir, "launch-checklist-rules.json"), "utf8");
   if (uri === "seo-master://migration-plan-rules") return readFile(join(dataDir, "migration-plan-rules.json"), "utf8");
+  if (uri === "seo-master://measurement-rules") return JSON.stringify(await getReportingGovernanceRules(), null, 2);
+  if (uri === "seo-master://report-generator-rules") return readFile(join(dataDir, "report-generator-rules.json"), "utf8");
+  if (uri === "seo-master://governance-rules") return readFile(join(dataDir, "governance-rules.json"), "utf8");
+  if (uri === "seo-master://seo-qa-rules") return readFile(join(dataDir, "seo-qa-rules.json"), "utf8");
+  if (uri === "seo-master://release-seo-rules") return readFile(join(dataDir, "release-seo-rules.json"), "utf8");
   throw new Error(`Unknown resource: ${uri}`);
 }
 
@@ -834,6 +883,36 @@ async function handle(request: JsonRpcRequest): Promise<void> {
         send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
         return;
       }
+      if (name === "seo_master_report") {
+        const report = runSEOReport({ mode: "report", ...(args as Partial<ReportingGovernanceInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_measurement_report") {
+        const report = runSEOMeasurement({ mode: "measurement", ...(args as Partial<ReportingGovernanceInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_governance_check") {
+        const report = runSEOGovernance({ mode: "governance", ...(args as Partial<ReportingGovernanceInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_seo_qa") {
+        const report = runSEOQAChecklist({ mode: "qa", ...(args as Partial<ReportingGovernanceInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_release_seo_check") {
+        const report = runReleaseSEOGuard({ mode: "release", ...(args as Partial<ReportingGovernanceInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_final_status") {
+        const report = runFinalMasterReport({ mode: "final", ...(args as Partial<ReportingGovernanceInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
       throw new Error(`Unknown tool: ${name}`);
     }
 
@@ -890,7 +969,12 @@ async function handle(request: JsonRpcRequest): Promise<void> {
             { uri: "seo-master://seo-plan-rules", name: "Master of SEO Plan Rules", mimeType: "application/json" },
             { uri: "seo-master://campaign-planning-rules", name: "Master of SEO Campaign Planning Rules", mimeType: "application/json" },
             { uri: "seo-master://launch-checklist-rules", name: "Master of SEO Launch Checklist Rules", mimeType: "application/json" },
-            { uri: "seo-master://migration-plan-rules", name: "Master of SEO Migration Plan Rules", mimeType: "application/json" }
+            { uri: "seo-master://migration-plan-rules", name: "Master of SEO Migration Plan Rules", mimeType: "application/json" },
+            { uri: "seo-master://measurement-rules", name: "Master of SEO Measurement Rules", mimeType: "application/json" },
+            { uri: "seo-master://report-generator-rules", name: "Master of SEO Report Generator Rules", mimeType: "application/json" },
+            { uri: "seo-master://governance-rules", name: "Master of SEO Governance Rules", mimeType: "application/json" },
+            { uri: "seo-master://seo-qa-rules", name: "Master of SEO QA Rules", mimeType: "application/json" },
+            { uri: "seo-master://release-seo-rules", name: "Master of SEO Release SEO Rules", mimeType: "application/json" }
           ]
         }
       });
@@ -911,6 +995,12 @@ async function handle(request: JsonRpcRequest): Promise<void> {
     if (method === "prompts/get") {
       const promptName = String(params.name ?? "");
       const commandByPrompt: Record<string, string> = {
+        "seo-master-final-status": "/seo-master final-status",
+        "seo-master-release-seo-check": "/seo-master release-seo-check",
+        "seo-master-seo-qa": "/seo-master seo-qa",
+        "seo-master-governance-check": "/seo-master governance-check",
+        "seo-master-measurement-report": "/seo-master measurement-report",
+        "seo-master-report": "/seo-master report",
         "seo-master-migration-plan": "/seo-master migration-plan",
         "seo-master-launch-checklist": "/seo-master launch-checklist",
         "seo-master-campaign-plan": "/seo-master seo-campaign-plan",

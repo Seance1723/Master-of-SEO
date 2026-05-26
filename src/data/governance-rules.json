@@ -1,0 +1,5 @@
+{
+  "name": "SEO Governance Rules",
+  "checks": ["SEO QA process", "release checklist", "redirect policy", "content update process", "analytics cadence", "SEO changelog"],
+  "donts": ["Do not allow casual URL changes.", "Do not launch template changes without SEO QA."]
+}

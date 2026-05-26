@@ -2,7 +2,7 @@
 
 Master of SEO is an npm-ready, MCP-compatible AI skill for orchestrating SEO workflows through a strict slash trigger.
 
-Master of SEO does not activate automatically. Use /seo-master to trigger the skill.
+Master of SEO does not activate automatically. Use `/seo-master` to trigger the skill.
 
 ## Install
 
@@ -16,10 +16,11 @@ npm install -g master-of-seo
 seo-master
 seo-master /
 seo-master "/seo-master help"
-seo-master "/seo-master seo-plan"
-seo-master "/seo-master seo-strategy --business '{\"websiteType\":\"saas\",\"businessGoals\":[\"demo_booking\"]}'"
-seo-master "/seo-master launch-checklist --launch '{\"isNewWebsite\":true,\"hasAnalytics\":false}'"
-seo-master "/seo-master migration-plan --migration '{\"isMigration\":true,\"migrationType\":\"url_structure\"}'"
+seo-master "/seo-master report"
+seo-master "/seo-master measurement-report --searchConsole '{\"clicks\":100,\"impressions\":10000,\"ctr\":1}'"
+seo-master "/seo-master governance-check --governance '{\"hasSeoQaProcess\":false}'"
+seo-master "/seo-master seo-qa"
+seo-master "/seo-master release-seo-check --governance '{\"pendingChanges\":[{\"type\":\"url_change\",\"riskLevel\":\"high\"}]}'"
 ```
 
 ## Active Commands
@@ -79,18 +80,21 @@ seo-master "/seo-master migration-plan --migration '{\"isMigration\":true,\"migr
 - `/seo-master opportunity-plan`
 - `/seo-master launch-checklist`
 - `/seo-master migration-plan`
+- `/seo-master report`
+- `/seo-master seo-report`
+- `/seo-master measurement-report`
+- `/seo-master governance-check`
+- `/seo-master seo-qa`
+- `/seo-master release-seo-check`
+- `/seo-master final-status`
 
 Typing `/` shows all available Master of SEO commands. SEO logic only runs when input starts with `/seo-master`.
 
-## Planned Commands
+## Measurement, Reporting & Governance Scope
 
-- `/seo-master report`
+Group 18 implements SEO measurement, KPI mapping, Search Console diagnostics, GA4 organic conversion checks, analytics event mapping, organic traffic/conversion measurement, keyword performance, content decay, Core Web Vitals measurement, backlink measurement, revenue/pipeline attribution, SEO report generation, executive summaries, roadmap progress tracking, SEO governance, SEO QA checklist, release SEO guard, SEO changelog, and final Master of SEO reporting.
 
-## SEO Strategy & Campaign Planning Scope
-
-Group 17 implements SEO strategy, SEO plan generation, campaign planning, goal mapping, opportunity prioritization, impact-effort matrix, 30/60/90 roadmap, technical/content/authority/conversion roadmaps, launch checklist, migration plan, resource planning, SEO risk planning, and strategy reporting.
-
-Group 17 does not fetch live audit, ranking, keyword, traffic, competitor, launch, or migration data unless provider support is added later. It safely creates SEO strategy and planning outputs from provided inputs only.
+Group 18 does not fetch live Search Console, GA4, ranking, backlink, revenue, or provider data unless provider support is added later. It safely reports and governs SEO from provided inputs only.
 
 ## MCP Usage
 
@@ -100,7 +104,7 @@ Run the MCP server:
 npm run mcp
 ```
 
-The MCP server exposes `seo_master_run`, `seo_master_commands`, active audit/planning tools, and rule resources.
+The MCP server exposes `seo_master_run`, `seo_master_commands`, active audit/planning/reporting tools, and rule resources.
 
 ## Group Roadmap
 
@@ -121,7 +125,8 @@ The MCP server exposes `seo_master_run`, `seo_master_commands`, active audit/pla
 - Group 15: Website Audit - completed
 - Group 16: Competitor Analysis - completed
 - Group 17: SEO Strategy & Campaign Planning - completed
-- Group 18: Measurement, Reporting & Governance - next
+- Group 18: Measurement, Reporting & Governance - completed
+- Final Packaging, QA & npm Release - next
 
 ## Memory System
 
@@ -133,5 +138,6 @@ Master of SEO is designed for OpenAI agents, Claude, Antigravity, Windsurf, Curs
 
 ## Current Status
 
-- Current status: Group 17 completed
-- Next group: Group 18 Measurement, Reporting & Governance
+- Current implementation: Groups 1 to 18 completed
+- Next phase: Final packaging, npm publish readiness, MCP compatibility testing, docs polishing, and release validation
+

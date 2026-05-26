@@ -16,5 +16,6 @@
   { "id": "group-15", "name": "Website Audit", "status": "completed" },
   { "id": "group-16", "name": "Competitor Analysis", "status": "completed" },
   { "id": "group-17", "name": "SEO Strategy & Campaign Planning", "status": "completed" },
-  { "id": "group-18", "name": "Measurement, Reporting & Governance", "status": "next" }
+  { "id": "group-18", "name": "Measurement, Reporting & Governance", "status": "completed" },
+  { "id": "final-packaging", "name": "Final Packaging, QA & npm Release", "status": "next" }
 ]

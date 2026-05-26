@@ -533,11 +533,71 @@
     "id": "report",
     "command": "/seo-master report",
     "title": "Report",
-    "description": "Generate an SEO report.",
+    "description": "Generate an evidence-based SEO report from provided audit, strategy, measurement, and governance inputs.",
     "group": "group-18",
-    "status": "planned",
-    "requiredInputs": ["websiteUrl"],
-    "outputType": "seo-report"
+    "status": "active",
+    "requiredInputs": ["business optional", "websiteAudit optional", "seoStrategy optional", "searchConsole optional", "ga4 optional", "rankTracking optional", "coreWebVitals optional", "backlinks optional", "contentPerformance optional", "governance optional"],
+    "outputType": "measurement_reporting_governance_report"
+  },
+  {
+    "id": "seo-report",
+    "command": "/seo-master seo-report",
+    "title": "SEO Report",
+    "description": "Generate a structured SEO report with executive summary, KPI snapshot, top issues, risks, and next actions.",
+    "group": "group-18",
+    "status": "active",
+    "requiredInputs": ["business optional", "websiteAudit optional", "seoStrategy optional", "searchConsole optional", "ga4 optional", "rankTracking optional", "coreWebVitals optional", "backlinks optional", "contentPerformance optional", "governance optional"],
+    "outputType": "measurement_reporting_governance_report"
+  },
+  {
+    "id": "measurement-report",
+    "command": "/seo-master measurement-report",
+    "title": "Measurement Report",
+    "description": "Analyze provided Search Console-style, GA4-style, rank, Core Web Vitals, backlink, content, and revenue data.",
+    "group": "group-18",
+    "status": "active",
+    "requiredInputs": ["business optional", "searchConsole optional", "ga4 optional", "rankTracking optional", "coreWebVitals optional", "backlinks optional", "contentPerformance optional"],
+    "outputType": "measurement_reporting_governance_report"
+  },
+  {
+    "id": "governance-check",
+    "command": "/seo-master governance-check",
+    "title": "Governance Check",
+    "description": "Check SEO governance processes, pending changes, release readiness, QA, redirect policy, and changelog readiness.",
+    "group": "group-18",
+    "status": "active",
+    "requiredInputs": ["governance optional", "websiteAudit optional", "seoStrategy optional"],
+    "outputType": "measurement_reporting_governance_report"
+  },
+  {
+    "id": "seo-qa",
+    "command": "/seo-master seo-qa",
+    "title": "SEO QA",
+    "description": "Generate an SEO QA checklist for releases and template reviews. Can run without input.",
+    "group": "group-18",
+    "status": "active",
+    "requiredInputs": ["governance optional", "websiteAudit optional"],
+    "outputType": "measurement_reporting_governance_report"
+  },
+  {
+    "id": "release-seo-check",
+    "command": "/seo-master release-seo-check",
+    "title": "Release SEO Check",
+    "description": "Assess provided pending release changes for SEO risk and required release checks.",
+    "group": "group-18",
+    "status": "active",
+    "requiredInputs": ["governance optional"],
+    "outputType": "measurement_reporting_governance_report"
+  },
+  {
+    "id": "final-status",
+    "command": "/seo-master final-status",
+    "title": "Final Status",
+    "description": "Generate the final Master of SEO status report from provided audit, strategy, measurement, and governance data.",
+    "group": "group-18",
+    "status": "active",
+    "requiredInputs": ["business optional", "websiteAudit optional", "seoStrategy optional", "searchConsole optional", "ga4 optional", "rankTracking optional", "coreWebVitals optional", "backlinks optional", "contentPerformance optional", "governance optional"],
+    "outputType": "measurement_reporting_governance_report"
   },
   {
     "id": "memory",

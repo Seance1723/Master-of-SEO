@@ -1,0 +1,4 @@
+{
+  "name": "SEO QA Rules",
+  "checklist": ["metadata", "headings", "canonical", "robots", "sitemap", "redirects", "schema", "Core Web Vitals", "mobile", "accessibility", "forms", "analytics", "Search Console", "Open Graph", "trust pages", "404 page", "template QA"]
+}

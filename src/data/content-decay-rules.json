@@ -1,0 +1,6 @@
+{
+  "name": "Content Decay Rules",
+  "threshold": "20 percent drop when previous-period clicks or sessions are provided",
+  "actions": ["refresh", "merge", "prune", "improve"],
+  "donts": ["Do not claim decay without previous-period data.", "Do not refresh only the date."]
+}

@@ -1,0 +1,16 @@
+{
+  "group": "group-18",
+  "name": "SEO Measurement Rules",
+  "dos": [
+    "Measure business impact, not only rankings.",
+    "Track clicks, impressions, CTR, average position, organic sessions, conversions, and revenue where available.",
+    "Compare performance over time only when previous-period data exists.",
+    "Report missing data clearly."
+  ],
+  "donts": [
+    "Do not invent missing metrics.",
+    "Do not mix paid and organic data.",
+    "Do not claim growth or decline without comparison data.",
+    "Do not treat rankings as the only KPI."
+  ]
+}

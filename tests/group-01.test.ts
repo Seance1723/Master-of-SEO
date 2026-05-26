@@ -27,19 +27,19 @@ test("input /seo-master help returns help", async () => {
 test("input /seo-master memory reads memory", async () => {
   const result = await runSeoMaster("/seo-master memory");
   assert.equal(result.type, "memory");
-  assert.match(result.message, /Current group: Measurement, Reporting & Governance/u);
+  assert.match(result.message, /Current group: Final Packaging, QA & npm Release/u);
 });
 
-test("input /seo-master next-group returns Group 18", async () => {
+test("input /seo-master next-group returns final packaging", async () => {
   const result = await runSeoMaster("/seo-master next-group");
   assert.equal(result.type, "next-group");
-  assert.match(result.message, /Measurement, Reporting & Governance \(group-18\)/u);
+  assert.match(result.message, /Final Packaging, QA & npm Release \(final-packaging\)/u);
 });
 
-test("planned command returns planned-module response", async () => {
-  const result = await runSeoMaster("/seo-master report https://example.com");
-  assert.equal(result.type, "planned");
-  assert.match(result.message, /not implemented yet/u);
+test("report command is active after Group 18", async () => {
+  const result = await runSeoMaster("/seo-master report");
+  assert.equal(result.type, "reporting-governance");
+  assert.equal((result.data as { status: string }).status, "needs_input");
 });
 
 test("command registry includes required planned commands", async () => {

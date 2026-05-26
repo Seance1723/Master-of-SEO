@@ -1,0 +1,5 @@
+{
+  "name": "KPI Mapping Rules",
+  "dos": ["Map KPIs to website type and business goals.", "Use SaaS, ecommerce, local, content, and documentation KPI groups where supported."],
+  "donts": ["Do not use the same KPI set for every website.", "Do not report vanity metrics without action."]
+}

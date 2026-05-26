@@ -1,0 +1,5 @@
+{
+  "name": "SEO Report Generator Rules",
+  "sections": ["executive summary", "KPI snapshot", "what changed", "what improved", "what declined", "priority issues", "completed work", "next actions", "risks"],
+  "donts": ["Do not dump raw tool data.", "Do not hide negative findings.", "Do not make claims without evidence."]
+}
