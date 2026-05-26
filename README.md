@@ -2,7 +2,7 @@
 
 An AI-agent SEO skill that turns any coding assistant into a technical SEO auditor, strategist, and website optimization partner.
 
-Master of SEO helps AI agents audit websites, review code, plan keyword strategy, analyze competitors, generate SEO roadmaps, and protect SEO during launches and migrations. It is built for CLI workflows, MCP-compatible assistants, and npm-based developer environments.
+Master of SEO gives AI agents a structured SEO brain: it can audit provided website data, review SEO-sensitive code and HTML, map keywords to intent, analyze competitor inputs, generate roadmaps, protect launches and migrations, and produce governance-ready reports.
 
 [![npm](https://img.shields.io/badge/npm-master--of--seo-cb3837?style=flat-square)](https://www.npmjs.com/package/master-of-seo)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](#license)
@@ -13,32 +13,34 @@ Master of SEO helps AI agents audit websites, review code, plan keyword strategy
 
 ## Why Master of SEO?
 
-Most AI agents can write code.  
-Master of SEO teaches them how to think like an SEO architect.
+Most AI agents can write code. Master of SEO helps them think like an SEO architect.
 
-It gives AI assistants structured SEO judgment across technical SEO, on-page SEO, keyword research, competitor analysis, website audits, schema/entity SEO, performance SEO, ecommerce SEO, local/international SEO, AI Search readiness, launch/migration protection, reporting, and governance.
+It brings rule-based SEO reasoning to developer workflows, covering technical SEO, on-page SEO, performance, schema/entity SEO, keyword research, content planning, competitor analysis, ecommerce, local and international SEO, AI Search readiness, trust, accessibility, reporting, governance, launches, and migrations.
 
-Safe by default: Master of SEO works from provided inputs unless live provider integrations are added later. It does not invent crawl results, Search Console metrics, GA4 data, rankings, backlinks, keyword volume, revenue, or traffic.
+Master of SEO is safe by default. It works from provided inputs unless live provider integrations are added later. It does not invent crawl results, rankings, Search Console data, GA4 data, backlinks, keyword volume, traffic, revenue, Core Web Vitals, reviews, ratings, or security status.
 
 ## What It Can Do
 
 | Capability | What it helps with |
 |---|---|
-| Website Audit | Find technical, content, schema, UX, performance, and trust issues |
-| Technical SEO | Robots, sitemap, canonical, redirects, status codes, indexing |
-| Keyword Research | Cluster keywords, map intent, detect cannibalization |
-| Competitor Analysis | Find keyword gaps, content gaps, backlink gaps, SERP opportunities |
-| Content Planning | Build topic clusters, briefs, refresh plans, pruning plans |
-| Schema SEO | Audit and generate safe JSON-LD |
-| Performance SEO | Core Web Vitals, image, JS, CSS, font, third-party script checks |
+| Website Audit | Combine technical, content, schema, UX, performance, trust, and CMS findings |
+| Technical SEO | Robots, sitemaps, canonicals, redirects, status codes, indexing, crawlability |
+| Performance SEO | Core Web Vitals, images, JavaScript, CSS, fonts, third-party scripts |
+| On-Page SEO | Titles, descriptions, headings, CTAs, internal links, image alt text |
+| Keyword Research | Cluster keywords, map intent, detect cannibalization, prioritize opportunities |
+| Competitor Analysis | Find keyword gaps, content gaps, backlink gaps, SERP feature opportunities |
+| Content Planning | Build topic clusters, briefs, refresh plans, pruning plans, content calendars |
+| Schema SEO | Audit JSON-LD and generate safe schema only from supplied facts |
 | Ecommerce SEO | Product, category, variants, faceted navigation, reviews, Merchant feed readiness |
-| Local & International SEO | NAP, local pages, GBP readiness, hreflang, localization |
+| Local & International SEO | NAP, local pages, GBP readiness, hreflang, x-default, localization |
 | AI Search Readiness | Answer blocks, entity clarity, information gain, citation quality |
-| Governance | SEO QA, release guard, reports, changelog, measurement |
+| Trust & Accessibility | E-E-A-T, policies, author trust, security, semantic HTML, accessibility checks |
+| CMS & Framework SEO | WordPress, React, Next.js, static sites, route metadata, build SEO checks |
+| Governance | SEO QA, release guard, changelog, measurement, executive reporting |
 
 ## Installation
 
-Install globally for CLI usage:
+Install globally for the CLI:
 
 ```bash
 npm install -g master-of-seo
@@ -58,9 +60,10 @@ seo-master "/seo-master audit-website"
 seo-master "/seo-master keyword-research technical seo, seo audit, ecommerce seo"
 seo-master "/seo-master competitor-analysis"
 seo-master "/seo-master seo-plan"
+seo-master "/seo-master seo-qa"
 ```
 
-Example with explicit input:
+Commands without enough supplied data return `needs_input` instead of guessing.
 
 ```bash
 seo-master "/seo-master technical-audit --html '<html><head><meta name=\"robots\" content=\"noindex\"></head></html>'"
@@ -76,21 +79,23 @@ Fix: Remove noindex from indexable public pages.
 
 ## Natural Agent Usage
 
-Trigger with a slash command:
+Slash command activation:
 
 ```text
 /seo-master audit-website
 ```
 
-Or explicitly ask an agent to use it:
+Explicit natural activation:
 
 ```text
 Check what is wrong in my website and use seo-master skills.
+Use Master of SEO to audit this HTML.
+Apply seo-master skills to this launch checklist.
 ```
 
 Master of SEO does not silently run for every SEO-related prompt. It activates only when:
 
-- The command starts with `/seo-master`
+- The input starts with `/seo-master`
 - The user explicitly says `use seo-master`, `use Master of SEO`, or `apply seo-master skills`
 - An MCP tool is called directly
 
@@ -109,15 +114,17 @@ Add Master of SEO as an MCP server:
 }
 ```
 
-| Tool | Usage |
+| Client | Setup |
 |---|---|
-| Codex | Add Master of SEO as MCP server |
-| Antigravity | Add MCP server config |
-| Windsurf | Add MCP server config |
-| VS Code | Add MCP server in workspace/user config |
-| Cursor | Add MCP server config |
-| Claude | Add MCP server config |
+| Codex | Add Master of SEO as an MCP server |
+| Antigravity | Add the MCP server config |
+| Windsurf | Add the MCP server config |
+| VS Code | Add the MCP server in workspace or user config |
+| Cursor | Add the MCP server config |
+| Claude | Add the MCP server config |
 | Continue | Use MCP, CLI, or package import |
+
+Example configs live in [`examples/mcp`](./examples/mcp).
 
 ## Available Commands
 
@@ -151,12 +158,12 @@ Add Master of SEO as an MCP server:
 
 ```text
 /seo-master keyword-research
+/seo-master content-plan
 /seo-master competitor-analysis
 /seo-master competitor-keyword-gap
 /seo-master competitor-content-gap
 /seo-master competitor-backlink-gap
 /seo-master serp-analysis
-/seo-master content-plan
 /seo-master seo-plan
 /seo-master seo-strategy
 /seo-master seo-campaign-plan
@@ -167,18 +174,24 @@ Add Master of SEO as an MCP server:
 
 ```text
 /seo-master ecommerce-seo
+/seo-master ecommerce-audit
 /seo-master product-seo-audit
 /seo-master category-seo-audit
 /seo-master local-seo
+/seo-master local-seo-audit
 /seo-master international-seo
+/seo-master international-seo-audit
 /seo-master hreflang-audit
 /seo-master ai-search-readiness
+/seo-master ai-search-audit
 /seo-master discover-seo-audit
+/seo-master ai-content-quality-audit
 /seo-master framework-seo-audit
 /seo-master wordpress-seo-audit
 /seo-master react-seo-audit
 /seo-master nextjs-seo-audit
 /seo-master static-seo-audit
+/seo-master build-seo-check
 ```
 
 ### Launch, Migration & Reporting
@@ -196,18 +209,18 @@ Add Master of SEO as an MCP server:
 
 ## What Makes It Different
 
-- Built for AI agents, not just humans
-- Rule-based SEO reasoning
-- Do / Don't guardrails
-- Priority scoring: `P0`, `P1`, `P2`, `P3`
+- Built for AI agents, not just dashboards
 - Works through CLI, MCP, and package import
-- Safe by default: does not hallucinate live data
-- Designed for npm distribution
-- Useful for developers, SEO teams, content teams, and agencies
+- Uses do/don't guardrails to avoid unsafe SEO recommendations
+- Prioritizes findings as `P0`, `P1`, `P2`, and `P3`
+- Returns `needs_input` or `partial` when evidence is missing
+- Keeps live data separate from provided data
+- Designed for npm distribution and MCP-compatible coding agents
+- Useful for developers, SEO teams, content teams, agencies, and product teams
 
-## Safe By Default
+## Safe Data Policy
 
-Master of SEO does not invent data. If live crawl, keyword, ranking, traffic, backlink, GA4, or Search Console data is not provided, it returns safe recommendations or asks for input.
+Master of SEO does not invent data. If live crawl, keyword, ranking, traffic, backlink, GA4, Search Console, revenue, review, rating, security, or Core Web Vitals data is not provided, it returns safe recommendations or asks for input.
 
 Live crawling, Search Console reads, GA4 reads, SERP scraping, backlink checks, ranking checks, keyword API calls, and external validation require future provider integrations.
 
@@ -216,16 +229,31 @@ Live crawling, Search Console reads, GA4 reads, SERP scraping, backlink checks, 
 ```ts
 import { runSeoMaster } from "master-of-seo";
 
-const result = await runSeoMaster("/seo-master keyword-research technical seo, seo audit");
+const result = await runSeoMaster(
+  "/seo-master keyword-research technical seo, seo audit"
+);
+
 console.log(result);
 ```
 
+Useful exports include the command registry, memory helpers, MCP server entry, and core types.
+
+## Documentation
+
+- [Getting started](./docs/getting-started.md)
+- [CLI usage](./docs/cli-usage.md)
+- [MCP setup](./docs/mcp-setup.md)
+- [Command reference](./docs/command-reference.md)
+- [Examples](./docs/examples.md)
+- [Safe data policy](./docs/safe-data-policy.md)
+- [Publishing notes](./docs/publishing.md)
+
 ## Project Status
 
-Current status: All 18 skill groups implemented.  
-Next: Final QA, npm publish, MCP compatibility testing.
+Current status: all 18 skill groups implemented and final QA completed.
+
+Next step: npm release preparation, publish validation, and MCP compatibility checks in target agent clients.
 
 ## License
 
 MIT License.
-
