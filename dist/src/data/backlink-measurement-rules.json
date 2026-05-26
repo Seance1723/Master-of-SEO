@@ -1,0 +1,5 @@
+{
+  "name": "Backlink Measurement Rules",
+  "checks": ["new links", "lost links", "referring domains", "spam flags", "anchor text"],
+  "donts": ["Do not chase link quantity only.", "Do not recommend spammy link recovery."]
+}

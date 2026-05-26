@@ -1,0 +1,14 @@
+[
+  {
+    "id": "competitor-ux-conversion",
+    "group": "group-16",
+    "category": "UX / Conversion",
+    "title": "Compare conversion messaging evidence",
+    "description": "Compare CTA clarity, trust proof, pricing/demo/contact paths, and friction from provided inputs.",
+    "do": ["Identify conversion gaps", "Align CTA recommendations with business goal"],
+    "dont": ["Do not copy competitor layouts blindly", "Do not treat visual design alone as SEO success"],
+    "priority": "P2",
+    "appliesTo": ["page", "audit", "planning"],
+    "status": "active"
+  }
+]

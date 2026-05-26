@@ -1,0 +1,28 @@
+[
+  {
+    "id": "sitemap-core",
+    "category": "xml sitemap",
+    "title": "XML sitemap quality",
+    "description": "Sitemaps should list canonical, indexable, 200-status URLs.",
+    "do": [
+      "Include only canonical indexable 200 URLs.",
+      "Split sitemaps by type where needed.",
+      "Use correct lastmod only when content changes."
+    ],
+    "dont": [
+      "Include redirected URLs.",
+      "Include 404/410 URLs.",
+      "Include noindex URLs.",
+      "Fake lastmod.",
+      "Use sitemap as replacement for internal linking."
+    ],
+    "priority": "P1",
+    "appliesTo": [
+      "website",
+      "technical",
+      "audit"
+    ],
+    "status": "active",
+    "group": "sitemap"
+  }
+]

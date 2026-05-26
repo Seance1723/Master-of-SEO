@@ -1,0 +1,28 @@
+[
+  {
+    "id": "keyword-priority-core",
+    "category": "keyword-priority",
+    "title": "Keyword opportunity prioritization",
+    "description": "Prioritize by business value, intent, difficulty, rank, and content gap.",
+    "do": [
+      "Prioritize by business value, intent, difficulty, existing rank, and content gap.",
+      "Mark quick wins.",
+      "Identify page-2 ranking opportunities when current rank is provided.",
+      "Separate traffic opportunities from conversion opportunities."
+    ],
+    "dont": [
+      "Prioritize volume over revenue potential.",
+      "Treat all keywords equally.",
+      "Recommend low-impact content before BOFU gaps."
+    ],
+    "priority": "P1",
+    "appliesTo": [
+      "keyword",
+      "content",
+      "planning",
+      "audit"
+    ],
+    "status": "active",
+    "group": "keyword"
+  }
+]

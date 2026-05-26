@@ -1,0 +1,5 @@
+{
+  "name": "Search Console Diagnostic Rules",
+  "checks": ["high impressions low CTR", "page 2 opportunities", "query and page diagnostics", "indexing issues"],
+  "donts": ["Do not assume GSC data exists.", "Do not invent query data."]
+}

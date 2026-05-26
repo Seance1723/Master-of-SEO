@@ -1,0 +1,14 @@
+[
+  {
+    "id": "spa-seo-risk-core",
+    "group": "group-14",
+    "category": "spa-seo-risk",
+    "title": "SPA SEO Risk",
+    "description": "Identify client-rendered public routes and recommend SSR/SSG/pre-rendering where SEO-critical HTML is missing.",
+    "do": ["Identify client-rendered pages.", "Check if rendered HTML contains SEO-critical content.", "Recommend SSR/SSG/pre-rendering for public routes."],
+    "dont": ["Assume Google will always render everything perfectly.", "Serve empty root div for public SEO pages without fallback.", "Use private-app architecture for public landing pages."],
+    "priority": "P2",
+    "appliesTo": ["technical", "audit", "planning"],
+    "status": "active"
+  }
+]

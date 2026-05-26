@@ -1,0 +1,1 @@
+{"version":3,"file":"image-performance.d.ts","sourceRoot":"","sources":["../../../src/performance/image-performance.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAoB,qBAAqB,EAAE,qBAAqB,EAAE,eAAe,EAAE,MAAM,yBAAyB,CAAC;AAE/H,eAAO,MAAM,qBAAqB,EAAE,eAAe,EAYlD,CAAC;AAEF,wBAAgB,qBAAqB,CAAC,KAAK,EAAE,qBAAqB,GAAG;IAAE,MAAM,EAAE,qBAAqB,EAAE,CAAC;IAAC,YAAY,EAAE,MAAM,EAAE,CAAA;CAAE,CAa/H"}

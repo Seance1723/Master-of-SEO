@@ -1,0 +1,29 @@
+[
+  {
+    "id": "topic-cluster-linking-core",
+    "category": "topic-cluster-linking",
+    "title": "Topic cluster linking",
+    "description": "Pillar, supporting, and commercial pages should connect naturally.",
+    "do": [
+      "Connect pillar pages and supporting pages.",
+      "Link supporting pages back to pillar pages.",
+      "Link pillar pages to supporting pages.",
+      "Connect related supporting pages.",
+      "Connect cluster pages to commercial pages."
+    ],
+    "dont": [
+      "Create topic clusters without links.",
+      "Let supporting pages compete with pillar pages.",
+      "Isolate BOFU pages from TOFU/MOFU content."
+    ],
+    "priority": "P1",
+    "appliesTo": [
+      "architecture",
+      "internal_linking",
+      "planning",
+      "audit"
+    ],
+    "status": "active",
+    "group": "topic"
+  }
+]

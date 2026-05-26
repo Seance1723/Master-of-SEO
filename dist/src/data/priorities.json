@@ -1,0 +1,22 @@
+[
+  {
+    "label": "P0",
+    "name": "Critical",
+    "description": "Blocks crawling, indexing, security, launch, or business-critical SEO."
+  },
+  {
+    "label": "P1",
+    "name": "High",
+    "description": "Strong ranking, technical, content, or conversion impact."
+  },
+  {
+    "label": "P2",
+    "name": "Medium",
+    "description": "Useful optimization."
+  },
+  {
+    "label": "P3",
+    "name": "Low",
+    "description": "Enhancement or polish."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "static-seo-core",
+    "group": "group-14",
+    "category": "static-seo",
+    "title": "Static Website SEO",
+    "description": "Static pages need complete metadata, semantic HTML, crawlable links, sitemap, robots, schema, and optimized assets.",
+    "do": ["Include title, meta description, canonical, Open Graph, schema, sitemap, and robots.txt.", "Use semantic HTML.", "Keep internal links crawlable.", "Optimize images/assets."],
+    "dont": ["Publish pages without metadata.", "Rely on JavaScript for core content.", "Skip sitemap/robots.", "Use broken relative links."],
+    "priority": "P2",
+    "appliesTo": ["technical", "audit", "planning"],
+    "status": "active"
+  }
+]

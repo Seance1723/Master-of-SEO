@@ -1,0 +1,27 @@
+[
+  {
+    "id": "funnel-stage-core",
+    "category": "funnel-stage",
+    "title": "Funnel stage mapping",
+    "description": "Keywords should connect to TOFU, MOFU, BOFU, or retention journeys.",
+    "do": [
+      "Map keywords to TOFU, MOFU, BOFU, or retention.",
+      "Connect TOFU content to commercial pages.",
+      "Prioritize BOFU terms for faster business impact.",
+      "Include support/retention queries for SaaS and product sites."
+    ],
+    "dont": [
+      "Build only TOFU blogs.",
+      "Ignore conversion-stage keywords.",
+      "Leave informational content disconnected from money pages."
+    ],
+    "priority": "P1",
+    "appliesTo": [
+      "keyword",
+      "content",
+      "planning"
+    ],
+    "status": "active",
+    "group": "funnel"
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "informational": ["what", "how", "why", "guide", "tutorial", "checklist", "meaning", "examples", "tips"],
+  "commercial": ["best", "top", "compare", "alternative", "review", "software", "tool", "solution"],
+  "transactional": ["buy", "pricing", "quote", "hire", "agency", "service", "consultant", "demo", "book"],
+  "local": ["near me", "local"],
+  "comparison": ["vs", "versus", "alternative", "compare"],
+  "pricing": ["pricing", "cost", "price", "plans"],
+  "support": ["login", "setup", "documentation", "docs", "help", "troubleshooting", "fix", "error"],
+  "product_led": ["product", "platform", "app", "software", "tool", "features"]
+}

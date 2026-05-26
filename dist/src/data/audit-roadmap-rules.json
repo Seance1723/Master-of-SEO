@@ -1,0 +1,24 @@
+[
+  {
+    "id": "audit-roadmap",
+    "category": "Roadmap",
+    "title": "Sequence audit work by risk",
+    "do": [
+      "Put P0 issues in the first 7 days.",
+      "Put P1 issues in the first 30 days.",
+      "Put P2 work in days 31 to 60.",
+      "Put strategic content, authority, AI Search, and governance improvements in days 61 to 90."
+    ],
+    "dont": [
+      "Do not schedule optional polish before critical blockers.",
+      "Do not create unrealistic task lists."
+    ],
+    "group": "audit",
+    "description": "Sequence audit work by risk",
+    "priority": "P3",
+    "appliesTo": [
+      "audit"
+    ],
+    "status": "active"
+  }
+]

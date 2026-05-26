@@ -1,0 +1,30 @@
+[
+  {
+    "id": "ecommerce-foundation",
+    "category": "ecommerce-seo",
+    "title": "Optimize ecommerce pages by type",
+    "description": "Category, product, collection, and low-value commerce pages need different SEO handling.",
+    "do": [
+      "Optimize category, product, collection, and search-intent pages separately",
+      "Keep commercial pages crawlable and indexable",
+      "Use breadcrumbs",
+      "Show trust, shipping, return, contact, and payment information"
+    ],
+    "dont": [
+      "Index cart, checkout, account, internal search, or low-value filter pages",
+      "Create duplicate product/category pages",
+      "Publish thin category pages"
+    ],
+    "priority": "P1",
+    "appliesTo": [
+      "ecommerce",
+      "category",
+      "product",
+      "faceted_navigation",
+      "pagination",
+      "audit"
+    ],
+    "status": "active",
+    "group": "ecommerce"
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "serp-feature-opportunities",
+    "group": "group-16",
+    "category": "SERP Feature Opportunities",
+    "title": "Map provided SERP features to safe opportunities",
+    "description": "Use provided features to recommend answer blocks, PAA coverage, local, video, image, shopping, review, sitelink, news, or AI readiness improvements.",
+    "do": ["Use features only when provided", "Keep page usefulness first"],
+    "dont": ["Do not promise SERP feature ownership", "Do not optimize for features at the cost of usefulness"],
+    "priority": "P2",
+    "appliesTo": ["website", "content", "audit", "planning"],
+    "status": "active"
+  }
+]

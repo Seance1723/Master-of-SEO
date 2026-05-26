@@ -1,0 +1,14 @@
+[
+  {
+    "id": "cms-framework-core",
+    "group": "group-14",
+    "category": "cms-framework-seo",
+    "title": "CMS & Framework SEO",
+    "description": "Identify the CMS/framework before applying SEO checks for metadata, rendering, routes, sitemap, robots, schema, and build output.",
+    "do": ["Identify the CMS/framework before applying rules.", "Verify metadata, canonical, robots, sitemap, and schema generation.", "Check route-level SEO.", "Check public pages render SEO-critical content.", "Keep framework SEO aligned with technical SEO rules."],
+    "dont": ["Assume every framework handles SEO automatically.", "Use the same checks for WordPress, React, Next.js, and static sites.", "Rely on client-side rendering for important SEO pages without review.", "Ignore build/deployment output."],
+    "priority": "P2",
+    "appliesTo": ["technical", "audit", "planning"],
+    "status": "active"
+  }
+]

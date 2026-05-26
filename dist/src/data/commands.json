@@ -1,0 +1,622 @@
+[
+  {
+    "id": "help",
+    "command": "/seo-master help",
+    "title": "Help",
+    "description": "Show all available Master of SEO commands.",
+    "group": "group-01",
+    "status": "active",
+    "requiredInputs": [],
+    "outputType": "command-menu"
+  },
+  {
+    "id": "audit-website",
+    "command": "/seo-master audit-website",
+    "title": "Audit Website",
+    "description": "Run a complete website SEO audit from provided inputs only.",
+    "group": "group-15",
+    "status": "active",
+    "requiredInputs": ["website optional", "pages optional", "technical optional", "performance optional", "onPage optional", "keywords optional", "content optional", "architecture optional", "schema optional", "media optional", "ecommerce optional", "localInternational optional", "aiDiscover optional", "trustSecurityAccessibility optional", "cmsFramework optional"],
+    "outputType": "website_audit_report"
+  },
+  {
+    "id": "website-audit",
+    "command": "/seo-master website-audit",
+    "title": "Website Audit",
+    "description": "Run the Website Audit orchestration skill from provided audit inputs only.",
+    "group": "group-15",
+    "status": "active",
+    "requiredInputs": ["website optional", "pages optional", "technical optional", "performance optional", "onPage optional", "keywords optional", "content optional", "architecture optional", "schema optional", "media optional", "ecommerce optional", "localInternational optional", "aiDiscover optional", "trustSecurityAccessibility optional", "cmsFramework optional"],
+    "outputType": "website_audit_report"
+  },
+  {
+    "id": "full-audit",
+    "command": "/seo-master full-audit",
+    "title": "Full Audit",
+    "description": "Run a full SEO audit report from provided website, page, and module inputs only.",
+    "group": "group-15",
+    "status": "active",
+    "requiredInputs": ["website optional", "pages optional", "technical optional", "performance optional", "onPage optional", "keywords optional", "content optional", "architecture optional", "schema optional", "media optional", "ecommerce optional", "localInternational optional", "aiDiscover optional", "trustSecurityAccessibility optional", "cmsFramework optional"],
+    "outputType": "website_audit_report"
+  },
+  {
+    "id": "page-audit",
+    "command": "/seo-master page-audit",
+    "title": "Page Audit",
+    "description": "Run a page-level SEO audit from provided page and contextual inputs only.",
+    "group": "group-15",
+    "status": "active",
+    "requiredInputs": ["pages optional", "technical optional", "performance optional", "onPage optional", "schema optional", "media optional", "trustSecurityAccessibility optional", "cmsFramework optional"],
+    "outputType": "website_audit_report"
+  },
+  {
+    "id": "competitor-analysis",
+    "command": "/seo-master competitor-analysis",
+    "title": "Competitor Analysis",
+    "description": "Analyze provided competitors, SERP data, keyword gaps, content gaps, backlinks, metadata, schema, and conversion signals.",
+    "group": "group-16",
+    "status": "active",
+    "requiredInputs": ["business optional", "ownSite optional", "competitors optional", "serpData optional"],
+    "outputType": "competitor_analysis_report"
+  },
+  {
+    "id": "competitor-audit",
+    "command": "/seo-master competitor-audit",
+    "title": "Competitor Audit",
+    "description": "Audit provided competitor pages, keywords, backlinks, SERP features, page structure, metadata, schema, and UX signals.",
+    "group": "group-16",
+    "status": "active",
+    "requiredInputs": ["business optional", "ownSite optional", "competitors optional", "serpData optional"],
+    "outputType": "competitor_analysis_report"
+  },
+  {
+    "id": "competitor-keyword-gap",
+    "command": "/seo-master competitor-keyword-gap",
+    "title": "Competitor Keyword Gap",
+    "description": "Find provided competitor keywords missing from own-site keyword inputs.",
+    "group": "group-16",
+    "status": "active",
+    "requiredInputs": ["business optional", "ownSite optional", "competitors optional", "serpData optional"],
+    "outputType": "competitor_analysis_report"
+  },
+  {
+    "id": "competitor-content-gap",
+    "command": "/seo-master competitor-content-gap",
+    "title": "Competitor Content Gap",
+    "description": "Find content gaps from provided competitor pages, target keywords, sections, and page types.",
+    "group": "group-16",
+    "status": "active",
+    "requiredInputs": ["business optional", "ownSite optional", "competitors optional", "serpData optional"],
+    "outputType": "competitor_analysis_report"
+  },
+  {
+    "id": "competitor-backlink-gap",
+    "command": "/seo-master competitor-backlink-gap",
+    "title": "Competitor Backlink Gap",
+    "description": "Find safe backlink opportunities from provided competitor backlink inputs only.",
+    "group": "group-16",
+    "status": "active",
+    "requiredInputs": ["business optional", "ownSite optional", "competitors optional", "serpData optional"],
+    "outputType": "competitor_analysis_report"
+  },
+  {
+    "id": "serp-analysis",
+    "command": "/seo-master serp-analysis",
+    "title": "SERP Analysis",
+    "description": "Analyze provided SERP result types and SERP features without live scraping.",
+    "group": "group-16",
+    "status": "active",
+    "requiredInputs": ["business optional", "ownSite optional", "competitors optional", "serpData optional"],
+    "outputType": "competitor_analysis_report"
+  },
+  {
+    "id": "keyword-research",
+    "command": "/seo-master keyword-research",
+    "title": "Keyword Research",
+    "description": "Research keywords and map search intent.",
+    "group": "group-05",
+    "status": "active",
+    "requiredInputs": ["seedKeywords optional", "competitorKeywords optional", "existingPages optional", "business optional", "keywordMetrics optional"],
+    "outputType": "keyword_research_report"
+  },
+  {
+    "id": "seo-plan",
+    "command": "/seo-master seo-plan",
+    "title": "SEO Plan",
+    "description": "Create a prioritized SEO strategy plan from provided business, audit, keyword, content, competitor, resource, launch, or migration inputs.",
+    "group": "group-17",
+    "status": "active",
+    "requiredInputs": ["business optional", "websiteAudit optional", "keywordResearch optional", "contentPlan optional", "competitorAnalysis optional", "resources optional", "constraints optional", "launch optional", "migration optional"],
+    "outputType": "seo_strategy_plan"
+  },
+  {
+    "id": "seo-strategy",
+    "command": "/seo-master seo-strategy",
+    "title": "SEO Strategy",
+    "description": "Map business goals to SEO goals, priorities, roadmap, resources, and risks from provided inputs.",
+    "group": "group-17",
+    "status": "active",
+    "requiredInputs": ["business optional", "websiteAudit optional", "keywordResearch optional", "contentPlan optional", "competitorAnalysis optional", "resources optional", "constraints optional", "launch optional", "migration optional"],
+    "outputType": "seo_strategy_plan"
+  },
+  {
+    "id": "seo-campaign-plan",
+    "command": "/seo-master seo-campaign-plan",
+    "title": "SEO Campaign Plan",
+    "description": "Create an SEO campaign plan with target pages, assets, dependencies, authority support, conversion path, and timeline.",
+    "group": "group-17",
+    "status": "active",
+    "requiredInputs": ["business optional", "websiteAudit optional", "keywordResearch optional", "contentPlan optional", "competitorAnalysis optional", "resources optional", "constraints optional"],
+    "outputType": "seo_strategy_plan"
+  },
+  {
+    "id": "opportunity-plan",
+    "command": "/seo-master opportunity-plan",
+    "title": "Opportunity Plan",
+    "description": "Prioritize SEO opportunities by impact, effort, risk, business value, and capacity from provided inputs.",
+    "group": "group-17",
+    "status": "active",
+    "requiredInputs": ["business optional", "websiteAudit optional", "keywordResearch optional", "contentPlan optional", "competitorAnalysis optional", "resources optional", "constraints optional"],
+    "outputType": "seo_strategy_plan"
+  },
+  {
+    "id": "content-plan",
+    "command": "/seo-master content-plan",
+    "title": "Content Plan",
+    "description": "Create a content strategy and publishing plan.",
+    "group": "group-06",
+    "status": "active",
+    "requiredInputs": ["business optional", "keywordClusters optional", "existingPages optional", "competitorPages optional", "constraints optional"],
+    "outputType": "content_strategy_plan"
+  },
+  {
+    "id": "architecture-audit",
+    "command": "/seo-master architecture-audit",
+    "title": "Architecture Audit",
+    "description": "Audit site architecture, URL hierarchy, crawl depth, orphan pages, and internal linking.",
+    "group": "group-07",
+    "status": "active",
+    "requiredInputs": ["pages optional", "links optional", "navigation optional", "breadcrumbs optional", "sitemapUrls optional", "topicClusters optional"],
+    "outputType": "architecture_internal_linking_report"
+  },
+  {
+    "id": "internal-linking-audit",
+    "command": "/seo-master internal-linking-audit",
+    "title": "Internal Linking Audit",
+    "description": "Audit internal links, anchor text, breadcrumbs, topic cluster links, and link equity signals.",
+    "group": "group-07",
+    "status": "active",
+    "requiredInputs": ["pages optional", "links optional", "navigation optional", "breadcrumbs optional", "sitemapUrls optional", "topicClusters optional"],
+    "outputType": "architecture_internal_linking_report"
+  },
+  {
+    "id": "technical-audit",
+    "command": "/seo-master technical-audit",
+    "title": "Technical Audit",
+    "description": "Audit technical SEO foundations.",
+    "group": "group-02",
+    "status": "active",
+    "requiredInputs": ["url optional", "html optional", "robotsTxt optional", "sitemapXml optional", "statusCode optional"],
+    "outputType": "technical_audit_report"
+  },
+  {
+    "id": "on-page-audit",
+    "command": "/seo-master on-page-audit",
+    "title": "On-Page Audit",
+    "description": "Audit page-level SEO and content alignment.",
+    "group": "group-04",
+    "status": "active",
+    "requiredInputs": ["url optional", "html optional", "title optional", "metaDescription optional", "headings optional", "bodyText optional", "images optional", "links optional", "ctas optional", "primaryKeyword optional"],
+    "outputType": "on_page_audit_report"
+  },
+  {
+    "id": "schema-audit",
+    "command": "/seo-master schema-audit",
+    "title": "Schema Audit",
+    "description": "Audit structured data and entity markup.",
+    "group": "group-08",
+    "status": "active",
+    "requiredInputs": ["html optional", "jsonLd optional", "page optional", "organization optional", "author optional", "product optional", "service optional", "softwareApplication optional", "localBusiness optional", "video optional", "jobPosting optional"],
+    "outputType": "schema_entity_report"
+  },
+  {
+    "id": "schema-generate",
+    "command": "/seo-master schema-generate",
+    "title": "Schema Generate",
+    "description": "Generate safe JSON-LD from provided schema and entity inputs only.",
+    "group": "group-08",
+    "status": "active",
+    "requiredInputs": ["html optional", "jsonLd optional", "page optional", "organization optional", "author optional", "product optional", "service optional", "softwareApplication optional", "localBusiness optional", "video optional", "jobPosting optional"],
+    "outputType": "schema_entity_report"
+  },
+  {
+    "id": "media-audit",
+    "command": "/seo-master media-audit",
+    "title": "Media Audit",
+    "description": "Audit image, video, Open Graph, schema, accessibility, and media performance inputs.",
+    "group": "group-09",
+    "status": "active",
+    "requiredInputs": ["html optional", "images optional", "videos optional", "openGraph optional", "schema optional", "assets optional"],
+    "outputType": "media_seo_report"
+  },
+  {
+    "id": "image-seo-audit",
+    "command": "/seo-master image-seo-audit",
+    "title": "Image SEO Audit",
+    "description": "Audit image SEO, alt text, filenames, formats, responsive attributes, OG images, and performance.",
+    "group": "group-09",
+    "status": "active",
+    "requiredInputs": ["html optional", "images optional", "openGraph optional", "schema optional", "assets optional"],
+    "outputType": "media_seo_report"
+  },
+  {
+    "id": "video-seo-audit",
+    "command": "/seo-master video-seo-audit",
+    "title": "Video SEO Audit",
+    "description": "Audit video SEO, transcripts, captions, thumbnails, VideoObject schema, accessibility, and performance.",
+    "group": "group-09",
+    "status": "active",
+    "requiredInputs": ["html optional", "videos optional", "schema optional", "assets optional"],
+    "outputType": "media_seo_report"
+  },
+  {
+    "id": "performance-audit",
+    "command": "/seo-master performance-audit",
+    "title": "Performance Audit",
+    "description": "Audit Core Web Vitals and performance SEO.",
+    "group": "group-03",
+    "status": "active",
+    "requiredInputs": ["url optional", "html optional", "assets optional", "metrics optional", "headers optional"],
+    "outputType": "performance_audit_report"
+  },
+  {
+    "id": "local-seo",
+    "command": "/seo-master local-seo",
+    "title": "Local SEO",
+    "description": "Plan local SEO improvements.",
+    "group": "group-11",
+    "status": "active",
+    "requiredInputs": ["business optional", "locations optional", "pages optional", "googleBusinessProfile optional", "citations optional", "reviews optional", "site optional", "hreflangSets optional", "localizedContent optional"],
+    "outputType": "local_international_seo_report"
+  },
+  {
+    "id": "local-seo-audit",
+    "command": "/seo-master local-seo-audit",
+    "title": "Local SEO Audit",
+    "description": "Audit local SEO, GBP readiness, NAP consistency, local pages, citations, reviews, and LocalBusiness schema.",
+    "group": "group-11",
+    "status": "active",
+    "requiredInputs": ["business optional", "locations optional", "pages optional", "googleBusinessProfile optional", "citations optional", "reviews optional"],
+    "outputType": "local_international_seo_report"
+  },
+  {
+    "id": "international-seo",
+    "command": "/seo-master international-seo",
+    "title": "International SEO",
+    "description": "Audit international SEO, hreflang, language/country targeting, x-default, and localized content.",
+    "group": "group-11",
+    "status": "active",
+    "requiredInputs": ["site optional", "pages optional", "hreflangSets optional", "localizedContent optional"],
+    "outputType": "local_international_seo_report"
+  },
+  {
+    "id": "international-seo-audit",
+    "command": "/seo-master international-seo-audit",
+    "title": "International SEO Audit",
+    "description": "Audit international URL structure, hreflang, canonicals, and localization quality.",
+    "group": "group-11",
+    "status": "active",
+    "requiredInputs": ["site optional", "pages optional", "hreflangSets optional", "localizedContent optional"],
+    "outputType": "local_international_seo_report"
+  },
+  {
+    "id": "hreflang-audit",
+    "command": "/seo-master hreflang-audit",
+    "title": "Hreflang Audit",
+    "description": "Audit hreflang self-references, return tags, language/country codes, canonicals, and x-default.",
+    "group": "group-11",
+    "status": "active",
+    "requiredInputs": ["site optional", "pages optional", "hreflangSets optional", "localizedContent optional"],
+    "outputType": "local_international_seo_report"
+  },
+  {
+    "id": "ecommerce-seo",
+    "command": "/seo-master ecommerce-seo",
+    "title": "Ecommerce SEO",
+    "description": "Plan ecommerce SEO for categories, products, and feeds.",
+    "group": "group-10",
+    "status": "active",
+    "requiredInputs": ["html optional", "page optional", "categories optional", "products optional", "filters optional", "pagination optional", "policies optional", "merchantFeed optional", "internalLinks optional"],
+    "outputType": "ecommerce_seo_report"
+  },
+  {
+    "id": "ecommerce-audit",
+    "command": "/seo-master ecommerce-audit",
+    "title": "Ecommerce Audit",
+    "description": "Audit ecommerce category, product, filter, pagination, trust, feed, and internal link inputs.",
+    "group": "group-10",
+    "status": "active",
+    "requiredInputs": ["html optional", "page optional", "categories optional", "products optional", "filters optional", "pagination optional", "policies optional", "merchantFeed optional", "internalLinks optional"],
+    "outputType": "ecommerce_seo_report"
+  },
+  {
+    "id": "product-seo-audit",
+    "command": "/seo-master product-seo-audit",
+    "title": "Product SEO Audit",
+    "description": "Audit ecommerce product pages, variants, reviews, ratings, schema, stock, and internal links.",
+    "group": "group-10",
+    "status": "active",
+    "requiredInputs": ["products optional", "page optional", "policies optional", "merchantFeed optional", "internalLinks optional"],
+    "outputType": "ecommerce_seo_report"
+  },
+  {
+    "id": "category-seo-audit",
+    "command": "/seo-master category-seo-audit",
+    "title": "Category SEO Audit",
+    "description": "Audit ecommerce category pages, filters, pagination, content quality, and internal links.",
+    "group": "group-10",
+    "status": "active",
+    "requiredInputs": ["categories optional", "filters optional", "pagination optional", "internalLinks optional"],
+    "outputType": "ecommerce_seo_report"
+  },
+  {
+    "id": "ai-search-readiness",
+    "command": "/seo-master ai-search-readiness",
+    "title": "AI Search Readiness",
+    "description": "Audit AI Search readiness, answer extractability, entity clarity, information gain, and content quality.",
+    "group": "group-12",
+    "status": "active",
+    "requiredInputs": ["html optional", "page optional", "content optional", "entities optional", "queries optional", "schema optional", "publisher optional", "images optional", "openGraph optional", "contentSignals optional"],
+    "outputType": "ai_search_discover_report"
+  },
+  {
+    "id": "ai-search-audit",
+    "command": "/seo-master ai-search-audit",
+    "title": "AI Search Audit",
+    "description": "Audit AI Search readiness from provided page, content, entity, query, schema, and source inputs.",
+    "group": "group-12",
+    "status": "active",
+    "requiredInputs": ["html optional", "page optional", "content optional", "entities optional", "queries optional", "schema optional"],
+    "outputType": "ai_search_discover_report"
+  },
+  {
+    "id": "answer-block-audit",
+    "command": "/seo-master answer-block-audit",
+    "title": "Answer Block Audit",
+    "description": "Audit concise answer blocks, extractability, and query alignment.",
+    "group": "group-12",
+    "status": "active",
+    "requiredInputs": ["content optional", "queries optional", "page optional", "html optional"],
+    "outputType": "ai_search_discover_report"
+  },
+  {
+    "id": "discover-seo-audit",
+    "command": "/seo-master discover-seo-audit",
+    "title": "Discover SEO Audit",
+    "description": "Audit Google Discover readiness from provided page, publisher, image, Open Graph, and content-signal inputs.",
+    "group": "group-12",
+    "status": "active",
+    "requiredInputs": ["html optional", "page optional", "publisher optional", "images optional", "openGraph optional", "contentSignals optional"],
+    "outputType": "ai_search_discover_report"
+  },
+  {
+    "id": "ai-content-quality-audit",
+    "command": "/seo-master ai-content-quality-audit",
+    "title": "AI Content Quality Audit",
+    "description": "Audit generic AI-content risk, source quality, information gain, and human-value signals.",
+    "group": "group-12",
+    "status": "active",
+    "requiredInputs": ["content optional", "page optional", "entities optional", "queries optional", "schema optional"],
+    "outputType": "ai_search_discover_report"
+  },
+  {
+    "id": "trust-audit",
+    "command": "/seo-master trust-audit",
+    "title": "Trust Audit",
+    "description": "Audit trust, transparency, authorship, policies, testimonials, and proof signals from provided inputs.",
+    "group": "group-13",
+    "status": "active",
+    "requiredInputs": ["html optional", "page optional", "organization optional", "authors optional", "reviewers optional", "trustPages optional", "testimonials optional", "caseStudies optional", "headers optional", "resources optional", "forms optional", "headings optional", "images optional", "links optional", "buttons optional"],
+    "outputType": "trust_security_accessibility_report"
+  },
+  {
+    "id": "eeat-audit",
+    "command": "/seo-master eeat-audit",
+    "title": "E-E-A-T Audit",
+    "description": "Audit E-E-A-T, author/reviewer trust, YMYL support, and proof from provided inputs.",
+    "group": "group-13",
+    "status": "active",
+    "requiredInputs": ["html optional", "page optional", "organization optional", "authors optional", "reviewers optional", "trustPages optional", "testimonials optional", "caseStudies optional"],
+    "outputType": "trust_security_accessibility_report"
+  },
+  {
+    "id": "security-audit",
+    "command": "/seo-master security-audit",
+    "title": "Security Audit",
+    "description": "Audit HTTPS, mixed content, forms, security headers, malware/hacked flags, and safety signals from provided inputs.",
+    "group": "group-13",
+    "status": "active",
+    "requiredInputs": ["html optional", "page optional", "headers optional", "resources optional", "forms optional"],
+    "outputType": "trust_security_accessibility_report"
+  },
+  {
+    "id": "accessibility-audit",
+    "command": "/seo-master accessibility-audit",
+    "title": "Accessibility Audit",
+    "description": "Audit semantic HTML, headings, image alt text, forms, links, buttons, keyboard, contrast, and readability inputs.",
+    "group": "group-13",
+    "status": "active",
+    "requiredInputs": ["html optional", "page optional", "headings optional", "images optional", "forms optional", "links optional", "buttons optional"],
+    "outputType": "trust_security_accessibility_report"
+  },
+  {
+    "id": "framework-seo-audit",
+    "command": "/seo-master framework-seo-audit",
+    "title": "Framework SEO Audit",
+    "description": "Audit CMS/framework SEO, routes, rendering, metadata, sitemap, robots, canonicals, schema, and build signals.",
+    "group": "group-14",
+    "status": "active",
+    "requiredInputs": ["html optional", "framework optional", "cms optional", "packageJson optional", "frameworkConfig optional", "routes optional", "build optional", "seoFiles optional"],
+    "outputType": "cms_framework_seo_report"
+  },
+  {
+    "id": "wordpress-seo-audit",
+    "command": "/seo-master wordpress-seo-audit",
+    "title": "WordPress SEO Audit",
+    "description": "Audit WordPress permalinks, archive indexing, attachment pages, plugins, sitemap, and theme/plugin risks.",
+    "group": "group-14",
+    "status": "active",
+    "requiredInputs": ["html optional", "framework optional", "cms optional", "packageJson optional", "frameworkConfig optional", "routes optional", "build optional", "seoFiles optional"],
+    "outputType": "cms_framework_seo_report"
+  },
+  {
+    "id": "react-seo-audit",
+    "command": "/seo-master react-seo-audit",
+    "title": "React SEO Audit",
+    "description": "Audit React SPA SEO risk, CSR routes, metadata, root HTML, hash routes, and crawlable navigation.",
+    "group": "group-14",
+    "status": "active",
+    "requiredInputs": ["html optional", "framework optional", "cms optional", "packageJson optional", "frameworkConfig optional", "routes optional", "build optional", "seoFiles optional"],
+    "outputType": "cms_framework_seo_report"
+  },
+  {
+    "id": "nextjs-seo-audit",
+    "command": "/seo-master nextjs-seo-audit",
+    "title": "Next.js SEO Audit",
+    "description": "Audit Next.js metadata, dynamic routes, rendering modes, sitemap, robots, canonicals, and build warnings.",
+    "group": "group-14",
+    "status": "active",
+    "requiredInputs": ["html optional", "framework optional", "cms optional", "packageJson optional", "frameworkConfig optional", "routes optional", "build optional", "seoFiles optional"],
+    "outputType": "cms_framework_seo_report"
+  },
+  {
+    "id": "static-seo-audit",
+    "command": "/seo-master static-seo-audit",
+    "title": "Static SEO Audit",
+    "description": "Audit static site metadata, canonical, sitemap, robots, schema, links, and JS-required content risks.",
+    "group": "group-14",
+    "status": "active",
+    "requiredInputs": ["html optional", "framework optional", "cms optional", "packageJson optional", "frameworkConfig optional", "routes optional", "build optional", "seoFiles optional"],
+    "outputType": "cms_framework_seo_report"
+  },
+  {
+    "id": "build-seo-check",
+    "command": "/seo-master build-seo-check",
+    "title": "Build SEO Check",
+    "description": "Check framework build status, SEO-related warnings, output directory, generated sitemap, robots, and static routes.",
+    "group": "group-14",
+    "status": "active",
+    "requiredInputs": ["html optional", "framework optional", "cms optional", "packageJson optional", "frameworkConfig optional", "routes optional", "build optional", "seoFiles optional"],
+    "outputType": "cms_framework_seo_report"
+  },
+  {
+    "id": "launch-checklist",
+    "command": "/seo-master launch-checklist",
+    "title": "Launch Checklist",
+    "description": "Create a pre-launch SEO checklist.",
+    "group": "group-17",
+    "status": "active",
+    "requiredInputs": ["business optional", "websiteAudit optional", "resources optional", "constraints optional", "launch optional"],
+    "outputType": "seo_strategy_plan"
+  },
+  {
+    "id": "migration-plan",
+    "command": "/seo-master migration-plan",
+    "title": "Migration Plan",
+    "description": "Create an SEO migration plan.",
+    "group": "group-17",
+    "status": "active",
+    "requiredInputs": ["business optional", "websiteAudit optional", "resources optional", "constraints optional", "migration optional"],
+    "outputType": "seo_strategy_plan"
+  },
+  {
+    "id": "report",
+    "command": "/seo-master report",
+    "title": "Report",
+    "description": "Generate an evidence-based SEO report from provided audit, strategy, measurement, and governance inputs.",
+    "group": "group-18",
+    "status": "active",
+    "requiredInputs": ["business optional", "websiteAudit optional", "seoStrategy optional", "searchConsole optional", "ga4 optional", "rankTracking optional", "coreWebVitals optional", "backlinks optional", "contentPerformance optional", "governance optional"],
+    "outputType": "measurement_reporting_governance_report"
+  },
+  {
+    "id": "seo-report",
+    "command": "/seo-master seo-report",
+    "title": "SEO Report",
+    "description": "Generate a structured SEO report with executive summary, KPI snapshot, top issues, risks, and next actions.",
+    "group": "group-18",
+    "status": "active",
+    "requiredInputs": ["business optional", "websiteAudit optional", "seoStrategy optional", "searchConsole optional", "ga4 optional", "rankTracking optional", "coreWebVitals optional", "backlinks optional", "contentPerformance optional", "governance optional"],
+    "outputType": "measurement_reporting_governance_report"
+  },
+  {
+    "id": "measurement-report",
+    "command": "/seo-master measurement-report",
+    "title": "Measurement Report",
+    "description": "Analyze provided Search Console-style, GA4-style, rank, Core Web Vitals, backlink, content, and revenue data.",
+    "group": "group-18",
+    "status": "active",
+    "requiredInputs": ["business optional", "searchConsole optional", "ga4 optional", "rankTracking optional", "coreWebVitals optional", "backlinks optional", "contentPerformance optional"],
+    "outputType": "measurement_reporting_governance_report"
+  },
+  {
+    "id": "governance-check",
+    "command": "/seo-master governance-check",
+    "title": "Governance Check",
+    "description": "Check SEO governance processes, pending changes, release readiness, QA, redirect policy, and changelog readiness.",
+    "group": "group-18",
+    "status": "active",
+    "requiredInputs": ["governance optional", "websiteAudit optional", "seoStrategy optional"],
+    "outputType": "measurement_reporting_governance_report"
+  },
+  {
+    "id": "seo-qa",
+    "command": "/seo-master seo-qa",
+    "title": "SEO QA",
+    "description": "Generate an SEO QA checklist for releases and template reviews. Can run without input.",
+    "group": "group-18",
+    "status": "active",
+    "requiredInputs": ["governance optional", "websiteAudit optional"],
+    "outputType": "measurement_reporting_governance_report"
+  },
+  {
+    "id": "release-seo-check",
+    "command": "/seo-master release-seo-check",
+    "title": "Release SEO Check",
+    "description": "Assess provided pending release changes for SEO risk and required release checks.",
+    "group": "group-18",
+    "status": "active",
+    "requiredInputs": ["governance optional"],
+    "outputType": "measurement_reporting_governance_report"
+  },
+  {
+    "id": "final-status",
+    "command": "/seo-master final-status",
+    "title": "Final Status",
+    "description": "Generate the final Master of SEO status report from provided audit, strategy, measurement, and governance data.",
+    "group": "group-18",
+    "status": "active",
+    "requiredInputs": ["business optional", "websiteAudit optional", "seoStrategy optional", "searchConsole optional", "ga4 optional", "rankTracking optional", "coreWebVitals optional", "backlinks optional", "contentPerformance optional", "governance optional"],
+    "outputType": "measurement_reporting_governance_report"
+  },
+  {
+    "id": "memory",
+    "command": "/seo-master memory",
+    "title": "Memory",
+    "description": "Show project memory status.",
+    "group": "group-01",
+    "status": "active",
+    "requiredInputs": [],
+    "outputType": "memory-status"
+  },
+  {
+    "id": "next-group",
+    "command": "/seo-master next-group",
+    "title": "Next Group",
+    "description": "Show the next planned implementation group.",
+    "group": "group-01",
+    "status": "active",
+    "requiredInputs": [],
+    "outputType": "next-group"
+  }
+]

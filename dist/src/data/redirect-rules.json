@@ -1,0 +1,29 @@
+[
+  {
+    "id": "redirects-core",
+    "category": "redirects",
+    "title": "Redirect hygiene",
+    "description": "Redirects should preserve relevance and avoid chains or loops.",
+    "do": [
+      "Use 301/308 for permanent moves.",
+      "Use 302/307 for temporary moves.",
+      "Redirect to closest relevant page.",
+      "Update internal links after redirects."
+    ],
+    "dont": [
+      "Redirect everything to homepage.",
+      "Create redirect chains.",
+      "Create redirect loops.",
+      "Use JS redirects for critical SEO moves."
+    ],
+    "priority": "P1",
+    "appliesTo": [
+      "website",
+      "page",
+      "technical",
+      "audit"
+    ],
+    "status": "active",
+    "group": "redirects"
+  }
+]

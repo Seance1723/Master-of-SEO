@@ -1,0 +1,5 @@
+{
+  "name": "GA4 Organic Conversion Rules",
+  "checks": ["organic sessions", "organic users", "events", "conversions", "conversion rate", "organic revenue"],
+  "donts": ["Do not mix all-channel conversions with organic conversions unless specified.", "Do not claim revenue attribution without revenue data."]
+}

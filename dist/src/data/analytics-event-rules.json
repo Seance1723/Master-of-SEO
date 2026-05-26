@@ -1,0 +1,5 @@
+{
+  "name": "Analytics Event Mapping Rules",
+  "events": ["forms", "demo clicks", "signup clicks", "checkout", "add-to-cart", "phone clicks", "downloads", "newsletter", "content engagement"],
+  "donts": ["Do not track meaningless events.", "Do not call an event a conversion without business relevance."]
+}

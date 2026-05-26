@@ -1,0 +1,14 @@
+[
+  {
+    "id": "ssr-ssg-core",
+    "group": "group-14",
+    "category": "ssr-ssg-readiness",
+    "title": "SSR / SSG Readiness",
+    "description": "Choose SSR, SSG, or ISR intentionally and keep metadata/content available at initial render.",
+    "do": ["Prefer SSG for stable marketing/content pages.", "Use SSR/ISR where content changes frequently.", "Ensure metadata is available at initial render."],
+    "dont": ["Generate important SEO content only after client API calls.", "Forget fallback states for dynamic routes.", "Allow missing metadata on generated pages."],
+    "priority": "P2",
+    "appliesTo": ["technical", "audit", "planning"],
+    "status": "active"
+  }
+]

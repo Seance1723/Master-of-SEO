@@ -1,0 +1,29 @@
+[
+  {
+    "id": "core-web-vitals-core",
+    "category": "core-web-vitals",
+    "title": "Core Web Vitals baseline",
+    "description": "LCP, INP, and CLS should meet user-centric performance thresholds.",
+    "do": [
+      "Keep LCP <= 2.5s.",
+      "Keep INP <= 200ms.",
+      "Keep CLS <= 0.1.",
+      "Optimize mobile performance first.",
+      "Check real-user data when available."
+    ],
+    "dont": [
+      "Optimize only Lighthouse lab scores.",
+      "Ignore poor mobile field data.",
+      "Treat homepage score as whole-site score."
+    ],
+    "priority": "P1",
+    "appliesTo": [
+      "website",
+      "page",
+      "performance",
+      "audit"
+    ],
+    "status": "active",
+    "group": "core"
+  }
+]

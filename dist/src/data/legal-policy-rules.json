@@ -1,0 +1,14 @@
+[
+  {
+    "id": "legal-policy-core",
+    "group": "group-13",
+    "category": "legal-policy-readiness",
+    "title": "Legal Policy Readiness",
+    "description": "Use reviewed legal policies appropriate to the site and business model.",
+    "do": ["Include privacy, terms, refunds, shipping, cookies, and security policies where relevant.", "Keep policies visible and accurate."],
+    "dont": ["Invent policy details.", "Hide policies from users.", "Use unreviewed copied policy text."],
+    "priority": "P2",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

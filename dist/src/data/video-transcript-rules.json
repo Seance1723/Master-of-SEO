@@ -1,0 +1,26 @@
+[
+  {
+    "id": "video-transcript-captions",
+    "category": "video-transcript-caption",
+    "title": "Provide transcripts and captions",
+    "description": "Transcripts and captions support SEO, accessibility, and comprehension.",
+    "do": [
+      "Provide transcripts",
+      "Provide captions",
+      "Keep transcripts near the video or clearly linked"
+    ],
+    "dont": [
+      "Ignore accessibility for videos",
+      "Use auto captions without review where accuracy matters"
+    ],
+    "priority": "P2",
+    "appliesTo": [
+      "media",
+      "video",
+      "accessibility",
+      "audit"
+    ],
+    "status": "active",
+    "group": "video"
+  }
+]

@@ -1,0 +1,25 @@
+[
+  {
+    "id": "service-real-provider",
+    "category": "service-schema",
+    "title": "Service schema should reflect real services",
+    "description": "Use Service schema for service pages with accurate provider and area served.",
+    "do": [
+      "Use Service schema for service pages",
+      "Connect provider to Organization or LocalBusiness"
+    ],
+    "dont": [
+      "Use Product schema for normal service pages",
+      "Add fake service areas"
+    ],
+    "priority": "P2",
+    "appliesTo": [
+      "schema",
+      "entity",
+      "audit",
+      "planning"
+    ],
+    "status": "active",
+    "group": "service"
+  }
+]

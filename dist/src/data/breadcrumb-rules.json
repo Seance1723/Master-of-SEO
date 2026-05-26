@@ -1,0 +1,28 @@
+[
+  {
+    "id": "breadcrumbs-core",
+    "category": "breadcrumbs",
+    "title": "Breadcrumb structure",
+    "description": "Breadcrumbs should match site hierarchy and remain crawlable.",
+    "do": [
+      "Use breadcrumbs for hierarchical sites.",
+      "Keep breadcrumb links crawlable.",
+      "Match breadcrumb path to site structure.",
+      "Prepare BreadcrumbList schema support for later schema group."
+    ],
+    "dont": [
+      "Use breadcrumbs that conflict with canonical hierarchy.",
+      "Show fake hierarchy.",
+      "Make breadcrumbs non-clickable without reason."
+    ],
+    "priority": "P2",
+    "appliesTo": [
+      "architecture",
+      "internal_linking",
+      "planning",
+      "audit"
+    ],
+    "status": "active",
+    "group": "breadcrumbs"
+  }
+]

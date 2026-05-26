@@ -1,0 +1,14 @@
+[
+  {
+    "id": "competitor-metadata",
+    "group": "group-16",
+    "category": "Metadata",
+    "title": "Use competitor metadata as positioning evidence",
+    "description": "Compare title and meta description strategy without copying.",
+    "do": ["Identify message gaps", "Recommend clearer original metadata"],
+    "dont": ["Do not copy competitor titles", "Do not keyword-stuff metadata"],
+    "priority": "P3",
+    "appliesTo": ["page", "audit", "planning"],
+    "status": "active"
+  }
+]

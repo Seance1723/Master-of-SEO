@@ -1,0 +1,27 @@
+[
+  {
+    "id": "hreflang-valid-complete",
+    "category": "hreflang",
+    "title": "Hreflang must be valid and reciprocal",
+    "description": "Hreflang requires valid codes, self-references, return tags, and indexable canonical URLs.",
+    "do": [
+      "Use correct language-country codes",
+      "Include self-referencing hreflang",
+      "Include return tags",
+      "Include all alternates"
+    ],
+    "dont": [
+      "Use invalid hreflang codes",
+      "Point hreflang to non-indexable URLs",
+      "Create conflicting hreflang sets"
+    ],
+    "priority": "P2",
+    "appliesTo": [
+      "international_seo",
+      "hreflang",
+      "audit"
+    ],
+    "status": "active",
+    "group": "hreflang"
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "canonical-generation-core",
+    "group": "group-14",
+    "category": "canonical-generation",
+    "title": "Canonical Generation",
+    "description": "Generate consistent production canonical URLs and avoid staging/localhost values.",
+    "do": ["Generate canonical URLs consistently.", "Use production URLs.", "Add canonicals on duplicate-prone routes."],
+    "dont": ["Generate canonicals with localhost or staging URLs.", "Leave canonical missing on duplicate-prone routes.", "Use same canonical for unrelated pages."],
+    "priority": "P2",
+    "appliesTo": ["technical", "audit", "planning"],
+    "status": "active"
+  }
+]

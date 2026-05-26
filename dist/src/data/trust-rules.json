@@ -1,0 +1,14 @@
+[
+  {
+    "id": "trust-seo-core",
+    "group": "group-13",
+    "category": "trust-seo",
+    "title": "Trust SEO",
+    "description": "Show real ownership, contact details, policies, and genuine proof.",
+    "do": ["Clearly show who owns or operates the website.", "Provide real contact information.", "Include About and Contact pages.", "Include policies relevant to the website type.", "Include genuine proof such as case studies, testimonials, credentials, and examples."],
+    "dont": ["Hide business identity.", "Use fake testimonials.", "Make unsupported claims.", "Publish sensitive advice without expertise.", "Invent trust signals."],
+    "priority": "P2",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

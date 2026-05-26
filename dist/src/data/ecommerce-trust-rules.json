@@ -1,0 +1,28 @@
+[
+  {
+    "id": "ecommerce-trust-policies",
+    "category": "ecommerce-trust-policy",
+    "title": "Ecommerce sites need trust and policy pages",
+    "description": "Show shipping, returns, privacy, terms, contact, and payment security information.",
+    "do": [
+      "Include shipping policy",
+      "Include return/refund policy",
+      "Include privacy policy",
+      "Include terms",
+      "Include contact information",
+      "Show secure payment/trust information"
+    ],
+    "dont": [
+      "Hide return/shipping details",
+      "Make checkout trust unclear",
+      "Publish ecommerce pages without basic legal/trust pages"
+    ],
+    "priority": "P2",
+    "appliesTo": [
+      "ecommerce",
+      "audit"
+    ],
+    "status": "active",
+    "group": "ecommerce"
+  }
+]

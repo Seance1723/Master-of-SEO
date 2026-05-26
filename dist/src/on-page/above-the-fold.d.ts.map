@@ -1,0 +1,1 @@
+{"version":3,"file":"above-the-fold.d.ts","sourceRoot":"","sources":["../../../src/on-page/above-the-fold.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,gBAAgB,EAAE,gBAAgB,EAAE,UAAU,EAAE,MAAM,qBAAqB,CAAC;AAE1F,eAAO,MAAM,iBAAiB,EAAE,UAAU,EAUxC,CAAC;AAEH,wBAAgB,iBAAiB,CAAC,KAAK,EAAE,gBAAgB,GAAG;IAAE,MAAM,EAAE,gBAAgB,EAAE,CAAC;IAAC,YAAY,EAAE,MAAM,EAAE,CAAA;CAAE,CAqBjH"}

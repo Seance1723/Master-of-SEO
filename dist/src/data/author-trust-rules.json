@@ -1,0 +1,14 @@
+[
+  {
+    "id": "author-trust-core",
+    "group": "group-13",
+    "category": "author-reviewer-trust",
+    "title": "Author & Reviewer Trust",
+    "description": "Use real author and reviewer responsibility where relevant.",
+    "do": ["Include author name on articles where relevant.", "Include author bio for expert content.", "Include reviewer details for YMYL content.", "Include sameAs links where real."],
+    "dont": ["Invent authors.", "Use fake profile images or credentials.", "Hide author responsibility for expert content."],
+    "priority": "P2",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

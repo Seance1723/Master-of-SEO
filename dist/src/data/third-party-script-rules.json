@@ -1,0 +1,28 @@
+[
+  {
+    "id": "third-party-scripts-core",
+    "category": "third-party-scripts",
+    "title": "Third-party script performance",
+    "description": "Third-party scripts should be owned, audited, delayed, and deduplicated.",
+    "do": [
+      "Audit third-party scripts.",
+      "Delay chat, heatmap, and marketing widgets where possible.",
+      "Remove unused tracking pixels.",
+      "Load critical analytics responsibly."
+    ],
+    "dont": [
+      "Allow third-party scripts to destroy INP.",
+      "Load duplicate analytics.",
+      "Install scripts without performance ownership."
+    ],
+    "priority": "P2",
+    "appliesTo": [
+      "website",
+      "page",
+      "performance",
+      "audit"
+    ],
+    "status": "active",
+    "group": "third"
+  }
+]

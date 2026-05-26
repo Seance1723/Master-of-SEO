@@ -1,0 +1,1 @@
+{"version":3,"file":"status-codes.d.ts","sourceRoot":"","sources":["../../../src/technical/status-codes.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,mBAAmB,EAAE,mBAAmB,EAAE,aAAa,EAAE,MAAM,uBAAuB,CAAC;AAErG,eAAO,MAAM,eAAe,EAAE,aAAa,EAY1C,CAAC;AAEF,wBAAgB,eAAe,CAAC,KAAK,EAAE,mBAAmB,GAAG;IAAE,MAAM,EAAE,mBAAmB,EAAE,CAAC;IAAC,YAAY,EAAE,MAAM,EAAE,CAAA;CAAE,CAarH"}

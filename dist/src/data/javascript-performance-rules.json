@@ -1,0 +1,28 @@
+[
+  {
+    "id": "javascript-performance-core",
+    "category": "javascript-performance",
+    "title": "JavaScript performance",
+    "description": "JavaScript should be minimal, deferred where possible, and split by need.",
+    "do": [
+      "Defer or async non-critical JS.",
+      "Remove unused JS.",
+      "Code-split where useful.",
+      "Avoid hydration bloat."
+    ],
+    "dont": [
+      "Load full app bundles for static pages.",
+      "Place non-critical scripts in head.",
+      "Run heavy animations on page load."
+    ],
+    "priority": "P1",
+    "appliesTo": [
+      "website",
+      "page",
+      "performance",
+      "audit"
+    ],
+    "status": "active",
+    "group": "javascript"
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "ai-search-readiness-core",
+    "group": "group-12",
+    "category": "ai-search-readiness",
+    "title": "AI Search Readiness",
+    "description": "Keep valuable content crawlable, indexable, snippet-eligible, clear, original, and entity-aware without promising AI visibility.",
+    "do": ["Keep valuable pages crawlable and indexable.", "Allow snippets if AI search visibility matters.", "Create clear, direct, helpful answers.", "Structure content with headings, lists, tables, FAQs, and examples.", "Include original insight and real experience.", "Make entities clear."],
+    "dont": ["Block snippets without reason.", "Create vague commodity content.", "Chase fake GEO hacks.", "Promise AI Overview visibility.", "Rely on schema alone."],
+    "priority": "P1",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

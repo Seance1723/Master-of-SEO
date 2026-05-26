@@ -1,0 +1,27 @@
+[
+  {
+    "id": "image-alt-natural",
+    "category": "image-alt",
+    "title": "Write natural descriptive alt text",
+    "description": "Meaningful images need descriptive alt text; decorative images may use empty alt.",
+    "do": [
+      "Describe the image purpose",
+      "Keep alt text natural",
+      "Make product image alt text specific"
+    ],
+    "dont": [
+      "Write alt text like image or photo",
+      "Repeat the exact same alt everywhere",
+      "Stuff keywords"
+    ],
+    "priority": "P2",
+    "appliesTo": [
+      "media",
+      "image",
+      "accessibility",
+      "audit"
+    ],
+    "status": "active",
+    "group": "image"
+  }
+]

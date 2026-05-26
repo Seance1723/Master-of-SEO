@@ -1,0 +1,46 @@
+[
+  {
+    "id": "website-audit",
+    "category": "Website Audit",
+    "title": "Full website audit",
+    "do": [
+      "Identify website type and business goal before scoring.",
+      "Audit multiple SEO areas together.",
+      "Use only provided evidence.",
+      "Separate P0 blockers from optimization work.",
+      "Deduplicate repeated issues."
+    ],
+    "dont": [
+      "Do not hallucinate crawl, performance, ranking, or analytics data.",
+      "Do not treat all SEO issues equally.",
+      "Do not recommend ecommerce, local, or international actions when not applicable."
+    ],
+    "group": "website",
+    "description": "Full website audit",
+    "priority": "P3",
+    "appliesTo": [
+      "audit"
+    ],
+    "status": "active"
+  },
+  {
+    "id": "page-level-audit",
+    "category": "Page-Level Audit",
+    "title": "Audit important page types separately",
+    "do": [
+      "Check homepage, service, product, category, blog, pricing, contact, and legal pages where provided.",
+      "Identify page-specific SEO blockers."
+    ],
+    "dont": [
+      "Do not apply one-page findings to the whole site unless evidence supports it.",
+      "Do not assume missing pages are broken unless input proves they exist."
+    ],
+    "group": "page",
+    "description": "Audit important page types separately",
+    "priority": "P3",
+    "appliesTo": [
+      "audit"
+    ],
+    "status": "active"
+  }
+]

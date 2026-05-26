@@ -1,0 +1,1 @@
+{"version":3,"file":"core-web-vitals.d.ts","sourceRoot":"","sources":["../../../src/performance/core-web-vitals.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,qBAAqB,EAAE,qBAAqB,EAAE,eAAe,EAAE,MAAM,yBAAyB,CAAC;AAE7G,eAAO,MAAM,kBAAkB,EAAE,eAAe,EAY/C,CAAC;AAEF,wBAAgB,kBAAkB,CAAC,KAAK,EAAE,qBAAqB,GAAG;IAAE,MAAM,EAAE,qBAAqB,EAAE,CAAC;IAAC,YAAY,EAAE,MAAM,EAAE,CAAA;CAAE,CAwB5H"}

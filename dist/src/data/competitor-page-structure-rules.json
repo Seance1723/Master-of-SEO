@@ -1,0 +1,14 @@
+[
+  {
+    "id": "competitor-page-structure",
+    "group": "group-16",
+    "category": "Page Structure",
+    "title": "Compare useful structure signals",
+    "description": "Compare headings, sections, CTAs, FAQs, proof, and page format from provided data.",
+    "do": ["Identify missing useful sections", "Respect search intent"],
+    "dont": ["Do not copy exact structure", "Do not make pages longer just because competitors are longer"],
+    "priority": "P3",
+    "appliesTo": ["page", "content", "audit"],
+    "status": "active"
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "id": "asset-optimization-core",
+    "category": "asset-optimization",
+    "title": "Asset optimization",
+    "description": "Assets should be compressed, cacheable, appropriately loaded, and limited to what the page needs.",
+    "do": [
+      "Compress assets.",
+      "Cache static files.",
+      "Load critical assets early.",
+      "Defer non-critical assets."
+    ],
+    "dont": [
+      "Ship unused assets.",
+      "Load heavy above-fold assets without need.",
+      "Ignore cache and compression headers."
+    ],
+    "priority": "P2",
+    "appliesTo": [
+      "website",
+      "page",
+      "performance",
+      "audit"
+    ],
+    "status": "active",
+    "group": "asset"
+  }
+]

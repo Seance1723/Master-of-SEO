@@ -1,0 +1,1 @@
+{"version":3,"file":"static-seo-audit.js","sourceRoot":"","sources":["../../../src/cms-framework/static-seo-audit.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,oBAAoB,EAAE,MAAM,0BAA0B,CAAC;AAEhE,MAAM,UAAU,iBAAiB,CAAC,KAA6B;IAC7D,OAAO,oBAAoB,CAAC,EAAE,GAAG,KAAK,EAAE,SAAS,EAAE,KAAK,CAAC,SAAS,IAAI,QAAQ,EAAE,IAAI,EAAE,QAAQ,EAAE,CAAC,CAAC;AACpG,CAAC"}

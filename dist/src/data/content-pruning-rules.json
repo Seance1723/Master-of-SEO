@@ -1,0 +1,28 @@
+[
+  {
+    "id": "content-pruning-core",
+    "category": "content-pruning",
+    "title": "Content pruning safety",
+    "description": "Pruning should improve index quality while preserving valuable URLs.",
+    "do": [
+      "Identify thin, duplicate, outdated, expired, and no-value pages.",
+      "Recommend improve, merge, redirect, canonicalize, noindex, or delete.",
+      "Preserve pages with backlinks, traffic, or conversions when provided."
+    ],
+    "dont": [
+      "Delete pages without replacement/redirect logic.",
+      "Noindex important pages.",
+      "Keep index bloat.",
+      "Merge pages with clearly different intent."
+    ],
+    "priority": "P1",
+    "appliesTo": [
+      "content",
+      "planning",
+      "audit",
+      "strategy"
+    ],
+    "status": "active",
+    "group": "content"
+  }
+]

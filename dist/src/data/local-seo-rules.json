@@ -1,0 +1,30 @@
+[
+  {
+    "id": "local-seo-real-presence",
+    "category": "local-seo",
+    "title": "Local SEO requires real local presence",
+    "description": "Use accurate NAP, GBP, local pages, service areas, reviews, and LocalBusiness schema only from provided real data.",
+    "do": [
+      "Keep name, address, and phone consistent",
+      "Optimize Google Business Profile where relevant",
+      "Create genuine local landing pages",
+      "Show contact information clearly",
+      "Collect and respond to genuine reviews"
+    ],
+    "dont": [
+      "Create fake office locations",
+      "Create doorway city pages",
+      "Buy fake reviews",
+      "Use inconsistent NAP",
+      "Mark up fake local details"
+    ],
+    "priority": "P1",
+    "appliesTo": [
+      "local_seo",
+      "local_pages",
+      "audit"
+    ],
+    "status": "active",
+    "group": "local"
+  }
+]

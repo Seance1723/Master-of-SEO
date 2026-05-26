@@ -1,0 +1,1 @@
+{"version":3,"file":"font-performance.d.ts","sourceRoot":"","sources":["../../../src/performance/font-performance.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,qBAAqB,EAAE,qBAAqB,EAAE,eAAe,EAAE,MAAM,yBAAyB,CAAC;AAE7G,eAAO,MAAM,oBAAoB,EAAE,eAAe,EAYjD,CAAC;AAEF,wBAAgB,oBAAoB,CAAC,KAAK,EAAE,qBAAqB,GAAG;IAAE,MAAM,EAAE,qBAAqB,EAAE,CAAC;IAAC,YAAY,EAAE,MAAM,EAAE,CAAA;CAAE,CAa9H"}

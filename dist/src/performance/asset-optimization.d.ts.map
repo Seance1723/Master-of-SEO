@@ -1,0 +1,1 @@
+{"version":3,"file":"asset-optimization.d.ts","sourceRoot":"","sources":["../../../src/performance/asset-optimization.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,qBAAqB,EAAE,qBAAqB,EAAE,eAAe,EAAE,MAAM,yBAAyB,CAAC;AAE7G,eAAO,MAAM,sBAAsB,EAAE,eAAe,EAYnD,CAAC;AAEF,wBAAgB,sBAAsB,CAAC,KAAK,EAAE,qBAAqB,GAAG;IAAE,MAAM,EAAE,qBAAqB,EAAE,CAAC;IAAC,YAAY,EAAE,MAAM,EAAE,CAAA;CAAE,CAoBhI"}

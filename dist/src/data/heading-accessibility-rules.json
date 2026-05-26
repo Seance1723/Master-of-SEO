@@ -1,0 +1,14 @@
+[
+  {
+    "id": "heading-accessibility-core",
+    "group": "group-13",
+    "category": "heading-accessibility",
+    "title": "Heading Accessibility",
+    "description": "Use one clear H1 and logical descriptive headings.",
+    "do": ["Use one clear H1.", "Follow logical heading order.", "Make headings descriptive."],
+    "dont": ["Skip from H1 to H4 without reason.", "Use headings only for styling.", "Leave headings empty."],
+    "priority": "P2",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

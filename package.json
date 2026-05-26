@@ -1,6 +1,6 @@
 {
   "name": "master-of-seo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An MCP-compatible AI-agent SEO skill for technical audits, strategy, reporting, and release-safe website optimization.",
   "type": "module",
   "main": "./dist/src/core/orchestrator.js",
@@ -45,20 +45,19 @@
     "./seo-governance": "./dist/src/reporting-governance/seo-governance.js"
   },
   "files": [
+    "dist",
+    "src/data",
     "README.md",
     "LICENSE",
-    "dist/src",
-    "src/data",
-    "memory",
-    "prompts",
     "docs",
     "examples"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "dev": "node ./src/cli/index.ts",
+    "build": "tsc -p tsconfig.json && npm run copy-assets",
+    "copy-assets": "cpx \"src/**/*.{json,md}\" dist/src",
+    "dev": "tsx ./src/cli/index.ts",
     "start": "node ./dist/src/cli/index.js",
-    "test": "node ./tests/group-01.test.ts && node ./tests/group-02-technical-seo.test.ts && node ./tests/group-03-performance-seo.test.ts && node ./tests/group-04-on-page-seo.test.ts && node ./tests/group-05-keyword-research-intent.test.ts && node ./tests/group-06-content-strategy-planning.test.ts && node ./tests/group-07-site-architecture-internal-linking.test.ts && node ./tests/group-08-schema-entity-seo.test.ts && node ./tests/group-09-media-seo.test.ts && node ./tests/group-10-ecommerce-seo.test.ts && node ./tests/group-11-local-international-seo.test.ts && node ./tests/group-12-ai-search-discover-seo.test.ts && node ./tests/group-13-trust-security-accessibility.test.ts && node ./tests/group-14-cms-framework-seo.test.ts && node ./tests/group-15-website-audit.test.ts && node ./tests/group-16-competitor-analysis.test.ts && node ./tests/group-17-seo-strategy-campaign-planning.test.ts && node ./tests/group-18-measurement-reporting-governance.test.ts",
+    "test": "tsx ./tests/group-01.test.ts && tsx ./tests/group-02-technical-seo.test.ts && tsx ./tests/group-03-performance-seo.test.ts && tsx ./tests/group-04-on-page-seo.test.ts && tsx ./tests/group-05-keyword-research-intent.test.ts && tsx ./tests/group-06-content-strategy-planning.test.ts && tsx ./tests/group-07-site-architecture-internal-linking.test.ts && tsx ./tests/group-08-schema-entity-seo.test.ts && tsx ./tests/group-09-media-seo.test.ts && tsx ./tests/group-10-ecommerce-seo.test.ts && tsx ./tests/group-11-local-international-seo.test.ts && tsx ./tests/group-12-ai-search-discover-seo.test.ts && tsx ./tests/group-13-trust-security-accessibility.test.ts && tsx ./tests/group-14-cms-framework-seo.test.ts && tsx ./tests/group-15-website-audit.test.ts && tsx ./tests/group-16-competitor-analysis.test.ts && tsx ./tests/group-17-seo-strategy-campaign-planning.test.ts && tsx ./tests/group-18-measurement-reporting-governance.test.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "mcp": "node ./dist/src/mcp/server.js",
     "prepublishOnly": "npm run build && npm test"
@@ -73,11 +72,15 @@
     "windsurf",
     "continue"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Seance1723/Master-of-SEO.git"
+  },
   "author": "Master of SEO contributors",
   "license": "MIT",
-  "homepage": "https://www.npmjs.com/package/master-of-seo",
+  "homepage": "https://github.com/Seance1723/Master-of-SEO#readme",
   "bugs": {
-    "url": "https://www.npmjs.com/package/master-of-seo"
+    "url": "https://github.com/Seance1723/Master-of-SEO/issues"
   },
   "engines": {
     "node": ">=18"
@@ -87,6 +90,8 @@
   },
   "devDependencies": {
     "@types/node": "^25.9.1",
+    "cpx": "^1.5.0",
+    "tsx": "^4.22.3",
     "typescript": "^5.7.0"
   }
 }

@@ -1,0 +1,1 @@
+{"version":3,"file":"content-structure.d.ts","sourceRoot":"","sources":["../../../src/on-page/content-structure.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,gBAAgB,EAAE,gBAAgB,EAAE,UAAU,EAAE,MAAM,qBAAqB,CAAC;AAE1F,eAAO,MAAM,qBAAqB,EAAE,UAAU,EAU5C,CAAC;AAEH,wBAAgB,qBAAqB,CAAC,KAAK,EAAE,gBAAgB,GAAG;IAAE,MAAM,EAAE,gBAAgB,EAAE,CAAC;IAAC,YAAY,EAAE,MAAM,EAAE,CAAA;CAAE,CAMrH"}

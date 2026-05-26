@@ -1,0 +1,1 @@
+{"version":3,"file":"on-page-links.d.ts","sourceRoot":"","sources":["../../../src/on-page/on-page-links.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,gBAAgB,EAAE,gBAAgB,EAAE,UAAU,EAAE,MAAM,qBAAqB,CAAC;AAE1F,eAAO,MAAM,eAAe,EAAE,UAAU,EAUtC,CAAC;AAEH,wBAAgB,gBAAgB,CAAC,KAAK,EAAE,gBAAgB,GAAG;IAAE,MAAM,EAAE,gBAAgB,EAAE,CAAC;IAAC,YAAY,EAAE,MAAM,EAAE,CAAA;CAAE,CAWhH"}

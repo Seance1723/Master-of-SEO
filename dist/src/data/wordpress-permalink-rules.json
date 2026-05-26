@@ -1,0 +1,14 @@
+[
+  {
+    "id": "wordpress-permalink-core",
+    "group": "group-14",
+    "category": "wordpress-permalinks",
+    "title": "WordPress Permalinks",
+    "description": "Use clean readable WordPress URL structures and redirect planning for changes.",
+    "do": ["Use clean readable URLs.", "Use post name or logical custom structure.", "Avoid plain query-style permalinks."],
+    "dont": ["Change permalink structure without redirects.", "Use dates in evergreen URLs unless needed.", "Create duplicate URL patterns."],
+    "priority": "P2",
+    "appliesTo": ["technical", "audit", "planning"],
+    "status": "active"
+  }
+]

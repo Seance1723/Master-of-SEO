@@ -1,0 +1,24 @@
+[
+  {
+    "id": "priority-normalization",
+    "category": "Priority Normalization",
+    "title": "Normalize audit priorities",
+    "do": [
+      "Use P0 for sitewide noindex, important blocked pages, failed builds, malware, hacked content, and insecure sensitive forms.",
+      "Use P1 for important page noindex, missing titles/H1s on important templates, canonical strategy issues, and major ecommerce/local conflicts.",
+      "Use P2 for missing descriptions, thin pages, weak internal linking, and accessibility issues.",
+      "Use P3 for optional polish."
+    ],
+    "dont": [
+      "Do not mark guesses as P0.",
+      "Do not bury indexing, security, or build blockers under minor issues."
+    ],
+    "group": "priority",
+    "description": "Normalize audit priorities",
+    "priority": "P3",
+    "appliesTo": [
+      "audit"
+    ],
+    "status": "active"
+  }
+]

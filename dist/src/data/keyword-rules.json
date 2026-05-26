@@ -1,0 +1,34 @@
+[
+  {
+    "id": "keyword-research-core",
+    "category": "keyword-research",
+    "title": "Keyword research foundations",
+    "description": "Keyword planning should begin from business context and provided keywords.",
+    "do": [
+      "Start with business goals.",
+      "Collect seed keywords.",
+      "Include product/service keywords.",
+      "Include pain-point keywords.",
+      "Include comparison keywords.",
+      "Include question keywords.",
+      "Include local keywords when relevant.",
+      "Include branded keywords when relevant."
+    ],
+    "dont": [
+      "Target only high-volume keywords.",
+      "Ignore low-volume high-intent keywords.",
+      "Invent keyword metrics.",
+      "Create keyword lists without page mapping.",
+      "Ignore conversion value."
+    ],
+    "priority": "P1",
+    "appliesTo": [
+      "keyword",
+      "content",
+      "planning",
+      "audit"
+    ],
+    "status": "active",
+    "group": "keyword"
+  }
+]

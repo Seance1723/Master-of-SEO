@@ -1,0 +1,14 @@
+[
+  {
+    "id": "eeat-core",
+    "group": "group-13",
+    "category": "eeat",
+    "title": "E-E-A-T",
+    "description": "Show real experience, expertise, authority, and trust, especially for YMYL content.",
+    "do": ["Show real experience.", "Show expertise through author bios, credentials, examples, and case studies.", "Build authority through helpful content and credible references.", "Make trust the strongest signal.", "Use reviewers for YMYL content when appropriate."],
+    "dont": ["Create fake experts.", "Use fake credentials.", "Publish generic advice for high-stakes topics.", "Confuse AI-generated content with verified expertise."],
+    "priority": "P1",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

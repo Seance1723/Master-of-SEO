@@ -1,0 +1,14 @@
+[
+  {
+    "id": "snippet-eligibility-core",
+    "group": "group-12",
+    "category": "snippet-eligibility",
+    "title": "Snippet Eligibility Guard",
+    "description": "Keep important pages indexable and snippet-eligible while using max-snippet/data-nosnippet carefully.",
+    "do": ["Keep pages indexable.", "Allow snippets where visibility matters.", "Use max-snippet carefully.", "Use data-nosnippet only for sensitive sections."],
+    "dont": ["Apply nosnippet globally without reason.", "Block content that should be discoverable.", "Assume snippet eligibility guarantees AI visibility."],
+    "priority": "P1",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

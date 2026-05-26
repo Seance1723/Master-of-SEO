@@ -1,0 +1,28 @@
+[
+  {
+    "id": "international-targeting",
+    "category": "international-seo",
+    "title": "International SEO needs clear targeting",
+    "description": "Define language/country targets, URL strategy, hreflang, canonicals, and localized content.",
+    "do": [
+      "Define target languages and countries",
+      "Choose clear URL strategy",
+      "Use hreflang for localized alternatives",
+      "Localize content"
+    ],
+    "dont": [
+      "Mix languages on one page",
+      "Canonical all languages to one version",
+      "Block access with forced redirects",
+      "Use raw machine translation without review"
+    ],
+    "priority": "P1",
+    "appliesTo": [
+      "international_seo",
+      "hreflang",
+      "audit"
+    ],
+    "status": "active",
+    "group": "international"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "faq-visible-only",
+    "category": "faq-schema-guard",
+    "title": "FAQPage schema requires visible FAQs",
+    "description": "FAQPage schema should only be used for visible eligible FAQ content.",
+    "do": [
+      "Use FAQ content for users",
+      "Add FAQPage schema only if FAQs are visible and eligible"
+    ],
+    "dont": [
+      "Add hidden FAQs",
+      "Use FAQ schema to manipulate SERP appearance",
+      "Overpromise FAQ rich results"
+    ],
+    "priority": "P2",
+    "appliesTo": [
+      "schema",
+      "rich_results",
+      "audit",
+      "planning"
+    ],
+    "status": "active",
+    "group": "faq"
+  }
+]

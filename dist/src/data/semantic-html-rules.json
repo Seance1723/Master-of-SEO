@@ -1,0 +1,14 @@
+[
+  {
+    "id": "semantic-html-core",
+    "group": "group-13",
+    "category": "semantic-html",
+    "title": "Semantic HTML",
+    "description": "Use semantic landmarks, proper links and buttons, and list elements where appropriate.",
+    "do": ["Use header, nav, main, section, article, footer where appropriate.", "Use buttons for actions and links for navigation.", "Use lists for list content."],
+    "dont": ["Make everything a div.", "Use fake buttons without accessibility attributes."],
+    "priority": "P3",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

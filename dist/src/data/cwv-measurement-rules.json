@@ -1,0 +1,5 @@
+{
+  "name": "Core Web Vitals Measurement Rules",
+  "thresholds": { "lcp": 2.5, "inp": 200, "cls": 0.1 },
+  "donts": ["Do not treat homepage CWV as whole-site CWV.", "Do not invent field data."]
+}

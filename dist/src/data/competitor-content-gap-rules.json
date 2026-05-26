@@ -1,0 +1,14 @@
+[
+  {
+    "id": "competitor-content-gap",
+    "group": "group-16",
+    "category": "Content Gap",
+    "title": "Find missing useful content from competitor page evidence",
+    "description": "Compare provided competitor topics, sections, page types, and target keywords with own-site pages.",
+    "do": ["Recommend unique content and information gain", "Improve existing pages before creating duplicates"],
+    "dont": ["Do not copy competitor outlines blindly", "Do not recommend content without business purpose"],
+    "priority": "P2",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

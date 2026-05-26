@@ -1,0 +1,5 @@
+{
+  "name": "Release SEO Guard Rules",
+  "highRiskChanges": ["url_change", "template_change", "robots_change", "sitemap_change", "migration", "redesign"],
+  "donts": ["Do not release robots/canonical changes without review.", "Do not approve migrations without an SEO checklist."]
+}

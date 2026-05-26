@@ -1,5 +1,9 @@
 node_modules/
-dist/
 *.tgz
 release-install-test/
 .release-install-test/
+coverage/
+.env
+.env.*
+*.log
+.DS_Store

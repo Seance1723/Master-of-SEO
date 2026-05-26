@@ -1,0 +1,14 @@
+[
+  {
+    "id": "contrast-readability-core",
+    "group": "group-13",
+    "category": "contrast-readability",
+    "title": "Contrast / Readability",
+    "description": "Keep text readable with sufficient contrast, clear sizing, and non-color-only meaning.",
+    "do": ["Use readable text sizes.", "Keep sufficient contrast.", "Avoid text over busy images without overlay."],
+    "dont": ["Use low contrast text.", "Make important text too small.", "Rely only on color for meaning."],
+    "priority": "P2",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "image-filenames-readable",
+    "category": "image-filename",
+    "title": "Use readable image filenames",
+    "description": "Image filenames should be relevant, readable, and hyphenated.",
+    "do": [
+      "Use readable filenames",
+      "Use hyphens between words",
+      "Keep filenames relevant"
+    ],
+    "dont": [
+      "Use random names like IMG_1234.jpg",
+      "Use underscores",
+      "Keyword-stuff filenames"
+    ],
+    "priority": "P3",
+    "appliesTo": [
+      "media",
+      "image",
+      "audit"
+    ],
+    "status": "active",
+    "group": "image"
+  }
+]

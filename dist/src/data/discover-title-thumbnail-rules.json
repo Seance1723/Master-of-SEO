@@ -1,0 +1,14 @@
+[
+  {
+    "id": "discover-title-thumbnail-core",
+    "group": "group-12",
+    "category": "discover-title-thumbnail",
+    "title": "Discover Title & Thumbnail",
+    "description": "Make titles and thumbnails honest, accurate, and aligned with the page content.",
+    "do": ["Make title and thumbnail accurately represent the content.", "Avoid exaggeration.", "Align OG title/image with page content."],
+    "dont": ["Use misleading thumbnails.", "Write titles that overpromise.", "Use curiosity-gap clickbait."],
+    "priority": "P2",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

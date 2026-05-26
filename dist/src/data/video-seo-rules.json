@@ -1,0 +1,31 @@
+[
+  {
+    "id": "video-seo-foundation",
+    "category": "video-seo",
+    "title": "Use accessible contextual video",
+    "description": "Videos need titles, descriptions, thumbnails, transcripts, captions, relevant context, and safe schema.",
+    "do": [
+      "Add clear video title and description",
+      "Add transcript",
+      "Add captions",
+      "Use strong thumbnail",
+      "Use VideoObject schema when data exists"
+    ],
+    "dont": [
+      "Publish video-only pages without text context",
+      "Hide important videos too low",
+      "Use misleading thumbnails",
+      "Embed heavy video players without performance review"
+    ],
+    "priority": "P2",
+    "appliesTo": [
+      "media",
+      "video",
+      "accessibility",
+      "performance",
+      "audit"
+    ],
+    "status": "active",
+    "group": "video"
+  }
+]

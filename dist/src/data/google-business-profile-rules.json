@@ -1,0 +1,27 @@
+[
+  {
+    "id": "gbp-accurate-details",
+    "category": "google-business-profile",
+    "title": "Google Business Profile details must be accurate",
+    "description": "GBP name, category, phone, website, address, hours, photos, and services should match real business details.",
+    "do": [
+      "Keep business name accurate",
+      "Choose accurate categories",
+      "Keep phone, website, address, and hours consistent",
+      "Add photos and services where relevant"
+    ],
+    "dont": [
+      "Keyword-stuff business name",
+      "Use fake categories",
+      "Use fake addresses",
+      "List unavailable hours or services"
+    ],
+    "priority": "P2",
+    "appliesTo": [
+      "local_seo",
+      "audit"
+    ],
+    "status": "active",
+    "group": "gbp"
+  }
+]

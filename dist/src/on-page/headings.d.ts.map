@@ -1,0 +1,1 @@
+{"version":3,"file":"headings.d.ts","sourceRoot":"","sources":["../../../src/on-page/headings.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,gBAAgB,EAAE,gBAAgB,EAAE,UAAU,EAAE,MAAM,qBAAqB,CAAC;AAE1F,eAAO,MAAM,YAAY,EAAE,UAAU,EAUnC,CAAC;AAEH,wBAAgB,aAAa,CAAC,KAAK,EAAE,gBAAgB,GAAG;IAAE,MAAM,EAAE,gBAAgB,EAAE,CAAC;IAAC,YAAY,EAAE,MAAM,EAAE,CAAA;CAAE,CAoB7G"}

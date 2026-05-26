@@ -1,0 +1,30 @@
+[
+  {
+    "id": "media-input-only",
+    "category": "media-seo",
+    "title": "Audit only provided media data",
+    "description": "Media SEO must use provided HTML, image, video, Open Graph, schema, and asset inputs only.",
+    "do": [
+      "Use meaningful media",
+      "Compress media",
+      "Define dimensions",
+      "Optimize social previews"
+    ],
+    "dont": [
+      "Fetch media files",
+      "Invent metadata",
+      "Use broken image URLs"
+    ],
+    "priority": "P1",
+    "appliesTo": [
+      "media",
+      "image",
+      "video",
+      "accessibility",
+      "performance",
+      "audit"
+    ],
+    "status": "active",
+    "group": "media"
+  }
+]

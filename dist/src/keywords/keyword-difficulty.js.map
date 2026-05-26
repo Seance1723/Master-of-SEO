@@ -1,0 +1,1 @@
+{"version":3,"file":"keyword-difficulty.js","sourceRoot":"","sources":["../../../src/keywords/keyword-difficulty.ts"],"names":[],"mappings":"AAAA,MAAM,UAAU,kBAAkB,CAAC,UAAmB;IACpD,IAAI,UAAU,KAAK,SAAS;QAAE,OAAO,SAAS,CAAC;IAC/C,IAAI,UAAU,IAAI,EAAE;QAAE,OAAO,MAAM,CAAC;IACpC,IAAI,UAAU,IAAI,EAAE;QAAE,OAAO,QAAQ,CAAC;IACtC,OAAO,MAAM,CAAC;AAChB,CAAC"}

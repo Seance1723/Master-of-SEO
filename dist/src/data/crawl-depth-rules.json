@@ -1,0 +1,28 @@
+[
+  {
+    "id": "crawl-depth-core",
+    "category": "crawl-depth",
+    "title": "Crawl depth",
+    "description": "Important pages should be reachable in few clicks.",
+    "do": [
+      "Keep critical pages within 1-2 clicks from homepage where possible.",
+      "Keep high-priority pages within 3 clicks.",
+      "Reduce deep paths for money pages.",
+      "Use internal links to improve discovery."
+    ],
+    "dont": [
+      "Bury service, product, pricing, or conversion pages.",
+      "Create deep isolated blog chains.",
+      "Assume sitemap solves poor internal linking."
+    ],
+    "priority": "P1",
+    "appliesTo": [
+      "architecture",
+      "crawlability",
+      "planning",
+      "audit"
+    ],
+    "status": "active",
+    "group": "crawl"
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "conversational-query-coverage-core",
+    "group": "group-12",
+    "category": "conversational-query-coverage",
+    "title": "Conversational Query Coverage",
+    "description": "Map natural follow-up questions and conversational search intents to useful sections.",
+    "do": ["Cover natural follow-up questions.", "Include what, why, how, best, cost, vs, alternatives, risks, and examples where relevant.", "Map conversational queries to sections."],
+    "dont": ["Stuff question keywords.", "Add FAQs that do not help users.", "Mix unrelated query intents."],
+    "priority": "P2",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

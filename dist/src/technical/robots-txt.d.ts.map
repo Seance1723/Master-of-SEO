@@ -1,0 +1,1 @@
+{"version":3,"file":"robots-txt.d.ts","sourceRoot":"","sources":["../../../src/technical/robots-txt.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,mBAAmB,EAAE,mBAAmB,EAAE,aAAa,EAAE,MAAM,uBAAuB,CAAC;AAErG,eAAO,MAAM,cAAc,EAAE,aAAa,EAYzC,CAAC;AAEF,wBAAgB,cAAc,CAAC,KAAK,EAAE,mBAAmB,GAAG;IAAE,MAAM,EAAE,mBAAmB,EAAE,CAAC;IAAC,YAAY,EAAE,MAAM,EAAE,CAAA;CAAE,CA2DpH"}

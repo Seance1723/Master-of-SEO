@@ -1,0 +1,14 @@
+[
+  {
+    "id": "news-publisher-core",
+    "group": "group-12",
+    "category": "news-publisher",
+    "title": "News / Publisher Readiness",
+    "description": "Show publisher identity, author information, dates, and accurate Article/NewsArticle signals where appropriate.",
+    "do": ["Show publisher identity.", "Show author information.", "Include publish and modified dates where relevant.", "Use Article/NewsArticle schema where appropriate.", "Keep news content timely and accurate."],
+    "dont": ["Fake news freshness.", "Use misleading headlines.", "Hide author/publisher details.", "Republish old content as new without real updates."],
+    "priority": "P2",
+    "appliesTo": ["content", "audit", "planning"],
+    "status": "active"
+  }
+]

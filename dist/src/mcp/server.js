@@ -1,0 +1,1098 @@
+#!/usr/bin/env node
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
+import { runAIContentQualityAudit } from "../ai-discover/ai-generated-content-quality-guard.js";
+import { getAIDiscoverRules } from "../ai-discover/ai-discover-rules.js";
+import { runAISearchAudit } from "../ai-discover/ai-search-audit.js";
+import { runAnswerBlockAudit } from "../ai-discover/answer-block.js";
+import { runDiscoverSEOAudit } from "../ai-discover/discover-seo-audit.js";
+import { runArchitectureAudit } from "../architecture/architecture-audit.js";
+import { getArchitectureRules } from "../architecture/architecture-rules.js";
+import { runBuildSEOCheck } from "../cms-framework/build-seo-check.js";
+import { getCMSFrameworkRules } from "../cms-framework/cms-framework-rules.js";
+import { runFrameworkSEOAudit } from "../cms-framework/framework-seo-audit.js";
+import { runNextJSSEOAudit } from "../cms-framework/nextjs-seo-audit.js";
+import { runReactSEOAudit } from "../cms-framework/react-seo-audit.js";
+import { runStaticSEOAudit } from "../cms-framework/static-seo-audit.js";
+import { runWordPressSEOAudit } from "../cms-framework/wordpress-seo-audit.js";
+import { runCompetitorBacklinkGap } from "../competitors/competitor-backlink-gap.js";
+import { runCompetitorContentGap } from "../competitors/competitor-content-gap.js";
+import { runCompetitorAnalysis } from "../competitors/competitor-analysis.js";
+import { runCompetitorKeywordGap } from "../competitors/competitor-keyword-gap.js";
+import { getCompetitorRules } from "../competitors/competitor-rules.js";
+import { runCompetitorSerpAnalysis } from "../competitors/competitor-serp-analysis.js";
+import { runContentPlan } from "../content/content-plan.js";
+import { getContentRules } from "../content/content-rules.js";
+import { getCommandMenu } from "../core/command-registry.js";
+import { runSeoMaster } from "../core/orchestrator.js";
+import { dataDir, memoryPath } from "../core/paths.js";
+import { runCategorySeoAudit } from "../ecommerce/category-seo.js";
+import { runEcommerceAudit } from "../ecommerce/ecommerce-audit.js";
+import { getEcommerceRules } from "../ecommerce/ecommerce-rules.js";
+import { runProductSeoAudit } from "../ecommerce/product-seo.js";
+import { runKeywordResearch } from "../keywords/keyword-research.js";
+import { getKeywordRules } from "../keywords/keyword-rules.js";
+import { runHreflangAudit, runInternationalSEOAudit } from "../local-international/international-seo-audit.js";
+import { getLocalInternationalRules } from "../local-international/local-international-rules.js";
+import { runLocalSEOAudit } from "../local-international/local-seo-audit.js";
+import { runImageSeoAudit } from "../media/image-seo.js";
+import { runMediaAudit } from "../media/media-audit.js";
+import { getMediaRules } from "../media/media-rules.js";
+import { runVideoSeoAudit } from "../media/video-seo.js";
+import { runOnPageAudit } from "../on-page/on-page-audit.js";
+import { getOnPageRules } from "../on-page/on-page-rules.js";
+import { runPerformanceAudit } from "../performance/performance-audit.js";
+import { getPerformanceRules } from "../performance/performance-rules.js";
+import { runFinalMasterReport } from "../reporting-governance/final-master-report.js";
+import { getReportingGovernanceRules } from "../reporting-governance/reporting-governance-rules.js";
+import { runReleaseSEOGuard } from "../reporting-governance/release-seo-guard.js";
+import { runSEOGovernance } from "../reporting-governance/seo-governance.js";
+import { runSEOMeasurement } from "../reporting-governance/seo-measurement.js";
+import { runSEOQAChecklist } from "../reporting-governance/seo-qa-checklist.js";
+import { runSEOReport } from "../reporting-governance/seo-report-generator.js";
+import { runSchemaAudit } from "../schema/schema-audit.js";
+import { runSchemaGenerate } from "../schema/schema-generate.js";
+import { getSchemaRules } from "../schema/schema-rules.js";
+import { runCampaignPlan } from "../strategy/campaign-plan.js";
+import { runLaunchChecklist } from "../strategy/launch-checklist.js";
+import { runMigrationPlan } from "../strategy/migration-plan.js";
+import { runOpportunityPlan } from "../strategy/opportunity-prioritization.js";
+import { runSEOPlan } from "../strategy/seo-plan.js";
+import { runSEOStrategy } from "../strategy/seo-strategy.js";
+import { getStrategyRules } from "../strategy/strategy-rules.js";
+import { runTechnicalAudit } from "../technical/technical-audit.js";
+import { runAccessibilityAudit } from "../trust-security-accessibility/accessibility-audit.js";
+import { runEEATAudit } from "../trust-security-accessibility/eeat-audit.js";
+import { runSecurityAudit } from "../trust-security-accessibility/security-audit.js";
+import { runTrustAudit } from "../trust-security-accessibility/trust-audit.js";
+import { getTrustSecurityAccessibilityRules } from "../trust-security-accessibility/trust-security-accessibility-rules.js";
+import { getTechnicalRules } from "../technical/technical-rules.js";
+import { runPageAudit } from "../website-audit/page-audit.js";
+import { runTemplateAudit } from "../website-audit/template-audit.js";
+import { runWebsiteAudit } from "../website-audit/website-audit.js";
+import { getWebsiteAuditRules } from "../website-audit/website-audit-rules.js";
+const protocolVersion = "2024-11-05";
+let buffer = "";
+const tools = [
+    {
+        name: "seo_master_run",
+        description: "Run Master of SEO through the same trigger-safe orchestrator used by the CLI.",
+        inputSchema: {
+            type: "object",
+            properties: {
+                input: { type: "string", description: "Raw user input. Activates with /seo-master or explicit natural activation such as use seo-master." }
+            },
+            required: ["input"]
+        }
+    },
+    {
+        name: "seo_master_commands",
+        description: "List all available Master of SEO commands.",
+        inputSchema: { type: "object", properties: {} }
+    },
+    {
+        name: "seo_master_technical_audit",
+        description: "Run Technical SEO audit logic with explicit provided inputs only. No live crawling is performed.",
+        inputSchema: {
+            type: "object",
+            properties: {
+                url: { type: "string" },
+                html: { type: "string" },
+                robotsTxt: { type: "string" },
+                sitemapXml: { type: "string" },
+                headers: { type: "object" },
+                statusCode: { type: "number" },
+                canonicalUrl: { type: "string" },
+                mode: { type: "string", enum: ["website", "page", "code", "planning"] }
+            }
+        }
+    },
+    {
+        name: "seo_master_performance_audit",
+        description: "Run Performance SEO audit logic with explicit provided inputs only. No live Lighthouse crawl is performed.",
+        inputSchema: {
+            type: "object",
+            properties: {
+                url: { type: "string" },
+                html: { type: "string" },
+                headers: { type: "object" },
+                assets: { type: "array" },
+                metrics: { type: "object" },
+                mode: { type: "string", enum: ["website", "page", "code", "planning"] }
+            }
+        }
+    },
+    {
+        name: "seo_master_on_page_audit",
+        description: "Run On-Page SEO audit logic with explicit provided inputs only. No live crawling is performed.",
+        inputSchema: {
+            type: "object",
+            properties: {
+                url: { type: "string" },
+                html: { type: "string" },
+                title: { type: "string" },
+                metaDescription: { type: "string" },
+                h1: { type: "string" },
+                headings: { type: "array" },
+                bodyText: { type: "string" },
+                images: { type: "array" },
+                links: { type: "array" },
+                ctas: { type: "array" },
+                pageType: { type: "string" },
+                primaryKeyword: { type: "string" },
+                secondaryKeywords: { type: "array" },
+                mode: { type: "string", enum: ["website", "page", "code", "planning"] }
+            }
+        }
+    },
+    {
+        name: "seo_master_keyword_research",
+        description: "Run Keyword Research & Intent logic with explicit provided inputs only. No live keyword API fetching is performed.",
+        inputSchema: {
+            type: "object",
+            properties: {
+                seedKeywords: { type: "array" },
+                competitorKeywords: { type: "array" },
+                existingPages: { type: "array" },
+                business: { type: "object" },
+                keywordMetrics: { type: "array" },
+                mode: { type: "string", enum: ["research", "clustering", "mapping", "planning", "audit"] }
+            }
+        }
+    },
+    {
+        name: "seo_master_content_plan",
+        description: "Run Content Strategy & Planning logic with explicit provided inputs only. No live SERP, traffic, competitor, or keyword metric fetching is performed.",
+        inputSchema: {
+            type: "object",
+            properties: {
+                business: { type: "object" },
+                keywordClusters: { type: "array" },
+                existingPages: { type: "array" },
+                competitorPages: { type: "array" },
+                constraints: { type: "object" },
+                mode: { type: "string", enum: ["planning", "brief", "refresh", "pruning", "calendar", "audit"] }
+            }
+        }
+    },
+    {
+        name: "seo_master_architecture_audit",
+        description: "Run Site Architecture & Internal Linking audit logic with explicit provided inputs only. No live crawling is performed.",
+        inputSchema: {
+            type: "object",
+            properties: {
+                url: { type: "string" },
+                pages: { type: "array" },
+                links: { type: "array" },
+                navigation: { type: "array" },
+                breadcrumbs: { type: "array" },
+                sitemapUrls: { type: "array" },
+                topicClusters: { type: "array" },
+                mode: { type: "string", enum: ["audit", "planning", "linking", "architecture"] }
+            }
+        }
+    },
+    {
+        name: "seo_master_internal_linking_audit",
+        description: "Run Internal Linking audit logic with explicit provided inputs only. No live crawling is performed.",
+        inputSchema: {
+            type: "object",
+            properties: {
+                url: { type: "string" },
+                pages: { type: "array" },
+                links: { type: "array" },
+                navigation: { type: "array" },
+                breadcrumbs: { type: "array" },
+                sitemapUrls: { type: "array" },
+                topicClusters: { type: "array" },
+                mode: { type: "string", enum: ["audit", "planning", "linking", "architecture"] }
+            }
+        }
+    },
+    {
+        name: "seo_master_schema_audit",
+        description: "Run Schema & Entity SEO audit logic with explicit provided inputs only. No live validation is performed.",
+        inputSchema: {
+            type: "object",
+            properties: {
+                url: { type: "string" },
+                html: { type: "string" },
+                jsonLd: { type: "array" },
+                page: { type: "object" },
+                organization: { type: "object" },
+                author: { type: "object" },
+                product: { type: "object" },
+                service: { type: "object" },
+                softwareApplication: { type: "object" },
+                localBusiness: { type: "object" },
+                video: { type: "object" },
+                jobPosting: { type: "object" },
+                mode: { type: "string", enum: ["audit", "generate", "validate", "planning"] }
+            }
+        }
+    },
+    {
+        name: "seo_master_schema_generate",
+        description: "Generate safe JSON-LD from explicit provided inputs only. No fake reviews, ratings, authors, or hidden-content markup.",
+        inputSchema: {
+            type: "object",
+            properties: {
+                url: { type: "string" },
+                html: { type: "string" },
+                jsonLd: { type: "array" },
+                page: { type: "object" },
+                organization: { type: "object" },
+                author: { type: "object" },
+                product: { type: "object" },
+                service: { type: "object" },
+                softwareApplication: { type: "object" },
+                localBusiness: { type: "object" },
+                video: { type: "object" },
+                jobPosting: { type: "object" },
+                mode: { type: "string", enum: ["audit", "generate", "validate", "planning"] }
+            }
+        }
+    },
+    {
+        name: "seo_master_media_audit",
+        description: "Run Media SEO audit logic with explicit provided inputs only. No live crawling, fetching, OCR, or external validation is performed.",
+        inputSchema: { type: "object", properties: { url: { type: "string" }, html: { type: "string" }, page: { type: "object" }, images: { type: "array" }, videos: { type: "array" }, openGraph: { type: "object" }, schema: { type: "object" }, assets: { type: "array" }, mode: { type: "string", enum: ["audit", "image", "video", "planning"] } } }
+    },
+    {
+        name: "seo_master_image_seo_audit",
+        description: "Run Image SEO audit logic with explicit provided inputs only. No image fetching or OCR is performed.",
+        inputSchema: { type: "object", properties: { url: { type: "string" }, html: { type: "string" }, page: { type: "object" }, images: { type: "array" }, openGraph: { type: "object" }, schema: { type: "object" }, assets: { type: "array" }, mode: { type: "string", enum: ["audit", "image", "video", "planning"] } } }
+    },
+    {
+        name: "seo_master_video_seo_audit",
+        description: "Run Video SEO audit logic with explicit provided inputs only. No video fetching or external validation is performed.",
+        inputSchema: { type: "object", properties: { url: { type: "string" }, html: { type: "string" }, page: { type: "object" }, videos: { type: "array" }, schema: { type: "object" }, assets: { type: "array" }, mode: { type: "string", enum: ["audit", "image", "video", "planning"] } } }
+    },
+    {
+        name: "seo_master_ecommerce_audit",
+        description: "Run Ecommerce SEO audit logic with explicit provided inputs only. No live product, stock, price, review, feed, or Merchant Center fetching is performed.",
+        inputSchema: { type: "object", properties: { url: { type: "string" }, html: { type: "string" }, page: { type: "object" }, categories: { type: "array" }, products: { type: "array" }, filters: { type: "array" }, pagination: { type: "array" }, policies: { type: "object" }, merchantFeed: { type: "object" }, internalLinks: { type: "array" }, mode: { type: "string", enum: ["audit", "category", "product", "variants", "faceted", "planning"] } } }
+    },
+    {
+        name: "seo_master_product_seo_audit",
+        description: "Run Product SEO audit logic with explicit provided inputs only. No hallucinated product, price, review, rating, or stock data.",
+        inputSchema: { type: "object", properties: { products: { type: "array" }, page: { type: "object" }, policies: { type: "object" }, merchantFeed: { type: "object" }, internalLinks: { type: "array" }, mode: { type: "string", enum: ["audit", "category", "product", "variants", "faceted", "planning"] } } }
+    },
+    {
+        name: "seo_master_category_seo_audit",
+        description: "Run Category SEO audit logic with explicit provided inputs only. No live crawling or product fetching.",
+        inputSchema: { type: "object", properties: { categories: { type: "array" }, filters: { type: "array" }, pagination: { type: "array" }, internalLinks: { type: "array" }, mode: { type: "string", enum: ["audit", "category", "product", "variants", "faceted", "planning"] } } }
+    },
+    {
+        name: "seo_master_local_seo_audit",
+        description: "Run Local SEO audit logic with explicit provided inputs only. No live GBP, maps, citation, or review fetching.",
+        inputSchema: { type: "object", properties: { business: { type: "object" }, locations: { type: "array" }, pages: { type: "array" }, googleBusinessProfile: { type: "object" }, citations: { type: "array" }, reviews: { type: "array" }, mode: { type: "string", enum: ["audit", "planning", "local_pages", "citations", "reviews"] } } }
+    },
+    {
+        name: "seo_master_international_seo_audit",
+        description: "Run International SEO audit logic with explicit provided inputs only. No live hreflang, country, or language fetching.",
+        inputSchema: { type: "object", properties: { site: { type: "object" }, pages: { type: "array" }, hreflangSets: { type: "array" }, localizedContent: { type: "array" }, mode: { type: "string", enum: ["audit", "hreflang", "localization", "planning"] } } }
+    },
+    {
+        name: "seo_master_hreflang_audit",
+        description: "Run Hreflang audit logic with explicit provided inputs only.",
+        inputSchema: { type: "object", properties: { site: { type: "object" }, pages: { type: "array" }, hreflangSets: { type: "array" }, localizedContent: { type: "array" }, mode: { type: "string", enum: ["audit", "hreflang", "localization", "planning"] } } }
+    },
+    {
+        name: "seo_master_ai_search_audit",
+        description: "Run AI Search readiness audit logic with explicit provided inputs only. No live AI Overview, SERP, or ranking checks are performed.",
+        inputSchema: { type: "object", properties: { url: { type: "string" }, html: { type: "string" }, page: { type: "object" }, content: { type: "object" }, entities: { type: "array" }, queries: { type: "array" }, schema: { type: "object" }, mode: { type: "string", enum: ["audit", "readiness", "answer_block", "content_quality", "planning"] } } }
+    },
+    {
+        name: "seo_master_answer_block_audit",
+        description: "Run answer block audit logic with explicit provided inputs only.",
+        inputSchema: { type: "object", properties: { html: { type: "string" }, page: { type: "object" }, content: { type: "object" }, queries: { type: "array" }, mode: { type: "string", enum: ["audit", "readiness", "answer_block", "content_quality", "planning"] } } }
+    },
+    {
+        name: "seo_master_discover_seo_audit",
+        description: "Run Discover SEO readiness audit logic with explicit provided inputs only. No live Discover, news, or ranking checks are performed.",
+        inputSchema: { type: "object", properties: { url: { type: "string" }, html: { type: "string" }, page: { type: "object" }, publisher: { type: "object" }, images: { type: "array" }, openGraph: { type: "object" }, contentSignals: { type: "object" }, mode: { type: "string", enum: ["audit", "discover", "news", "planning"] } } }
+    },
+    {
+        name: "seo_master_ai_content_quality_audit",
+        description: "Run AI content quality audit logic with explicit provided inputs only.",
+        inputSchema: { type: "object", properties: { html: { type: "string" }, page: { type: "object" }, content: { type: "object" }, entities: { type: "array" }, queries: { type: "array" }, schema: { type: "object" }, mode: { type: "string", enum: ["audit", "readiness", "answer_block", "content_quality", "planning"] } } }
+    },
+    {
+        name: "seo_master_trust_audit",
+        description: "Run Trust SEO audit logic with explicit provided inputs only. No hallucinated trust findings.",
+        inputSchema: { type: "object", properties: { url: { type: "string" }, html: { type: "string" }, page: { type: "object" }, organization: { type: "object" }, authors: { type: "array" }, reviewers: { type: "array" }, trustPages: { type: "object" }, testimonials: { type: "array" }, caseStudies: { type: "array" }, mode: { type: "string", enum: ["trust", "eeat", "policy", "audit"] } } }
+    },
+    {
+        name: "seo_master_eeat_audit",
+        description: "Run E-E-A-T audit logic with explicit provided inputs only. No fake authors, reviewers, credentials, or proof.",
+        inputSchema: { type: "object", properties: { url: { type: "string" }, html: { type: "string" }, page: { type: "object" }, organization: { type: "object" }, authors: { type: "array" }, reviewers: { type: "array" }, trustPages: { type: "object" }, testimonials: { type: "array" }, caseStudies: { type: "array" }, mode: { type: "string", enum: ["trust", "eeat", "policy", "audit"] } } }
+    },
+    {
+        name: "seo_master_security_audit",
+        description: "Run Security SEO audit logic with explicit provided inputs only. No live security, malware, SSL, or external scans.",
+        inputSchema: { type: "object", properties: { url: { type: "string" }, html: { type: "string" }, headers: { type: "object" }, page: { type: "object" }, resources: { type: "array" }, forms: { type: "array" }, securitySignals: { type: "object" }, mode: { type: "string", enum: ["security", "forms", "headers", "audit"] } } }
+    },
+    {
+        name: "seo_master_accessibility_audit",
+        description: "Run Accessibility SEO audit logic with explicit provided inputs only. No live accessibility crawling or external validation.",
+        inputSchema: { type: "object", properties: { url: { type: "string" }, html: { type: "string" }, page: { type: "object" }, headings: { type: "array" }, images: { type: "array" }, forms: { type: "array" }, links: { type: "array" }, buttons: { type: "array" }, accessibilitySignals: { type: "object" }, mode: { type: "string", enum: ["accessibility", "semantic", "forms", "audit"] } } }
+    },
+    {
+        name: "seo_master_framework_seo_audit",
+        description: "Run CMS/framework SEO audit logic with explicit inputs only. No live CMS login, build execution, plugin scan, or crawling.",
+        inputSchema: { type: "object", properties: { url: { type: "string" }, html: { type: "string" }, framework: { type: "string" }, cms: { type: "object" }, packageJson: { type: "object" }, frameworkConfig: { type: "object" }, routes: { type: "array" }, build: { type: "object" }, seoFiles: { type: "object" }, mode: { type: "string", enum: ["framework", "wordpress", "react", "nextjs", "static", "build", "audit"] } } }
+    },
+    {
+        name: "seo_master_wordpress_seo_audit",
+        description: "Run WordPress SEO audit logic with explicit CMS inputs only.",
+        inputSchema: { type: "object", properties: { html: { type: "string" }, cms: { type: "object" }, routes: { type: "array" }, build: { type: "object" }, seoFiles: { type: "object" }, mode: { type: "string", enum: ["framework", "wordpress", "react", "nextjs", "static", "build", "audit"] } } }
+    },
+    {
+        name: "seo_master_react_seo_audit",
+        description: "Run React SEO audit logic with explicit inputs only.",
+        inputSchema: { type: "object", properties: { html: { type: "string" }, packageJson: { type: "object" }, routes: { type: "array" }, build: { type: "object" }, seoFiles: { type: "object" }, mode: { type: "string", enum: ["framework", "wordpress", "react", "nextjs", "static", "build", "audit"] } } }
+    },
+    {
+        name: "seo_master_nextjs_seo_audit",
+        description: "Run Next.js SEO audit logic with explicit inputs only.",
+        inputSchema: { type: "object", properties: { html: { type: "string" }, packageJson: { type: "object" }, frameworkConfig: { type: "object" }, routes: { type: "array" }, build: { type: "object" }, seoFiles: { type: "object" }, mode: { type: "string", enum: ["framework", "wordpress", "react", "nextjs", "static", "build", "audit"] } } }
+    },
+    {
+        name: "seo_master_static_seo_audit",
+        description: "Run Static Website SEO audit logic with explicit inputs only.",
+        inputSchema: { type: "object", properties: { html: { type: "string" }, routes: { type: "array" }, build: { type: "object" }, seoFiles: { type: "object" }, mode: { type: "string", enum: ["framework", "wordpress", "react", "nextjs", "static", "build", "audit"] } } }
+    },
+    {
+        name: "seo_master_build_seo_check",
+        description: "Run framework build SEO check logic with explicit build data only. No build is executed.",
+        inputSchema: { type: "object", properties: { framework: { type: "string" }, routes: { type: "array" }, build: { type: "object" }, seoFiles: { type: "object" }, mode: { type: "string", enum: ["framework", "wordpress", "react", "nextjs", "static", "build", "audit"] } } }
+    },
+    {
+        name: "seo_master_website_audit",
+        description: "Run Website Audit aggregation logic with explicit provided inputs only. No live crawling, Lighthouse, Search Console, GA4, rankings, or external validation.",
+        inputSchema: { type: "object", properties: { url: { type: "string" }, website: { type: "object" }, pages: { type: "array" }, technical: { type: "object" }, performance: { type: "object" }, onPage: { type: "object" }, keywords: { type: "object" }, content: { type: "object" }, architecture: { type: "object" }, schema: { type: "object" }, media: { type: "object" }, ecommerce: { type: "object" }, localInternational: { type: "object" }, aiDiscover: { type: "object" }, trustSecurityAccessibility: { type: "object" }, cmsFramework: { type: "object" }, mode: { type: "string", enum: ["website", "page", "template", "full", "partial"] } } }
+    },
+    {
+        name: "seo_master_page_audit",
+        description: "Run page-level Website Audit logic with explicit provided inputs only.",
+        inputSchema: { type: "object", properties: { url: { type: "string" }, website: { type: "object" }, pages: { type: "array" }, technical: { type: "object" }, performance: { type: "object" }, onPage: { type: "object" }, schema: { type: "object" }, media: { type: "object" }, trustSecurityAccessibility: { type: "object" }, cmsFramework: { type: "object" }, mode: { type: "string", enum: ["website", "page", "template", "full", "partial"] } } }
+    },
+    {
+        name: "seo_master_template_audit",
+        description: "Run template-level Website Audit grouping logic with explicit provided page inputs only.",
+        inputSchema: { type: "object", properties: { pages: { type: "array" }, mode: { type: "string", enum: ["website", "page", "template", "full", "partial"] } } }
+    },
+    {
+        name: "seo_master_competitor_analysis",
+        description: "Run competitor analysis with explicit provided inputs only. No live crawling, SERP scraping, backlink fetching, keyword APIs, or traffic estimation.",
+        inputSchema: { type: "object", properties: { business: { type: "object" }, ownSite: { type: "object" }, competitors: { type: "array" }, serpData: { type: "array" }, mode: { type: "string", enum: ["analysis", "keyword_gap", "content_gap", "backlink_gap", "serp", "planning"] } } }
+    },
+    {
+        name: "seo_master_competitor_keyword_gap",
+        description: "Run competitor keyword gap logic with explicit provided inputs only.",
+        inputSchema: { type: "object", properties: { business: { type: "object" }, ownSite: { type: "object" }, competitors: { type: "array" }, serpData: { type: "array" }, mode: { type: "string", enum: ["analysis", "keyword_gap", "content_gap", "backlink_gap", "serp", "planning"] } } }
+    },
+    {
+        name: "seo_master_competitor_content_gap",
+        description: "Run competitor content gap logic with explicit provided inputs only.",
+        inputSchema: { type: "object", properties: { business: { type: "object" }, ownSite: { type: "object" }, competitors: { type: "array" }, serpData: { type: "array" }, mode: { type: "string", enum: ["analysis", "keyword_gap", "content_gap", "backlink_gap", "serp", "planning"] } } }
+    },
+    {
+        name: "seo_master_competitor_backlink_gap",
+        description: "Run competitor backlink gap logic with explicit provided inputs only. Spam links are not recommended.",
+        inputSchema: { type: "object", properties: { business: { type: "object" }, ownSite: { type: "object" }, competitors: { type: "array" }, serpData: { type: "array" }, mode: { type: "string", enum: ["analysis", "keyword_gap", "content_gap", "backlink_gap", "serp", "planning"] } } }
+    },
+    {
+        name: "seo_master_serp_analysis",
+        description: "Run SERP analysis from provided SERP data only. No live SERP scraping.",
+        inputSchema: { type: "object", properties: { business: { type: "object" }, ownSite: { type: "object" }, competitors: { type: "array" }, serpData: { type: "array" }, mode: { type: "string", enum: ["analysis", "keyword_gap", "content_gap", "backlink_gap", "serp", "planning"] } } }
+    },
+    {
+        name: "seo_master_seo_plan",
+        description: "Run SEO plan logic with explicit provided inputs only. No live provider reads or invented metrics.",
+        inputSchema: { type: "object", properties: { business: { type: "object" }, websiteAudit: { type: "object" }, keywordResearch: { type: "object" }, contentPlan: { type: "object" }, competitorAnalysis: { type: "object" }, resources: { type: "object" }, constraints: { type: "object" }, launch: { type: "object" }, migration: { type: "object" }, mode: { type: "string", enum: ["strategy", "seo_plan", "campaign", "opportunity", "launch", "migration", "roadmap"] } } }
+    },
+    {
+        name: "seo_master_seo_strategy",
+        description: "Run SEO strategy logic with explicit provided inputs only.",
+        inputSchema: { type: "object", properties: { business: { type: "object" }, websiteAudit: { type: "object" }, keywordResearch: { type: "object" }, contentPlan: { type: "object" }, competitorAnalysis: { type: "object" }, resources: { type: "object" }, constraints: { type: "object" }, launch: { type: "object" }, migration: { type: "object" }, mode: { type: "string", enum: ["strategy", "seo_plan", "campaign", "opportunity", "launch", "migration", "roadmap"] } } }
+    },
+    {
+        name: "seo_master_campaign_plan",
+        description: "Run SEO campaign planning with explicit provided inputs only.",
+        inputSchema: { type: "object", properties: { business: { type: "object" }, websiteAudit: { type: "object" }, keywordResearch: { type: "object" }, contentPlan: { type: "object" }, competitorAnalysis: { type: "object" }, resources: { type: "object" }, constraints: { type: "object" }, mode: { type: "string", enum: ["strategy", "seo_plan", "campaign", "opportunity", "launch", "migration", "roadmap"] } } }
+    },
+    {
+        name: "seo_master_opportunity_plan",
+        description: "Run SEO opportunity prioritization with explicit provided inputs only.",
+        inputSchema: { type: "object", properties: { business: { type: "object" }, websiteAudit: { type: "object" }, keywordResearch: { type: "object" }, contentPlan: { type: "object" }, competitorAnalysis: { type: "object" }, resources: { type: "object" }, constraints: { type: "object" }, mode: { type: "string", enum: ["strategy", "seo_plan", "campaign", "opportunity", "launch", "migration", "roadmap"] } } }
+    },
+    {
+        name: "seo_master_launch_checklist",
+        description: "Run launch checklist planning from explicit launch inputs only.",
+        inputSchema: { type: "object", properties: { business: { type: "object" }, websiteAudit: { type: "object" }, resources: { type: "object" }, constraints: { type: "object" }, launch: { type: "object" }, mode: { type: "string", enum: ["strategy", "seo_plan", "campaign", "opportunity", "launch", "migration", "roadmap"] } } }
+    },
+    {
+        name: "seo_master_migration_plan",
+        description: "Run migration planning from explicit migration inputs only.",
+        inputSchema: { type: "object", properties: { business: { type: "object" }, websiteAudit: { type: "object" }, resources: { type: "object" }, constraints: { type: "object" }, migration: { type: "object" }, mode: { type: "string", enum: ["strategy", "seo_plan", "campaign", "opportunity", "launch", "migration", "roadmap"] } } }
+    },
+    {
+        name: "seo_master_report",
+        description: "Generate an SEO report from explicit provided audit, strategy, measurement, and governance inputs only. No live provider data is fetched.",
+        inputSchema: { type: "object", properties: { business: { type: "object" }, websiteAudit: { type: "object" }, seoStrategy: { type: "object" }, searchConsole: { type: "object" }, ga4: { type: "object" }, rankTracking: { type: "array" }, coreWebVitals: { type: "object" }, backlinks: { type: "object" }, contentPerformance: { type: "array" }, governance: { type: "object" }, mode: { type: "string", enum: ["report", "measurement", "governance", "qa", "release", "final"] } } }
+    },
+    {
+        name: "seo_master_measurement_report",
+        description: "Run SEO measurement logic from explicit provided metrics only. No Search Console, GA4, rank, backlink, or revenue reads are performed.",
+        inputSchema: { type: "object", properties: { business: { type: "object" }, searchConsole: { type: "object" }, ga4: { type: "object" }, rankTracking: { type: "array" }, coreWebVitals: { type: "object" }, backlinks: { type: "object" }, contentPerformance: { type: "array" }, governance: { type: "object" }, mode: { type: "string", enum: ["report", "measurement", "governance", "qa", "release", "final"] } } }
+    },
+    {
+        name: "seo_master_governance_check",
+        description: "Run SEO governance checks from explicit provided governance inputs only.",
+        inputSchema: { type: "object", properties: { governance: { type: "object" }, websiteAudit: { type: "object" }, seoStrategy: { type: "object" }, mode: { type: "string", enum: ["report", "measurement", "governance", "qa", "release", "final"] } } }
+    },
+    {
+        name: "seo_master_seo_qa",
+        description: "Generate an SEO QA checklist. This tool may return a generic checklist without input.",
+        inputSchema: { type: "object", properties: { governance: { type: "object" }, websiteAudit: { type: "object" }, mode: { type: "string", enum: ["report", "measurement", "governance", "qa", "release", "final"] } } }
+    },
+    {
+        name: "seo_master_release_seo_check",
+        description: "Assess provided pending release changes for SEO risk. No external validation is performed.",
+        inputSchema: { type: "object", properties: { governance: { type: "object" }, mode: { type: "string", enum: ["report", "measurement", "governance", "qa", "release", "final"] } } }
+    },
+    {
+        name: "seo_master_final_status",
+        description: "Generate the final Master of SEO report from explicit audit, strategy, measurement, and governance inputs only.",
+        inputSchema: { type: "object", properties: { business: { type: "object" }, websiteAudit: { type: "object" }, seoStrategy: { type: "object" }, searchConsole: { type: "object" }, ga4: { type: "object" }, rankTracking: { type: "array" }, coreWebVitals: { type: "object" }, backlinks: { type: "object" }, contentPerformance: { type: "array" }, governance: { type: "object" }, mode: { type: "string", enum: ["report", "measurement", "governance", "qa", "release", "final"] } } }
+    }
+];
+const prompts = [
+    "seo-master-final-status",
+    "seo-master-release-seo-check",
+    "seo-master-seo-qa",
+    "seo-master-governance-check",
+    "seo-master-measurement-report",
+    "seo-master-report",
+    "seo-master-migration-plan",
+    "seo-master-launch-checklist",
+    "seo-master-campaign-plan",
+    "seo-master-seo-strategy",
+    "seo-master-seo-plan",
+    "seo-master-serp-analysis",
+    "seo-master-competitor-backlink-gap",
+    "seo-master-competitor-content-gap",
+    "seo-master-competitor-keyword-gap",
+    "seo-master-competitor-analysis",
+    "seo-master-full-audit",
+    "seo-master-page-audit",
+    "seo-master-website-audit",
+    "seo-master-build-seo-check",
+    "seo-master-static-seo-audit",
+    "seo-master-nextjs-seo-audit",
+    "seo-master-react-seo-audit",
+    "seo-master-wordpress-seo-audit",
+    "seo-master-framework-seo-audit",
+    "seo-master-accessibility-audit",
+    "seo-master-security-audit",
+    "seo-master-eeat-audit",
+    "seo-master-trust-audit",
+    "seo-master-ai-content-quality-audit",
+    "seo-master-discover-seo-audit",
+    "seo-master-answer-block-audit",
+    "seo-master-ai-search-audit",
+    "seo-master-hreflang-audit",
+    "seo-master-international-seo-audit",
+    "seo-master-local-seo-audit",
+    "seo-master-category-seo-audit",
+    "seo-master-product-seo-audit",
+    "seo-master-ecommerce-audit",
+    "seo-master-video-seo-audit",
+    "seo-master-image-seo-audit",
+    "seo-master-media-audit",
+    "seo-master-schema-generate",
+    "seo-master-schema-audit",
+    "seo-master-internal-linking-audit",
+    "seo-master-architecture-audit",
+    "seo-master-content-plan",
+    "seo-master-keyword-research",
+    "seo-master-on-page-audit",
+    "seo-master-performance-audit",
+    "seo-master-technical-audit",
+    "seo-master-audit"
+].map((name) => ({
+    name,
+    description: `${name} prompt for Master of SEO.`,
+    arguments: []
+}));
+function send(message) {
+    process.stdout.write(`${JSON.stringify(message)}\n`);
+}
+function resultText(text) {
+    return { content: [{ type: "text", text }] };
+}
+async function readResource(uri) {
+    if (uri === "seo-master://memory")
+        return readFile(memoryPath, "utf8");
+    if (uri === "seo-master://commands")
+        return readFile(join(dataDir, "commands.json"), "utf8");
+    if (uri === "seo-master://groups")
+        return readFile(join(dataDir, "groups.json"), "utf8");
+    if (uri === "seo-master://technical-rules")
+        return JSON.stringify(await getTechnicalRules(), null, 2);
+    if (uri === "seo-master://performance-rules")
+        return JSON.stringify(await getPerformanceRules(), null, 2);
+    if (uri === "seo-master://on-page-rules")
+        return JSON.stringify(await getOnPageRules(), null, 2);
+    if (uri === "seo-master://keyword-rules")
+        return JSON.stringify(await getKeywordRules(), null, 2);
+    if (uri === "seo-master://content-rules")
+        return JSON.stringify(await getContentRules(), null, 2);
+    if (uri === "seo-master://architecture-rules")
+        return JSON.stringify(await getArchitectureRules(), null, 2);
+    if (uri === "seo-master://internal-linking-rules")
+        return readFile(join(dataDir, "internal-linking-rules.json"), "utf8");
+    if (uri === "seo-master://schema-rules")
+        return JSON.stringify(await getSchemaRules(), null, 2);
+    if (uri === "seo-master://entity-seo-rules")
+        return readFile(join(dataDir, "entity-seo-rules.json"), "utf8");
+    if (uri === "seo-master://media-rules")
+        return JSON.stringify(await getMediaRules(), null, 2);
+    if (uri === "seo-master://image-seo-rules")
+        return readFile(join(dataDir, "image-seo-rules.json"), "utf8");
+    if (uri === "seo-master://video-seo-rules")
+        return readFile(join(dataDir, "video-seo-rules.json"), "utf8");
+    if (uri === "seo-master://ecommerce-rules")
+        return JSON.stringify(await getEcommerceRules(), null, 2);
+    if (uri === "seo-master://product-seo-rules")
+        return readFile(join(dataDir, "product-seo-rules.json"), "utf8");
+    if (uri === "seo-master://category-seo-rules")
+        return readFile(join(dataDir, "ecommerce-category-rules.json"), "utf8");
+    if (uri === "seo-master://faceted-navigation-rules")
+        return readFile(join(dataDir, "faceted-navigation-rules.json"), "utf8");
+    if (uri === "seo-master://local-seo-rules")
+        return JSON.stringify(await getLocalInternationalRules(), null, 2);
+    if (uri === "seo-master://international-seo-rules")
+        return readFile(join(dataDir, "international-seo-rules.json"), "utf8");
+    if (uri === "seo-master://hreflang-rules")
+        return readFile(join(dataDir, "hreflang-rules.json"), "utf8");
+    if (uri === "seo-master://ai-search-rules")
+        return JSON.stringify(await getAIDiscoverRules(), null, 2);
+    if (uri === "seo-master://discover-seo-rules")
+        return readFile(join(dataDir, "discover-seo-rules.json"), "utf8");
+    if (uri === "seo-master://answer-block-rules")
+        return readFile(join(dataDir, "answer-block-rules.json"), "utf8");
+    if (uri === "seo-master://ai-content-quality-rules")
+        return readFile(join(dataDir, "ai-content-quality-rules.json"), "utf8");
+    if (uri === "seo-master://trust-rules")
+        return JSON.stringify(await getTrustSecurityAccessibilityRules(), null, 2);
+    if (uri === "seo-master://eeat-rules")
+        return readFile(join(dataDir, "eeat-rules.json"), "utf8");
+    if (uri === "seo-master://security-rules")
+        return readFile(join(dataDir, "security-seo-rules.json"), "utf8");
+    if (uri === "seo-master://accessibility-rules")
+        return readFile(join(dataDir, "accessibility-rules.json"), "utf8");
+    if (uri === "seo-master://cms-framework-rules")
+        return JSON.stringify(await getCMSFrameworkRules(), null, 2);
+    if (uri === "seo-master://wordpress-seo-rules")
+        return readFile(join(dataDir, "wordpress-seo-rules.json"), "utf8");
+    if (uri === "seo-master://react-seo-rules")
+        return readFile(join(dataDir, "react-seo-rules.json"), "utf8");
+    if (uri === "seo-master://nextjs-seo-rules")
+        return readFile(join(dataDir, "nextjs-seo-rules.json"), "utf8");
+    if (uri === "seo-master://build-seo-rules")
+        return readFile(join(dataDir, "build-seo-rules.json"), "utf8");
+    if (uri === "seo-master://website-audit-rules")
+        return JSON.stringify(await getWebsiteAuditRules(), null, 2);
+    if (uri === "seo-master://audit-category-weights")
+        return readFile(join(dataDir, "audit-category-weights.json"), "utf8");
+    if (uri === "seo-master://audit-roadmap-rules")
+        return readFile(join(dataDir, "audit-roadmap-rules.json"), "utf8");
+    if (uri === "seo-master://competitor-rules")
+        return JSON.stringify(await getCompetitorRules(), null, 2);
+    if (uri === "seo-master://competitor-keyword-gap-rules")
+        return readFile(join(dataDir, "competitor-keyword-gap-rules.json"), "utf8");
+    if (uri === "seo-master://competitor-content-gap-rules")
+        return readFile(join(dataDir, "competitor-content-gap-rules.json"), "utf8");
+    if (uri === "seo-master://competitor-backlink-gap-rules")
+        return readFile(join(dataDir, "competitor-backlink-gap-rules.json"), "utf8");
+    if (uri === "seo-master://competitor-serp-rules")
+        return readFile(join(dataDir, "competitor-serp-rules.json"), "utf8");
+    if (uri === "seo-master://strategy-rules")
+        return JSON.stringify(await getStrategyRules(), null, 2);
+    if (uri === "seo-master://seo-plan-rules")
+        return readFile(join(dataDir, "seo-plan-rules.json"), "utf8");
+    if (uri === "seo-master://campaign-planning-rules")
+        return readFile(join(dataDir, "campaign-planning-rules.json"), "utf8");
+    if (uri === "seo-master://launch-checklist-rules")
+        return readFile(join(dataDir, "launch-checklist-rules.json"), "utf8");
+    if (uri === "seo-master://migration-plan-rules")
+        return readFile(join(dataDir, "migration-plan-rules.json"), "utf8");
+    if (uri === "seo-master://measurement-rules")
+        return JSON.stringify(await getReportingGovernanceRules(), null, 2);
+    if (uri === "seo-master://report-generator-rules")
+        return readFile(join(dataDir, "report-generator-rules.json"), "utf8");
+    if (uri === "seo-master://governance-rules")
+        return readFile(join(dataDir, "governance-rules.json"), "utf8");
+    if (uri === "seo-master://seo-qa-rules")
+        return readFile(join(dataDir, "seo-qa-rules.json"), "utf8");
+    if (uri === "seo-master://release-seo-rules")
+        return readFile(join(dataDir, "release-seo-rules.json"), "utf8");
+    throw new Error(`Unknown resource: ${uri}`);
+}
+async function handle(request) {
+    const { id, method, params = {} } = request;
+    try {
+        if (method === "initialize") {
+            send({
+                jsonrpc: "2.0",
+                id,
+                result: {
+                    protocolVersion,
+                    capabilities: { tools: {}, resources: {}, prompts: {} },
+                    serverInfo: { name: "master-of-seo", version: "1.0.0" }
+                }
+            });
+            return;
+        }
+        if (method === "notifications/initialized")
+            return;
+        if (method === "tools/list") {
+            send({ jsonrpc: "2.0", id, result: { tools } });
+            return;
+        }
+        if (method === "tools/call") {
+            const name = String(params.name ?? "");
+            const args = (params.arguments ?? {});
+            if (name === "seo_master_run") {
+                const response = await runSeoMaster(String(args.input ?? ""));
+                send({ jsonrpc: "2.0", id, result: resultText(response.message) });
+                return;
+            }
+            if (name === "seo_master_commands") {
+                send({ jsonrpc: "2.0", id, result: resultText(await getCommandMenu()) });
+                return;
+            }
+            if (name === "seo_master_technical_audit") {
+                const report = runTechnicalAudit({ mode: "planning", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_performance_audit") {
+                const report = runPerformanceAudit({ mode: "planning", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_on_page_audit") {
+                const report = runOnPageAudit({ mode: "planning", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_keyword_research") {
+                const report = runKeywordResearch({ mode: "research", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_content_plan") {
+                const report = runContentPlan({ mode: "planning", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_architecture_audit" || name === "seo_master_internal_linking_audit") {
+                const report = runArchitectureAudit({ mode: "audit", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_schema_audit") {
+                const report = runSchemaAudit({ mode: "audit", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_schema_generate") {
+                const report = runSchemaGenerate({ mode: "generate", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_media_audit") {
+                const report = runMediaAudit({ mode: "audit", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_image_seo_audit") {
+                const report = runImageSeoAudit({ mode: "image", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_video_seo_audit") {
+                const report = runVideoSeoAudit({ mode: "video", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_ecommerce_audit") {
+                const report = runEcommerceAudit({ mode: "audit", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_product_seo_audit") {
+                const report = runProductSeoAudit({ mode: "product", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_category_seo_audit") {
+                const report = runCategorySeoAudit({ mode: "category", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_local_seo_audit") {
+                const report = runLocalSEOAudit({ mode: "audit", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_international_seo_audit") {
+                const report = runInternationalSEOAudit({ mode: "audit", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_hreflang_audit") {
+                const report = runHreflangAudit({ mode: "hreflang", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_ai_search_audit") {
+                const report = runAISearchAudit({ mode: "audit", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_answer_block_audit") {
+                const report = runAnswerBlockAudit({ mode: "answer_block", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_discover_seo_audit") {
+                const report = runDiscoverSEOAudit({ mode: "discover", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_ai_content_quality_audit") {
+                const report = runAIContentQualityAudit({ mode: "content_quality", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_trust_audit") {
+                const report = runTrustAudit({ mode: "trust", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_eeat_audit") {
+                const report = runEEATAudit({ mode: "eeat", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_security_audit") {
+                const report = runSecurityAudit({ mode: "security", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_accessibility_audit") {
+                const report = runAccessibilityAudit({ mode: "accessibility", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_framework_seo_audit") {
+                const report = runFrameworkSEOAudit({ mode: "framework", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_wordpress_seo_audit") {
+                const report = runWordPressSEOAudit({ mode: "wordpress", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_react_seo_audit") {
+                const report = runReactSEOAudit({ mode: "react", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_nextjs_seo_audit") {
+                const report = runNextJSSEOAudit({ mode: "nextjs", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_static_seo_audit") {
+                const report = runStaticSEOAudit({ mode: "static", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_build_seo_check") {
+                const report = runBuildSEOCheck({ mode: "build", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_website_audit") {
+                const report = runWebsiteAudit({ mode: "website", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_page_audit") {
+                const report = runPageAudit({ mode: "page", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_template_audit") {
+                const report = runTemplateAudit((args.pages ?? []));
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_competitor_analysis") {
+                const report = runCompetitorAnalysis({ mode: "analysis", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_competitor_keyword_gap") {
+                const report = runCompetitorKeywordGap({ mode: "keyword_gap", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_competitor_content_gap") {
+                const report = runCompetitorContentGap({ mode: "content_gap", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_competitor_backlink_gap") {
+                const report = runCompetitorBacklinkGap({ mode: "backlink_gap", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_serp_analysis") {
+                const report = runCompetitorSerpAnalysis({ mode: "serp", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_seo_plan") {
+                const report = runSEOPlan({ mode: "seo_plan", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_seo_strategy") {
+                const report = runSEOStrategy({ mode: "strategy", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_campaign_plan") {
+                const report = runCampaignPlan({ mode: "campaign", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_opportunity_plan") {
+                const report = runOpportunityPlan({ mode: "opportunity", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_launch_checklist") {
+                const report = runLaunchChecklist({ mode: "launch", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_migration_plan") {
+                const report = runMigrationPlan({ mode: "migration", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_report") {
+                const report = runSEOReport({ mode: "report", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_measurement_report") {
+                const report = runSEOMeasurement({ mode: "measurement", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_governance_check") {
+                const report = runSEOGovernance({ mode: "governance", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_seo_qa") {
+                const report = runSEOQAChecklist({ mode: "qa", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_release_seo_check") {
+                const report = runReleaseSEOGuard({ mode: "release", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            if (name === "seo_master_final_status") {
+                const report = runFinalMasterReport({ mode: "final", ...args });
+                send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+                return;
+            }
+            throw new Error(`Unknown tool: ${name}`);
+        }
+        if (method === "resources/list") {
+            send({
+                jsonrpc: "2.0",
+                id,
+                result: {
+                    resources: [
+                        { uri: "seo-master://memory", name: "Master of SEO Memory", mimeType: "application/json" },
+                        { uri: "seo-master://commands", name: "Master of SEO Commands", mimeType: "application/json" },
+                        { uri: "seo-master://groups", name: "Master of SEO Groups", mimeType: "application/json" },
+                        { uri: "seo-master://technical-rules", name: "Master of SEO Technical Rules", mimeType: "application/json" },
+                        { uri: "seo-master://performance-rules", name: "Master of SEO Performance Rules", mimeType: "application/json" },
+                        { uri: "seo-master://on-page-rules", name: "Master of SEO On-Page Rules", mimeType: "application/json" },
+                        { uri: "seo-master://keyword-rules", name: "Master of SEO Keyword Rules", mimeType: "application/json" },
+                        { uri: "seo-master://content-rules", name: "Master of SEO Content Rules", mimeType: "application/json" },
+                        { uri: "seo-master://architecture-rules", name: "Master of SEO Architecture Rules", mimeType: "application/json" },
+                        { uri: "seo-master://internal-linking-rules", name: "Master of SEO Internal Linking Rules", mimeType: "application/json" },
+                        { uri: "seo-master://schema-rules", name: "Master of SEO Schema Rules", mimeType: "application/json" },
+                        { uri: "seo-master://entity-seo-rules", name: "Master of SEO Entity SEO Rules", mimeType: "application/json" },
+                        { uri: "seo-master://media-rules", name: "Master of SEO Media Rules", mimeType: "application/json" },
+                        { uri: "seo-master://image-seo-rules", name: "Master of SEO Image SEO Rules", mimeType: "application/json" },
+                        { uri: "seo-master://video-seo-rules", name: "Master of SEO Video SEO Rules", mimeType: "application/json" },
+                        { uri: "seo-master://ecommerce-rules", name: "Master of SEO Ecommerce Rules", mimeType: "application/json" },
+                        { uri: "seo-master://product-seo-rules", name: "Master of SEO Product SEO Rules", mimeType: "application/json" },
+                        { uri: "seo-master://category-seo-rules", name: "Master of SEO Category SEO Rules", mimeType: "application/json" },
+                        { uri: "seo-master://faceted-navigation-rules", name: "Master of SEO Faceted Navigation Rules", mimeType: "application/json" },
+                        { uri: "seo-master://local-seo-rules", name: "Master of SEO Local SEO Rules", mimeType: "application/json" },
+                        { uri: "seo-master://international-seo-rules", name: "Master of SEO International SEO Rules", mimeType: "application/json" },
+                        { uri: "seo-master://hreflang-rules", name: "Master of SEO Hreflang Rules", mimeType: "application/json" },
+                        { uri: "seo-master://ai-search-rules", name: "Master of SEO AI Search Rules", mimeType: "application/json" },
+                        { uri: "seo-master://discover-seo-rules", name: "Master of SEO Discover SEO Rules", mimeType: "application/json" },
+                        { uri: "seo-master://answer-block-rules", name: "Master of SEO Answer Block Rules", mimeType: "application/json" },
+                        { uri: "seo-master://ai-content-quality-rules", name: "Master of SEO AI Content Quality Rules", mimeType: "application/json" },
+                        { uri: "seo-master://trust-rules", name: "Master of SEO Trust Rules", mimeType: "application/json" },
+                        { uri: "seo-master://eeat-rules", name: "Master of SEO E-E-A-T Rules", mimeType: "application/json" },
+                        { uri: "seo-master://security-rules", name: "Master of SEO Security Rules", mimeType: "application/json" },
+                        { uri: "seo-master://accessibility-rules", name: "Master of SEO Accessibility Rules", mimeType: "application/json" },
+                        { uri: "seo-master://cms-framework-rules", name: "Master of SEO CMS Framework Rules", mimeType: "application/json" },
+                        { uri: "seo-master://wordpress-seo-rules", name: "Master of SEO WordPress SEO Rules", mimeType: "application/json" },
+                        { uri: "seo-master://react-seo-rules", name: "Master of SEO React SEO Rules", mimeType: "application/json" },
+                        { uri: "seo-master://nextjs-seo-rules", name: "Master of SEO Next.js SEO Rules", mimeType: "application/json" },
+                        { uri: "seo-master://build-seo-rules", name: "Master of SEO Build SEO Rules", mimeType: "application/json" },
+                        { uri: "seo-master://website-audit-rules", name: "Master of SEO Website Audit Rules", mimeType: "application/json" },
+                        { uri: "seo-master://audit-category-weights", name: "Master of SEO Audit Category Weights", mimeType: "application/json" },
+                        { uri: "seo-master://audit-roadmap-rules", name: "Master of SEO Audit Roadmap Rules", mimeType: "application/json" },
+                        { uri: "seo-master://competitor-rules", name: "Master of SEO Competitor Rules", mimeType: "application/json" },
+                        { uri: "seo-master://competitor-keyword-gap-rules", name: "Master of SEO Competitor Keyword Gap Rules", mimeType: "application/json" },
+                        { uri: "seo-master://competitor-content-gap-rules", name: "Master of SEO Competitor Content Gap Rules", mimeType: "application/json" },
+                        { uri: "seo-master://competitor-backlink-gap-rules", name: "Master of SEO Competitor Backlink Gap Rules", mimeType: "application/json" },
+                        { uri: "seo-master://competitor-serp-rules", name: "Master of SEO Competitor SERP Rules", mimeType: "application/json" },
+                        { uri: "seo-master://strategy-rules", name: "Master of SEO Strategy Rules", mimeType: "application/json" },
+                        { uri: "seo-master://seo-plan-rules", name: "Master of SEO Plan Rules", mimeType: "application/json" },
+                        { uri: "seo-master://campaign-planning-rules", name: "Master of SEO Campaign Planning Rules", mimeType: "application/json" },
+                        { uri: "seo-master://launch-checklist-rules", name: "Master of SEO Launch Checklist Rules", mimeType: "application/json" },
+                        { uri: "seo-master://migration-plan-rules", name: "Master of SEO Migration Plan Rules", mimeType: "application/json" },
+                        { uri: "seo-master://measurement-rules", name: "Master of SEO Measurement Rules", mimeType: "application/json" },
+                        { uri: "seo-master://report-generator-rules", name: "Master of SEO Report Generator Rules", mimeType: "application/json" },
+                        { uri: "seo-master://governance-rules", name: "Master of SEO Governance Rules", mimeType: "application/json" },
+                        { uri: "seo-master://seo-qa-rules", name: "Master of SEO QA Rules", mimeType: "application/json" },
+                        { uri: "seo-master://release-seo-rules", name: "Master of SEO Release SEO Rules", mimeType: "application/json" }
+                    ]
+                }
+            });
+            return;
+        }
+        if (method === "resources/read") {
+            const uri = String(params.uri ?? "");
+            send({ jsonrpc: "2.0", id, result: { contents: [{ uri, mimeType: "application/json", text: await readResource(uri) }] } });
+            return;
+        }
+        if (method === "prompts/list") {
+            send({ jsonrpc: "2.0", id, result: { prompts } });
+            return;
+        }
+        if (method === "prompts/get") {
+            const promptName = String(params.name ?? "");
+            const commandByPrompt = {
+                "seo-master-final-status": "/seo-master final-status",
+                "seo-master-release-seo-check": "/seo-master release-seo-check",
+                "seo-master-seo-qa": "/seo-master seo-qa",
+                "seo-master-governance-check": "/seo-master governance-check",
+                "seo-master-measurement-report": "/seo-master measurement-report",
+                "seo-master-report": "/seo-master report",
+                "seo-master-migration-plan": "/seo-master migration-plan",
+                "seo-master-launch-checklist": "/seo-master launch-checklist",
+                "seo-master-campaign-plan": "/seo-master seo-campaign-plan",
+                "seo-master-seo-strategy": "/seo-master seo-strategy",
+                "seo-master-seo-plan": "/seo-master seo-plan",
+                "seo-master-serp-analysis": "/seo-master serp-analysis",
+                "seo-master-competitor-backlink-gap": "/seo-master competitor-backlink-gap",
+                "seo-master-competitor-content-gap": "/seo-master competitor-content-gap",
+                "seo-master-competitor-keyword-gap": "/seo-master competitor-keyword-gap",
+                "seo-master-competitor-analysis": "/seo-master competitor-analysis",
+                "seo-master-full-audit": "/seo-master full-audit",
+                "seo-master-page-audit": "/seo-master page-audit",
+                "seo-master-website-audit": "/seo-master website-audit",
+                "seo-master-build-seo-check": "/seo-master build-seo-check",
+                "seo-master-static-seo-audit": "/seo-master static-seo-audit",
+                "seo-master-nextjs-seo-audit": "/seo-master nextjs-seo-audit",
+                "seo-master-react-seo-audit": "/seo-master react-seo-audit",
+                "seo-master-wordpress-seo-audit": "/seo-master wordpress-seo-audit",
+                "seo-master-framework-seo-audit": "/seo-master framework-seo-audit",
+                "seo-master-accessibility-audit": "/seo-master accessibility-audit",
+                "seo-master-security-audit": "/seo-master security-audit",
+                "seo-master-eeat-audit": "/seo-master eeat-audit",
+                "seo-master-trust-audit": "/seo-master trust-audit",
+                "seo-master-ai-content-quality-audit": "/seo-master ai-content-quality-audit",
+                "seo-master-discover-seo-audit": "/seo-master discover-seo-audit",
+                "seo-master-answer-block-audit": "/seo-master answer-block-audit",
+                "seo-master-ai-search-audit": "/seo-master ai-search-audit",
+                "seo-master-hreflang-audit": "/seo-master hreflang-audit",
+                "seo-master-international-seo-audit": "/seo-master international-seo-audit",
+                "seo-master-local-seo-audit": "/seo-master local-seo-audit",
+                "seo-master-category-seo-audit": "/seo-master category-seo-audit",
+                "seo-master-product-seo-audit": "/seo-master product-seo-audit",
+                "seo-master-ecommerce-audit": "/seo-master ecommerce-audit",
+                "seo-master-video-seo-audit": "/seo-master video-seo-audit",
+                "seo-master-image-seo-audit": "/seo-master image-seo-audit",
+                "seo-master-media-audit": "/seo-master media-audit",
+                "seo-master-schema-generate": "/seo-master schema-generate",
+                "seo-master-schema-audit": "/seo-master schema-audit",
+                "seo-master-internal-linking-audit": "/seo-master internal-linking-audit",
+                "seo-master-architecture-audit": "/seo-master architecture-audit",
+                "seo-master-content-plan": "/seo-master content-plan",
+                "seo-master-keyword-research": "/seo-master keyword-research",
+                "seo-master-on-page-audit": "/seo-master on-page-audit",
+                "seo-master-performance-audit": "/seo-master performance-audit",
+                "seo-master-technical-audit": "/seo-master technical-audit",
+                "seo-master-audit": "/seo-master audit-website"
+            };
+            send({
+                jsonrpc: "2.0",
+                id,
+                result: {
+                    description: `${promptName} planned-module prompt`,
+                    messages: [
+                        {
+                            role: "user",
+                            content: {
+                                type: "text",
+                                text: commandByPrompt[promptName] ?? "/seo-master help"
+                            }
+                        }
+                    ]
+                }
+            });
+            return;
+        }
+        send({ jsonrpc: "2.0", id, error: { code: -32601, message: `Method not found: ${method}` } });
+    }
+    catch (error) {
+        send({ jsonrpc: "2.0", id, error: { code: -32000, message: error instanceof Error ? error.message : String(error) } });
+    }
+}
+process.stdin.setEncoding("utf8");
+process.stdin.on("data", (chunk) => {
+    buffer += chunk;
+    const lines = buffer.split(/\r?\n/u);
+    buffer = lines.pop() ?? "";
+    for (const line of lines) {
+        if (line.trim())
+            void handle(JSON.parse(line));
+    }
+});
+//# sourceMappingURL=server.js.map

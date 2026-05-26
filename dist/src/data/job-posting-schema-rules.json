@@ -1,0 +1,26 @@
+[
+  {
+    "id": "job-posting-current-real",
+    "category": "job-posting-schema",
+    "title": "JobPosting schema must be current and real",
+    "description": "Use JobPosting only for real active jobs with required fields.",
+    "do": [
+      "Include title, description, datePosted, validThrough, hiringOrganization, and jobLocation where available",
+      "Remove or update expired jobs"
+    ],
+    "dont": [
+      "Leave expired job postings live with active schema",
+      "Mark up non-job pages as jobs",
+      "Use fake locations or salary data"
+    ],
+    "priority": "P2",
+    "appliesTo": [
+      "schema",
+      "rich_results",
+      "audit",
+      "planning"
+    ],
+    "status": "active",
+    "group": "job"
+  }
+]

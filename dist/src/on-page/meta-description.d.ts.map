@@ -1,0 +1,1 @@
+{"version":3,"file":"meta-description.d.ts","sourceRoot":"","sources":["../../../src/on-page/meta-description.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,gBAAgB,EAAE,gBAAgB,EAAE,UAAU,EAAE,MAAM,qBAAqB,CAAC;AAE1F,eAAO,MAAM,oBAAoB,EAAE,UAAU,EAU3C,CAAC;AAEH,wBAAgB,oBAAoB,CAAC,KAAK,EAAE,gBAAgB,GAAG;IAAE,MAAM,EAAE,gBAAgB,EAAE,CAAC;IAAC,YAAY,EAAE,MAAM,EAAE,CAAA;CAAE,CAWpH"}

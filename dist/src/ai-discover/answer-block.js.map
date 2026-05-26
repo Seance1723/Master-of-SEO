@@ -1,0 +1,1 @@
+{"version":3,"file":"answer-block.js","sourceRoot":"","sources":["../../../src/ai-discover/answer-block.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,gBAAgB,EAAE,MAAM,sBAAsB,CAAC;AAExD,MAAM,UAAU,mBAAmB,CAAC,KAAyB;IAC3D,OAAO,gBAAgB,CAAC,EAAE,GAAG,KAAK,EAAE,IAAI,EAAE,cAAc,EAAE,CAAC,CAAC;AAC9D,CAAC"}

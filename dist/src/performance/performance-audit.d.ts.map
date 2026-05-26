@@ -1,0 +1,1 @@
+{"version":3,"file":"performance-audit.d.ts","sourceRoot":"","sources":["../../../src/performance/performance-audit.ts"],"names":[],"mappings":"AASA,OAAO,KAAK,EAAE,qBAAqB,EAAyB,sBAAsB,EAAE,MAAM,yBAAyB,CAAC;AAEpH,wBAAgB,mBAAmB,CAAC,KAAK,EAAE,qBAAqB,GAAG,sBAAsB,CAgDxF;AAED,wBAAgB,kCAAkC,CAAC,QAAQ,EAAE,MAAM,GAAG,qBAAqB,CAkB1F"}

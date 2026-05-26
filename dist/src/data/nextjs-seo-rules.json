@@ -1,0 +1,14 @@
+[
+  {
+    "id": "nextjs-seo-core",
+    "group": "group-14",
+    "category": "nextjs-seo",
+    "title": "Next.js SEO",
+    "description": "Use Metadata API/head management, intentional rendering modes, dynamic route metadata, sitemap, robots, canonicals, OG, and JSON-LD.",
+    "do": ["Use Metadata API or head management correctly.", "Generate route-level metadata.", "Use SSR/SSG/ISR intentionally.", "Generate sitemap and robots.txt.", "Add canonical and Open Graph per route.", "Render JSON-LD safely."],
+    "dont": ["Use client components unnecessarily for SEO-critical pages.", "Forget dynamic route metadata.", "Generate duplicate canonical URLs.", "Block static export/deployment SEO files."],
+    "priority": "P2",
+    "appliesTo": ["technical", "audit", "planning"],
+    "status": "active"
+  }
+]

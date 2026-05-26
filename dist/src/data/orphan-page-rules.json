@@ -1,0 +1,28 @@
+[
+  {
+    "id": "orphan-pages-core",
+    "category": "orphan-pages",
+    "title": "Orphan page detection",
+    "description": "Valuable pages should receive relevant internal links.",
+    "do": [
+      "Identify pages with no internal links.",
+      "Link valuable orphan pages from relevant pages.",
+      "Remove, merge, or noindex low-value orphan pages.",
+      "Compare sitemap URLs with internal link graph."
+    ],
+    "dont": [
+      "Leave important pages orphaned.",
+      "Rely only on XML sitemap for discovery.",
+      "Link orphan pages randomly without context."
+    ],
+    "priority": "P1",
+    "appliesTo": [
+      "architecture",
+      "internal_linking",
+      "crawlability",
+      "audit"
+    ],
+    "status": "active",
+    "group": "orphan"
+  }
+]

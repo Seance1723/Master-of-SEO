@@ -1,0 +1,28 @@
+[
+  {
+    "id": "url-hierarchy-core",
+    "category": "url-hierarchy",
+    "title": "URL hierarchy",
+    "description": "URL hierarchy should be logical, readable, and stable.",
+    "do": [
+      "Keep URL hierarchy logical.",
+      "Use category/subcategory structure where useful.",
+      "Keep URLs readable.",
+      "Keep important pages stable."
+    ],
+    "dont": [
+      "Create unnecessary deep URL paths.",
+      "Mix unrelated sections.",
+      "Create multiple URL patterns for the same page type.",
+      "Change URL hierarchy without redirect planning."
+    ],
+    "priority": "P2",
+    "appliesTo": [
+      "architecture",
+      "planning",
+      "audit"
+    ],
+    "status": "active",
+    "group": "url"
+  }
+]

@@ -255,7 +255,6 @@ Useful exports include the command registry, memory helpers, MCP server entry, a
 
 Current status: Master of SEO includes 18 SEO skill groups covering website audits, technical SEO, performance, on-page SEO, keyword research, content planning, schema, media, ecommerce, local/international SEO, AI Search readiness, trust/security/accessibility, CMS/framework SEO, competitor analysis, strategy, reporting, and governance.
 
-Next step: npm release preparation, publish validation, and MCP compatibility checks in target agent clients.
 
 ## License
 

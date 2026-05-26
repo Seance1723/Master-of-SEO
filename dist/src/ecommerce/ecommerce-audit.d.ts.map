@@ -1,0 +1,1 @@
+{"version":3,"file":"ecommerce-audit.d.ts","sourceRoot":"","sources":["../../../src/ecommerce/ecommerce-audit.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,mBAAmB,EAAE,oBAAoB,EAAkB,MAAM,uBAAuB,CAAC;AAEvG,wBAAgB,iBAAiB,CAAC,KAAK,EAAE,mBAAmB,GAAG,oBAAoB,CAgClF;AAED,wBAAgB,gCAAgC,CAAC,QAAQ,EAAE,MAAM,GAAG,mBAAmB,CAqBtF"}

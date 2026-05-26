@@ -1,0 +1,14 @@
+[
+  {
+    "id": "jsonld-rendering-core",
+    "group": "group-14",
+    "category": "jsonld-rendering",
+    "title": "JSON-LD Rendering",
+    "description": "Render JSON-LD safely from real visible data, preferably in initial HTML.",
+    "do": ["Render JSON-LD server-side or in initial HTML where possible.", "Generate schema only from real visible data.", "Avoid duplicate conflicting JSON-LD."],
+    "dont": ["Invent schema fields.", "Rely on delayed client injection for important schema.", "Add fake reviews/ratings."],
+    "priority": "P3",
+    "appliesTo": ["technical", "audit", "planning"],
+    "status": "active"
+  }
+]

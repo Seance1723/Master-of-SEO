@@ -1,0 +1,1 @@
+{"version":3,"file":"react-seo-audit.js","sourceRoot":"","sources":["../../../src/cms-framework/react-seo-audit.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,oBAAoB,EAAE,MAAM,0BAA0B,CAAC;AAEhE,MAAM,UAAU,gBAAgB,CAAC,KAA6B;IAC5D,OAAO,oBAAoB,CAAC,EAAE,GAAG,KAAK,EAAE,SAAS,EAAE,KAAK,CAAC,SAAS,IAAI,OAAO,EAAE,IAAI,EAAE,OAAO,EAAE,CAAC,CAAC;AAClG,CAAC"}
