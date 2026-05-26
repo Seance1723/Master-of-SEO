@@ -1,143 +1,231 @@
 # Master of SEO
 
-Master of SEO is an npm-ready, MCP-compatible AI skill for orchestrating SEO workflows through a strict slash trigger.
+An AI-agent SEO skill that turns any coding assistant into a technical SEO auditor, strategist, and website optimization partner.
 
-Master of SEO does not activate automatically. Use `/seo-master` to trigger the skill.
+Master of SEO helps AI agents audit websites, review code, plan keyword strategy, analyze competitors, generate SEO roadmaps, and protect SEO during launches and migrations. It is built for CLI workflows, MCP-compatible assistants, and npm-based developer environments.
 
-## Install
+[![npm](https://img.shields.io/badge/npm-master--of--seo-cb3837?style=flat-square)](https://www.npmjs.com/package/master-of-seo)
+[![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](#license)
+[![MCP Ready](https://img.shields.io/badge/MCP-ready-blue?style=flat-square)](#mcp-usage)
+[![TypeScript](https://img.shields.io/badge/TypeScript-ready-3178c6?style=flat-square)](https://www.typescriptlang.org/)
+[![AI Agent Skill](https://img.shields.io/badge/AI%20Agent-skill-7c3aed?style=flat-square)](#why-master-of-seo)
+[![CLI Ready](https://img.shields.io/badge/CLI-ready-111827?style=flat-square)](#cli-usage)
+
+## Why Master of SEO?
+
+Most AI agents can write code.  
+Master of SEO teaches them how to think like an SEO architect.
+
+It gives AI assistants structured SEO judgment across technical SEO, on-page SEO, keyword research, competitor analysis, website audits, schema/entity SEO, performance SEO, ecommerce SEO, local/international SEO, AI Search readiness, launch/migration protection, reporting, and governance.
+
+Safe by default: Master of SEO works from provided inputs unless live provider integrations are added later. It does not invent crawl results, Search Console metrics, GA4 data, rankings, backlinks, keyword volume, revenue, or traffic.
+
+## What It Can Do
+
+| Capability | What it helps with |
+|---|---|
+| Website Audit | Find technical, content, schema, UX, performance, and trust issues |
+| Technical SEO | Robots, sitemap, canonical, redirects, status codes, indexing |
+| Keyword Research | Cluster keywords, map intent, detect cannibalization |
+| Competitor Analysis | Find keyword gaps, content gaps, backlink gaps, SERP opportunities |
+| Content Planning | Build topic clusters, briefs, refresh plans, pruning plans |
+| Schema SEO | Audit and generate safe JSON-LD |
+| Performance SEO | Core Web Vitals, image, JS, CSS, font, third-party script checks |
+| Ecommerce SEO | Product, category, variants, faceted navigation, reviews, Merchant feed readiness |
+| Local & International SEO | NAP, local pages, GBP readiness, hreflang, localization |
+| AI Search Readiness | Answer blocks, entity clarity, information gain, citation quality |
+| Governance | SEO QA, release guard, reports, changelog, measurement |
+
+## Installation
+
+Install globally for CLI usage:
 
 ```bash
 npm install -g master-of-seo
 ```
 
+Install locally for package imports:
+
+```bash
+npm install master-of-seo
+```
+
 ## CLI Usage
 
 ```bash
-seo-master
-seo-master /
 seo-master "/seo-master help"
-seo-master "/seo-master report"
-seo-master "/seo-master measurement-report --searchConsole '{\"clicks\":100,\"impressions\":10000,\"ctr\":1}'"
-seo-master "/seo-master governance-check --governance '{\"hasSeoQaProcess\":false}'"
-seo-master "/seo-master seo-qa"
-seo-master "/seo-master release-seo-check --governance '{\"pendingChanges\":[{\"type\":\"url_change\",\"riskLevel\":\"high\"}]}'"
+seo-master "/seo-master audit-website"
+seo-master "/seo-master keyword-research technical seo, seo audit, ecommerce seo"
+seo-master "/seo-master competitor-analysis"
+seo-master "/seo-master seo-plan"
 ```
 
-## Active Commands
+Example with explicit input:
 
-- `/seo-master help`
-- `/seo-master memory`
-- `/seo-master next-group`
-- `/seo-master technical-audit`
-- `/seo-master performance-audit`
-- `/seo-master on-page-audit`
-- `/seo-master keyword-research`
-- `/seo-master content-plan`
-- `/seo-master architecture-audit`
-- `/seo-master internal-linking-audit`
-- `/seo-master schema-audit`
-- `/seo-master schema-generate`
-- `/seo-master media-audit`
-- `/seo-master image-seo-audit`
-- `/seo-master video-seo-audit`
-- `/seo-master ecommerce-seo`
-- `/seo-master ecommerce-audit`
-- `/seo-master product-seo-audit`
-- `/seo-master category-seo-audit`
-- `/seo-master local-seo`
-- `/seo-master local-seo-audit`
-- `/seo-master international-seo`
-- `/seo-master international-seo-audit`
-- `/seo-master hreflang-audit`
-- `/seo-master ai-search-readiness`
-- `/seo-master ai-search-audit`
-- `/seo-master answer-block-audit`
-- `/seo-master discover-seo-audit`
-- `/seo-master ai-content-quality-audit`
-- `/seo-master trust-audit`
-- `/seo-master eeat-audit`
-- `/seo-master security-audit`
-- `/seo-master accessibility-audit`
-- `/seo-master framework-seo-audit`
-- `/seo-master wordpress-seo-audit`
-- `/seo-master react-seo-audit`
-- `/seo-master nextjs-seo-audit`
-- `/seo-master static-seo-audit`
-- `/seo-master build-seo-check`
-- `/seo-master audit-website`
-- `/seo-master website-audit`
-- `/seo-master full-audit`
-- `/seo-master page-audit`
-- `/seo-master competitor-analysis`
-- `/seo-master competitor-audit`
-- `/seo-master competitor-keyword-gap`
-- `/seo-master competitor-content-gap`
-- `/seo-master competitor-backlink-gap`
-- `/seo-master serp-analysis`
-- `/seo-master seo-plan`
-- `/seo-master seo-strategy`
-- `/seo-master seo-campaign-plan`
-- `/seo-master opportunity-plan`
-- `/seo-master launch-checklist`
-- `/seo-master migration-plan`
-- `/seo-master report`
-- `/seo-master seo-report`
-- `/seo-master measurement-report`
-- `/seo-master governance-check`
-- `/seo-master seo-qa`
-- `/seo-master release-seo-check`
-- `/seo-master final-status`
+```bash
+seo-master "/seo-master technical-audit --html '<html><head><meta name=\"robots\" content=\"noindex\"></head></html>'"
+```
 
-Typing `/` shows all available Master of SEO commands. SEO logic only runs when input starts with `/seo-master`.
+Example output:
 
-## Measurement, Reporting & Governance Scope
+```text
+P1: Page has noindex directive
+Why it matters: Important pages with noindex may not appear in search.
+Fix: Remove noindex from indexable public pages.
+```
 
-Group 18 implements SEO measurement, KPI mapping, Search Console diagnostics, GA4 organic conversion checks, analytics event mapping, organic traffic/conversion measurement, keyword performance, content decay, Core Web Vitals measurement, backlink measurement, revenue/pipeline attribution, SEO report generation, executive summaries, roadmap progress tracking, SEO governance, SEO QA checklist, release SEO guard, SEO changelog, and final Master of SEO reporting.
+## Natural Agent Usage
 
-Group 18 does not fetch live Search Console, GA4, ranking, backlink, revenue, or provider data unless provider support is added later. It safely reports and governs SEO from provided inputs only.
+Trigger with a slash command:
+
+```text
+/seo-master audit-website
+```
+
+Or explicitly ask an agent to use it:
+
+```text
+Check what is wrong in my website and use seo-master skills.
+```
+
+Master of SEO does not silently run for every SEO-related prompt. It activates only when:
+
+- The command starts with `/seo-master`
+- The user explicitly says `use seo-master`, `use Master of SEO`, or `apply seo-master skills`
+- An MCP tool is called directly
 
 ## MCP Usage
 
-Run the MCP server:
+Add Master of SEO as an MCP server:
 
-```bash
-npm run mcp
+```json
+{
+  "mcpServers": {
+    "master-of-seo": {
+      "command": "npx",
+      "args": ["-y", "master-of-seo", "mcp"]
+    }
+  }
+}
 ```
 
-The MCP server exposes `seo_master_run`, `seo_master_commands`, active audit/planning/reporting tools, and rule resources.
+| Tool | Usage |
+|---|---|
+| Codex | Add Master of SEO as MCP server |
+| Antigravity | Add MCP server config |
+| Windsurf | Add MCP server config |
+| VS Code | Add MCP server in workspace/user config |
+| Cursor | Add MCP server config |
+| Claude | Add MCP server config |
+| Continue | Use MCP, CLI, or package import |
 
-## Group Roadmap
+## Available Commands
 
-- Group 1: Core SEO Orchestration - completed
-- Group 2: Technical SEO - completed
-- Group 3: Performance SEO - completed
-- Group 4: On-Page SEO - completed
-- Group 5: Keyword Research & Intent - completed
-- Group 6: Content Strategy & Planning - completed
-- Group 7: Site Architecture & Internal Linking - completed
-- Group 8: Schema & Entity SEO - completed
-- Group 9: Media SEO - completed
-- Group 10: Ecommerce SEO - completed
-- Group 11: Local & International SEO - completed
-- Group 12: AI Search & Discover SEO - completed
-- Group 13: Trust, Security & Accessibility - completed
-- Group 14: CMS & Framework SEO - completed
-- Group 15: Website Audit - completed
-- Group 16: Competitor Analysis - completed
-- Group 17: SEO Strategy & Campaign Planning - completed
-- Group 18: Measurement, Reporting & Governance - completed
-- Final Packaging, QA & npm Release - next
+### Core
 
-## Memory System
+```text
+/seo-master help
+/seo-master memory
+/seo-master final-status
+```
 
-Project memory lives in `memory/master-of-seo.memory.json`. Before starting a new group, read memory first. After every group, update memory and README.
+### Audit
 
-## Compatibility
+```text
+/seo-master audit-website
+/seo-master website-audit
+/seo-master full-audit
+/seo-master page-audit
+/seo-master technical-audit
+/seo-master performance-audit
+/seo-master on-page-audit
+/seo-master schema-audit
+/seo-master media-audit
+/seo-master accessibility-audit
+/seo-master security-audit
+/seo-master trust-audit
+/seo-master eeat-audit
+```
 
-Master of SEO is designed for OpenAI agents, Claude, Antigravity, Windsurf, Cursor, Continue, VS Code agents, and other MCP-compatible tools.
+### Research & Strategy
 
-## Current Status
+```text
+/seo-master keyword-research
+/seo-master competitor-analysis
+/seo-master competitor-keyword-gap
+/seo-master competitor-content-gap
+/seo-master competitor-backlink-gap
+/seo-master serp-analysis
+/seo-master content-plan
+/seo-master seo-plan
+/seo-master seo-strategy
+/seo-master seo-campaign-plan
+/seo-master opportunity-plan
+```
 
-- Current implementation: Groups 1 to 18 completed
-- Next phase: Final packaging, npm publish readiness, MCP compatibility testing, docs polishing, and release validation
+### Specialized SEO
+
+```text
+/seo-master ecommerce-seo
+/seo-master product-seo-audit
+/seo-master category-seo-audit
+/seo-master local-seo
+/seo-master international-seo
+/seo-master hreflang-audit
+/seo-master ai-search-readiness
+/seo-master discover-seo-audit
+/seo-master framework-seo-audit
+/seo-master wordpress-seo-audit
+/seo-master react-seo-audit
+/seo-master nextjs-seo-audit
+/seo-master static-seo-audit
+```
+
+### Launch, Migration & Reporting
+
+```text
+/seo-master launch-checklist
+/seo-master migration-plan
+/seo-master report
+/seo-master seo-report
+/seo-master measurement-report
+/seo-master governance-check
+/seo-master seo-qa
+/seo-master release-seo-check
+```
+
+## What Makes It Different
+
+- Built for AI agents, not just humans
+- Rule-based SEO reasoning
+- Do / Don't guardrails
+- Priority scoring: `P0`, `P1`, `P2`, `P3`
+- Works through CLI, MCP, and package import
+- Safe by default: does not hallucinate live data
+- Designed for npm distribution
+- Useful for developers, SEO teams, content teams, and agencies
+
+## Safe By Default
+
+Master of SEO does not invent data. If live crawl, keyword, ranking, traffic, backlink, GA4, or Search Console data is not provided, it returns safe recommendations or asks for input.
+
+Live crawling, Search Console reads, GA4 reads, SERP scraping, backlink checks, ranking checks, keyword API calls, and external validation require future provider integrations.
+
+## Library Usage
+
+```ts
+import { runSeoMaster } from "master-of-seo";
+
+const result = await runSeoMaster("/seo-master keyword-research technical seo, seo audit");
+console.log(result);
+```
+
+## Project Status
+
+Current status: All 18 skill groups implemented.  
+Next: Final QA, npm publish, MCP compatibility testing.
+
+## License
+
+MIT License.
 
