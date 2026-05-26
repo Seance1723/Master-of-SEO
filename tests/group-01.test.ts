@@ -47,13 +47,13 @@ test("input /seo-master help returns help", async () => {
 test("input /seo-master memory reads memory", async () => {
   const result = await runSeoMaster("/seo-master memory");
   assert.equal(result.type, "memory");
-  assert.match(result.message, /Current group: Final Packaging, QA & npm Release/u);
+  assert.match(result.message, /Current group: Publish Approval/u);
 });
 
-test("input /seo-master next-group returns final packaging", async () => {
+test("input /seo-master next-group returns publish approval", async () => {
   const result = await runSeoMaster("/seo-master next-group");
   assert.equal(result.type, "next-group");
-  assert.match(result.message, /Final Packaging, QA & npm Release \(final-packaging\)/u);
+  assert.match(result.message, /No planned groups remain/u);
 });
 
 test("report command is active after Group 18", async () => {

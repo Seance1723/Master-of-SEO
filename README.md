@@ -246,11 +246,14 @@ Useful exports include the command registry, memory helpers, MCP server entry, a
 - [Command reference](./docs/command-reference.md)
 - [Examples](./docs/examples.md)
 - [Safe data policy](./docs/safe-data-policy.md)
+- [Client smoke tests](./docs/client-smoke-tests.md)
+- [Troubleshooting](./docs/troubleshooting.md)
 - [Publishing notes](./docs/publishing.md)
+- [Post-publish checklist](./docs/post-publish-checklist.md)
 
 ## Project Status
 
-Current status: all 18 skill groups implemented and final QA completed.
+Current status: Master of SEO includes 18 SEO skill groups covering website audits, technical SEO, performance, on-page SEO, keyword research, content planning, schema, media, ecommerce, local/international SEO, AI Search readiness, trust/security/accessibility, CMS/framework SEO, competitor analysis, strategy, reporting, and governance.
 
 Next step: npm release preparation, publish validation, and MCP compatibility checks in target agent clients.
 

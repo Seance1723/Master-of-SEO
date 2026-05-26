@@ -1,7 +1,7 @@
 {
   "name": "master-of-seo",
   "version": "1.0.0",
-  "description": "An npm-ready, MCP-compatible AI skill for gated SEO orchestration with /seo-master.",
+  "description": "An MCP-compatible AI-agent SEO skill for technical audits, strategy, reporting, and release-safe website optimization.",
   "type": "module",
   "main": "./dist/src/core/orchestrator.js",
   "types": "./dist/src/core/orchestrator.d.ts",
@@ -16,6 +16,7 @@
     "./mcp": "./dist/src/mcp/server.js",
     "./command-registry": "./dist/src/core/command-registry.js",
     "./memory": "./dist/src/core/memory.js",
+    "./types": "./dist/src/types/index.js",
     "./technical-audit": "./dist/src/technical/technical-audit.js",
     "./performance-audit": "./dist/src/performance/performance-audit.js",
     "./on-page-audit": "./dist/src/on-page/on-page-audit.js",
@@ -58,7 +59,8 @@
     "dev": "node ./src/cli/index.ts",
     "start": "node ./dist/src/cli/index.js",
     "test": "node ./tests/group-01.test.ts && node ./tests/group-02-technical-seo.test.ts && node ./tests/group-03-performance-seo.test.ts && node ./tests/group-04-on-page-seo.test.ts && node ./tests/group-05-keyword-research-intent.test.ts && node ./tests/group-06-content-strategy-planning.test.ts && node ./tests/group-07-site-architecture-internal-linking.test.ts && node ./tests/group-08-schema-entity-seo.test.ts && node ./tests/group-09-media-seo.test.ts && node ./tests/group-10-ecommerce-seo.test.ts && node ./tests/group-11-local-international-seo.test.ts && node ./tests/group-12-ai-search-discover-seo.test.ts && node ./tests/group-13-trust-security-accessibility.test.ts && node ./tests/group-14-cms-framework-seo.test.ts && node ./tests/group-15-website-audit.test.ts && node ./tests/group-16-competitor-analysis.test.ts && node ./tests/group-17-seo-strategy-campaign-planning.test.ts && node ./tests/group-18-measurement-reporting-governance.test.ts",
-    "mcp": "node ./src/mcp/server.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "mcp": "node ./dist/src/mcp/server.js",
     "prepublishOnly": "npm run build && npm test"
   },
   "keywords": [
@@ -71,9 +73,17 @@
     "windsurf",
     "continue"
   ],
+  "author": "Master of SEO contributors",
   "license": "MIT",
+  "homepage": "https://www.npmjs.com/package/master-of-seo",
+  "bugs": {
+    "url": "https://www.npmjs.com/package/master-of-seo"
+  },
   "engines": {
     "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "devDependencies": {
     "@types/node": "^25.9.1",
