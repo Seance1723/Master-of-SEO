@@ -46,6 +46,13 @@ import { getPerformanceRules } from "../performance/performance-rules.ts";
 import { runSchemaAudit } from "../schema/schema-audit.ts";
 import { runSchemaGenerate } from "../schema/schema-generate.ts";
 import { getSchemaRules } from "../schema/schema-rules.ts";
+import { runCampaignPlan } from "../strategy/campaign-plan.ts";
+import { runLaunchChecklist } from "../strategy/launch-checklist.ts";
+import { runMigrationPlan } from "../strategy/migration-plan.ts";
+import { runOpportunityPlan } from "../strategy/opportunity-prioritization.ts";
+import { runSEOPlan } from "../strategy/seo-plan.ts";
+import { runSEOStrategy } from "../strategy/seo-strategy.ts";
+import { getStrategyRules } from "../strategy/strategy-rules.ts";
 import { runTechnicalAudit } from "../technical/technical-audit.ts";
 import { runAccessibilityAudit } from "../trust-security-accessibility/accessibility-audit.ts";
 import { runEEATAudit } from "../trust-security-accessibility/eeat-audit.ts";
@@ -72,6 +79,7 @@ import type { AccessibilityAuditInput, SecurityAuditInput, TrustAuditInput } fro
 import type { CMSFrameworkAuditInput } from "../types/cms-framework.ts";
 import type { WebsiteAuditInput } from "../types/website-audit.ts";
 import type { CompetitorAnalysisInput } from "../types/competitors.ts";
+import type { SEOStrategyInput } from "../types/strategy.ts";
 
 interface JsonRpcRequest {
   jsonrpc: "2.0";
@@ -417,10 +425,45 @@ const tools = [
     name: "seo_master_serp_analysis",
     description: "Run SERP analysis from provided SERP data only. No live SERP scraping.",
     inputSchema: { type: "object", properties: { business: { type: "object" }, ownSite: { type: "object" }, competitors: { type: "array" }, serpData: { type: "array" }, mode: { type: "string", enum: ["analysis", "keyword_gap", "content_gap", "backlink_gap", "serp", "planning"] } } }
+  },
+  {
+    name: "seo_master_seo_plan",
+    description: "Run SEO plan logic with explicit provided inputs only. No live provider reads or invented metrics.",
+    inputSchema: { type: "object", properties: { business: { type: "object" }, websiteAudit: { type: "object" }, keywordResearch: { type: "object" }, contentPlan: { type: "object" }, competitorAnalysis: { type: "object" }, resources: { type: "object" }, constraints: { type: "object" }, launch: { type: "object" }, migration: { type: "object" }, mode: { type: "string", enum: ["strategy", "seo_plan", "campaign", "opportunity", "launch", "migration", "roadmap"] } } }
+  },
+  {
+    name: "seo_master_seo_strategy",
+    description: "Run SEO strategy logic with explicit provided inputs only.",
+    inputSchema: { type: "object", properties: { business: { type: "object" }, websiteAudit: { type: "object" }, keywordResearch: { type: "object" }, contentPlan: { type: "object" }, competitorAnalysis: { type: "object" }, resources: { type: "object" }, constraints: { type: "object" }, launch: { type: "object" }, migration: { type: "object" }, mode: { type: "string", enum: ["strategy", "seo_plan", "campaign", "opportunity", "launch", "migration", "roadmap"] } } }
+  },
+  {
+    name: "seo_master_campaign_plan",
+    description: "Run SEO campaign planning with explicit provided inputs only.",
+    inputSchema: { type: "object", properties: { business: { type: "object" }, websiteAudit: { type: "object" }, keywordResearch: { type: "object" }, contentPlan: { type: "object" }, competitorAnalysis: { type: "object" }, resources: { type: "object" }, constraints: { type: "object" }, mode: { type: "string", enum: ["strategy", "seo_plan", "campaign", "opportunity", "launch", "migration", "roadmap"] } } }
+  },
+  {
+    name: "seo_master_opportunity_plan",
+    description: "Run SEO opportunity prioritization with explicit provided inputs only.",
+    inputSchema: { type: "object", properties: { business: { type: "object" }, websiteAudit: { type: "object" }, keywordResearch: { type: "object" }, contentPlan: { type: "object" }, competitorAnalysis: { type: "object" }, resources: { type: "object" }, constraints: { type: "object" }, mode: { type: "string", enum: ["strategy", "seo_plan", "campaign", "opportunity", "launch", "migration", "roadmap"] } } }
+  },
+  {
+    name: "seo_master_launch_checklist",
+    description: "Run launch checklist planning from explicit launch inputs only.",
+    inputSchema: { type: "object", properties: { business: { type: "object" }, websiteAudit: { type: "object" }, resources: { type: "object" }, constraints: { type: "object" }, launch: { type: "object" }, mode: { type: "string", enum: ["strategy", "seo_plan", "campaign", "opportunity", "launch", "migration", "roadmap"] } } }
+  },
+  {
+    name: "seo_master_migration_plan",
+    description: "Run migration planning from explicit migration inputs only.",
+    inputSchema: { type: "object", properties: { business: { type: "object" }, websiteAudit: { type: "object" }, resources: { type: "object" }, constraints: { type: "object" }, migration: { type: "object" }, mode: { type: "string", enum: ["strategy", "seo_plan", "campaign", "opportunity", "launch", "migration", "roadmap"] } } }
   }
 ];
 
 const prompts = [
+  "seo-master-migration-plan",
+  "seo-master-launch-checklist",
+  "seo-master-campaign-plan",
+  "seo-master-seo-strategy",
+  "seo-master-seo-plan",
   "seo-master-serp-analysis",
   "seo-master-competitor-backlink-gap",
   "seo-master-competitor-content-gap",
@@ -522,6 +565,11 @@ async function readResource(uri: string): Promise<string> {
   if (uri === "seo-master://competitor-content-gap-rules") return readFile(join(dataDir, "competitor-content-gap-rules.json"), "utf8");
   if (uri === "seo-master://competitor-backlink-gap-rules") return readFile(join(dataDir, "competitor-backlink-gap-rules.json"), "utf8");
   if (uri === "seo-master://competitor-serp-rules") return readFile(join(dataDir, "competitor-serp-rules.json"), "utf8");
+  if (uri === "seo-master://strategy-rules") return JSON.stringify(await getStrategyRules(), null, 2);
+  if (uri === "seo-master://seo-plan-rules") return readFile(join(dataDir, "seo-plan-rules.json"), "utf8");
+  if (uri === "seo-master://campaign-planning-rules") return readFile(join(dataDir, "campaign-planning-rules.json"), "utf8");
+  if (uri === "seo-master://launch-checklist-rules") return readFile(join(dataDir, "launch-checklist-rules.json"), "utf8");
+  if (uri === "seo-master://migration-plan-rules") return readFile(join(dataDir, "migration-plan-rules.json"), "utf8");
   throw new Error(`Unknown resource: ${uri}`);
 }
 
@@ -756,6 +804,36 @@ async function handle(request: JsonRpcRequest): Promise<void> {
         send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
         return;
       }
+      if (name === "seo_master_seo_plan") {
+        const report = runSEOPlan({ mode: "seo_plan", ...(args as Partial<SEOStrategyInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_seo_strategy") {
+        const report = runSEOStrategy({ mode: "strategy", ...(args as Partial<SEOStrategyInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_campaign_plan") {
+        const report = runCampaignPlan({ mode: "campaign", ...(args as Partial<SEOStrategyInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_opportunity_plan") {
+        const report = runOpportunityPlan({ mode: "opportunity", ...(args as Partial<SEOStrategyInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_launch_checklist") {
+        const report = runLaunchChecklist({ mode: "launch", ...(args as Partial<SEOStrategyInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
+      if (name === "seo_master_migration_plan") {
+        const report = runMigrationPlan({ mode: "migration", ...(args as Partial<SEOStrategyInput>) });
+        send({ jsonrpc: "2.0", id, result: resultText(JSON.stringify(report, null, 2)) });
+        return;
+      }
       throw new Error(`Unknown tool: ${name}`);
     }
 
@@ -807,7 +885,12 @@ async function handle(request: JsonRpcRequest): Promise<void> {
             { uri: "seo-master://competitor-keyword-gap-rules", name: "Master of SEO Competitor Keyword Gap Rules", mimeType: "application/json" },
             { uri: "seo-master://competitor-content-gap-rules", name: "Master of SEO Competitor Content Gap Rules", mimeType: "application/json" },
             { uri: "seo-master://competitor-backlink-gap-rules", name: "Master of SEO Competitor Backlink Gap Rules", mimeType: "application/json" },
-            { uri: "seo-master://competitor-serp-rules", name: "Master of SEO Competitor SERP Rules", mimeType: "application/json" }
+            { uri: "seo-master://competitor-serp-rules", name: "Master of SEO Competitor SERP Rules", mimeType: "application/json" },
+            { uri: "seo-master://strategy-rules", name: "Master of SEO Strategy Rules", mimeType: "application/json" },
+            { uri: "seo-master://seo-plan-rules", name: "Master of SEO Plan Rules", mimeType: "application/json" },
+            { uri: "seo-master://campaign-planning-rules", name: "Master of SEO Campaign Planning Rules", mimeType: "application/json" },
+            { uri: "seo-master://launch-checklist-rules", name: "Master of SEO Launch Checklist Rules", mimeType: "application/json" },
+            { uri: "seo-master://migration-plan-rules", name: "Master of SEO Migration Plan Rules", mimeType: "application/json" }
           ]
         }
       });
@@ -828,6 +911,11 @@ async function handle(request: JsonRpcRequest): Promise<void> {
     if (method === "prompts/get") {
       const promptName = String(params.name ?? "");
       const commandByPrompt: Record<string, string> = {
+        "seo-master-migration-plan": "/seo-master migration-plan",
+        "seo-master-launch-checklist": "/seo-master launch-checklist",
+        "seo-master-campaign-plan": "/seo-master seo-campaign-plan",
+        "seo-master-seo-strategy": "/seo-master seo-strategy",
+        "seo-master-seo-plan": "/seo-master seo-plan",
         "seo-master-serp-analysis": "/seo-master serp-analysis",
         "seo-master-competitor-backlink-gap": "/seo-master competitor-backlink-gap",
         "seo-master-competitor-content-gap": "/seo-master competitor-content-gap",
@@ -868,8 +956,7 @@ async function handle(request: JsonRpcRequest): Promise<void> {
         "seo-master-on-page-audit": "/seo-master on-page-audit",
         "seo-master-performance-audit": "/seo-master performance-audit",
         "seo-master-technical-audit": "/seo-master technical-audit",
-        "seo-master-audit": "/seo-master audit-website",
-        "seo-master-seo-plan": "/seo-master seo-plan"
+        "seo-master-audit": "/seo-master audit-website"
       };
       send({
         jsonrpc: "2.0",

@@ -123,11 +123,41 @@
     "id": "seo-plan",
     "command": "/seo-master seo-plan",
     "title": "SEO Plan",
-    "description": "Create a prioritized SEO strategy plan.",
+    "description": "Create a prioritized SEO strategy plan from provided business, audit, keyword, content, competitor, resource, launch, or migration inputs.",
     "group": "group-17",
-    "status": "planned",
-    "requiredInputs": ["websiteUrl", "businessGoal"],
-    "outputType": "seo-roadmap"
+    "status": "active",
+    "requiredInputs": ["business optional", "websiteAudit optional", "keywordResearch optional", "contentPlan optional", "competitorAnalysis optional", "resources optional", "constraints optional", "launch optional", "migration optional"],
+    "outputType": "seo_strategy_plan"
+  },
+  {
+    "id": "seo-strategy",
+    "command": "/seo-master seo-strategy",
+    "title": "SEO Strategy",
+    "description": "Map business goals to SEO goals, priorities, roadmap, resources, and risks from provided inputs.",
+    "group": "group-17",
+    "status": "active",
+    "requiredInputs": ["business optional", "websiteAudit optional", "keywordResearch optional", "contentPlan optional", "competitorAnalysis optional", "resources optional", "constraints optional", "launch optional", "migration optional"],
+    "outputType": "seo_strategy_plan"
+  },
+  {
+    "id": "seo-campaign-plan",
+    "command": "/seo-master seo-campaign-plan",
+    "title": "SEO Campaign Plan",
+    "description": "Create an SEO campaign plan with target pages, assets, dependencies, authority support, conversion path, and timeline.",
+    "group": "group-17",
+    "status": "active",
+    "requiredInputs": ["business optional", "websiteAudit optional", "keywordResearch optional", "contentPlan optional", "competitorAnalysis optional", "resources optional", "constraints optional"],
+    "outputType": "seo_strategy_plan"
+  },
+  {
+    "id": "opportunity-plan",
+    "command": "/seo-master opportunity-plan",
+    "title": "Opportunity Plan",
+    "description": "Prioritize SEO opportunities by impact, effort, risk, business value, and capacity from provided inputs.",
+    "group": "group-17",
+    "status": "active",
+    "requiredInputs": ["business optional", "websiteAudit optional", "keywordResearch optional", "contentPlan optional", "competitorAnalysis optional", "resources optional", "constraints optional"],
+    "outputType": "seo_strategy_plan"
   },
   {
     "id": "content-plan",
@@ -484,20 +514,20 @@
     "command": "/seo-master launch-checklist",
     "title": "Launch Checklist",
     "description": "Create a pre-launch SEO checklist.",
-    "group": "group-02",
-    "status": "planned",
-    "requiredInputs": ["websiteUrl"],
-    "outputType": "launch-checklist"
+    "group": "group-17",
+    "status": "active",
+    "requiredInputs": ["business optional", "websiteAudit optional", "resources optional", "constraints optional", "launch optional"],
+    "outputType": "seo_strategy_plan"
   },
   {
     "id": "migration-plan",
     "command": "/seo-master migration-plan",
     "title": "Migration Plan",
     "description": "Create an SEO migration plan.",
-    "group": "group-02",
-    "status": "planned",
-    "requiredInputs": ["currentUrl", "newUrl"],
-    "outputType": "migration-plan"
+    "group": "group-17",
+    "status": "active",
+    "requiredInputs": ["business optional", "websiteAudit optional", "resources optional", "constraints optional", "migration optional"],
+    "outputType": "seo_strategy_plan"
   },
   {
     "id": "report",

@@ -16,9 +16,10 @@ npm install -g master-of-seo
 seo-master
 seo-master /
 seo-master "/seo-master help"
-seo-master "/seo-master competitor-analysis"
-seo-master "/seo-master competitor-keyword-gap --ownSite '{\"pages\":[{\"url\":\"/seo-services\",\"rankingKeywords\":[\"seo services\"]}]}'"
-seo-master "/seo-master serp-analysis --serpData '[{\"keyword\":\"technical seo\",\"features\":[\"people_also_ask\"]}]'"
+seo-master "/seo-master seo-plan"
+seo-master "/seo-master seo-strategy --business '{\"websiteType\":\"saas\",\"businessGoals\":[\"demo_booking\"]}'"
+seo-master "/seo-master launch-checklist --launch '{\"isNewWebsite\":true,\"hasAnalytics\":false}'"
+seo-master "/seo-master migration-plan --migration '{\"isMigration\":true,\"migrationType\":\"url_structure\"}'"
 ```
 
 ## Active Commands
@@ -72,21 +73,24 @@ seo-master "/seo-master serp-analysis --serpData '[{\"keyword\":\"technical seo\
 - `/seo-master competitor-content-gap`
 - `/seo-master competitor-backlink-gap`
 - `/seo-master serp-analysis`
+- `/seo-master seo-plan`
+- `/seo-master seo-strategy`
+- `/seo-master seo-campaign-plan`
+- `/seo-master opportunity-plan`
+- `/seo-master launch-checklist`
+- `/seo-master migration-plan`
 
 Typing `/` shows all available Master of SEO commands. SEO logic only runs when input starts with `/seo-master`.
 
 ## Planned Commands
 
-- `/seo-master seo-plan`
-- `/seo-master launch-checklist`
-- `/seo-master migration-plan`
 - `/seo-master report`
 
-## Competitor Analysis Scope
+## SEO Strategy & Campaign Planning Scope
 
-Group 16 implements competitor type detection, SERP analysis, keyword gaps, content gaps, backlink gaps, page structure comparison, metadata comparison, schema comparison, internal linking signals, UX/conversion signals, SERP feature opportunities, positioning analysis, opportunity prioritization, and competitor report generation.
+Group 17 implements SEO strategy, SEO plan generation, campaign planning, goal mapping, opportunity prioritization, impact-effort matrix, 30/60/90 roadmap, technical/content/authority/conversion roadmaps, launch checklist, migration plan, resource planning, SEO risk planning, and strategy reporting.
 
-Group 16 does not fetch live competitor, SERP, keyword, traffic, backlink, or ranking data unless provider support is added later. It safely analyzes provided competitor inputs only.
+Group 17 does not fetch live audit, ranking, keyword, traffic, competitor, launch, or migration data unless provider support is added later. It safely creates SEO strategy and planning outputs from provided inputs only.
 
 ## MCP Usage
 
@@ -116,8 +120,8 @@ The MCP server exposes `seo_master_run`, `seo_master_commands`, active audit/pla
 - Group 14: CMS & Framework SEO - completed
 - Group 15: Website Audit - completed
 - Group 16: Competitor Analysis - completed
-- Group 17: SEO Strategy & Campaign Planning - next
-- Group 18: Measurement, Reporting & Governance
+- Group 17: SEO Strategy & Campaign Planning - completed
+- Group 18: Measurement, Reporting & Governance - next
 
 ## Memory System
 
@@ -129,5 +133,5 @@ Master of SEO is designed for OpenAI agents, Claude, Antigravity, Windsurf, Curs
 
 ## Current Status
 
-- Current status: Group 16 completed
-- Next group: Group 17 SEO Strategy & Campaign Planning
+- Current status: Group 17 completed
+- Next group: Group 18 Measurement, Reporting & Governance

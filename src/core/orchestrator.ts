@@ -29,6 +29,12 @@ import { parseOnPageAuditInputFromText, runOnPageAudit } from "../on-page/on-pag
 import { parsePerformanceAuditInputFromText, runPerformanceAudit } from "../performance/performance-audit.ts";
 import { parseSchemaInputFromText, runSchemaAudit } from "../schema/schema-audit.ts";
 import { runSchemaGenerate } from "../schema/schema-generate.ts";
+import { runCampaignPlan } from "../strategy/campaign-plan.ts";
+import { runLaunchChecklist } from "../strategy/launch-checklist.ts";
+import { runMigrationPlan } from "../strategy/migration-plan.ts";
+import { runOpportunityPlan } from "../strategy/opportunity-prioritization.ts";
+import { runSEOPlan } from "../strategy/seo-plan.ts";
+import { parseSEOStrategyInputFromText, runSEOStrategy } from "../strategy/seo-strategy.ts";
 import { parseTechnicalAuditInputFromText, runTechnicalAudit } from "../technical/technical-audit.ts";
 import { parseAccessibilityInputFromText, runAccessibilityAudit } from "../trust-security-accessibility/accessibility-audit.ts";
 import { runEEATAudit } from "../trust-security-accessibility/eeat-audit.ts";
@@ -300,6 +306,18 @@ export async function runSeoMaster(input: string): Promise<OrchestratorResponse>
     return {
       active: true,
       type: "competitor-analysis",
+      command,
+      data: report,
+      message: JSON.stringify(report, null, 2)
+    };
+  }
+
+  if (command.id === "seo-plan" || command.id === "seo-strategy" || command.id === "seo-campaign-plan" || command.id === "opportunity-plan" || command.id === "launch-checklist" || command.id === "migration-plan") {
+    const parsed = parseSEOStrategyInputFromText(input);
+    const report = command.id === "seo-plan" ? runSEOPlan(parsed) : command.id === "seo-campaign-plan" ? runCampaignPlan(parsed) : command.id === "opportunity-plan" ? runOpportunityPlan(parsed) : command.id === "launch-checklist" ? runLaunchChecklist(parsed) : command.id === "migration-plan" ? runMigrationPlan(parsed) : runSEOStrategy(parsed);
+    return {
+      active: true,
+      type: "seo-strategy",
       command,
       data: report,
       message: JSON.stringify(report, null, 2)

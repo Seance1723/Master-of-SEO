@@ -23,7 +23,7 @@ export interface TriggerResult {
 
 export interface OrchestratorResponse {
   active: boolean;
-  type: "inactive" | "menu" | "help" | "memory" | "next-group" | "technical-audit" | "performance-audit" | "on-page-audit" | "keyword-research" | "content-plan" | "architecture-audit" | "schema-audit" | "schema-generate" | "media-audit" | "ecommerce-audit" | "local-international-audit" | "ai-discover-audit" | "trust-security-accessibility-audit" | "cms-framework-audit" | "website-audit" | "competitor-analysis" | "planned" | "error";
+  type: "inactive" | "menu" | "help" | "memory" | "next-group" | "technical-audit" | "performance-audit" | "on-page-audit" | "keyword-research" | "content-plan" | "architecture-audit" | "schema-audit" | "schema-generate" | "media-audit" | "ecommerce-audit" | "local-international-audit" | "ai-discover-audit" | "trust-security-accessibility-audit" | "cms-framework-audit" | "website-audit" | "competitor-analysis" | "seo-strategy" | "planned" | "error";
   command?: SeoCommand;
   message: string;
   data?: unknown;
