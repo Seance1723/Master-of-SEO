@@ -4,10 +4,25 @@
     "category": "content-brief",
     "title": "Content brief quality",
     "description": "Briefs should include intent, outline, internal links, CTA, schema, and quality requirements.",
-    "do": ["Include target keyword, intent, audience, page type, title ideas, H1, outline, FAQs, internal links, CTA, schema, and success metric.", "Include must-cover sections.", "Include information-gain requirement.", "Include E-E-A-T notes."],
-    "dont": ["Produce generic AI briefs.", "Copy competitor outlines blindly.", "Create briefs without business purpose.", "Omit internal linking instructions."],
+    "do": [
+      "Include target keyword, intent, audience, page type, title ideas, H1, outline, FAQs, internal links, CTA, schema, and success metric.",
+      "Include must-cover sections.",
+      "Include information-gain requirement.",
+      "Include E-E-A-T notes."
+    ],
+    "dont": [
+      "Produce generic AI briefs.",
+      "Copy competitor outlines blindly.",
+      "Create briefs without business purpose.",
+      "Omit internal linking instructions."
+    ],
     "priority": "P2",
-    "appliesTo": ["content", "planning", "strategy"],
-    "status": "active"
+    "appliesTo": [
+      "content",
+      "planning",
+      "strategy"
+    ],
+    "status": "active",
+    "group": "content"
   }
 ]

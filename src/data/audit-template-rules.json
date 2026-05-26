@@ -11,6 +11,13 @@
     "dont": [
       "Do not list the same issue hundreds of times.",
       "Do not ignore repeated template-level SEO problems."
-    ]
+    ],
+    "group": "template",
+    "description": "Group repeated issues by template",
+    "priority": "P3",
+    "appliesTo": [
+      "audit"
+    ],
+    "status": "active"
   }
 ]

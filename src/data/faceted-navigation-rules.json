@@ -4,10 +4,23 @@
     "category": "faceted-navigation",
     "title": "Control faceted navigation crawl and indexation",
     "description": "Index only valuable filter combinations and suppress low-value parameter URLs.",
-    "do": ["Index only valuable filter combinations", "Avoid infinite parameter combinations", "Use static landing pages for valuable filter demand"],
-    "dont": ["Index every color, size, price, sort, and filter combination", "Let filters flood the sitemap", "Internally link every filter combination"],
+    "do": [
+      "Index only valuable filter combinations",
+      "Avoid infinite parameter combinations",
+      "Use static landing pages for valuable filter demand"
+    ],
+    "dont": [
+      "Index every color, size, price, sort, and filter combination",
+      "Let filters flood the sitemap",
+      "Internally link every filter combination"
+    ],
     "priority": "P1",
-    "appliesTo": ["ecommerce", "faceted_navigation", "audit"],
-    "status": "active"
+    "appliesTo": [
+      "ecommerce",
+      "faceted_navigation",
+      "audit"
+    ],
+    "status": "active",
+    "group": "faceted"
   }
 ]

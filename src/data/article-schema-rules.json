@@ -4,10 +4,23 @@
     "category": "article-schema",
     "title": "Article schema needs real author and dates",
     "description": "Use Article or BlogPosting only for article content with real visible metadata.",
-    "do": ["Include headline, author, publisher, datePublished, dateModified where available", "Connect author and publisher entities"],
-    "dont": ["Invent authors", "Fake update dates", "Use Article schema for product/service pages"],
+    "do": [
+      "Include headline, author, publisher, datePublished, dateModified where available",
+      "Connect author and publisher entities"
+    ],
+    "dont": [
+      "Invent authors",
+      "Fake update dates",
+      "Use Article schema for product/service pages"
+    ],
     "priority": "P2",
-    "appliesTo": ["schema", "entity", "audit", "planning"],
-    "status": "active"
+    "appliesTo": [
+      "schema",
+      "entity",
+      "audit",
+      "planning"
+    ],
+    "status": "active",
+    "group": "article"
   }
 ]

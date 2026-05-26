@@ -4,10 +4,22 @@
     "category": "nap-consistency",
     "title": "NAP must stay consistent",
     "description": "Compare website, GBP, location, and citation NAP for consistency.",
-    "do": ["Compare website NAP, GBP NAP, and citations", "Standardize phone and address formats", "Fix conflicting business names"],
-    "dont": ["Use multiple phone numbers randomly", "Show different addresses across pages unless multi-location", "Ignore citation mismatches"],
+    "do": [
+      "Compare website NAP, GBP NAP, and citations",
+      "Standardize phone and address formats",
+      "Fix conflicting business names"
+    ],
+    "dont": [
+      "Use multiple phone numbers randomly",
+      "Show different addresses across pages unless multi-location",
+      "Ignore citation mismatches"
+    ],
     "priority": "P2",
-    "appliesTo": ["local_seo", "audit"],
-    "status": "active"
+    "appliesTo": [
+      "local_seo",
+      "audit"
+    ],
+    "status": "active",
+    "group": "nap"
   }
 ]

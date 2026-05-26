@@ -4,10 +4,29 @@
     "category": "meta-description",
     "title": "Meta description quality",
     "description": "Meta descriptions should summarize page value and match intent.",
-    "do": ["Write unique meta descriptions.", "Summarize page value clearly.", "Include a natural CTA where useful.", "Match the page intent.", "Use benefit-driven copy."],
-    "dont": ["Duplicate meta descriptions.", "Stuff keywords.", "Write generic descriptions.", "Mislead users.", "Leave important commercial pages without descriptions."],
+    "do": [
+      "Write unique meta descriptions.",
+      "Summarize page value clearly.",
+      "Include a natural CTA where useful.",
+      "Match the page intent.",
+      "Use benefit-driven copy."
+    ],
+    "dont": [
+      "Duplicate meta descriptions.",
+      "Stuff keywords.",
+      "Write generic descriptions.",
+      "Mislead users.",
+      "Leave important commercial pages without descriptions."
+    ],
     "priority": "P2",
-    "appliesTo": ["website", "page", "content", "on_page", "audit"],
-    "status": "active"
+    "appliesTo": [
+      "website",
+      "page",
+      "content",
+      "on_page",
+      "audit"
+    ],
+    "status": "active",
+    "group": "meta"
   }
 ]

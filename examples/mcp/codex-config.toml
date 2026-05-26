@@ -1,0 +1,4 @@
+[mcp_servers.master-of-seo]
+command = "npx"
+args = ["-y", "master-of-seo", "mcp"]
+

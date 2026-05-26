@@ -12,6 +12,13 @@
     "dont": [
       "Do not mark guesses as P0.",
       "Do not bury indexing, security, or build blockers under minor issues."
-    ]
+    ],
+    "group": "priority",
+    "description": "Normalize audit priorities",
+    "priority": "P3",
+    "appliesTo": [
+      "audit"
+    ],
+    "status": "active"
   }
 ]

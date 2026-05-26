@@ -4,10 +4,24 @@
     "category": "rich-result-eligibility",
     "title": "Rich result eligibility is not guaranteed display",
     "description": "Separate schema validity from rich result display eligibility.",
-    "do": ["Check whether schema may be eligible", "Follow Google quality rules", "Warn that eligibility does not guarantee display"],
-    "dont": ["Promise rich results", "Use misleading structured data", "Add Review schema unless genuine reviews are visible"],
+    "do": [
+      "Check whether schema may be eligible",
+      "Follow Google quality rules",
+      "Warn that eligibility does not guarantee display"
+    ],
+    "dont": [
+      "Promise rich results",
+      "Use misleading structured data",
+      "Add Review schema unless genuine reviews are visible"
+    ],
     "priority": "P1",
-    "appliesTo": ["schema", "rich_results", "audit", "planning"],
-    "status": "active"
+    "appliesTo": [
+      "schema",
+      "rich_results",
+      "audit",
+      "planning"
+    ],
+    "status": "active",
+    "group": "rich"
   }
 ]

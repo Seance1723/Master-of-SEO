@@ -4,10 +4,23 @@
     "category": "responsive-images",
     "title": "Use responsive image attributes",
     "description": "Large images should use responsive sources and dimensions.",
-    "do": ["Use srcset and sizes", "Serve correct dimensions", "Set width and height"],
-    "dont": ["Rely on CSS resizing alone for huge images", "Omit dimensions on layout-critical images"],
+    "do": [
+      "Use srcset and sizes",
+      "Serve correct dimensions",
+      "Set width and height"
+    ],
+    "dont": [
+      "Rely on CSS resizing alone for huge images",
+      "Omit dimensions on layout-critical images"
+    ],
     "priority": "P2",
-    "appliesTo": ["media", "image", "performance", "audit"],
-    "status": "active"
+    "appliesTo": [
+      "media",
+      "image",
+      "performance",
+      "audit"
+    ],
+    "status": "active",
+    "group": "responsive"
   }
 ]

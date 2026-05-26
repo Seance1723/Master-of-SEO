@@ -4,10 +4,27 @@
     "category": "content-quality",
     "title": "Content quality guard",
     "description": "Content should add original value and avoid commodity output.",
-    "do": ["Require original insight.", "Require examples, proof, screenshots, data, or expert input where possible.", "Flag generic AI-style filler.", "Check user value.", "Align with E-E-A-T."],
-    "dont": ["Publish commodity content.", "Copy competitors.", "Create mass low-value pages.", "Overpromise ranking impact."],
+    "do": [
+      "Require original insight.",
+      "Require examples, proof, screenshots, data, or expert input where possible.",
+      "Flag generic AI-style filler.",
+      "Check user value.",
+      "Align with E-E-A-T."
+    ],
+    "dont": [
+      "Publish commodity content.",
+      "Copy competitors.",
+      "Create mass low-value pages.",
+      "Overpromise ranking impact."
+    ],
     "priority": "P1",
-    "appliesTo": ["content", "planning", "audit", "strategy"],
-    "status": "active"
+    "appliesTo": [
+      "content",
+      "planning",
+      "audit",
+      "strategy"
+    ],
+    "status": "active",
+    "group": "content"
   }
 ]

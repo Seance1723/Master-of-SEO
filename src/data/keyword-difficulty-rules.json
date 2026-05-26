@@ -4,10 +4,25 @@
     "category": "keyword-difficulty",
     "title": "Keyword difficulty handling",
     "description": "Difficulty should use provided metrics or remain unknown.",
-    "do": ["Use provided difficulty data when available.", "Infer difficulty level only as a soft estimate when metrics are missing.", "Consider site maturity and authority when planning.", "Prioritize realistic opportunities."],
-    "dont": ["Claim exact difficulty without data.", "Chase only hard keywords.", "Ignore quick-win keywords.", "Recommend unrealistic ranking timelines."],
+    "do": [
+      "Use provided difficulty data when available.",
+      "Infer difficulty level only as a soft estimate when metrics are missing.",
+      "Consider site maturity and authority when planning.",
+      "Prioritize realistic opportunities."
+    ],
+    "dont": [
+      "Claim exact difficulty without data.",
+      "Chase only hard keywords.",
+      "Ignore quick-win keywords.",
+      "Recommend unrealistic ranking timelines."
+    ],
     "priority": "P2",
-    "appliesTo": ["keyword", "planning", "audit"],
-    "status": "active"
+    "appliesTo": [
+      "keyword",
+      "planning",
+      "audit"
+    ],
+    "status": "active",
+    "group": "keyword"
   }
 ]

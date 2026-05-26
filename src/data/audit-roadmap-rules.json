@@ -12,6 +12,13 @@
     "dont": [
       "Do not schedule optional polish before critical blockers.",
       "Do not create unrealistic task lists."
-    ]
+    ],
+    "group": "audit",
+    "description": "Sequence audit work by risk",
+    "priority": "P3",
+    "appliesTo": [
+      "audit"
+    ],
+    "status": "active"
   }
 ]

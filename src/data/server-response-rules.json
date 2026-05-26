@@ -4,10 +4,26 @@
     "category": "server-response",
     "title": "Server response and TTFB",
     "description": "Fast server response helps LCP and perceived speed.",
-    "do": ["Use CDN.", "Use caching.", "Optimize backend/database queries.", "Compress responses.", "Use HTTP/2 or HTTP/3 where available."],
-    "dont": ["Serve uncached static pages slowly.", "Ignore slow hosting.", "Let backend delays damage LCP."],
+    "do": [
+      "Use CDN.",
+      "Use caching.",
+      "Optimize backend/database queries.",
+      "Compress responses.",
+      "Use HTTP/2 or HTTP/3 where available."
+    ],
+    "dont": [
+      "Serve uncached static pages slowly.",
+      "Ignore slow hosting.",
+      "Let backend delays damage LCP."
+    ],
     "priority": "P1",
-    "appliesTo": ["website", "page", "performance", "audit"],
-    "status": "active"
+    "appliesTo": [
+      "website",
+      "page",
+      "performance",
+      "audit"
+    ],
+    "status": "active",
+    "group": "server"
   }
 ]

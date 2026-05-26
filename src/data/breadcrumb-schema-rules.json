@@ -4,10 +4,23 @@
     "category": "breadcrumb-schema",
     "title": "BreadcrumbList must match visible breadcrumbs",
     "description": "Breadcrumb schema should reflect visible ordered breadcrumb paths.",
-    "do": ["Match visible breadcrumbs", "Keep item positions ordered", "Use canonical URLs"],
-    "dont": ["Mark up fake breadcrumbs", "Conflict with site hierarchy"],
+    "do": [
+      "Match visible breadcrumbs",
+      "Keep item positions ordered",
+      "Use canonical URLs"
+    ],
+    "dont": [
+      "Mark up fake breadcrumbs",
+      "Conflict with site hierarchy"
+    ],
     "priority": "P2",
-    "appliesTo": ["schema", "rich_results", "audit", "planning"],
-    "status": "active"
+    "appliesTo": [
+      "schema",
+      "rich_results",
+      "audit",
+      "planning"
+    ],
+    "status": "active",
+    "group": "breadcrumb"
   }
 ]

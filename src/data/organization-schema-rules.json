@@ -4,10 +4,22 @@
     "category": "organization-schema",
     "title": "Use real organization details",
     "description": "Organization schema should use provided name, URL, logo, description, sameAs, and contactPoint.",
-    "do": ["Include name, URL, logo, description, and sameAs where available", "Keep organization details consistent"],
-    "dont": ["Invent logo, contact, or social profile URLs", "Use different organization names across pages"],
+    "do": [
+      "Include name, URL, logo, description, and sameAs where available",
+      "Keep organization details consistent"
+    ],
+    "dont": [
+      "Invent logo, contact, or social profile URLs",
+      "Use different organization names across pages"
+    ],
     "priority": "P2",
-    "appliesTo": ["schema", "entity", "audit", "planning"],
-    "status": "active"
+    "appliesTo": [
+      "schema",
+      "entity",
+      "audit",
+      "planning"
+    ],
+    "status": "active",
+    "group": "organization"
   }
 ]

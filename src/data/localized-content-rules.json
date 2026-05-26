@@ -4,10 +4,22 @@
     "category": "localized-content",
     "title": "Localized content should be native-quality",
     "description": "Localization should adapt examples, metadata, currency, units, legal terms, testimonials, and CTAs.",
-    "do": ["Adapt examples, currency, units, legal terms, testimonials, and CTAs", "Translate metadata", "Use native-quality review"],
-    "dont": ["Publish raw machine translation", "Leave mixed-language content", "Reuse one region's claims for all regions"],
+    "do": [
+      "Adapt examples, currency, units, legal terms, testimonials, and CTAs",
+      "Translate metadata",
+      "Use native-quality review"
+    ],
+    "dont": [
+      "Publish raw machine translation",
+      "Leave mixed-language content",
+      "Reuse one region's claims for all regions"
+    ],
     "priority": "P2",
-    "appliesTo": ["international_seo", "audit"],
-    "status": "active"
+    "appliesTo": [
+      "international_seo",
+      "audit"
+    ],
+    "status": "active",
+    "group": "localized"
   }
 ]

@@ -4,10 +4,22 @@
     "category": "review-rating-guard",
     "title": "Reviews and ratings must be genuine",
     "description": "Use aggregateRating only when real visible review data exists.",
-    "do": ["Show genuine reviews visibly", "Keep review count and rating accurate"],
-    "dont": ["Fake reviews", "Show schema ratings without visible ratings", "Mark up testimonials as product reviews unless they are product reviews"],
+    "do": [
+      "Show genuine reviews visibly",
+      "Keep review count and rating accurate"
+    ],
+    "dont": [
+      "Fake reviews",
+      "Show schema ratings without visible ratings",
+      "Mark up testimonials as product reviews unless they are product reviews"
+    ],
     "priority": "P1",
-    "appliesTo": ["ecommerce", "product", "audit"],
-    "status": "active"
+    "appliesTo": [
+      "ecommerce",
+      "product",
+      "audit"
+    ],
+    "status": "active",
+    "group": "reviews"
   }
 ]

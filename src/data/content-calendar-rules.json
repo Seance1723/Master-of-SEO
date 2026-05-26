@@ -4,10 +4,25 @@
     "category": "content-calendar",
     "title": "Content calendar sequencing",
     "description": "Content calendars should sequence work by impact and capacity.",
-    "do": ["Sequence content by business impact.", "Balance BOFU, MOFU, TOFU, and refresh tasks.", "Respect monthly capacity.", "Include owner/status placeholders.", "Include internal linking tasks."],
-    "dont": ["Schedule too much content unrealistically.", "Publish only TOFU blogs.", "Ignore content refresh in the calendar."],
+    "do": [
+      "Sequence content by business impact.",
+      "Balance BOFU, MOFU, TOFU, and refresh tasks.",
+      "Respect monthly capacity.",
+      "Include owner/status placeholders.",
+      "Include internal linking tasks."
+    ],
+    "dont": [
+      "Schedule too much content unrealistically.",
+      "Publish only TOFU blogs.",
+      "Ignore content refresh in the calendar."
+    ],
     "priority": "P2",
-    "appliesTo": ["content", "planning", "strategy"],
-    "status": "active"
+    "appliesTo": [
+      "content",
+      "planning",
+      "strategy"
+    ],
+    "status": "active",
+    "group": "content"
   }
 ]

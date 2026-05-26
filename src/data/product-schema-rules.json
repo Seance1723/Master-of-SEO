@@ -4,10 +4,22 @@
     "category": "product-schema",
     "title": "Product schema must not fake reviews or offers",
     "description": "Product ratings, reviews, price, and availability must be genuine and visible.",
-    "do": ["Include product name, description, image, brand, offers where available", "Include reviews/ratings only if visible and genuine"],
-    "dont": ["Fake reviews or ratings", "Add price if not visible or reliable"],
+    "do": [
+      "Include product name, description, image, brand, offers where available",
+      "Include reviews/ratings only if visible and genuine"
+    ],
+    "dont": [
+      "Fake reviews or ratings",
+      "Add price if not visible or reliable"
+    ],
     "priority": "P1",
-    "appliesTo": ["schema", "rich_results", "audit", "planning"],
-    "status": "active"
+    "appliesTo": [
+      "schema",
+      "rich_results",
+      "audit",
+      "planning"
+    ],
+    "status": "active",
+    "group": "product"
   }
 ]

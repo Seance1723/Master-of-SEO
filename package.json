@@ -1,9 +1,10 @@
 {
   "name": "master-of-seo",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "An npm-ready, MCP-compatible AI skill for gated SEO orchestration with /seo-master.",
   "type": "module",
   "main": "./dist/src/core/orchestrator.js",
+  "types": "./dist/src/core/orchestrator.d.ts",
   "bin": {
     "seo-master": "./dist/src/cli/index.js",
     "master-of-seo": "./dist/src/cli/index.js"
@@ -11,6 +12,7 @@
   "exports": {
     ".": "./dist/src/core/orchestrator.js",
     "./orchestrator": "./dist/src/core/orchestrator.js",
+    "./cli": "./dist/src/cli/index.js",
     "./mcp": "./dist/src/mcp/server.js",
     "./command-registry": "./dist/src/core/command-registry.js",
     "./memory": "./dist/src/core/memory.js",
@@ -44,10 +46,12 @@
   "files": [
     "README.md",
     "LICENSE",
-    "dist",
-    "src",
+    "dist/src",
+    "src/data",
     "memory",
-    "prompts"
+    "prompts",
+    "docs",
+    "examples"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",

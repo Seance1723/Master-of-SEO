@@ -4,10 +4,23 @@
     "category": "software-application-schema",
     "title": "SoftwareApplication schema should match real software",
     "description": "Use SoftwareApplication for SaaS/software product pages only.",
-    "do": ["Include name, applicationCategory, operatingSystem, offers where available", "Connect software to Organization"],
-    "dont": ["Add ratings unless visible and genuine", "Invent pricing", "Use it for generic service pages"],
+    "do": [
+      "Include name, applicationCategory, operatingSystem, offers where available",
+      "Connect software to Organization"
+    ],
+    "dont": [
+      "Add ratings unless visible and genuine",
+      "Invent pricing",
+      "Use it for generic service pages"
+    ],
     "priority": "P2",
-    "appliesTo": ["schema", "entity", "audit", "planning"],
-    "status": "active"
+    "appliesTo": [
+      "schema",
+      "entity",
+      "audit",
+      "planning"
+    ],
+    "status": "active",
+    "group": "software"
   }
 ]

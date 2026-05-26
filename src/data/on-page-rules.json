@@ -4,10 +4,25 @@
     "category": "on-page-orchestration",
     "title": "Audit only supplied on-page inputs",
     "description": "On-page checks must use only provided HTML and structured inputs until crawler support is implemented.",
-    "do": ["Use evidence only from supplied input.", "Extract from HTML when provided.", "Return missingInputs when data is unavailable."],
-    "dont": ["Hallucinate page findings.", "Fetch live pages by default.", "Infer page copy without evidence."],
+    "do": [
+      "Use evidence only from supplied input.",
+      "Extract from HTML when provided.",
+      "Return missingInputs when data is unavailable."
+    ],
+    "dont": [
+      "Hallucinate page findings.",
+      "Fetch live pages by default.",
+      "Infer page copy without evidence."
+    ],
     "priority": "P0",
-    "appliesTo": ["website", "page", "content", "on_page", "audit"],
-    "status": "active"
+    "appliesTo": [
+      "website",
+      "page",
+      "content",
+      "on_page",
+      "audit"
+    ],
+    "status": "active",
+    "group": "on"
   }
 ]

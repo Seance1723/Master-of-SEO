@@ -4,10 +4,25 @@
     "category": "css-performance",
     "title": "CSS performance",
     "description": "CSS should prioritize critical rendering and avoid large unused global styles.",
-    "do": ["Inline or prioritize critical CSS.", "Remove unused CSS.", "Minify CSS.", "Avoid massive global CSS."],
-    "dont": ["Block rendering with unnecessary CSS.", "Ship unused framework styles everywhere.", "Use heavy animation CSS without need."],
+    "do": [
+      "Inline or prioritize critical CSS.",
+      "Remove unused CSS.",
+      "Minify CSS.",
+      "Avoid massive global CSS."
+    ],
+    "dont": [
+      "Block rendering with unnecessary CSS.",
+      "Ship unused framework styles everywhere.",
+      "Use heavy animation CSS without need."
+    ],
     "priority": "P2",
-    "appliesTo": ["website", "page", "performance", "audit"],
-    "status": "active"
+    "appliesTo": [
+      "website",
+      "page",
+      "performance",
+      "audit"
+    ],
+    "status": "active",
+    "group": "css"
   }
 ]

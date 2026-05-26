@@ -4,10 +4,25 @@
     "category": "indexability",
     "title": "Indexability control",
     "description": "Important pages should be indexable; low-value utility pages should be noindexed.",
-    "do": ["Keep important pages indexable.", "Noindex admin, login, cart, checkout, staging, thank-you, and internal search pages.", "Check noindex mistakes."],
-    "dont": ["Noindex important landing pages.", "Index placeholder pages.", "Index duplicate filtered pages.", "Assume sitemap submission means indexing."],
+    "do": [
+      "Keep important pages indexable.",
+      "Noindex admin, login, cart, checkout, staging, thank-you, and internal search pages.",
+      "Check noindex mistakes."
+    ],
+    "dont": [
+      "Noindex important landing pages.",
+      "Index placeholder pages.",
+      "Index duplicate filtered pages.",
+      "Assume sitemap submission means indexing."
+    ],
     "priority": "P1",
-    "appliesTo": ["website", "page", "technical", "audit"],
-    "status": "active"
+    "appliesTo": [
+      "website",
+      "page",
+      "technical",
+      "audit"
+    ],
+    "status": "active",
+    "group": "indexability"
   }
 ]

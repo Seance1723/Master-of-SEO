@@ -4,10 +4,29 @@
     "category": "content-planning",
     "title": "Content planning foundations",
     "description": "Content plans should map business goals, search intent, funnel stage, and keyword clusters.",
-    "do": ["Start with business goals.", "Map content to search intent.", "Map content to funnel stage.", "Prioritize BOFU and high-business-value pages.", "Connect TOFU content to commercial pages.", "Use keyword clusters from Group 5."],
-    "dont": ["Create random blogs.", "Create content without intent.", "Prioritize traffic over qualified business impact.", "Create duplicate content plans.", "Ignore existing pages that can be improved."],
+    "do": [
+      "Start with business goals.",
+      "Map content to search intent.",
+      "Map content to funnel stage.",
+      "Prioritize BOFU and high-business-value pages.",
+      "Connect TOFU content to commercial pages.",
+      "Use keyword clusters from Group 5."
+    ],
+    "dont": [
+      "Create random blogs.",
+      "Create content without intent.",
+      "Prioritize traffic over qualified business impact.",
+      "Create duplicate content plans.",
+      "Ignore existing pages that can be improved."
+    ],
     "priority": "P1",
-    "appliesTo": ["content", "planning", "audit", "strategy"],
-    "status": "active"
+    "appliesTo": [
+      "content",
+      "planning",
+      "audit",
+      "strategy"
+    ],
+    "status": "active",
+    "group": "content"
   }
 ]

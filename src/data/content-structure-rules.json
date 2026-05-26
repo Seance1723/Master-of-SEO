@@ -4,10 +4,29 @@
     "category": "content-structure",
     "title": "Content structure",
     "description": "Content should satisfy intent quickly, clearly, and completely.",
-    "do": ["Place the main value/answer early.", "Match search intent.", "Include useful sections, examples, FAQs, proof, and internal links.", "Write for humans first.", "Support topical clarity."],
-    "dont": ["Write vague intros.", "Create thin pages.", "Copy competitor content.", "Publish generic AI-style filler.", "Mix too many unrelated topics on one page."],
+    "do": [
+      "Place the main value/answer early.",
+      "Match search intent.",
+      "Include useful sections, examples, FAQs, proof, and internal links.",
+      "Write for humans first.",
+      "Support topical clarity."
+    ],
+    "dont": [
+      "Write vague intros.",
+      "Create thin pages.",
+      "Copy competitor content.",
+      "Publish generic AI-style filler.",
+      "Mix too many unrelated topics on one page."
+    ],
     "priority": "P1",
-    "appliesTo": ["website", "page", "content", "on_page", "audit"],
-    "status": "active"
+    "appliesTo": [
+      "website",
+      "page",
+      "content",
+      "on_page",
+      "audit"
+    ],
+    "status": "active",
+    "group": "content"
   }
 ]

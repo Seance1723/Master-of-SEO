@@ -4,10 +4,22 @@
     "category": "local-business-schema",
     "title": "LocalBusiness schema must match visible NAP",
     "description": "LocalBusiness schema should use real visible details only.",
-    "do": ["Include name, address, telephone, opening hours, geo, and sameAs where available", "Keep schema consistent with visible page content"],
-    "dont": ["Invent local schema fields", "Add fake locations", "Mark up non-local businesses as LocalBusiness"],
+    "do": [
+      "Include name, address, telephone, opening hours, geo, and sameAs where available",
+      "Keep schema consistent with visible page content"
+    ],
+    "dont": [
+      "Invent local schema fields",
+      "Add fake locations",
+      "Mark up non-local businesses as LocalBusiness"
+    ],
     "priority": "P2",
-    "appliesTo": ["local_seo", "local_pages", "audit"],
-    "status": "active"
+    "appliesTo": [
+      "local_seo",
+      "local_pages",
+      "audit"
+    ],
+    "status": "active",
+    "group": "localbusiness"
   }
 ]

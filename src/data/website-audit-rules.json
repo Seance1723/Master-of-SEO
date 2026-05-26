@@ -14,7 +14,14 @@
       "Do not hallucinate crawl, performance, ranking, or analytics data.",
       "Do not treat all SEO issues equally.",
       "Do not recommend ecommerce, local, or international actions when not applicable."
-    ]
+    ],
+    "group": "website",
+    "description": "Full website audit",
+    "priority": "P3",
+    "appliesTo": [
+      "audit"
+    ],
+    "status": "active"
   },
   {
     "id": "page-level-audit",
@@ -27,6 +34,13 @@
     "dont": [
       "Do not apply one-page findings to the whole site unless evidence supports it.",
       "Do not assume missing pages are broken unless input proves they exist."
-    ]
+    ],
+    "group": "page",
+    "description": "Audit important page types separately",
+    "priority": "P3",
+    "appliesTo": [
+      "audit"
+    ],
+    "status": "active"
   }
 ]

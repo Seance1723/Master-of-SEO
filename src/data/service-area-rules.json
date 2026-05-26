@@ -4,10 +4,23 @@
     "category": "service-area-seo",
     "title": "Service areas must be real",
     "description": "Service area pages should describe real served areas and limitations.",
-    "do": ["Show real service areas", "Explain services available in each area", "Avoid fake address usage"],
-    "dont": ["Create doorway location pages", "Target areas you do not serve", "Hide service limitations"],
+    "do": [
+      "Show real service areas",
+      "Explain services available in each area",
+      "Avoid fake address usage"
+    ],
+    "dont": [
+      "Create doorway location pages",
+      "Target areas you do not serve",
+      "Hide service limitations"
+    ],
     "priority": "P2",
-    "appliesTo": ["local_seo", "local_pages", "audit"],
-    "status": "active"
+    "appliesTo": [
+      "local_seo",
+      "local_pages",
+      "audit"
+    ],
+    "status": "active",
+    "group": "service"
   }
 ]

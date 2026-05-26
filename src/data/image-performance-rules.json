@@ -4,10 +4,26 @@
     "category": "image-performance",
     "title": "Image performance",
     "description": "Images should be compressed, modern, responsive, dimensioned, and loaded by viewport priority.",
-    "do": ["Use WebP/AVIF where possible.", "Compress images.", "Use responsive images and srcset.", "Set width and height.", "Lazy-load below-fold images."],
-    "dont": ["Upload huge raw images.", "Lazy-load above-fold hero images.", "Use image text as important SEO content."],
+    "do": [
+      "Use WebP/AVIF where possible.",
+      "Compress images.",
+      "Use responsive images and srcset.",
+      "Set width and height.",
+      "Lazy-load below-fold images."
+    ],
+    "dont": [
+      "Upload huge raw images.",
+      "Lazy-load above-fold hero images.",
+      "Use image text as important SEO content."
+    ],
     "priority": "P1",
-    "appliesTo": ["website", "page", "performance", "audit"],
-    "status": "active"
+    "appliesTo": [
+      "website",
+      "page",
+      "performance",
+      "audit"
+    ],
+    "status": "active",
+    "group": "image"
   }
 ]

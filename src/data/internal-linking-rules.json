@@ -4,10 +4,30 @@
     "category": "internal-linking",
     "title": "Internal linking",
     "description": "Internal links should be descriptive, contextual, followed, and relevant.",
-    "do": ["Use descriptive internal anchor text.", "Link supporting content to pillar pages.", "Link informational pages to commercial pages.", "Add contextual links inside content body.", "Link related pages naturally.", "Update old content with links to new pages."],
-    "dont": ["Overuse exact-match anchors.", "Use click here everywhere.", "Nofollow normal internal links.", "Link to broken, redirected, or irrelevant pages.", "Add links only for search engines."],
+    "do": [
+      "Use descriptive internal anchor text.",
+      "Link supporting content to pillar pages.",
+      "Link informational pages to commercial pages.",
+      "Add contextual links inside content body.",
+      "Link related pages naturally.",
+      "Update old content with links to new pages."
+    ],
+    "dont": [
+      "Overuse exact-match anchors.",
+      "Use click here everywhere.",
+      "Nofollow normal internal links.",
+      "Link to broken, redirected, or irrelevant pages.",
+      "Add links only for search engines."
+    ],
     "priority": "P1",
-    "appliesTo": ["architecture", "internal_linking", "crawlability", "planning", "audit"],
-    "status": "active"
+    "appliesTo": [
+      "architecture",
+      "internal_linking",
+      "crawlability",
+      "planning",
+      "audit"
+    ],
+    "status": "active",
+    "group": "internal"
   }
 ]

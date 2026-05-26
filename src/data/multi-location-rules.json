@@ -4,10 +4,23 @@
     "category": "multi-location-seo",
     "title": "Multi-location pages need unique NAP and proof",
     "description": "Each real location should have distinct, accurate details and useful local proof.",
-    "do": ["Create one strong page per real location", "Show unique NAP per location", "Link locations from a finder"],
-    "dont": ["Duplicate all location pages", "Canonical all location pages to headquarters", "Mix location NAP details"],
+    "do": [
+      "Create one strong page per real location",
+      "Show unique NAP per location",
+      "Link locations from a finder"
+    ],
+    "dont": [
+      "Duplicate all location pages",
+      "Canonical all location pages to headquarters",
+      "Mix location NAP details"
+    ],
     "priority": "P2",
-    "appliesTo": ["local_seo", "local_pages", "audit"],
-    "status": "active"
+    "appliesTo": [
+      "local_seo",
+      "local_pages",
+      "audit"
+    ],
+    "status": "active",
+    "group": "multi"
   }
 ]

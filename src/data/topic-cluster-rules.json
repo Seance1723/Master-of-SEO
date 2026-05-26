@@ -4,10 +4,25 @@
     "category": "topic-cluster",
     "title": "Topic cluster planning",
     "description": "Topic clusters need pillar pages, supporting pages, and internal links.",
-    "do": ["Create one strong pillar page per major topic.", "Create supporting pages for subtopics.", "Internally link cluster pages.", "Include blogs, comparisons, use cases, case studies, FAQs, and tools where relevant."],
-    "dont": ["Create disconnected posts.", "Create multiple pillar pages for the same intent.", "Build clusters without internal linking.", "Ignore commercial pages in cluster planning."],
+    "do": [
+      "Create one strong pillar page per major topic.",
+      "Create supporting pages for subtopics.",
+      "Internally link cluster pages.",
+      "Include blogs, comparisons, use cases, case studies, FAQs, and tools where relevant."
+    ],
+    "dont": [
+      "Create disconnected posts.",
+      "Create multiple pillar pages for the same intent.",
+      "Build clusters without internal linking.",
+      "Ignore commercial pages in cluster planning."
+    ],
     "priority": "P1",
-    "appliesTo": ["content", "planning", "strategy"],
-    "status": "active"
+    "appliesTo": [
+      "content",
+      "planning",
+      "strategy"
+    ],
+    "status": "active",
+    "group": "topic"
   }
 ]

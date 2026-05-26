@@ -4,10 +4,25 @@
     "category": "entity-seo",
     "title": "Keep entity details consistent",
     "description": "Connect real organization, brand, author, product, service, and sameAs entities.",
-    "do": ["Clearly define entities", "Use consistent naming", "Use real sameAs links", "Connect Organization to page entities"],
-    "dont": ["Create fake entities", "Use inconsistent brand names", "Add irrelevant sameAs profiles"],
+    "do": [
+      "Clearly define entities",
+      "Use consistent naming",
+      "Use real sameAs links",
+      "Connect Organization to page entities"
+    ],
+    "dont": [
+      "Create fake entities",
+      "Use inconsistent brand names",
+      "Add irrelevant sameAs profiles"
+    ],
     "priority": "P2",
-    "appliesTo": ["schema", "entity", "audit", "planning"],
-    "status": "active"
+    "appliesTo": [
+      "schema",
+      "entity",
+      "audit",
+      "planning"
+    ],
+    "status": "active",
+    "group": "entity"
   }
 ]

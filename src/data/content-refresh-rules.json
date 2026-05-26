@@ -4,10 +4,27 @@
     "category": "content-refresh",
     "title": "Content refresh planning",
     "description": "Refresh outdated, decayed, or underperforming useful pages.",
-    "do": ["Refresh outdated facts, examples, screenshots, and statistics.", "Improve pages with impressions but low CTR.", "Improve pages ranking on page 2.", "Add missing sections and FAQs where useful.", "Update internal links."],
-    "dont": ["Only change the date.", "Delete old pages without checking value.", "Refresh low-value pages that should be merged or pruned.", "Ignore content decay."],
+    "do": [
+      "Refresh outdated facts, examples, screenshots, and statistics.",
+      "Improve pages with impressions but low CTR.",
+      "Improve pages ranking on page 2.",
+      "Add missing sections and FAQs where useful.",
+      "Update internal links."
+    ],
+    "dont": [
+      "Only change the date.",
+      "Delete old pages without checking value.",
+      "Refresh low-value pages that should be merged or pruned.",
+      "Ignore content decay."
+    ],
     "priority": "P2",
-    "appliesTo": ["content", "planning", "audit", "strategy"],
-    "status": "active"
+    "appliesTo": [
+      "content",
+      "planning",
+      "audit",
+      "strategy"
+    ],
+    "status": "active",
+    "group": "content"
   }
 ]

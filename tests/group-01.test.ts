@@ -12,10 +12,30 @@ test("input without /seo-master stays inactive", async () => {
   assert.equal(result.message, "inactive");
 });
 
+test("explicit natural activation with seo-master activates", async () => {
+  const result = await runSeoMaster("Check what is wrong in my site and use seo-master skills");
+  assert.equal(result.active, true);
+  assert.equal(result.type, "website-audit");
+});
+
+test("explicit natural activation with Master of SEO activates", async () => {
+  const result = await runSeoMaster("Use Master of SEO to audit this HTML");
+  assert.equal(result.active, true);
+  assert.equal(result.type, "website-audit");
+});
+
 test("input / returns command menu", async () => {
   const result = await runSeoMaster("/");
   assert.equal(result.type, "menu");
   assert.match(result.message, /\/seo-master audit-website/u);
+  assert.match(result.message, /Core:/u);
+  assert.match(result.message, /Research & Strategy:/u);
+});
+
+test("input /random-command returns command menu", async () => {
+  const result = await runSeoMaster("/random-command");
+  assert.equal(result.type, "menu");
+  assert.match(result.message, /\/seo-master help/u);
 });
 
 test("input /seo-master help returns help", async () => {

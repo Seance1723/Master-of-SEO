@@ -106,7 +106,7 @@ const tools = [
     inputSchema: {
       type: "object",
       properties: {
-        input: { type: "string", description: "Raw user input. Must start with /seo-master to activate SEO logic." }
+        input: { type: "string", description: "Raw user input. Activates with /seo-master or explicit natural activation such as use seo-master." }
       },
       required: ["input"]
     }
@@ -548,12 +548,10 @@ const prompts = [
   "seo-master-on-page-audit",
   "seo-master-performance-audit",
   "seo-master-technical-audit",
-  "seo-master-audit",
-  "seo-master-competitor-analysis",
-  "seo-master-seo-plan"
+  "seo-master-audit"
 ].map((name) => ({
   name,
-  description: `${name} prompt. Returns planned-module behavior until its module is implemented.`,
+  description: `${name} prompt for Master of SEO.`,
   arguments: []
 }));
 
@@ -633,7 +631,7 @@ async function handle(request: JsonRpcRequest): Promise<void> {
         result: {
           protocolVersion,
           capabilities: { tools: {}, resources: {}, prompts: {} },
-          serverInfo: { name: "master-of-seo", version: "0.1.0" }
+          serverInfo: { name: "master-of-seo", version: "1.0.0" }
         }
       });
       return;

@@ -4,10 +4,23 @@
     "category": "video-thumbnail",
     "title": "Use accurate video thumbnails",
     "description": "Thumbnails should be high-quality, relevant, and provided in VideoObject when available.",
-    "do": ["Use high-quality thumbnails", "Make thumbnail relevant to video", "Include thumbnailUrl in VideoObject when available"],
-    "dont": ["Use misleading thumbnails", "Use broken thumbnail URLs", "Invent thumbnails"],
+    "do": [
+      "Use high-quality thumbnails",
+      "Make thumbnail relevant to video",
+      "Include thumbnailUrl in VideoObject when available"
+    ],
+    "dont": [
+      "Use misleading thumbnails",
+      "Use broken thumbnail URLs",
+      "Invent thumbnails"
+    ],
     "priority": "P2",
-    "appliesTo": ["media", "video", "audit"],
-    "status": "active"
+    "appliesTo": [
+      "media",
+      "video",
+      "audit"
+    ],
+    "status": "active",
+    "group": "video"
   }
 ]

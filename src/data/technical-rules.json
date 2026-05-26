@@ -4,10 +4,24 @@
     "category": "technical-orchestration",
     "title": "Audit only supplied inputs",
     "description": "Technical SEO checks must use only provided data until crawler support is implemented.",
-    "do": ["Use evidence only from supplied input.", "Return missingInputs when data is unavailable.", "Keep recommendations safe when inputs are limited."],
-    "dont": ["Hallucinate crawl results.", "Fetch live pages by default.", "Infer robots, status, or sitemap facts without evidence."],
+    "do": [
+      "Use evidence only from supplied input.",
+      "Return missingInputs when data is unavailable.",
+      "Keep recommendations safe when inputs are limited."
+    ],
+    "dont": [
+      "Hallucinate crawl results.",
+      "Fetch live pages by default.",
+      "Infer robots, status, or sitemap facts without evidence."
+    ],
     "priority": "P0",
-    "appliesTo": ["website", "page", "technical", "audit"],
-    "status": "active"
+    "appliesTo": [
+      "website",
+      "page",
+      "technical",
+      "audit"
+    ],
+    "status": "active",
+    "group": "technical"
   }
 ]

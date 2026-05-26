@@ -4,10 +4,22 @@
     "category": "citation-readiness",
     "title": "Citations should be consistent and high quality",
     "description": "Citation readiness depends on consistent NAP across quality sources.",
-    "do": ["Keep citations consistent", "Prioritize quality directories", "Fix incorrect citations"],
-    "dont": ["Create spam citations", "Submit inconsistent NAP", "Rely only on citations without website quality"],
+    "do": [
+      "Keep citations consistent",
+      "Prioritize quality directories",
+      "Fix incorrect citations"
+    ],
+    "dont": [
+      "Create spam citations",
+      "Submit inconsistent NAP",
+      "Rely only on citations without website quality"
+    ],
     "priority": "P3",
-    "appliesTo": ["local_seo", "audit"],
-    "status": "active"
+    "appliesTo": [
+      "local_seo",
+      "audit"
+    ],
+    "status": "active",
+    "group": "citation"
   }
 ]

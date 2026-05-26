@@ -4,10 +4,26 @@
     "category": "search-intent",
     "title": "Search intent mapping",
     "description": "Intent should be classified before recommending page type.",
-    "do": ["Classify intent before recommending page type.", "Identify informational, commercial, transactional, navigational, local, comparison, pricing, product-led, and support intent.", "Recommend page type based on intent.", "Flag uncertain intent as unknown."],
-    "dont": ["Assume intent only from keyword volume.", "Create service pages for purely informational queries.", "Create blog posts for transactional queries.", "Mix conflicting intents on one page."],
+    "do": [
+      "Classify intent before recommending page type.",
+      "Identify informational, commercial, transactional, navigational, local, comparison, pricing, product-led, and support intent.",
+      "Recommend page type based on intent.",
+      "Flag uncertain intent as unknown."
+    ],
+    "dont": [
+      "Assume intent only from keyword volume.",
+      "Create service pages for purely informational queries.",
+      "Create blog posts for transactional queries.",
+      "Mix conflicting intents on one page."
+    ],
     "priority": "P1",
-    "appliesTo": ["keyword", "content", "planning", "audit"],
-    "status": "active"
+    "appliesTo": [
+      "keyword",
+      "content",
+      "planning",
+      "audit"
+    ],
+    "status": "active",
+    "group": "keyword"
   }
 ]
